@@ -1,11 +1,41 @@
-//console.log("Loading script.js");
-
 onload = startingWebsite
 
 function startingWebsite() {
-  //console.log("Starting website");
-
+  subtitle();
+  hideEverySecret();
   defineAge();
+}
+
+function subtitle() {
+  allSubtitles = [
+    "Sabia que esse subtitulo é aleatório?",
+    "Se jogar thiagola92 no google, talvez encontra muita coisa sobre mim",
+    "Eu tento ser sincero o máximo que dá..."
+  ]
+
+  randomSubtitle = (Math.random()*100) % allSubtitles.length;
+  randomSubtitle = parseInt(randomSubtitle);
+
+  subtitle = document.getElementById("subtitle");
+  subtitle.innerHTML = allSubtitles[randomSubtitle];
+}
+
+function hideEverySecret() {
+  allSecrets = document.getElementsByClassName("secret");
+  for(var i = 0; i < allSecrets.length; i++) {
+    allSecrets[i].addEventListener("mouseover", showSecret);
+    allSecrets[i].addEventListener("mouseout", hideSecret);
+  }
+}
+
+function showSecret(event) {
+  secret = event.target;
+  secret.style["background-color"] = "white";
+}
+
+function hideSecret(event) {
+  secret = event.target;
+  secret.style["background-color"] = "black";
 }
 
 function defineAge() {
