@@ -1,3 +1,14 @@
 * {
   font-family: Arial;
 }
+
+td {
+}
+
+*.informationType {
+  font-weight: bold;
+}
+
+*.secret {
+  background-color: black;
+}
