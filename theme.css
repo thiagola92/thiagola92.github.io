@@ -5,10 +5,6 @@
 td {
 }
 
-*.informationType {
-  font-weight: bold;
-}
-
-*.secret {
-  background-color: black;
+*.information {
+  padding-left: 40px;
 }
