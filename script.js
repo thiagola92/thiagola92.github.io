@@ -3,6 +3,7 @@ onload = startingWebsite
 function startingWebsite() {
   subtitle();
   hideEverySecret();
+  writeEveryLink();
   defineAge();
 }
 
@@ -20,9 +21,15 @@ function subtitle() {
   subtitle.innerHTML = allSubtitles[randomSubtitle];
 }
 
+function writeEveryLink() {
+  allSecrets = document.getElementsByClassName("writeThisLink");
+  for(var i = 0; i < allSecrets.length; ++i)
+    allSecrets[i].innerHTML = allSecrets[i].href;
+}
+
 function hideEverySecret() {
   allSecrets = document.getElementsByClassName("secret");
-  for(var i = 0; i < allSecrets.length; i++) {
+  for(var i = 0; i < allSecrets.length; ++i) {
     allSecrets[i].addEventListener("mouseover", showSecret);
     allSecrets[i].addEventListener("mouseout", hideSecret);
   }
