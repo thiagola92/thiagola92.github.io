@@ -31,7 +31,7 @@ function defineAge() {
   age = calculateAge(dateBorn);
   ageElement = document.getElementById("age");
   ageTextNode = document.createTextNode(age);
-  
+
   ageElement.appendChild(ageTextNode);
 }
 
@@ -59,10 +59,10 @@ function hideEverySecret() {
 
 function showSecret(event) {
   secret = event.target;
-  secret.style["background-color"] = "white";
+  secret.style["color"] = "black";
 }
 
 function hideSecret(event) {
   secret = event.target;
-  secret.style["background-color"] = "black";
+  secret.style["color"] = "white";
 }
