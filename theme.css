@@ -5,12 +5,3 @@
 td {
   padding-bottom: 5px;
 }
-
-*.information {
-  padding-left: 40px;
-  padding-bottom: 20px;
-}
-
-*.secret {
-  color: white;
-}
