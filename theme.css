@@ -7,7 +7,7 @@ body {
   width: 842px;
 }
 
-div.box {
+.box {
   background-color: #373d48 !important;
   border-radius: 5px;
   padding-left: 5px;
@@ -36,4 +36,16 @@ ul {
 td.separete {
   vertical-align: text-top;
   width: 1%;
+}
+
+.explanation {
+  font-size: 12px;
+  text-align: right;
+  color: #000;
+}
+
+@media print{
+  .explanation {
+    display: none;
+  }
 }
