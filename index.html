@@ -11,13 +11,14 @@
 <div class="box">
   <b>Endereço:</b>
   Ipanema, Rio de Janeiro, RJ, Brasil
-  </br>
-  <b>Celular:</b>
-  (21)99117-6830
-  </br>
-  <b>E-mail:</b>
-  <a href="mailto:thiagola92@gmail.com">thiagola92@gmail.com</a>
-  </br>
+  <br/>
+  <table>
+    <tr>
+      <td class="separete"><img src="phoneIcon.png" class="icon"/> (21)99117-6830 </td>
+      <td class="separete"><img src="emailIcon.png" class="icon"/>
+      <a href="mailto:thiagola92@gmail.com">thiagola92@gmail.com</a></td>
+    </tr>
+  </table>
   <hr/>
   <b>Idiomas:</b>
   <table>
@@ -33,33 +34,24 @@
     </tr>
   </table>
   <hr/>
-  <b>Websites:</b>
   <table>
       <tr>
-        <td>
-          GitHub<br/>
-          Facebook<br/>
-          LinkedIn<br/>
-          Youtube
-        </td>
-        <td>
-          <a href="https://github.com/thiagola92">https://github.com/thiagola92</a><br/>
-          <a href="https://www.facebook.com/thiagola92">https://www.facebook.com/thiagola92</a><br/>
-          <a href="https://www.linkedin.com/in/thiagola92/">https://www.linkedin.com/in/thiagola92/</a><br/>
-          <a href="https://www.youtube.com/user/thiagola92">https://www.youtube.com/user/thiagola92</a>
-        </td>
+        <td class="separete"> <img src="githubIcon.png" class="icon"/> <a href="https://github.com/thiagola92" class="iconText">thiagola92</a> </td>
+        <td class="separete"> <img src="facebookIcon.png" class="icon"> <a href="https://www.facebook.com/thiagola92" class="iconText">thiagola92</a> </td>
+        <td class="separete"> <img src="linkedinIcon.png" class="icon"> <a href="https://www.linkedin.com/in/thiagola92/" class="iconText">thiagola92</a> </td>
+        <td class="separete"> <img src="youtubeIcon.png" class="icon"> <a href="https://www.youtube.com/user/thiagola92" class="iconText">thiagola92</a> </td>
       </tr>
   </table>
 </div>
 
 <div class="box">
   <h2>Estudo</h2>
-  <table class="study">
+  <table class="fullWidth">
     <tr>
       <td><sub>(2011 -  cursando)</sub></td>
       <td><b>Ensino superior:</b></td>
       <td>
-        Ciência da computação</br>
+        Ciência da computação<br/>
         <a href="http://www.puc-rio.br/">Pontifícia Universidade Católica do Rio de Janeiro</a>
       </td>
     </tr>
@@ -84,59 +76,62 @@
   </table>
 </div>
 
-<div class="box">
-  <h2>Linguagens de programação</h2>
-  <table>
-    <tr>
-      <td class="separete">
-        <b>Confortável:</b>
-        <ul>
-          <li>C</li>
-          <li>HTML</li>
-          <li>Java</li>
-          <li>Lua</li>
-        </ul>
-      </td>
-      <td class="separete">
-        <b>Familiar:</b>
-        <ul>
-          <li>CSS</li>
-          <!--<li>C#,</li>-->
-          <li>C++</li>
-          <li>Javascript</li>
-          <li>Python</li>
-          <li>Ruby</li>
-          <!--<li>Rust</li>-->
-          <li>SQL</li>
-        </ul>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div class="box">
-  <h2>Ferramentas</h2>
-  <table>
-    <tr>
-      <td class="separete">
-        <b>Confortável:</b>
-        <ul>
-          <li>Atom</li>
-          <li>Eclipse</li>
-        </ul>
-      </td>
-      <td class="separete">
-        <b>Familiar:</b>
-        <ul>
-          <li>Arduino</li>
-          <li>Gimp</li>
-          <li>Git</li>
-          <li>Ubuntu</li>
-        </ul>
-      </td>
-    </tr>
-  </table>
-</div>
+<table class="fullWidth">
+  <tr>
+    <td class="separete box">
+      <h2><img src="codeIcon.png" class="icon"/> Linguagens de programação</h2>
+      <table>
+        <tr>
+          <td class="separete">
+            <b>Confortável:</b>
+            <ul>
+              <li>C</li>
+              <li>HTML</li>
+              <li>Java</li>
+              <li>Lua</li>
+            </ul>
+          </td>
+          <td class="separete">
+            <b>Familiar:</b>
+            <ul>
+              <li>CSS</li>
+              <!--<li>C#,</li>-->
+              <li>C++</li>
+              <li>Javascript</li>
+              <li>Python</li>
+              <li>Ruby</li>
+              <!--<li>Rust</li>-->
+              <li>SQL</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+  </td>
+  <td class="separete box" style="border-left: none;">
+      <h2><img src="gearIcon.png" class="icon"/> Ferramentas</h2>
+      <table>
+        <tr>
+          <td class="separete">
+            <b>Confortável:</b>
+            <ul>
+              <li>Atom</li>
+              <li>Eclipse</li>
+            </ul>
+          </td>
+          <td class="separete">
+            <b>Familiar:</b>
+            <ul>
+              <li>Arduino</li>
+              <li>Gimp</li>
+              <li>Git</li>
+              <li>Ubuntu</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
 
 <div class="box">
   <h2>Extra</h2>
@@ -147,7 +142,12 @@
 <div class="explanation">
 A idéia por trás desse site é que eu posso montar meu site usando HTML & CSS<br/>
 Para fazer o arquivo pdf, basta eu imprimir a página em pdf<br/>
-(esse texto não vai aparecer quando for imprimir)
+(esse texto não vai aparecer quando for imprimir)<br/>
+<br/>
+Icone do telefone de Vladimir Belochkin<br/>
+Icone do email de iconsmind.com<br/>
+Icone da engrenagem de Reed Enger<br/>
+Iconde do html de Bernar Novalyi
 </div>
 
 </body>

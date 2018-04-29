@@ -16,6 +16,7 @@ h1 {
 h2 {
   margin-top: auto;
   margin-bottom: 5px;
+  font-size: 23px;
 }
 
 hr {
@@ -27,17 +28,26 @@ ul {
   margin-bottom: 5px;
 }
 
-table.study {
+.icon {
+  width: 20px;
+}
+
+.iconText {
+  vertical-align: middle;
+}
+
+.fullWidth {
   width: 100%;
 }
 
-td.separete {
+.separete {
   vertical-align: text-top;
   width: 1%;
 }
 
 .box {
   border-style: solid;
+  border-top-style: none;
   border-color: #373d48;
   border-radius: 5px;
   padding-left: 5px;
