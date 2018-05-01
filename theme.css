@@ -4,28 +4,22 @@
 }
 
 body {
-  align:center;
+  align: center;
   max-width: 842px;
 }
 
 h1 {
   margin-bottom: 5px;
-  font-family: Arial;
 }
 
 h2 {
   margin-top: auto;
   margin-bottom: 5px;
-  font-size: x-large;
+  font-size: 23px;
 }
 
 hr {
   border-color: #373d48;
-}
-
-sub {
-    vertical-align: sub;
-    font-size: smaller;
 }
 
 ul {
@@ -52,6 +46,7 @@ ul {
 
 .fullWidth {
   width: 100%;
+  max-width: 842px;
 }
 
 .icon {
@@ -64,7 +59,7 @@ ul {
 
 .separete {
   vertical-align: text-top;
-  width: 1%;
+  width: 25%; /*por acaso equilibra os 3 casos que tem*/
 }
 
 @media print{
