@@ -5,7 +5,7 @@
 
 body {
   align: center;
-  max-width: 842px;
+  max-width: 842px; /* Papel A4 = 842px?*/
 }
 
 h1 {
@@ -46,7 +46,6 @@ ul {
 
 .fullWidth {
   width: 100%;
-  max-width: 842px;
 }
 
 .icon {
