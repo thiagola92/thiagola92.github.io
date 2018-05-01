@@ -16,33 +16,21 @@ h1 {
 h2 {
   margin-top: auto;
   margin-bottom: 5px;
-  font-size: 23px;
+  font-size: x-large;
 }
 
 hr {
   border-color: #373d48;
 }
 
+sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+
 ul {
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-.icon {
-  width: 20px;
-}
-
-.iconText {
-  vertical-align: middle;
-}
-
-.fullWidth {
-  width: 100%;
-}
-
-.separete {
-  vertical-align: text-top;
-  width: 1%;
 }
 
 .box {
@@ -58,8 +46,25 @@ ul {
 }
 
 .explanation {
-  font-size: 12px;
+  font-size: x-small;
   text-align: right;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.icon {
+  width: 20px;
+}
+
+.iconText {
+  vertical-align: bottom;
+}
+
+.separete {
+  vertical-align: text-top;
+  width: 1%;
 }
 
 @media print{
