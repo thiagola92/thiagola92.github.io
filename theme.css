@@ -4,7 +4,7 @@
 }
 
 body {
-  align: center;
+  align-content: center;
   max-width: 842px; /* Papel A4 = 842px?*/
 }
 
