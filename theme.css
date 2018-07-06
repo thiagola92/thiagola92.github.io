@@ -75,7 +75,7 @@ ul {
 
 @media only screen and (max-width: 414px) {
   * {
-    font-size: x-small;
+    font-size: small;
   }
 
   h1 {
@@ -84,6 +84,11 @@ ul {
 
   h2 {
     font-size: large;
+  }
+
+  iframe {
+    width: 307px;
+    height: 172px;
   }
 
   .explanation {
@@ -109,6 +114,15 @@ ul {
     font-size: larger;
   }
 
+  iframe {
+    width: 307px;
+    height: 172px;
+  }
+
+  .bigLinks {
+    font-size: x-small;
+  }
+
   .explanation {
     font-size: x-small;
     text-align: right;
@@ -130,6 +144,11 @@ ul {
 
   h2 {
     font-size: larger;
+  }
+
+  iframe {
+    width: 230px;
+    height: 129px;
   }
 
   .explanation {
