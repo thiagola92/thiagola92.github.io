@@ -17,8 +17,17 @@
 
   let touchName = false;
   let stop = true;
+  let audioReady = false;
 
-  canvas.addEventListener("click", () => {if(touchName == false) {stop = false}})
+  audio.addEventListener("canplay", () => {
+    audioReady = true;
+  });
+
+  canvas.addEventListener("click", () => {
+    if(audioReady == true && touchName == false) {
+      stop = false
+    }
+  });
 
   function calculateXY() {
     x = dislocate_x + radius * Math.cos(angle*angleFraction); // 75 and 255
