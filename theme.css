@@ -28,19 +28,9 @@ ul {
   margin-left: -20px;
 }
 
-.barLeft {
-  border-style: solid;
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-style: none;
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-top: 5px;
-}
-
+.barLeft,
 .box {
+  border-color: #000;
   border-style: solid;
   border-top-style: none;
   border-radius: 5px;
@@ -49,6 +39,11 @@ ul {
   padding-top: 5px;
   padding-bottom: 5px;
   margin-top: 5px;
+}
+
+.barLeft {
+  border-right-style: none;
+  border-bottom-style: none;
 }
 
 .explanation {
