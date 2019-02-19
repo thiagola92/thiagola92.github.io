@@ -68,6 +68,11 @@ ul {
   width: 25%; /*por acaso equilibra os 3 casos que tem*/
 }
 
+/* hobby and college page*/
+.logo {
+  text-decoration: none;
+}
+
 @media only screen and (max-width: 414px) {
   * {
     font-size: small;
