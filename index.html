@@ -4,10 +4,20 @@
   <title>ThiagoCV</title>
   <meta name="viewport" content="width=device-width" charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="theme.css" media="all"/>
+
   <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
+  <script>
+  fetch('hobby.html')
+    .then(data => data.text())
+    .then(html => document.getElementById('here').innerHTML = html);
+  </script>
 </head>
 
 <body>
+
+<div id='here'>
+</div>
 
 <h1>Thiago Lages de Alencar</h1>
 
@@ -48,7 +58,7 @@
   <h2> <i class="fas fa-book-open"></i> Estudo</h2>
   <table class="fullWidth">
     <tr>
-      <td><sub>2017 - 2019</sub></td> <!--2011 - 2019?-->
+      <td><sub>2011 - 2019</sub></td> <!--2011 - 2019?-->
       <td><strong>Ensino superior:</strong></td>
       <td>
         Ciência da computação<br/>
@@ -98,8 +108,8 @@
               <li>C++</li>
               <li>Javascript</li>
               <li>HTML</li>
-              <li>Python</li>
-              <li>Ruby</li>
+              <!--li>Python</li-->
+              <!--li>Ruby</li-->
               <!--<li>Rust</li>-->
               <li>SQL</li>
             </ul>
@@ -116,6 +126,7 @@
             <ul>
               <li>Atom</li>
               <li>Eclipse</li>
+              <li>Git</li>
             </ul>
           </td>
           <td class="separate barLeft">
@@ -123,7 +134,6 @@
             <ul>
               <li>Arduino</li>
               <li>Gimp</li>
-              <li>Git</li>
               <li>Ubuntu</li>
             </ul>
           </td>
