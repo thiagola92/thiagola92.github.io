@@ -10,42 +10,12 @@
   <link rel="stylesheet" type="text/css" href="style/index.css" media="all"/>
 
   <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
-  <!-- <script src="script/include_html.js"></script> -->
-
-  <script>
-  function includeHTML() {
-    var z, i, elmnt, file, xhttp;
-    /* Loop through a collection of all HTML elements: */
-    z = document.getElementsByTagName("*");
-    for (i = 0; i < z.length; i++) {
-      elmnt = z[i];
-      /*search for elements with a certain atrribute:*/
-      file = elmnt.getAttribute("w3-include-html");
-      if (file) {
-        /* Make an HTTP request using the attribute value as the file name: */
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-            if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-            /* Remove the attribute, and call this function once more: */
-            elmnt.removeAttribute("w3-include-html");
-            includeHTML();
-          }
-        }
-        xhttp.open("GET", file, true);
-        xhttp.send();
-        /* Exit the function: */
-        return;
-      }
-    }
-  }
-  </script>
+  <script src="script/include_html.js"></script>
 </head>
 
 <body>
 
-<!-- <div id="basic_info"></div>
+<div id="basic_info"></div>
 <script>includeHTML('page/index/basic_info.html', 'basic_info');</script>
 
 <div id="study"></div>
@@ -55,12 +25,7 @@
 <script>includeHTML('page/index/knowledge.html', 'knowledge');</script>
 
 <div id="projects"></div>
-<script>includeHTML('page/index/projects.html', 'projects');</script> -->
-
-<div w3-include-html="page/index/basic_info.html"></div>
-<script>
-includeHTML();
-</script>
+<script>includeHTML('page/index/projects.html', 'projects');</script>
 
 <br/>
 
