@@ -3,7 +3,10 @@
 <head>
   <title>ThiagoCV</title>
   <meta name="viewport" content="width=device-width" charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="theme.css" media="all"/>
+
+  <link rel="stylesheet" type="text/css" href="style/global.css" media="all"/>
+  <link rel="stylesheet" type="text/css" href="style/global_class.css" media="all"/>
+  <link rel="stylesheet" type="text/css" href="style/index.css" media="all"/>
 
   <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
 </head>
@@ -13,13 +16,11 @@
 <h1>Thiago Lages de Alencar</h1>
 
 <div class="box">
-  <table class="fullWidth">
-    <tr>
-      <td class="separate"> <i class="fas fa-home fa-lg"></i> Ipanema, Rio de Janeiro </td>
-      <td class="separate"> <i class="fas fa-phone fa-lg"></i> (21)99117-6830 </td>
-      <td class="separate"> <i class="fas fa-at fa-lg"></i> <a href="mailto:thiagola92@gmail.com">thiagola92@gmail.com</a> </td>
-    </tr>
-  </table>
+  <span class="boxFake">
+    <span class="boxFlex"> <i class="fas fa-home fa-lg"></i> Ipanema, Rio de Janeiro </span>
+    <span class="boxFlex"> <i class="fas fa-phone fa-lg"></i> (21)99117-6830 </span>
+    <span class="boxFlex"> <i class="fas fa-at fa-lg"></i> <a href="mailto:thiagola92@gmail.com">thiagola92@gmail.com</a> </span>
+  </span>
   <hr/>
   <strong>Idiomas:</strong>
   <table>
@@ -35,21 +36,19 @@
     </tr>
   </table>
   <hr/>
-  <table class="fullWidth">
-      <tr>
-        <td class="separate"> <i class="fab fa-github fa-lg"></i> <a href="https://github.com/thiagola92" class="iconText">thiagola92</a> </td>
-        <td class="separate"> <i class="fab fa-facebook-f fa-lg" style="padding-right: 0.2em;"></i><a href="https://www.facebook.com/thiagola92" class="iconText">thiagola92</a> </td>
-        <td class="separate"> <i class="fab fa-linkedin-in fa-lg"></i> <a href="https://www.linkedin.com/in/thiagola92/" class="iconText">thiagola92</a> </td>
-        <td class="separate"> <i class="fab fa-youtube fa-lg"></i> <a href="https://www.youtube.com/user/thiagola92" class="iconText">thiagola92</a> </td>
-      </tr>
-  </table>
+  <span class="boxFake">
+    <span class="boxFlex"> <i class="fab fa-github fa-lg"></i> <a href="https://github.com/thiagola92" class="iconText">thiagola92</a> </span>
+    <span class="boxFlex"> <i class="fab fa-facebook-f fa-lg" style="padding-right: 0.2em;"></i><a href="https://www.facebook.com/thiagola92" class="iconText">thiagola92</a> </span>
+    <span class="boxFlex"> <i class="fab fa-linkedin-in fa-lg"></i> <a href="https://www.linkedin.com/in/thiagola92/" class="iconText">thiagola92</a> </span>
+    <span class="boxFlex"> <i class="fab fa-youtube fa-lg"></i> <a href="https://www.youtube.com/user/thiagola92" class="iconText">thiagola92</a> </span>
+  </span>
 </div>
 
 <div class="box">
   <h2> <i class="fas fa-book-open"></i> Estudo</h2>
   <table class="fullWidth">
     <tr>
-      <td><sub>2011 - 2019</sub></td> <!--2011 - 2019?-->
+      <td><sub>2011 - 2019</sub></td>
       <td><strong>Ensino superior:</strong></td>
       <td>
         Ciência da computação<br/>
@@ -77,80 +76,73 @@
   </table>
 </div>
 
-<table class="fullWidth">
-  <tr>
-    <td class="separate box">
-      <h2> <i class="fas fa-code"></i> Linguagens de programação</h2>
-      <table class="fullWidth">
-        <tr>
-          <td class="separate">
-            <strong>Confortável</strong>
-            <ul>
-              <li>C</li>
-              <li>Java</li>
-              <li>Lua</li>
-            </ul>
-          </td>
-          <td class="separate barLeft">
-            <strong>Familiar</strong>
-            <ul>
-              <li>CSS</li>
-              <!--<li>C#,</li>-->
-              <!--<li>C++</li>-->
-              <li>JavaScript</li>
-              <li>HTML</li>
-              <!--li>Python</li-->
-              <!--li>Ruby</li-->
-              <!--<li>Rust</li>-->
-              <li>SQL</li>
-            </ul>
-          </td>
-        </tr>
-      </table>
-  </td>
-  <td class="separate box" style="border-left: none;">
-      <h2> <i class="fas fa-screwdriver"></i> Ferramentas</h2>
-      <table class="fullWidth">
-        <tr>
-          <td class="separate">
-            <strong>Confortável</strong>
-            <ul>
-              <li>Atom</li>
-              <li>Eclipse</li>
-              <li>Git</li>
-            </ul>
-          </td>
-          <td class="separate barLeft">
-            <strong>Familiar</strong>
-            <ul>
-              <li>Arduino</li>
-              <li>Gimp</li>
-              <li>Ubuntu</li>
-            </ul>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+<div class="boxFake">
+  <span class="box boxFlex">
+    <h2> <i class="fas fa-code"></i> Linguagens</h2>
+    <span class="boxFake">
+      <span class="boxFlex">
+        <strong>Confortável</strong>
+        <ul>
+          <li>C</li>
+          <li>CSS</li>
+          <li>HTML</li>
+          <li>Java</li>
+          <li>JavaScript</li>
+          <li>Lua</li>
+        </ul>
+      </span>
+      <span class="boxFlex">
+        <strong>Familiar</strong>
+        <ul>
+          <li>C#,</li>
+          <li>C++</li>
+          <li>Python</li>
+          <li>Ruby</li>
+          <li>Rust</li>
+          <li>SQL</li>
+        </ul>
+      </span>
+    </span>
+  </span>
+  <span class="box boxFlex boxRemoveLeft">
+    <h2> <i class="fas fa-screwdriver"></i> Ferramentas</h2>
+    <span class="boxFake">
+      <span class="boxFlex">
+        <strong>Confortável</strong>
+        <ul>
+          <li>Atom</li>
+          <li>Eclipse</li>
+          <li>Git</li>
+        </ul>
+      </span>
+      <span class="boxFlex">
+        <strong>Familiar</strong>
+        <ul>
+          <li>Arduino</li>
+          <li>Gimp</li>
+          <li>Ubuntu</li>
+        </ul>
+      </span>
+  </span>
+</div>
 
 <div class="box">
   <h2> <i class="fas fa-project-diagram"></i> Projetos</h2>
     <table>
       <tr>
         <td>
-          <strong class="bigLinks">Faculdade:</strong>
+          <strong>Faculdade:</strong>
         </td>
         <td>
-          <a class="bigLinks" href="https://thiagola92.github.io/CurriculumVitae/college.html">thiagola92.github.io/CurriculumVitae/college.html</a>
+          <a href="https://thiagola92.github.io/CurriculumVitae/college.html">thiagola92.github.io/CurriculumVitae/college.html</a>
         </td>
       </tr>
       <tr>
         <td>
-          <strong class="bigLinks">Hobby:</strong>
+          <strong>Hobby:</strong>
         </td>
         <td>
-          <a class="bigLinks" href="https://thiagola92.github.io/CurriculumVitae/hobby.html">thiagola92.github.io/CurriculumVitae/hobby.html</a>
+          <a href="https://thiagola92.github.io/CurriculumVitae/hobby.html">thiagola92.github.io/CurriculumVitae/hobby.html</a>
         </td>
       </tr>
     </table>
@@ -158,7 +150,7 @@
 
 <br/>
 
-<div class="explanation">
+<div class="bottomExplanation">
 O objetivo desse site é demonstrar minhas competências de <b>HTML</b>, <b>CSS</b> e <b>JavaScript</b>.<br/>
 Para gerar o CV, basta imprimir a página em pdf.<br/>
 (esse texto não vai aparecer na impressão)<br/>
