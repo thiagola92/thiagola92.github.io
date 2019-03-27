@@ -36,3 +36,24 @@
 .fullWidth {
   width: 100%;
 }
+
+.iconText {
+  vertical-align: bottom;
+}
+
+.bottomExplanation {
+  font-size: x-small;
+  text-align: right;
+}
+
+@media only screen and (max-width: 360px) {
+  .bottomExplanation {
+    font-size: xx-small;
+  }
+}
+
+@media print{
+  .bottomExplanation {
+    display: none;
+  }
+}
