@@ -9,9 +9,17 @@
   <link rel="stylesheet" type="text/css" href="style/index.css" media="all"/>
 
   <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+  <script src="script/include_html.js"></script>
 </head>
 
 <body>
+
+<div id="basic_info"></div>
+<script>
+fetch('page/index/basic_info.html')
+  .then(data => data.text())
+  .then(html => document.getElementById('basic_info').innerHTML = html);
+</script>
 
 <h1>Thiago Lages de Alencar</h1>
 
