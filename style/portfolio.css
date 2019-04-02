@@ -1,0 +1,18 @@
+body {
+  background-color: white;
+
+  animation-name: screen;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes screen {
+  100% {
+    background-color: black;
+  }
+}
