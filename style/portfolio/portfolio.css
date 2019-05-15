@@ -1,5 +1,10 @@
 body {
-  background-color: white;
+  margin: 0px 0px 0px 0px;
+}
+
+nav {
+  font-size: x-large;
+  font-family: monospace;
 
   animation-name: screen;
   animation-duration: 1s;
@@ -12,6 +17,11 @@ body {
 }
 
 @keyframes screen {
+  0% {
+    height: 0px;
+    background-color: white;
+  }
+
   100% {
     background-color: black;
   }
