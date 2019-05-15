@@ -5,8 +5,8 @@
 
   <meta name="viewport" content="width=device-width" charset="UTF-8">
 
-  <link rel="stylesheet" type="text/css" href="style/resume/resume.css" media="all"/>
-  <link rel="stylesheet" type="text/css" href="style/resume/resume_class.css" media="all"/>
+  <link rel="stylesheet" type="text/css" href="style/resume.css" media="all"/>
+  <link rel="stylesheet" type="text/css" href="style/resume_class.css" media="all"/>
 
   <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
   <script src="script/include_html.js"></script>
@@ -14,17 +14,136 @@
 
 <body>
 
-<div id="basic_info"></div>
-<script>includeHTML('page/resume/basic_info.html', 'basic_info');</script>
+<h1>Thiago Lages de Alencar</h1>
 
-<div id="studies"></div>
-<script>includeHTML('page/resume/studies.html', 'studies');</script>
+<div class="box">
+  <span class="boxFake">
+    <span class="boxFlex"> <i class="fas fa-home fa-lg"></i> Ipanema, Rio de Janeiro </span>
+    <span class="boxFlex"> <i class="fas fa-phone fa-lg"></i> (21)99117-6830 </span>
+    <span class="boxFlex"> <i class="fas fa-at fa-lg"></i> <a href="mailto:thiagola92@gmail.com">thiagola92@gmail.com</a> </span>
+  </span>
+  <hr/>
+  <span class="boxFake">
+    <span class="boxFlex"> <strong>Português brasileiro</strong> (Nativo) </span>
+    <span class="boxFlex"> <strong>Inglês</strong> (Avançado) </span>
+  </span>
+  <hr/>
+  <span class="boxFake">
+    <span class="boxFlex"> <i class="fab fa-github fa-lg"></i> <a href="https://github.com/thiagola92" class="iconText">thiagola92</a> </span>
+    <span class="boxFlex"> <i class="fab fa-facebook-f fa-lg" style="padding-right: 0.2em;"></i><a href="https://www.facebook.com/thiagola92" class="iconText">thiagola92</a> </span>
+    <span class="boxFlex"> <i class="fab fa-linkedin-in fa-lg"></i> <a href="https://www.linkedin.com/in/thiagola92/" class="iconText">thiagola92</a> </span>
+    <span class="boxFlex"> <i class="fab fa-youtube fa-lg"></i> <a href="https://www.youtube.com/user/thiagola92" class="iconText">thiagola92</a> </span>
+  </span>
+</div>
 
-<div id="skills"></div>
-<script>includeHTML('page/resume/skills.html', 'skills');</script>
+<div class="box">
+  <h2> <i class="fas fa-graduation-cap"></i> Estudos </h2>
+  <table class="fullWidth">
+    <tr>
+      <td><sub>2019</sub></td>
+      <td><strong>Ensino superior</strong></td>
+      <td>
+        Ciência da computação<br/>
+        <a href="http://www.puc-rio.br/">Pontifícia Universidade Católica do Rio de Janeiro</a>
+      </td>
+    </tr>
+    <tr>
+      <td><sub>2010</sub></td>
+      <td><strong>Ensino médio</strong></td>
+      <td><a href="http://www.escolanova.com.br/">Escola Nova</a></td>
+    </tr>
+    <tr>
+      <td><sub>2007</sub></td>
+      <td><strong>Ensino fundamental</strong></td>
+      <td><a href="http://www.crj.com.br/">Colégio Rio de Janeiro</a></td>
+    </tr>
+    <tr>
+      <td colspan="4"><hr/></td>
+    </tr>
+    <tr>
+      <td><sub>2011</sub></td>
+      <td><strong>Pré-vestibular</strong></td>
+      <td><a href="https://www.pensi.com.br">Pensi</a></td>
+    </tr>
+    <tr>
+      <td><sub>2011</sub></td>
+      <td><strong>Curso de inglês</strong></td>
+      <td><a href="http://portal.ibeu.org.br/">IBEU</a></td>
+    </tr>
+  </table>
+</div>
 
-<div id="projects"></div>
-<script>includeHTML('page/resume/projects.html', 'projects');</script>
+<div class="boxFake">
+  <span class="box boxFlex">
+    <h2> <i class="fas fa-code"></i> Linguagens </h2>
+    <span class="boxFake">
+      <span class="boxFlex">
+        <strong>Confortável</strong>
+        <ul>
+          <li>C</li>
+          <li>CSS</li>
+          <li>HTML</li>
+          <li>Java</li>
+          <li>JavaScript</li>
+          <li>Lua</li>
+        </ul>
+      </span>
+      <span class="boxFlex">
+        <strong>Familiar</strong>
+        <ul>
+          <li>C#,</li>
+          <li>C++</li>
+          <li>Python</li>
+          <li>Ruby</li>
+          <li>Rust</li>
+          <li>SQL</li>
+        </ul>
+      </span>
+    </span>
+  </span>
+  <span class="box boxFlex boxRemoveLeft">
+    <h2> <i class="fas fa-screwdriver"></i> Ferramentas </h2>
+    <span class="boxFake">
+      <span class="boxFlex">
+        <strong>Confortável</strong>
+        <ul>
+          <li>Atom</li>
+          <li>Eclipse</li>
+          <li>Git</li>
+        </ul>
+      </span>
+      <span class="boxFlex">
+        <strong>Familiar</strong>
+        <ul>
+          <li>Arduino</li>
+          <li>Gimp</li>
+          <li>Ubuntu</li>
+        </ul>
+      </span>
+  </span>
+</div>
+
+<div class="box">
+  <h2> <i class="fas fa-project-diagram"></i> Projetos </h2>
+    <table>
+      <tr>
+        <td>
+          <strong>Faculdade:</strong>
+        </td>
+        <td>
+          <a href="https://thiagola92.github.io/college.html">thiagola92.github.io/college.html</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Hobby:</strong>
+        </td>
+        <td>
+          <a href="https://thiagola92.github.io/hobby.html">thiagola92.github.io/hobby.html</a>
+        </td>
+      </tr>
+    </table>
+</div>
 
 <br/>
 
