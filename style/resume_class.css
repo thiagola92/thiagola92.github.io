@@ -1,3 +1,4 @@
+/* draw the box around the div */
 .box {
   border-color: #000;
   border-style: solid;
@@ -16,19 +17,19 @@
   border-left-style: none;
 }
 
-.boxRemoveRight {
-  border-right-style: none;
-}
-
-.boxRemoveBottom {
-  border-bottom-style: none;
-}
-
-.boxFake {
+/* every element use the same space */
+.elementsRespectSpace {
   display: flex;
 }
 
-.boxFlex {
+/* show elements in column */
+.elementsInColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+/* element should stretch yourself */
+.elementStretch {
   vertical-align: text-top;
   flex: 1;
 }
@@ -41,12 +42,32 @@
   vertical-align: bottom;
 }
 
+.picture {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+}
+
 .bottomExplanation {
   font-size: x-small;
   text-align: right;
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 490px) {
+  .picture {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
   .bottomExplanation {
     font-size: xx-small;
   }
