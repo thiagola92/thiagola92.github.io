@@ -38,8 +38,14 @@
   width: 100%;
 }
 
-.iconText {
+.iconFollowedByText {
   vertical-align: bottom;
+  height: 22px;
+}
+
+.iconFollowedByH2 {
+  vertical-align: bottom;
+  height: 24px;
 }
 
 .picture {
@@ -51,30 +57,4 @@
 .bottomExplanation {
   font-size: x-small;
   text-align: right;
-}
-
-@media only screen and (max-width: 490px) {
-  .picture {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-  }
-}
-
-@media only screen and (max-width: 375px) {
-  .picture {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
-
-  .bottomExplanation {
-    font-size: xx-small;
-  }
-}
-
-@media print{
-  .bottomExplanation {
-    display: none;
-  }
 }
