@@ -1,0 +1,7 @@
+<script>
+fetch('page.html')
+    .then(data => data.text())
+    .then(html => document.getElementById('elementID').innerHTML = html);
+</script>
+
+<div id='elementID'> </div>
