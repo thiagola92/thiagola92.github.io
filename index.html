@@ -1,7 +1,12 @@
 <script>
+console.log("start request")
 fetch('page.html')
-    .then(data => data.text())
-    .then(html => document.getElementById('elementID').innerHTML = html);
+    .then(response => {
+        text = response.text()
+        document.getElementById('elementID').innerHTML = html
+        console.log("finish request")
+    })
+console.log("after code")
 </script>
 
 <div id='elementID'> </div>
