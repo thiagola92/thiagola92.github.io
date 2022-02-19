@@ -1,0 +1,13 @@
+<script>
+async function loadHtml() {
+    const response = await fetch("page.html")
+    const text = await response.text()
+    document.getElementById('elementID').insertAdjacentText('beforeend', text)
+}
+
+console.log("before")
+loadHtml()
+console.log("after")
+</script>
+
+<div id='elementID'> </div>
