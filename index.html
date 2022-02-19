@@ -1,8 +1,8 @@
 <script>
 console.log("before calling function")
 fetch('page.html')
-    .then(response => {
-        text = response.text()
+    .then(response => response.text())
+    .then(text => {
         document.getElementById('elementID').innerHTML = text
         console.log("request finished")
     })
