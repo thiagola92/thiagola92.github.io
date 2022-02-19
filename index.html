@@ -1,12 +1,12 @@
 <script>
-console.log("start request")
+console.log("before calling function")
 fetch('page.html')
     .then(response => {
         text = response.text()
         document.getElementById('elementID').innerHTML = html
-        console.log("finish request")
+        console.log("request finished")
     })
-console.log("after code")
+console.log("after calling function")
 </script>
 
 <div id='elementID'> </div>
