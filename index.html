@@ -3,7 +3,7 @@ console.log("before calling function")
 fetch('page.html')
     .then(response => {
         text = response.text()
-        document.getElementById('elementID').innerHTML = html
+        document.getElementById('elementID').innerHTML = text
         console.log("request finished")
     })
 console.log("after calling function")
