@@ -47,3 +47,11 @@ body{
   border-bottom: 4px solid;
   transform: skewY(-20deg);
 }
+
+.msg {
+  font-size: 24px;
+  text-align: center;
+  color: #041781;
+  margin: 0 16px;
+  position: relative;
+}
