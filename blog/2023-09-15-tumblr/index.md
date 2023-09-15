@@ -1,8 +1,8 @@
 ---
-slug: tubmlr
+slug: tumblr
 title: Tumblr
 authors: thiagola92-angry
-tags: [tumblr]
+tags: [tumblr, website]
 ---
 
 # Tumblr
