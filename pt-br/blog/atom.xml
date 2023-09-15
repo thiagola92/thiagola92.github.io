@@ -9,8 +9,8 @@
     <icon>https://thiagola92.github.io/pt-br/img/logo.svg</icon>
     <entry>
         <title type="html"><![CDATA[Tumblr]]></title>
-        <id>https://thiagola92.github.io/pt-br/blog/tubmlr</id>
-        <link href="https://thiagola92.github.io/pt-br/blog/tubmlr"/>
+        <id>https://thiagola92.github.io/pt-br/blog/tumblr</id>
+        <link href="https://thiagola92.github.io/pt-br/blog/tumblr"/>
         <updated>2023-09-15T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Estou experimentando alternativas já que o Tumblr me deixou revoltado.]]></summary>
         <content type="html"><![CDATA[<p>Estou experimentando alternativas já que o Tumblr me deixou revoltado.<br>
@@ -20,6 +20,7 @@
             <uri>https://github.com/thiagola92</uri>
         </author>
         <category label="tumblr" term="tumblr"/>
+        <category label="website" term="website"/>
     </entry>
     <entry>
         <title type="html"><![CDATA[Sieve]]></title>
