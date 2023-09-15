@@ -28,9 +28,9 @@
      inkscape:document-units="px"
      showgrid="true"
      labelstyle="default"
-     inkscape:zoom="0.72693604"
-     inkscape:cx="573.64056"
-     inkscape:cy="363.16813"
+     inkscape:zoom="0.5140214"
+     inkscape:cx="486.36107"
+     inkscape:cy="391.0343"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
      inkscape:window-x="1920"
@@ -79,13 +79,13 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#ececec;fill-opacity:1;stroke-width:1.15419;-inkscape-stroke:none"
+       style="fill:#ececec;fill-opacity:1;stroke-width:1.07698;-inkscape-stroke:none"
        id="rect3"
-       width="1264"
-       height="736"
-       x="-32"
-       y="-32"
-       ry="1.9442482" />
+       width="1200"
+       height="675"
+       x="1.0658141e-13"
+       y="-3.5527137e-14"
+       ry="1.7831081" />
     <g
        id="g4"
        transform="translate(0,14)">
