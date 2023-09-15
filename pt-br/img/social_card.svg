@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      showgrid="true"
      labelstyle="default"
-     inkscape:zoom="2.0560856"
-     inkscape:cx="268.22813"
-     inkscape:cy="361.60946"
+     inkscape:zoom="0.72693604"
+     inkscape:cx="574.32839"
+     inkscape:cy="363.16813"
      inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-height="1016"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1">
     <inkscape:grid
@@ -141,18 +141,22 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-weight:bold;font-size:192px;line-height:0.8;font-family:Manjari;-inkscape-font-specification:'Manjari Bold';text-align:center;text-anchor:middle;fill:#3ecc5f;fill-opacity:1;stroke-width:1.16147;-inkscape-stroke:none"
-       x="808"
-       y="160"
+       style="font-weight:bold;font-size:192px;line-height:1;font-family:Manjari;-inkscape-font-specification:'Manjari Bold';text-align:center;text-anchor:middle;fill:#3ecc5f;fill-opacity:1;stroke-width:1.16147;-inkscape-stroke:none"
+       x="672"
+       y="144"
        id="text1"><tspan
          sodipodi:role="line"
-         x="808"
-         y="160"
-         id="tspan3">Personal</tspan><tspan
+         x="672"
+         y="144"
+         id="tspan3">ThiagoLA92</tspan><tspan
          sodipodi:role="line"
-         x="808"
-         y="313.60001"
-         id="tspan1">Website</tspan></text>
+         x="672"
+         y="336"
+         id="tspan6">   Website</tspan><tspan
+         sodipodi:role="line"
+         x="672"
+         y="528"
+         id="tspan1" /></text>
     <ellipse
        style="fill:#f9f9f9;fill-opacity:1;stroke-width:1.02013;-inkscape-stroke:none"
        id="path2"
