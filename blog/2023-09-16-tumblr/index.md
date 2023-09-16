@@ -78,6 +78,14 @@ Existem casos que você realmente não quer que o outro site saiba de onde está
 
 Note como ambos "Hide thiagola92 from people without an account" e "Discourage searching of thiagola92" estão desligados mas mesmo assim eu recebo aquela proteção de privacidade.  
 
+## Undo?
+
+![Pessoa confusa](./confuse.svg)  
+
+Aviso logo que eu não consegui reproduzir esse problema que eu tive um dia qualquer, mas basicamente quando eu apertei `Ctrl+z` o post desfez tudo até a minha última inserção de imagem.  
+
+Como não conseguir reproduzir, pode ter sido um bug do dia...
+
 ## Conclusion
 
 ![Pessoa surpresa](./surprised.svg)  
