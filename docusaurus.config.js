@@ -42,6 +42,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
+            routeBasePath: '/',
         },
         blog: {
           showReadingTime: false,
