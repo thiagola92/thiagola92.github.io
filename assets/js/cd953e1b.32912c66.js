@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[9544],{7929:e=>{e.exports=JSON.parse('{"title":"Work Experiences","slug":"/category/work-experiences","permalink":"/category/work-experiences","navigation":{"previous":{"title":"About","permalink":"/"},"next":{"title":"Nodis","permalink":"/work_experience/nodis"}}}')}}]);
