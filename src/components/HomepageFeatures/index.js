@@ -4,15 +4,15 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Code',
+    title: 'Vivo Programando',
     Svg: require('@site/static/img/notebook.svg').default,
   },
   {
-    title: 'Software',
+    title: 'Acompanho Novidades',
     Svg: require('@site/static/img/software.svg').default,
   },
   {
-    title: 'Games',
+    title: 'Adoro Jogos',
     Svg: require('@site/static/img/walking.svg').default,
   },
   // {
