@@ -7,14 +7,14 @@ tags: [tumblr, website]
 
 # Tumblr
 
-Estou experimentando alternativas já que o Tumblr me deixou revoltado.  
+Estou experimentando alternativas já que o Tumblr me deixou puto.  
 E a pior parte é que foram funcionalidades importantes para um site de blogs!  
 
 ## Text Editor
 
 ![Imagem ilustrativa. Uma caneta escrevendo num papel, no papel tem diversas linhas e uma delas é um video 🤣](./text_editor.svg)
 
-Primeiro precisamos entender o 3 editores de texto que o Tumblr fornece:
+Primeiro preciso falar dos 3 editores de texto que o Tumblr fornece:
 - Rich Text (default)
     - **Positivo**: Os criadores do site gastaram tempo planejando como melhor te passar a habilidade de escrever texto em negrito/itálico ou como inserir links/imagens/videos.  
     - **Negativo**: Não existe garantia que possa mover seu texto para outros blogs sem perder qualidade, as chances de estar preso ao Tumblr são altas.  
