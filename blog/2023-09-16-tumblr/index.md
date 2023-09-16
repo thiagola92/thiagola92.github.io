@@ -39,16 +39,22 @@ Agora vamos ver os próximos detalhes que me incomodaram, tipo o fato do Tumblr 
 
 ## Switching Text Editors
 
-Primeiro vamos deixar claro que é um bom senso na vida não alterar algo que você vá precisar da versão original mais tarde. E no caso do Tumblr eu não tenho certeza de qual formato é o original entre Rich Text, HTML e Markdown (eu apostaria no Rich Text por ser o formato padrão).  
+![Setas apontando para os 3 tipos de formatos permitidos, sinalizando que está indo de um para o outro](./switch.svg)
 
-O problema é que ao trocar de editor de texto, nem todas as funcionalidades dos editores de texto que são conversiveis entre eles, e Tumblr não ajuda a entender o que vai acontecer com elas ao mudar de editor de texto.  
+Primeiro vamos deixar claro que é um bom senso na vida **não** alterar algo que você vá precisar da versão original mais tarde. E no caso do Tumblr eu não tenho certeza de qual formato é o original entre Rich Text, HTML e Markdown (eu apostaria no Rich Text por ser o formato padrão).  
+
+O problema que me deparei foi que ao trocar de editor de texto, nem todas as funcionalidades dos editores de texto são conversiveis entre eles, e não parece ter uma regra do que vai acontecer com a funcionalidade quando você trocar. Exemplos:  
 
 - **Rich text to HTML/Markdown**
-    - A funcionalidade "read more" vai ser removido.  
+    - A funcionalidade "read more" vai ser **removido**.  
 - **Rich text to Markdown**
-    - Texto em Lucille vai ficar invisível porém ainda vai estar lá quando salvar.
+    - Texto em Lucille vai ficar **invisível durante a edição** porém ainda vai estar presente quando publicado.
+
+Se você decidir voltar para o editor de texto anterior, você pode ter perdido algo da formatação ou pode ter se mantido.  
 
 ## Preview
+
+![Pessoa surpresa](./surprised.svg)
 
 Normalmente visualização prévia seria apenas para demonstrar como o seu trabalho irá ficar quando finalizado, sem alterar em nada o escrito...  
 

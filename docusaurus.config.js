@@ -39,9 +39,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          editUrl:
+            'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
         },
         blog: {
           showReadingTime: false,
+          editUrl:
+            'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
