@@ -4,11 +4,15 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Programmer',
+    title: 'Code',
     Svg: require('@site/static/img/notebook.svg').default,
   },
   {
-    title: 'Gamer',
+    title: 'Software',
+    Svg: require('@site/static/img/software.svg').default,
+  },
+  {
+    title: 'Games',
     Svg: require('@site/static/img/walking.svg').default,
   },
   // {
@@ -19,7 +23,7 @@ const FeatureList = [
 
 function Feature({Svg, title, description}) {
   return (
-    <div className={clsx('col col--6')}>
+    <div className={clsx('col col--4')}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>
