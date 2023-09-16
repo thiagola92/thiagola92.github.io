@@ -10,10 +10,3 @@ Formado em ciência da computação na [PUC-Rio](https://www.puc-rio.br/index.ht
 Atualmente eu moro no [Rio de Janeiro](https://en.wikipedia.org/wiki/Rio_de_Janeiro).  
 
 Contate-me por thiagola92@gmail.com  
-
-:::tip
-
-Aumenta as chances de resposta se você **não** mandar email pré feito ou automatizado, 
-pois posso associar estes a [spam](https://en.wikipedia.org/wiki/Email_spam) ou [phishing](https://en.wikipedia.org/wiki/Phishing).  
-
-:::
