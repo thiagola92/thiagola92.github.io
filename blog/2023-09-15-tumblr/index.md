@@ -12,6 +12,8 @@ E a pior parte é que foram funcionalidades importantes para um site de blogs!
 
 ## Text Editor
 
+![Imagem ilustrativa. Uma caneta escrevendo num papel, no papel tem diversas linhas e uma delas é um video 🤣](./text_editor.svg)
+
 Primeiro precisamos entender o 3 editores de texto que o Tumblr fornece:
 - Rich Text (default)
     - **Positivo**: Os criadores do site gastaram tempo planejando como melhor te passar a habilidade de escrever texto em negrito/itálico ou como inserir links/imagens/videos.  
@@ -29,11 +31,11 @@ Na minha cabeça HTML e Markdown parecem existir apenas para enfeitar, eles não
 
 > Contents contains unsupported Markdown, the post may not be what you expected.  
 
-Filtrar funcionalidades do HTML é aceitável pois poderia ser perigoso permitir tudo. 
+Eu entendo filtrar funcionalidades do HTML é aceitável pois poderia ser perigoso permitir tudo. Porém filtrar funcionalidade do Markdown não faz sentido já que a linguagem já foi feita para ser bem limitada e não oferecer nenhum risco (estou considerando Markdown sem HTML).  
 
-Filtrar funcionalidade do Markdown não faz sentido já que a linguagem já foi feita para ser bem limitada e não oferecer nenhum risco.  
+No final ambos acabam sendo uma versão mais limitada que o próprio Rich Text. Se tentarmos ser otimistas, podemos dizer que agora podemos exportar para HTML/Markdown e levar para outros sites.  
 
-No final ambos acabam sendo uma versão mais limitada que o próprio Rich Text. Se tentarmos ser otimistas, podemos dizer que agora podemos exportar para HTML/Markdown e levar para outros sites. Isto parece ótimo se você não liga para como vai ficar seu HTML ou Markdown no outro site, pois aviso que tem grande chances do Tumblr alterar o texto.  
+Agora vamos ver os próximos detalhes que me incomodaram, tipo o fato do Tumblr gostar de alterar o seu texto...
 
 ## Switching Text Editors
 
