@@ -54,7 +54,7 @@ Se você decidir voltar para o editor de texto anterior, você pode ter perdido 
 
 ## Preview
 
-![Pessoa surpresa](./surprised.svg)
+![Imagem ilustrativa do post entregando como ⭐ e saindo como 💩](./preview_breaking.svg)
 
 Normalmente visualização prévia seria apenas para demonstrar como o seu trabalho irá ficar quando finalizado, sem alterar em nada o escrito...  
 
@@ -63,6 +63,8 @@ Por algum motivo Tumblr decide alterar o seu trabalho durante a preparação da 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/uQBsBePphYI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>  
 
 ## Hide Request Referer
+
+![Pessoa se escondendo atrás de um muro](./hidding.svg)  
 
 Quando você clica em um link de um site, o seu navegador irá fazer a requisição do conteúdo daquele link para depois exibir ele na sua tela. Neste caso é normal enviar para o link que você clicou de onde você está vindo, para que o site que vai te enviar o conteúdo saber de onde está vindo o tráfico.  
 
@@ -78,4 +80,9 @@ Note como ambos "Hide thiagola92 from people without an account" e "Discourage s
 
 ## Conclusion
 
-Aqui estou eu experimentando outra maneira de escrever um blog.  
+![Pessoa surpresa](./surprised.svg)  
+
+No final das contas, todas essas chatisses me levaram a experimentar outras maneiras de compartilhar conteúdo. Ainda não estou completamente feliz mas está me satisfazendo.  
+
+**Observação**: Recentemente eu descobri que Tumblr tinha sido comprado pela mesma empresa do [Wordpress](https://en.wikipedia.org/wiki/WordPress.com) então isso deve explicar o pouco carinho que o website tem recebido em questão de funcionalidade.  
+
