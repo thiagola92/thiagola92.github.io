@@ -52,7 +52,6 @@ Até que por acaso esbarrei em um comentário de um video que simplesmente expli
 
 ## Reference
 
-Video com este comentário: https://www.youtube.com/watch?v=9LaB6wbZepg  
-
-Canal de quem comentou: https://www.youtube.com/channel/UC7uU5XaPB9uYKlowYOhEHnA  
+- [Video com o comentário](https://www.youtube.com/watch?v=9LaB6wbZepg)  
+- [A pessoa do comentário tem um canal que fala bem sobre Godot](https://www.youtube.com/channel/UC7uU5XaPB9uYKlowYOhEHnA)  
 

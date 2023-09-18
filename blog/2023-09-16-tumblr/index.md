@@ -1,6 +1,4 @@
 ---
-slug: tumblr
-title: Tumblr
 authors: thiagola92-angry
 tags: [tumblr, website]
 ---

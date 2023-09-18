@@ -1,6 +1,4 @@
 ---
-slug: sieve
-title: Sieve
 authors: thiagola92-calm
 tags: [sieve, programming language]
 ---

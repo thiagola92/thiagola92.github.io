@@ -1,6 +1,4 @@
 ---
-slug: godot-array
-title: GDScript Array
 authors: thiagola92-derp
 tags: [godot, gdscript, array]
 ---

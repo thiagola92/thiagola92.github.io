@@ -1,11 +1,9 @@
 ---
-slug: svg-inkscape
-title: SVG Inkscape
 authors: thiagola92-calm
-tags: [svg, inkscape, art, 2d]
+tags: [svg, inkscape, aseprite, art, 2d]
 ---
 
-# SVG Inkscape
+# SVG
 
 Eu tenho explorado maneiras de fazer gráfico para o meu jogo.  
 
@@ -53,7 +51,7 @@ Zero perda de qualidade e tudo que eu fiz foi alterar a propriedades dentro da i
 ></svg>
 ```
 
-## SVG Aseprite
+## Aseprite
 
 Aseprite exporta para SVG de uma maneira bem precária. Cada pixel é transformado em um quadrado, cada quadrado é uma linha do tipo:  
 

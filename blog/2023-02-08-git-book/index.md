@@ -1,9 +1,9 @@
 ---
-slug: git-doc
-title: Git Book
 authors: thiagola92-calm
 tags: [git, documentation]
 ---
+
+# Git Book
 
 Tirei essa semana para ler alguns capitulos do livro [Pro Git](https://git-scm.com/book/en/v2).  
 
