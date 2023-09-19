@@ -18,11 +18,11 @@ Assuma que teremos um conjunto de tiles onde cada lado está pintado de apenas u
 
 ![Exemplo de 5 tiles diferentes](./tiles.svg)  
 
-1. Cada lado do tile de uma cor.  
-2. Dois lados podem ter a mesma cor.  
-3. Todos os lados podem ter a mesma cor.
-4. Dois lados adjacentes podem ter a mesma cor.
-5. Pode ser uma variação das cores já vistas só que em posições diferentes.
+1. Cada lado com uma cor.  
+2. Dois lados com a mesma cor.  
+3. Todos os lados com a mesma cor.
+4. Dois lados adjacentes com a mesma cor.
+5. Variação das cores já vistas só que em posições diferentes.
 
 :::note
 
@@ -30,7 +30,7 @@ Por simplicidade mudaremos para duas cores apenas.
 
 :::
 
-Vamos reutilizar os mesmos tiles quantas vezes quisermos para botar eles lado a lado e formar um plano, porém as cores laterais do tiles devem sempre casar. Por exemplo:  
+Vamos reutilizar os mesmos tiles quantas vezes quisermos para botar eles lado a lado e formar um plano, porém com as cores laterais do tiles sempre casando. Por exemplo:  
 
 ![Exemplo utilizando 5 tiles diferentes para criar 2 combinações de plano](./tiles_match.svg)  
 
@@ -57,11 +57,11 @@ Podemos inserir em ferramentas como [Godot](https://godotengine.org/) que permit
 
 ![Exemplo 2 de plano criado utilizando os tiles](./plane01.png)  
 
-Note que não há problema criar variações do mesmo tile. Por exemplo, vamos adicionar tiles com árvores:  
+Note que não há problema criar variações do mesmo tile. Por exemplo, adicionando tiles com árvores:  
 
-![Mesmo 16 porém com a adição de 3 tiles com todos os lados verdes](./sides_with_trees.svg)  
+![Mesmos 16 porém com a adição de 3 tiles com todos os lados verdes](./sides_with_trees.svg)  
 
-Quando a ferramenta for botar um tile com quatro lados verdes, ela poderá escolher em 4 tiles diferentes:  
+Quando a ferramenta for botar um tile com quatro lados verdes, ela poderá escolher entre 4 tiles diferentes:  
 
 ![Exemplo 3 de plano criado utilizando os tiles, porém com árvores](./plane02.png)  
 
@@ -73,11 +73,11 @@ Porém como criador dos tiles, somos capazes de deduzir está informação e ape
 
 ![Todas os possíveis tiles com duas cores e quatro lados](./sides.svg)  
 
-Alguns destes tiles são variações dos anteriores porem rotacionandos ou refletindos. Levando isto em conta, podemos minimizar para 6 tiles apenas:  
+Alguns destes tiles são variações dos anteriores porém rotacionados ou refletidos. Levando isto em conta, podemos minimizar para 6 tiles apenas:  
 
 ![Seis tiles que conseguem representar os mesmo tiles acima](./sides_minimalist.svg)  
 
-É importante notar que só é possível se conhecermos a imagem. Botando a mesma árvore utilizada anteriormente em um dos tiles, podemos ver o tile perder o sentido quando rotacionado porém não quando refletido:  
+É importante notar que só é possível se conhecermos a imagem. Botando a mesma árvore utilizada anteriormente em um dos tiles, podemos ver o tile perder o sentido quando rotacionado mas não quando refletido:  
 
 ![Árvore adicionada a um tile e suas variações de rotação e reflexão](./tile_with_tree.svg)  
 
@@ -87,7 +87,7 @@ Todos nossos tiles tem sido com cores, porém as cores apenas servem para repres
 
 ![Seis tiles que conseguem representar todas combinações se você rotacionar](./sides_minimalist.svg)  
 
-Basta imaginarmos o **azul como sendo arbustos** que não vão deixar uma pessoa passar e o **verde como caminho** de terra que foram feitos para pessoas caminharem:  
+Basta imaginarmos o **azul como sendo arbustos** e o **verde como caminho de terra** para pessoas caminharem:  
 
 ![Tiles do labirinto](./maze_tiles.svg)  
 
