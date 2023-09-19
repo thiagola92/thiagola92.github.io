@@ -5,13 +5,6 @@ tags: [wang, tiles, godot]
 
 # Wang Tiles
 
-:::info
-
-[Conteúdo extraido do site cr31.co.uk](http://www.cr31.co.uk/stagecast/wang/intro.html).  
-Nunca se sabe quando um site antigo pode desaparecer então este post é uma maneira de continuar transmitindo parte do conhecimento.  
-
-:::
-
 Wang tiles foi proposto pelo matemático Hao Wang em 1961.  
 
 Assuma que teremos um conjunto de tiles onde cada lado está pintado de apenas uma cor. Por exemplo:  
