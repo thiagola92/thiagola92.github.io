@@ -87,11 +87,13 @@ Alguns destes tiles são variações dos anteriores porém rotacionados ou refle
 
 ## Example
 
-Todos nossos tiles tem sido com cores, porém as cores apenas servem para representar a relação entre os tiles. Criando apenas 6 tiles podemos fazer um labirinto:  
+Todos nossos tiles tem sido com cores, porém as cores apenas servem para representar a relação entre os tiles.  
 
-![Tiles do labirinto](./maze_tiles.svg)  
+Para deixar isto claro, vamos substituir o desenho dos tiles por desenhos que melhor representem um labirinto. Vamos trocar **azul por arbustos** e **verde por terra**:  
 
-Utilizando estes tiles com suas rotações/relexões, podemos criar em segundos o nosso mapa:  
+![Comparação do tiles bases com tiles do labirinto](./maze_tiles.svg)  
+
+Utilizando estes tiles com suas rotações/relexões, podemos criar em segundos o nosso labirinto:  
 
 ![Tiles do labirinto](./maze.png)  
 
