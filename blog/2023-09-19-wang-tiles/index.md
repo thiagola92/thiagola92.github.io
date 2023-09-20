@@ -5,7 +5,7 @@ tags: [wang, tiles, godot]
 
 # Wang Tiles
 
-Wang tiles foi proposto pelo matemático Hao Wang em 1961.  
+(Wang tiles foi proposto pelo matemático Hao Wang em 1961)  
 
 Assuma que teremos um conjunto de tiles onde cada lado está pintado de apenas uma cor. Por exemplo:  
 
@@ -23,16 +23,19 @@ Por simplicidade mudaremos para duas cores apenas.
 
 :::
 
-Vamos reutilizar os mesmos tiles quantas vezes quisermos para botar eles lado a lado e formar um plano, porém com as cores laterais do tiles sempre casando. Por exemplo:  
+A ideia é reutilizar os mesmos tiles quantas vezes quisermos para botar eles lado a lado e formar um plano, porém com as cores laterais do tiles sempre casando. No exemplo seguinte temos 5 tiles e 2 exemplos de planos formados por eles:  
 
 ![Exemplo utilizando 5 tiles diferentes para criar 2 combinações de plano](./tiles_match.svg)  
 
-Tiles **não** podem se sobrepor.  
-Tiles **não** podem ser rotacionados ou refletidos (por enquanto).  
+Importante notar que:
+- Tiles **não** podem se sobrepor.  
+- Tiles **não** podem ser rotacionados ou refletidos.  
+
+Pois não é possível saber se seriam tiles válidos sem conhecer a imagem utilizada neles.  
 
 ## Automation
 
-Embora reutilização de tiles para gerar diversos planos/áreas/mapas não seja especial, Wang tiles adiciona a lógica de relacionar os tiles entre si.  
+Embora reutilização de tiles para gerar diversos planos/mapas não seja especial, Wang tiles adiciona a lógica de relacionar os tiles entre si. Isto nos permite verificar se um tile é válido numa determinada posição.  
 
 Por exemplo, possuindo 2 cores e 4 lados, podemos formar 16 (2<sup>4</sup>) tiles diferentes:  
 
@@ -44,21 +47,29 @@ Adicionamos um quadrado cinza no centro de cada tile.
 
 :::
 
-Podemos inserir em ferramentas como [Godot](https://godotengine.org/) que permitem definir relações entre os tiles e com isto construir diversos mapas em segundos:  
+Botamos estes tiles na game engine [Godot](https://godotengine.org/) e nela definimos a relação entre os tiles.  
 
-![Exemplo 1 de plano criado utilizando os tiles](./plane00.png)  
+Ao começar a pintar tiles dentro da game engine, podemos ver que ela consegue verificar qual tile é válido naquela posição ou se precisa alterar os vizinhos.  
 
-![Exemplo 2 de plano criado utilizando os tiles](./plane01.png)  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aWyol4H4Csc?si=JpoIgIEVf9v2dJ45" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>  
 
-Note que não há problema criar variações do mesmo tile. Por exemplo, adicionando tiles com árvores:  
+Em segundos conseguimos construir planos onde os tiles tem uma conexão entre si.  
+
+## Variations
+
+É importante notar que não há problema criar variações do mesmo tile. Por exemplo:  
 
 ![Mesmos 16 porém com a adição de 3 tiles com todos os lados verdes](./sides_with_trees.svg)  
 
-Quando a ferramenta for botar um tile com quatro lados verdes, ela poderá escolher entre 4 tiles diferentes:  
+No momento de preencher por um tile válido naquela posição, a ferramenta iria ter que escolher entre 4 tiles diferentes. Algumas ferramentas como Godot escolheram aleatoriamente:  
 
-![Exemplo 3 de plano criado utilizando os tiles, porém com árvores](./plane02.png)  
+Antes  
+![Exemplo de plano criado utilizando os 16 tiles](./plane00.png)  
 
-## Rotate & Reflect
+Depois  
+![Exemplo 3 de plano criado utilizando os tiles, porém com árvores](./plane01.png)  
+
+## Rotation & Reflection
 
 Na proposta de Wang não se pode rotacionar e refletir tiles pois não existe garantia que a imagem continuará fazendo sentido após rotacionada ou refletida.  
 
@@ -76,15 +87,11 @@ Alguns destes tiles são variações dos anteriores porém rotacionados ou refle
 
 ## Example
 
-Todos nossos tiles tem sido com cores, porém as cores apenas servem para representar a relação entre os tiles. Utilizando estes 6 tiles como base, podemos fazer um labirinto:  
-
-![Seis tiles que conseguem representar todas combinações se você rotacionar](./sides_minimalist.svg)  
-
-Basta imaginarmos o **azul como sendo arbustos** e o **verde como caminho de terra** para pessoas caminharem:  
+Todos nossos tiles tem sido com cores, porém as cores apenas servem para representar a relação entre os tiles. Criando apenas 6 tiles podemos fazer um labirinto:  
 
 ![Tiles do labirinto](./maze_tiles.svg)  
 
-Utilizando estes tiles com suas rotações/relexões, podemos facilmente criar um labirinto:  
+Utilizando estes tiles com suas rotações/relexões, podemos criar em segundos o nosso mapa:  
 
 ![Tiles do labirinto](./maze.png)  
 
