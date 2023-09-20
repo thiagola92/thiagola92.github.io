@@ -103,8 +103,6 @@ Este labirinto está com cara de circuitos da placa mãe. 🤔
 
 :::
 
-
-
 ## References
 
 - [cr32 website](http://www.cr31.co.uk/stagecast/wang/intro.html)  
