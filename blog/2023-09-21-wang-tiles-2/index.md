@@ -19,9 +19,9 @@ A seguinte imagem desmonstra como cada tipo deve casar:
 
 ![Comparação entre os 3 tipos de tiles](./matching.svg)  
 
-Tirando isto a lógica principal de Wang tiles permanece, ou seja, não precisamos falar dos mesmos assuntos vistos na primeira parte pois você só precisa adaptar a essa nova maneira de casar tiles.  
+Tirando isto a lógica principal de Wang tiles permanece, ou seja, não precisamos falar dos mesmos assuntos vistos na primeira parte pois você só precisa adaptar a maneira de casar tiles.  
 
-Porém iremos monstrar para cada um dos tipos:
+Porém iremos mostrar para cada um dos tipos:
 - Todos os possiveis tiles
 - Mínimo de tiles considerando rotação e reflexão
 
