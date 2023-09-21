@@ -14,6 +14,7 @@ Pode me encontrar nas seguintes rede sociais:
 - [Steam](https://steamcommunity.com/id/thiagola92)  
 - [Threads](https://www.threads.net/@thiagola92)  
 - [TikTok](https://tiktok.com/@thiagola92)  
+- [Twitch](https://twitch.com/thiagola92)  
 - [Twitter](https://twitter.com/thiagola92)  
 - [Youtube](https://youtube.com/thiagola92)  
 
@@ -26,7 +27,6 @@ Utilizadas mais para meio de comunicação do que conteúdo.
 ## Deprecated
 - [Facebook](https://facebook.com/thiagola92)  
 - [Tumblr](https://thiagola92.tumblr.com/)  
-- [Twitch](https://twitch.com/thiagola92)  
 
 :::caution
 
