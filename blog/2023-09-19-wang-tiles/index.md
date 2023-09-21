@@ -3,7 +3,7 @@ authors: thiagola92-calm
 tags: [wang, tiles, godot]
 ---
 
-# Wang Tiles
+# Wang Tiles pt. 1
 
 (Wang tiles foi proposto pelo matemático Hao Wang em 1961)  
 
@@ -105,5 +105,5 @@ Este labirinto está com cara de circuitos da placa mãe. 🤔
 
 ## References
 
-- [cr32 website](http://www.cr31.co.uk/stagecast/wang/intro.html)  
+- [cr31 website](http://www.cr31.co.uk/stagecast/wang/intro.html)  
 - [Wikipedia](https://en.wikipedia.org/wiki/Wang_tile)  
