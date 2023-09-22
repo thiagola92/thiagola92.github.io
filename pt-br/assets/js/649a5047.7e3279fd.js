@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[4521],{3576:a=>{a.exports=JSON.parse('{"label":"mongo","permalink":"/pt-br/blog/tags/mongo","allTagsPath":"/pt-br/blog/tags","count":1}')}}]);
