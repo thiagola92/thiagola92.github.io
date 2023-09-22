@@ -11,6 +11,8 @@ Na época mantermos diversas licenças da interface gráfica [Studio 3T](https:/
 
 E por isso comecei a buscar por um interface gráfica que fosse me satisfazer.  
 
+![Pessoa caminhando com uma madeira carregando seus pertences na ponta](./migrate.svg)
+
 ## Robot 3T
 
 Uma alternativa considerada foi [Robo 3T/Robomongo](https://robomongo.org/) mas pelo fato dele ter sido adquirido pelo Studio 3T já não era um bom sinal para mim.  
