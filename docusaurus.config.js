@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ThiagoLA92',
+  title: 'thiagola92',
   tagline: '',
   favicon: 'img/logo.svg',
 
