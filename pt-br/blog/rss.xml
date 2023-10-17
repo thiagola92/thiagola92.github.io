@@ -4,10 +4,34 @@
         <title>thiagola92 Blog</title>
         <link>https://thiagola92.github.io/pt-br/blog</link>
         <description>thiagola92 Blog</description>
-        <lastBuildDate>Mon, 09 Oct 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 12 Oct 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>pt-br</language>
+        <item>
+            <title><![CDATA[Forward Kinematics]]></title>
+            <link>https://thiagola92.github.io/pt-br/blog/2023/10/12/fk</link>
+            <guid>https://thiagola92.github.io/pt-br/blog/2023/10/12/fk</guid>
+            <pubDate>Thu, 12 Oct 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Esses últimos meses eu tenho gastado um grande tempo (mais do que gostaria) vendo inverse kinematics 2D do Godot.]]></description>
+            <content:encoded><![CDATA[<p>Esses últimos meses eu tenho gastado um grande tempo (mais do que gostaria) vendo inverse kinematics 2D do Godot.  </p><p>Eu preciso passar a limpo o conhecimento básico que eu possuo, para melhor garantir que não estou cagando tudo no código fonte deles.</p>]]></content:encoded>
+            <category>godot</category>
+            <category>gdscript</category>
+            <category>forward kinematics</category>
+            <category>physics</category>
+        </item>
+        <item>
+            <title><![CDATA[Inverse Kinematics]]></title>
+            <link>https://thiagola92.github.io/pt-br/blog/2023/10/12/ik-lookat</link>
+            <guid>https://thiagola92.github.io/pt-br/blog/2023/10/12/ik-lookat</guid>
+            <pubDate>Thu, 12 Oct 2023 00:00:00 GMT</pubDate>
+            <category>godot</category>
+            <category>gdscript</category>
+            <category>inverse kinematics</category>
+            <category>ik</category>
+            <category>physics</category>
+            <category>look at</category>
+        </item>
         <item>
             <title><![CDATA[Mondot]]></title>
             <link>https://thiagola92.github.io/pt-br/blog/2023/10/09/mondot</link>

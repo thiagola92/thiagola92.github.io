@@ -2,11 +2,43 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://thiagola92.github.io/blog</id>
     <title>thiagola92 Blog</title>
-    <updated>2023-10-09T00:00:00.000Z</updated>
+    <updated>2023-10-12T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://thiagola92.github.io/blog"/>
     <subtitle>thiagola92 Blog</subtitle>
     <icon>https://thiagola92.github.io/img/logo.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Forward Kinematics]]></title>
+        <id>https://thiagola92.github.io/blog/2023/10/12/fk</id>
+        <link href="https://thiagola92.github.io/blog/2023/10/12/fk"/>
+        <updated>2023-10-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Esses últimos meses eu tenho gastado um grande tempo (mais do que gostaria) vendo inverse kinematics 2D do Godot.]]></summary>
+        <content type="html"><![CDATA[<p>Esses últimos meses eu tenho gastado um grande tempo (mais do que gostaria) vendo inverse kinematics 2D do Godot.  </p><p>Eu preciso passar a limpo o conhecimento básico que eu possuo, para melhor garantir que não estou cagando tudo no código fonte deles.</p>]]></content>
+        <author>
+            <name>Thiago Lages de Alencar</name>
+            <uri>https://github.com/thiagola92</uri>
+        </author>
+        <category label="godot" term="godot"/>
+        <category label="gdscript" term="gdscript"/>
+        <category label="forward kinematics" term="forward kinematics"/>
+        <category label="physics" term="physics"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Inverse Kinematics]]></title>
+        <id>https://thiagola92.github.io/blog/2023/10/12/ik-lookat</id>
+        <link href="https://thiagola92.github.io/blog/2023/10/12/ik-lookat"/>
+        <updated>2023-10-12T00:00:00.000Z</updated>
+        <author>
+            <name>Thiago Lages de Alencar</name>
+            <uri>https://github.com/thiagola92</uri>
+        </author>
+        <category label="godot" term="godot"/>
+        <category label="gdscript" term="gdscript"/>
+        <category label="inverse kinematics" term="inverse kinematics"/>
+        <category label="ik" term="ik"/>
+        <category label="physics" term="physics"/>
+        <category label="look at" term="look at"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Mondot]]></title>
         <id>https://thiagola92.github.io/blog/2023/10/09/mondot</id>
