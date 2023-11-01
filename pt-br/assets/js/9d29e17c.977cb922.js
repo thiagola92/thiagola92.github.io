@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[6564],{174:a=>{a.exports=JSON.parse('{"label":"physics","permalink":"/pt-br/blog/tags/physics","allTagsPath":"/pt-br/blog/tags","count":2}')}}]);
