@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[6981],{3412:t=>{t.exports=JSON.parse('{"label":"mongodb","permalink":"/pt-br/tags/mongodb","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"projects/2021","title":"2021","description":"Mondot","permalink":"/pt-br/projects/2021"}]}')}}]);
