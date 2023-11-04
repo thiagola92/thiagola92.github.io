@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[8905],{4108:t=>{t.exports=JSON.parse('{"label":"lua","permalink":"/pt-br/tags/lua","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"projects/2018","title":"2018","description":"Tower Defense","permalink":"/pt-br/projects/2018"}]}')}}]);

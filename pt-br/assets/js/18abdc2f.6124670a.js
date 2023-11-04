@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[2545],{1392:t=>{t.exports=JSON.parse('{"label":"processing","permalink":"/pt-br/tags/processing","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"projects/2017","title":"2017","description":"Winterfells","permalink":"/pt-br/projects/2017"}]}')}}]);
