@@ -81,7 +81,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} Thiago Lages de Alencar`,
+        copyright: `Copyright © ${new Date().getFullYear()} Thiago Lages de Alencar, Built with Docusaurus`,
       },
       prism: {
         theme: lightCodeTheme,
