@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[5340],{1563:e=>{e.exports=JSON.parse('{"label":"google drive","permalink":"/tags/google-drive","allTagsPath":"/tags","count":1,"items":[{"id":"projects/2019","title":"2019","description":"Monga Programming Language","permalink":"/projects/2019"}]}')}}]);

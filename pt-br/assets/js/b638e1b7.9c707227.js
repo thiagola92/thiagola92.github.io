@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[6333],{7153:e=>{e.exports=JSON.parse('{"label":"ethereum","permalink":"/pt-br/tags/ethereum","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"projects/2019","title":"2019","description":"Monga Programming Language","permalink":"/pt-br/projects/2019"}]}')}}]);

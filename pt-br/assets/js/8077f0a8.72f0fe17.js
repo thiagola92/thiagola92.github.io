@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[6032],{6657:t=>{t.exports=JSON.parse('{"label":"visual studio","permalink":"/pt-br/tags/visual-studio","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"projects/2015","title":"2015","description":"Simples Criptografia","permalink":"/pt-br/projects/2015"}]}')}}]);
