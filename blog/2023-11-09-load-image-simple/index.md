@@ -24,19 +24,19 @@ O que ele quer exiber? Texture.
 
 ### Texture
 
-Texture possui a informação daquilo que quer exibir já carregado na placa de video.  
+Texture possui a informação daquilo que quer exibir e já foi carregado na placa de video.  
 
 O que ele quer exibir? Image.
 
 ### Image
 
-Image possui a informação daquilo que quer exibir carregado na memória RAM.
+Image possui a informação daquilo que quer exibir e já foi carregado na memória RAM.
 
 O que ele quer exibir? File.
 
 ### File
 
-File possui os bytes daquilo que quer exibir na memória (HD/SSD).
+File possui os bytes daquilo que quer exibir porém ainda está no HD/SSD.
 
 ## `load()` vs `load_from_file()`
 
