@@ -2,11 +2,45 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://thiagola92.github.io/blog</id>
     <title>thiagola92 Blog</title>
-    <updated>2023-11-09T00:00:00.000Z</updated>
+    <updated>2023-11-27T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://thiagola92.github.io/blog"/>
     <subtitle>thiagola92 Blog</subtitle>
     <icon>https://thiagola92.github.io/img/logo.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[Little-endian and Big-endian]]></title>
+        <id>https://thiagola92.github.io/blog/2023/11/27/little-and-big-endians</id>
+        <link href="https://thiagola92.github.io/blog/2023/11/27/little-and-big-endians"/>
+        <updated>2023-11-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Definições utilizadas para informar em que ordem os bytes vão ser escritos na memória.]]></summary>
+        <content type="html"><![CDATA[<p>Definições utilizadas para informar em que ordem os bytes vão ser escritos na memória.  </p><p>Primeiro é preciso lembrar que a memória tem endereços, existe início e final.  </p><table><thead><tr><th>Endereço da memória</th></tr></thead><tbody><tr><td>0</td></tr><tr><td>1</td></tr><tr><td>2</td></tr><tr><td>3</td></tr><tr><td>4</td></tr><tr><td>5</td></tr><tr><td>6</td></tr><tr><td>7</td></tr></tbody></table><p>Dado que queremos armazenar o número 149, em binário <code>10010101</code>, das duas maneiras mais conhecidas de armazenas isto é little-endian e big-endian.  </p><p><strong>Little-endian</strong>: Bit menos significativo primeiro.<br>
+<strong>Big-endian</strong>: Bit mais significativo primeiro.  </p><table><thead><tr><th>Endereço da memória</th><th>Little-endian</th><th>Big-endian</th></tr></thead><tbody><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>2</td><td>1</td><td>0</td></tr><tr><td>3</td><td>0</td><td>1</td></tr><tr><td>4</td><td>1</td><td>0</td></tr><tr><td>5</td><td>0</td><td>1</td></tr><tr><td>6</td><td>0</td><td>0</td></tr><tr><td>7</td><td>1</td><td>1</td></tr></tbody></table>]]></content>
+        <author>
+            <name>Thiago Lages de Alencar</name>
+            <uri>https://github.com/thiagola92</uri>
+        </author>
+        <category label="bit" term="bit"/>
+        <category label="byte" term="byte"/>
+        <category label="bytes" term="bytes"/>
+        <category label="bits" term="bits"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Least vs Most significant bit]]></title>
+        <id>https://thiagola92.github.io/blog/2023/11/27/most-and-least-significant-bit</id>
+        <link href="https://thiagola92.github.io/blog/2023/11/27/most-and-least-significant-bit"/>
+        <updated>2023-11-27T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[O bit mais significativo é o bit que representa a maior valor do número.]]></summary>
+        <content type="html"><![CDATA[<p>O bit mais significativo é o bit que representa a maior valor do número.<br>
+<!-- -->O bit menos significativo é o bit que representa o menor valor do número.  </p><p>O número 149 em binário é <code>10010101</code>, cada bit é responsável por representar um número.    </p><table><thead><tr><th>1</th><th>0</th><th>0</th><th>1</th><th>0</th><th>1</th><th>0</th><th>1</th></tr></thead><tbody><tr><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr></tbody></table><p>Nós sabemos que isto é equivalente a 149 pois somando o valor de todos os bits que são 1 obtemos 149.  </p><p>128 + 16 + 4 + 1 = 149</p>]]></content>
+        <author>
+            <name>Thiago Lages de Alencar</name>
+            <uri>https://github.com/thiagola92</uri>
+        </author>
+        <category label="bit" term="bit"/>
+        <category label="byte" term="byte"/>
+        <category label="bytes" term="bytes"/>
+        <category label="bits" term="bits"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Loading an image is simple]]></title>
         <id>https://thiagola92.github.io/blog/2023/11/09/load-image-simple</id>
