@@ -200,7 +200,7 @@ Este tipo de estrutura é tão comum que tem o nome de [Tagged Union](https://en
 
 # Rust Enum
 
-Por ambos terem uma relação tão próxima, Rust trata eles como se fossem uma estrutura só.  
+Acredito que o `enum` do Rust seja nada mais que um tagged union.  
 
 ```Rust
 #[derive(Debug)]
@@ -213,24 +213,35 @@ enum Type {
 println!("{:#?}", Type::Integer);
 ```
 
-Em vez de declararmos uma union com os tipos que ela pode armazenar, Rust deixa você declarar no próprio enum:  
+Em outras lugares enum ligaria apenas identificadores a números, porém em Rust você pode armazenar estrutura/tipos juntos aos enums.  
 
 ```Rust
-fn main() {
-    #[derive(Debug)]
-    enum Type {
-        Integer(i32),
-        Floating(f32),
-        Character(char),
-    }
-    
-    let content: Type = Type::Floating(5.0);
-    
-    println!("{:#?}", content);
+#[derive(Debug)]
+enum Type {
+    Integer(i32),
+    Floating(f32),
+    Character(char),
 }
+
+let content: Type = Type::Floating(5.0);
+
+println!("{:#?}", content);
 ```
 
-Note que também não precisamos fazer declarações extras toda vez que o tipo mudar.  
+Isso nos da uma estrutura só que possue a capacidade de fazer o mesmo que tagged union e com menos chance do desenvolvedor cometer um erro.  
+
+Por exemplo, não precisamos mais atualizar o tipo armazenado na variável toda vez que alteramos:  
+
+```
+// C
+content.f = 5.0;
+type = Floating;
+
+// Rust
+let content: Type = Type::Floating(5.0);
+```
+
+Rust é linguagem que preza bastante segurança, então faria sentido tratar como se fosse uma única estrutura para evitar os problemas de union (embora Rust tenha o tipo union).  
 
 # Comparison
 
