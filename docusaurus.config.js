@@ -6,7 +6,7 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
-// Markdown math
+// Math markdown
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
@@ -52,7 +52,7 @@ const config = {
           'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
         routeBasePath: '/',
 
-        // Markdown math
+        // Math markdown
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
         },
@@ -117,6 +117,12 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
+
+    // Mermaid markdown
+    markdown: {
+      mermaid: true,
+    },
+    themes: ['@docusaurus/theme-mermaid'],
 };
 
 export default config;
