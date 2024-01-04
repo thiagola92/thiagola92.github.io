@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="240"
+   height="240"
+   viewBox="0 0 80 80"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (1:1.3+202307231459+0e150ed6c4)"
+   sodipodi:docname="oh_crap.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#afafaf"
+     inkscape:document-units="px"
+     showgrid="true"
+     labelstyle="default"
+     inkscape:zoom="5.8154881"
+     inkscape:cx="129.22389"
+     inkscape:cy="130.16964"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="8"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path1"
+       style="fill:#3ecc5f;fill-opacity:1;stroke-width:1.4426;stroke-linecap:round;stroke-linejoin:bevel"
+       d="M 40 8 A 32 32 0 0 0 8 40 A 32 32 0 0 0 40 72 A 32 32 0 0 0 72 40 A 32 32 0 0 0 40 8 z M 27 16 A 8 8 0 0 1 35 24 A 8 8 0 0 1 27 32 A 8 8 0 0 1 19 24 A 8 8 0 0 1 27 16 z M 53 16 A 8 8 0 0 1 61 24 A 8 8 0 0 1 53 32 A 8 8 0 0 1 45 24 A 8 8 0 0 1 53 16 z M 26.5 57.470703 L 53.5 57.470703 C 54.885157 57.470703 56 57.652219 56 57.877604 C 56 58.10299 54.885157 58.284505 53.5 58.284505 L 26.5 58.284505 C 25.114843 58.284505 24 58.10299 24 57.877604 C 24 57.652219 25.114843 57.470703 26.5 57.470703 z " />
+    <circle
+       style="fill:#3ecc5f;fill-opacity:1;stroke-width:0.157784;stroke-linecap:round;stroke-linejoin:bevel"
+       id="path1-5-7"
+       cx="55.5"
+       cy="20.5"
+       r="3.5" />
+    <circle
+       style="fill:#3ecc5f;fill-opacity:1;stroke-width:0.157784;stroke-linecap:round;stroke-linejoin:bevel"
+       id="path1-5-7-6"
+       cx="24.5"
+       cy="20.5"
+       r="3.5" />
+  </g>
+</svg>
