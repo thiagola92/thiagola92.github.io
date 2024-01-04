@@ -50,11 +50,11 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
           'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
-        routeBasePath: '/',
+          routeBasePath: '/',
 
-        // Math markdown
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
+          // Math markdown
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex, {strict: false}],
         },
         blog: {
           showReadingTime: false,
