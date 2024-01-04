@@ -1,8 +1,14 @@
 // @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+// `@type` JSDoc annotations allow editor autocompletion and type checking
+// (when paired with `@ts-check`).
+// There are various equivalent ways to declare your Docusaurus config.
+// See: https://docusaurus.io/docs/api/docusaurus-config
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import {themes as prismThemes} from 'prism-react-renderer';
+
+// Math markdown
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -25,9 +31,9 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'pt-br'],
@@ -39,23 +45,41 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: './sidebars.js',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
-            routeBasePath: '/',
+          'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
+          routeBasePath: '/',
+
+          // Math markdown
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         blog: {
           showReadingTime: false,
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
-          blogSidebarCount: 'ALL',
-          blogSidebarTitle: 'All posts',
+          'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
+        blogSidebarCount: 'ALL',
+        blogSidebarTitle: 'All posts',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: './src/css/custom.css',
         },
       }),
     ],
+  ],
+
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
   ],
 
   themeConfig:
@@ -72,11 +96,16 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'aboutSidebar',
+            sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'About',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            href: 'https://github.com/thiagola92',
+            label: 'GitHub',
+            position: 'right',
+          },
         ],
       },
       footer: {
@@ -84,10 +113,16 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Thiago Lages de Alencar, Built with Docusaurus`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
     }),
+
+    // Mermaid markdown
+    markdown: {
+      mermaid: true,
+    },
+    themes: ['@docusaurus/theme-mermaid'],
 };
 
-module.exports = config;
+export default config;
