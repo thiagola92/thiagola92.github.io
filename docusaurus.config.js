@@ -54,7 +54,7 @@ const config = {
 
           // Math markdown
           remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex, {strict: false}],
+          rehypePlugins: [rehypeKatex],
         },
         blog: {
           showReadingTime: false,
