@@ -28,3 +28,10 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.open-source-avatar {
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+  border-radius: var(--borderRadius-medium, 0.375rem);
+}
