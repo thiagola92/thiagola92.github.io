@@ -55,3 +55,7 @@ https://github.com/godotengine/godot/pull/79678
 
 https://github.com/pdm-project/setup-pdm/pull/33  
 https://github.com/pdm-project/setup-pdm/pull/28  
+
+<img class="open-source-avatar" src="https://github.com/bitbrain/beehave/raw/godot-4.x/docs/assets/logo.svg"/> <b>Beehave (2024)</b>  
+
+https://github.com/bitbrain/beehave/pull/295  
