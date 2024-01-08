@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[88],{63949:e=>{e.exports=JSON.parse('{"label":"security","permalink":"/pt-br/tags/security","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"open_source/2022","title":"2022","description":"Godot Engine","permalink":"/pt-br/open_source/2022"}],"unlisted":false}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[3258],{6667:t=>{t.exports=JSON.parse('{"label":"android","permalink":"/pt-br/tags/android","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"personal_projects/2014","title":"2014","description":"Niuxes","permalink":"/pt-br/personal_projects/2014"}],"unlisted":false}')}}]);

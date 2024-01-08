@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[7199],{8103:a=>{a.exports=JSON.parse('{"label":"inverse kinematics","permalink":"/pt-br/blog/tags/inverse-kinematics","allTagsPath":"/pt-br/blog/tags","count":1,"unlisted":false}')}}]);

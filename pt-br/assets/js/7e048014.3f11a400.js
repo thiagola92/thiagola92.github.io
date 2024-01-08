@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[9305],{48809:a=>{a.exports=JSON.parse('{"label":"inkscape","permalink":"/pt-br/blog/tags/inkscape","allTagsPath":"/pt-br/blog/tags","count":1,"unlisted":false}')}}]);

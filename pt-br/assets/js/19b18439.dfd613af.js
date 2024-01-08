@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[5124],{63684:e=>{e.exports=JSON.parse('{"label":"beekeper","permalink":"/pt-br/tags/beekeper","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"open_source/2020","title":"2020","description":"Beekeeper Studio","permalink":"/pt-br/open_source/2020"}],"unlisted":false}')}}]);

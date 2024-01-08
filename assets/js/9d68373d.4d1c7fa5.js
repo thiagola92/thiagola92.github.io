@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[4295],{87002:a=>{a.exports=JSON.parse('{"label":"gdscript","permalink":"/blog/tags/gdscript","allTagsPath":"/blog/tags","count":6,"unlisted":false}')}}]);

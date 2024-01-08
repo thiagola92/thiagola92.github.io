@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[2414],{75045:t=>{t.exports=JSON.parse('{"label":"html","permalink":"/tags/html","allTagsPath":"/tags","count":1,"items":[{"id":"personal_projects/2016","title":"2016","description":"Get Tournaments","permalink":"/personal_projects/2016"}],"unlisted":false}')}}]);
