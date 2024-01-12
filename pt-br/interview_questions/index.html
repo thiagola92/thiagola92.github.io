@@ -10,7 +10,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/pt-br/assets/css/styles.4ed44873.css">
-<script src="/pt-br/assets/js/runtime~main.5943c49e.js" defer="defer"></script>
+<script src="/pt-br/assets/js/runtime~main.6e5e8d3d.js" defer="defer"></script>
 <script src="/pt-br/assets/js/main.a45d0d5b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -19,30 +19,33 @@
 <blockquote>
 <p><strong>Por que agrupar as respostas aqui?</strong></p>
 </blockquote>
-<p>Durante uma entrevista eu costumo não lembrar das respostas ou posso até nunca ter pensado sobre o assunto.<br>
+<p>Durante uma entrevista eu costumo não lembrar das respostas (ou posso até nunca ter pensado sobre o assunto).<br>
 <!-- -->Agrupar todas em um local pode me ajuda a memorizar e sempre ter onde revisar.</p>
-<blockquote>
-<p><strong>Você poderia apenas práticar as perguntas e respostas, isto ajudaria a memorizar.</strong></p>
-</blockquote>
-<p>É verdade, dado que memórias se fortalecem quanto mais você se força a lembrar de algo.</p>
-<p>Essa seção pode ser usada da mesma maneira! Toda vez que eu esquecer uma resposta, eu posso vir aqui conferir o que o &quot;eu&quot; do passado tinha pensado.</p>
 <blockquote>
 <p><strong>Se um entrevistador ver essa seção, ele pode não fazer as perguntas dela.</strong></p>
 </blockquote>
-<p>É verdade!</p>
-<p>Caso ele tenha lido as respostas, isto já da a ele o que ele procurava.</p>
-<p>Caso ele só tenha lido as perguntas e decida fazer perguntas diferentes, provavelmente ele está testando minha criatividade ou pensamento rápido. Sou péssimo em ambos mas eu me preocupo mais em ser honesto sobre minhas qualificações.</p>
+<p>Caso ele tenha lido as respostas, isto já da a ele o que ele procurava e abre espaço para outras perguntas.</p>
 <blockquote>
 <p><strong>Você perde a chance de surprender o entrevistador com as respostas!</strong></p>
 </blockquote>
-<p>Sim, eu estou perdendo minha &quot;carta na manga&quot;.<br>
-<!-- -->Mas surprender os outros nunca foi meu forte, eu gosto mesmo é de me organizar (por isto essa seção).</p>
+<p>Sim, mas surprender os outros nunca foi meu forte e eu gosto de deixar todas as cartas na mesa.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="weakness">Weakness<a href="#weakness" class="hash-link" aria-label="Link direto para Weakness" title="Link direto para Weakness">​</a></h2>
 <p>Slow thinking</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="biggest-fucked-up">Biggest fucked up<a href="#biggest-fucked-up" class="hash-link" aria-label="Link direto para Biggest fucked up" title="Link direto para Biggest fucked up">​</a></h2>
-<p>Notificações sem parar pro cliente
-Kubernetes retentava o pod</p>
+<p>Fui responsável por escrever um script que notificava os clientes sobre produto novo.<br>
+<!-- -->Alguns clientes novos tinham um formato diferente no banco e isto quebrava o script.</p>
+<p>O problema maior foi: Eu esqueci que o pod do Kubernetes estava configurado para se recriar em caso de erro.</p>
+<p>O que aconteceu no final foi:</p>
+<ul>
+<li>notificava cliente 1, cliente 2, cliente 3, ..., erro</li>
+<li>recriava o pod</li>
+<li>notificava cliente 1, cliente 2, cliente 3, ..., erro</li>
+<li>recriava o pod</li>
+<li>...</li>
+</ul>
+<p>Pelo menos kubernetes tem configuração para dar intervalos maiores entre cada criação por erro, mas ainda foi bem ruim.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="design-pattern">Design pattern<a href="#design-pattern" class="hash-link" aria-label="Link direto para Design pattern" title="Link direto para Design pattern">​</a></h2>
-<p>Observable por causa do godot</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/thiagola92/thiagola92.github.io/tree/master/docs/interview_questions.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/pt-br/open_source/2019"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">2019</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#weakness" class="table-of-contents__link toc-highlight">Weakness</a></li><li><a href="#biggest-fucked-up" class="table-of-contents__link toc-highlight">Biggest fucked up</a></li><li><a href="#design-pattern" class="table-of-contents__link toc-highlight">Design pattern</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Thiago Lages de Alencar, Built with Docusaurus</div></div></div></footer></div>
+<p>Observer pattern, também conhecido por &quot;event-subscriber&quot; ou &quot;listener&quot;.<br>
+<!-- -->Ser capaz de ser notificado quando um evento ocorrer passou é o meu favorito, principalmente durante desenvolvimento de jogos.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="theme-doc-footer-edit-meta-row row"><div class="col"><a href="https://github.com/thiagola92/thiagola92.github.io/tree/master/docs/interview_questions.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Editar essa página</a></div><div class="col lastUpdated_vwxv"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Páginas de documentação"><a class="pagination-nav__link pagination-nav__link--prev" href="/pt-br/open_source/2019"><div class="pagination-nav__sublabel">Anterior</div><div class="pagination-nav__label">2019</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#weakness" class="table-of-contents__link toc-highlight">Weakness</a></li><li><a href="#biggest-fucked-up" class="table-of-contents__link toc-highlight">Biggest fucked up</a></li><li><a href="#design-pattern" class="table-of-contents__link toc-highlight">Design pattern</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2024 Thiago Lages de Alencar, Built with Docusaurus</div></div></div></footer></div>
 </body>
 </html>
