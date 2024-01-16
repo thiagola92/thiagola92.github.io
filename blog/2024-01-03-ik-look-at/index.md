@@ -11,7 +11,7 @@ Vamos começar por algo que eu até me questiono se seria inverse kinematic: Loo
 
 Ser capaz de fazer uma mão apontar para uma posição ou a cabeça olhar para uma direção.  
 
-![Jogador 2D movendo a cabeça para cima](./player_looking.gif)  
+![Jogador 2D movendo a cabeça para cima](./player_looking_animated.svg)  
 
 # Look At
 
