@@ -4,15 +4,15 @@
         <title>thiagola92 Blog</title>
         <link>https://thiagola92.github.io/pt-br/blog</link>
         <description>thiagola92 Blog</description>
-        <lastBuildDate>Wed, 03 Jan 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 04 Feb 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>pt-br</language>
         <item>
             <title><![CDATA[Inverse Kinematics: Look At]]></title>
-            <link>https://thiagola92.github.io/pt-br/blog/2024/01/03/ik-look-at</link>
-            <guid>https://thiagola92.github.io/pt-br/blog/2024/01/03/ik-look-at</guid>
-            <pubDate>Wed, 03 Jan 2024 00:00:00 GMT</pubDate>
+            <link>https://thiagola92.github.io/pt-br/blog/2024/02/04/ik-look-at</link>
+            <guid>https://thiagola92.github.io/pt-br/blog/2024/02/04/ik-look-at</guid>
+            <pubDate>Sun, 04 Feb 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[Dado que já refleti sobre forward kinematics, está na hora de falar sobre inverse kinematics (por mais que eu esteja com preguiça de fazer isso).]]></description>
             <content:encoded><![CDATA[<p>Dado que já refleti sobre <a href="https://thiagola92.github.io/pt-br/blog/2023/12/18/fk">forward kinematics</a>, está na hora de falar sobre inverse kinematics (por mais que eu esteja com preguiça de fazer isso).</p>
 <p>Vamos começar por algo que eu até me questiono se seria inverse kinematic: <strong>Look at</strong>.</p>
