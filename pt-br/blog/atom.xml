@@ -140,7 +140,12 @@
 <!-- -->Ângulo: 38º</p>
 <h1>Conclusion</h1>
 <p>Você provavelmente não terá que pensar em nada disso pois muitas game engines já possuem métodos para lidar com isto, por exemplo em Godot podemos encontrar algo como:</p>
-<p><code>get_angle_to(global_position)</code></p>]]></content>
+<p><code>get_angle_to(global_position)</code></p>
+<h1>References</h1>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=8Eur16foTMw" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=8Eur16foTMw</a></li>
+<li><a href="https://cplusplus.com/reference/cmath/atan2/" target="_blank" rel="noopener noreferrer">https://cplusplus.com/reference/cmath/atan2/</a></li>
+</ul>]]></content>
         <author>
             <name>Thiago Lages de Alencar</name>
             <uri>https://github.com/thiagola92</uri>
