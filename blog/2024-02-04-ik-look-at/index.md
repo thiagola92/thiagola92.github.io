@@ -90,18 +90,21 @@ A segunda utiliza os eixos para saber o real ângulo.
 
 # Rotating
 
-Para fazer com que a articulação pareça estar olhando para uma posição, nós precisamos calcular a rotação local.  
+Agora que sabemos como obter o ângulo do ponto (0,0) até uma posição qualquer, podemos finalmente rotacionar a articulação.  
+
+O próximo problema é que **não** estamos falando de rotacionar a partir do ponto (0,0) mas sim da posição da articulação.  
 
 ![Mostrando diferença entre o ângulo local e global](./rotation.svg)  
 
-**θ1**: Rotação global.  
-**θ2**: Rotação local.  
+**θ1**: Rotação global, usando ponto (0,0) como referência.  
+**θ2**: Rotação local, usando a posição da articulação como referência.  
 
-Como pode ver pela a imagem calcular globalmente não vai dar o ângulo que devemos rotacionar a articulação.  
+Para solucionar isto podemos calcular a posição do ponto em relação a articulação:  
 
-Para solucionar isto basta calcular a posição do ponto em relação a articulação:  
-
-`posição global do ponto - posição global da articulação = posição do ponto relativa à articulação`  
+```
+posição do ponto relativa à articulação =
+        posição global do ponto - posição global da articulação
+```  
 
 Exemplo:
 
@@ -116,6 +119,8 @@ Posição global do ponto: (50, 30)
 Posição global da articulação: (25, 10)  
 Posição do ponto relativa à articulação: (25, 20)  
 Ângulo: 38º  
+
+Pronto, agora sabemos qual deveria ser a rotação daquela articulação!  
 
 # Conclusion
 
