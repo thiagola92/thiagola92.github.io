@@ -71,9 +71,14 @@ Sim, o nome da lib seria `libname.so` e você botaria no argumento apenas `-lnam
 
 Nota: teoricamente você poderia usar `-l:libname.so` em vez de `-lname`.  
 
+Sim, você não só precisa linkar os seus arquivos `.so` como também precisa adicionar os headers que ele utiliza.  
+
 # Conclusion
 
-Isto me da uma idéia melhor do que está falhando e quando está falhando, porém é uma outra complexidade comparado a python, rust, javascript e outras linguagens que dependem bastante do package manager.  
+Isto me da uma idéia melhor do que está falhando e quando está falhando, porém é uma outra complexidade comparado a python, rust, javascript e outras linguagens que dependem bastante do package manager. Por dois motivos:  
+
+1- GCC é complexo, a documentação dele é gigantesca e difícil de entender.
+2- O fato que precisamos de dois arquivos, a lib (`.so`) e o header (`.h`), para conseguir adicionar código de alguém ao nosso projeto.
 
 # References
 - https://en.wikipedia.org/wiki/GNU_Compiler_Collection#Design  
