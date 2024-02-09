@@ -86,8 +86,11 @@
 <p>Sim, muitos dos comandos são realmente juntos em vez de argumentos separados (<code>-Iinclude</code> em vez de <code>-I include</code>).</p>
 <p>Sim, o nome da lib seria <code>libname.so</code> e você botaria no argumento apenas <code>-lname</code> (removendo a parte <code>lib</code> e <code>.so</code>).</p>
 <p>Nota: teoricamente você poderia usar <code>-l:libname.so</code> em vez de <code>-lname</code>.</p>
+<p>Sim, você não só precisa linkar os seus arquivos <code>.so</code> como também precisa adicionar os headers que ele utiliza.</p>
 <h1>Conclusion</h1>
-<p>Isto me da uma idéia melhor do que está falhando e quando está falhando, porém é uma outra complexidade comparado a python, rust, javascript e outras linguagens que dependem bastante do package manager.</p>
+<p>Isto me da uma idéia melhor do que está falhando e quando está falhando, porém é uma outra complexidade comparado a python, rust, javascript e outras linguagens que dependem bastante do package manager. Por dois motivos:</p>
+<p>1- GCC é complexo, a documentação dele é gigantesca e difícil de entender.
+2- O fato que precisamos de dois arquivos, a lib (<code>.so</code>) e o header (<code>.h</code>), para conseguir adicionar código de alguém ao nosso projeto.</p>
 <h1>References</h1>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection#Design" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/GNU_Compiler_Collection#Design</a></li>
