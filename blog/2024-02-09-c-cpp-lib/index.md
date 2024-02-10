@@ -15,23 +15,29 @@ tags: [c, c++, libs]
     - Escrevi código em C++
     - Executei
 
-Em ambos os casos eu nunca aprendi direito sobre bibliotecas... Notei claramente quando segui as instruções de projeto para **Build from Source** e não sabia mais o que fazer com o arquivo `.so` gerado.  
+Em ambos os casos eu nunca aprendi direito sobre bibliotecas... Notei claramente quando segui as instruções de projeto para **Build from Source** e não sabia mais o que fazer com os arquivos `.a` e `.so` gerados.  
 
 ![Desenho de um rosto rindo que nem idiota](./stupid_laughting_face.svg)
 
-Eu sabia que poderia compilar C/C++ com GCC ou Clang, mas meu conhecimento se resumia a compilar um arquivo só.  
+Eu sabia que poderia compilar C/C++ com GCC ou Clang, mas meu conhecimento se resumia a compilar projetos 100% meus.  
 
 ```
 gcc Main.c -o Main
 ```
 
-Nunca imaginaria que para executar meu código com uma biblioteca iria acabar com algo como:  
+Bem, vamos entender cada um dois formatos primeiro.
 
-```
-gcc start.c -o start -Iinclude -Llib -lname -Wl,-Rlib
-```
+# `.a` (archive)
+
+Se trata de uma biblioteca estática (**static library**), ou seja, podemos ver como um conjunto de funções/variáveis que seram anexadas ao seu executável durante a etapa de compilação (na etapa do **linker**). Ótimo quando você quer que seu programa tenha toda a lógica.  
+
+# `.so` (shared object)
+
+Se trata de uma biblioteca compartilhada (**shared library**), ou seja, podemos ver como um executável que será utilizado por qualquer programa que precise dele (ainda é preciso avisar ao **linker** da existencia da biblioteca). Ótimo pois ocupa menos espaço do computador da pessoa com a mesma lógica.  
 
 # GCC 4 Steps
+
+Eu já mencionei linker duas vezes, para entender o que ele é precisamos olhar para cada etapa do GCC.  
 
 [![4 etapas do GCC](./big_steps.svg)](./big_steps.svg)  
 
@@ -48,37 +54,45 @@ Um resumo seria:
 - Linker
     - Responsável por encontrar as referências de um arquivo e linkar elas, a saída é justamente o executável final.
 
-# CLI
+# Using Libraries
 
-Vamos voltar a essa linha de comando horrorosa.  
+Bibliotecas vão vir com os headers juntos, justamente para o compilador conseguir determinar o que exatamente tem que buscar nas bibliotecas. Podemos adicionar um diretório onde se buscar headers com o argumento `-I` seguido pelo diretório (não é separado por espaço):  
 
 ```
-gcc start.c -o start -Iinclude -Llib -lname -Wl,-Rlib
+gcc Main.c -o Main -Iinclude
 ```
 
-Para entender está linha de comando um ChatGPT é mais que o suficiente mas aqui o resumo:
+Obviamente vamos precisar de um dos tipos de bibliotecas (`.so` ou `.a`) e podemos passar ao compilador diretório onde as nossas bibliotecas se encontram com o argumento `-L` seguido pelo diretório (não é separado por espaço):  
 
-- `-Iinclude`: Adiciona o diretório `include` a lista de diretórios para se buscar headers (`.h`) durante a etapa do **compiler**.
-- `-Llib`: Adiciona o direitório `lib` a lista de diretórios para se buscar libs (`.so`) durante a etapa do **linker**.
-- `lname`: Adiciona a lib `libname.so` a um lugar a se olhar por simbolos durante a etapa do **linker**.
-- `-Wl,-Rlib`
-    - `-Wl`: Passa os seguintes comandos para o **linker** (separados por virgula).
-        `-Rlib`: Adiciona o diretório `lib` a lista de diretórios para se buscar libs (`.so`) durante a etapa de **execução do código**.
+```
+gcc Main.c -o Main -Iinclude -Llib
+```
 
-Sim, muitos dos comandos são realmente juntos em vez de argumentos separados (`-Iinclude` em vez de `-I include`).  
+Este diretório pode possuir centenas de bibliotecas, então faz sentido você ter que especificar as que você quer usar. Isso é feito com o argumento `-l` seguido pelo nome base da biblitoeca (não é separado por espaço):  
 
-Sim, o nome da lib seria `libname.so` e você botaria no argumento apenas `-lname` (removendo a parte `lib` e `.so`).  
+```
+gcc Main.c -o Main -Iinclude -Llib -lname
+```
 
-Nota: teoricamente você poderia usar `-l:libname.so` em vez de `-lname`.  
+:::warning
+`-lname` vai buscar pela biblioteca `libname.so` ou `libname.a`, este é um atalho para referênciar bibliotecas.  
+`-l:libname.so` ou `l:libname.a` podem ser usados em casos que a biblioteca não tem um nome seguindo as convenções.  
+:::
 
-Sim, você não só precisa linkar os seus arquivos `.so` como também precisa adicionar os headers que ele utiliza.  
+Agora vem a diferença entre utilizar biblioteca estática e compartilhada.  
 
-# Conclusion
+### Shared Library
 
-Isto me da uma idéia melhor do que está falhando e quando está falhando, porém é uma outra complexidade comparado a python, rust, javascript e outras linguagens que dependem bastante do package manager. Por dois motivos:  
+Vamos passar argumentos ao linker para que ele busque bibliotecas em um diretório durante a execução do código. Sendo este argumento `-Wl`, seguido por outros argumentos que você queira passar ao linker (esse argumentos separados por virgula).
 
-1- GCC é complexo, a documentação dele é gigantesca e difícil de entender.
-2- O fato que precisamos de dois arquivos, a lib (`.so`) e o header (`.h`), para conseguir adicionar código de alguém ao nosso projeto.
+```
+gcc Main.c -o Main -Iinclude -Llib -lname -Wl,-Rlib
+```
+
+No nosso caso estamos passando o diretório para buscar outras bibliotecas.  
+
+### Static library
+TODO
 
 # References
 - https://en.wikipedia.org/wiki/GNU_Compiler_Collection#Design  
