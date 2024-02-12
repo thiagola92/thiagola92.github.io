@@ -101,7 +101,8 @@ Agora podemos adicionar `#include <header.h>` sem o compilador reclamar que `hea
 Se tentarmos chamar uma função que está no `header.h` ainda teremos erro pois não temos a função, apenas a assinatura dela. Nós precisamos do código da função, que pode estar em um `.so` ou `.a`.  
 
 :::warning
-Saiba se sua biblioteca é C++ ou C para saber se deve usar `gcc` ou `g++`.
+- Saiba se sua biblioteca é C++ ou C para saber se deve usar `gcc` ou `g++`.
+- Se ambos tipos de bibliotecas existirem o linker talvez priorize o `.so`.  
 :::
 
 ---
@@ -138,6 +139,8 @@ gcc main.c -o main -Iinclude -Llib -lname
 `-l:libname.so` pode ser usado em casos que o nome da biblioteca não segue estes padrões.  
 :::
 
+---
+
 ### `.so`
 
 Segue basicamente a mesma lógica do `.a`, deixar a biblioteca no diretório `lib`.  
@@ -172,14 +175,11 @@ gcc main.c -o main -Iinclude -Llib -lname
 
 Ainda precisamos passar ao linker onde ele deve buscar essa biblioteca durante a execução do código (dentro do seu projeto sabemos que está no diretório `lib` mas na máquina de quem estiver executando vai estar aonde?).  
 
+Podemos passar argumentos ao linker com `-Wl` seguido pelos argumentos que ele deve receber, no caso `-Rlib` (argumentos separados por virgula):  
+
 ```
 gcc main.c -o main -Iinclude -Llib -lname -Wl,-Rlib
 ```
-
-:::note
-Este argumento (`-Wl`) passa diversos argumentos para o linker (separados por virgula).  
-Poderiamos passar outros argumentos, por exemplo `-Wl,X,Y,Z`.  
-:::
 
 Nosso executável agora vai sempre tentar buscar a biblioteca na pasta `lib` que estiver no mesmo diretório que ele.  
 
