@@ -45,7 +45,7 @@
 <p>Ótimo pois ocupa menos espaço do computador da pessoa com a mesma lógica.</p>
 <h1>GCC 4 Steps</h1>
 <p>Eu já mencionei linker duas vezes, para entender o que ele é precisamos olhar para cada etapa do GCC.</p>
-<p><a target="_blank" href="https://thiagola92.github.io/assets/files/big_steps-240df09e679ec9af7db05ac6be4b947e.svg"><img loading="lazy" alt="4 etapas do GCC" src="https://thiagola92.github.io/assets/images/big_steps-240df09e679ec9af7db05ac6be4b947e.svg" width="220" height="791" class="img_ev3q"></a></p>
+<p><a target="_blank" href="https://thiagola92.github.io/assets/files/big_steps-343ea7c155bad5fe97fecfe30973fda0.svg"><img loading="lazy" alt="4 etapas do GCC" src="https://thiagola92.github.io/assets/images/big_steps-343ea7c155bad5fe97fecfe30973fda0.svg" width="220" height="791" class="img_ev3q"></a></p>
 <p>Um resumo seria:</p>
 <ul>
 <li>Preprocessor<!-- -->
