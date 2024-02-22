@@ -132,9 +132,26 @@
             <category>libs</category>
         </item>
         <item>
+            <title><![CDATA[Inverse Kinematics: CCD]]></title>
+            <link>https://thiagola92.github.io/blog/2024/02/07/ik-ccd</link>
+            <guid>https://thiagola92.github.io/blog/2024/02/07/ik-ccd</guid>
+            <pubDate>Wed, 07 Feb 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Cyclic Coordinate Descent Inverse Kinematic (CCDIK) é diferente das lógicas anteriores, pois nós não sabemos qual o estado final que desejamos para os ossos. A ideia é fazer diversas iterações até que chegue em um resultado aceitável.]]></description>
+            <content:encoded><![CDATA[<p>Cyclic Coordinate Descent Inverse Kinematic (CCDIK) é diferente das lógicas anteriores, pois nós não sabemos qual o estado final que desejamos para os ossos. A ideia é fazer diversas iterações até que chegue em um resultado aceitável.</p>
+<p>Em outras palavras, CCDIK se trata da jornada e não do resultado final.</p>
+<h1>References</h1>
+<ul>
+<li><a href="https://www.alanzucconi.com/2018/05/02/ik-2d-1/" target="_blank" rel="noopener noreferrer">https://www.alanzucconi.com/2018/05/02/ik-2d-1/</a></li>
+</ul>]]></content:encoded>
+            <category>godot</category>
+            <category>gdscript</category>
+            <category>inverse kinematics</category>
+            <category>physics</category>
+        </item>
+        <item>
             <title><![CDATA[Inverse Kinematics: Two Bone]]></title>
-            <link>https://thiagola92.github.io/blog/2024/02/07/two-bone</link>
-            <guid>https://thiagola92.github.io/blog/2024/02/07/two-bone</guid>
+            <link>https://thiagola92.github.io/blog/2024/02/07/ik-two-bone</link>
+            <guid>https://thiagola92.github.io/blog/2024/02/07/ik-two-bone</guid>
             <pubDate>Wed, 07 Feb 2024 00:00:00 GMT</pubDate>
             <description><![CDATA[- https://www.alanzucconi.com/2018/05/02/ik-2d-1/]]></description>
             <content:encoded><![CDATA[<h1>References</h1>
