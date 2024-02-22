@@ -1,5 +1,5 @@
 ---
-authors: thiagola92-angry
+authors: thiagola92
 tags: [tumblr, website]
 ---
 

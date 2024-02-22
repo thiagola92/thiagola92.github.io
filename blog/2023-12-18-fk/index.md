@@ -1,5 +1,5 @@
 ---
-authors: thiagola92-calm
+authors: thiagola92
 tags: [godot, gdscript, forward kinematics, physics]
 ---
 

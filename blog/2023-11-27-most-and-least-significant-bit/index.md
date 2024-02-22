@@ -1,5 +1,5 @@
 ---
-authors: thiagola92-calm
+authors: thiagola92
 tags: [bit, byte, bytes, bits]
 ---
 

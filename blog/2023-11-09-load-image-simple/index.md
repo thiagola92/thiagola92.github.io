@@ -1,5 +1,5 @@
 ---
-authors: thiagola92-derp
+authors: thiagola92
 tags: [godot, gdscript, image, texture]
 ---
 

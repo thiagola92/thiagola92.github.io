@@ -1,7 +1,7 @@
 ---
 slug: godot-refcounted
 title: GDScript RefCounted
-authors: thiagola92-calm
+authors: thiagola92
 tags: [godot, gdscript, refcounted]
 ---
 

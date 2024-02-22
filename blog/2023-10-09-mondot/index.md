@@ -1,5 +1,5 @@
 ---
-authors: thiagola92-happy
+authors: thiagola92
 tags: [mongo, mongodb, gui, godot, python, gdscript]
 ---
 

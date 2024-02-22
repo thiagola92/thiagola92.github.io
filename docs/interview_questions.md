@@ -21,7 +21,9 @@ Sim, mas surprender os outros nunca foi meu forte e eu gosto de deixar todas as 
 
 ## Weakness
 
-Slow thinking
+Não sou bom em responder em cima da hora.  
+
+Normalmente chego a conclusões melhores após as reuniões sobre um determinado assunto.
 
 ## Biggest fucked up
 
@@ -37,9 +39,10 @@ O que aconteceu no final foi:
 - recriava o pod
 - ...
 
-Pelo menos kubernetes tem configuração para dar intervalos maiores entre cada criação por erro, mas ainda foi bem ruim.  
+Pelo menos Kubernetes tem configuração para dar intervalos maiores entre cada criação por erro, mas ainda foi bem ruim.  
 
 ## Design pattern
 
 Observer pattern, também conhecido por "event-subscriber" ou "listener".  
-Ser capaz de ser notificado quando um evento ocorrer passou é o meu favorito, principalmente durante desenvolvimento de jogos.  
+
+Ser capaz de ser "notificado" quando um evento ocorreu é meu favorito, principalmente durante desenvolvimento de jogos (Godot utiliza muito).  

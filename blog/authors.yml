@@ -1,23 +1,5 @@
-thiagola92-happy:
+thiagola92:
   name: Thiago Lages de Alencar
   title: Desenvolvedor de Software
   url: https://github.com/thiagola92
-  image_url: https://media.discordapp.net/attachments/807746464833863709/1110163112579047544/itchio.png
-
-thiagola92-angry:
-  name: Thiago Lages de Alencar
-  title: Desenvolvedor de Software
-  url: https://github.com/thiagola92
-  image_url: https://media.discordapp.net/attachments/807746464833863709/1110163211476533258/twitter.png
-
-thiagola92-derp:
-  name: Thiago Lages de Alencar
-  title: Desenvolvedor de Software
-  url: https://github.com/thiagola92
-  image_url: https://media.discordapp.net/attachments/807746464833863709/1110163082984034334/discord.png
-
-thiagola92-calm:
-  name: Thiago Lages de Alencar
-  title: Desenvolvedor de Software
-  url: https://github.com/thiagola92
-  image_url: https://cdn.discordapp.com/attachments/807746464833863709/1110163174289850378/tiktok.png
+  image_url: /img/dino.svg
