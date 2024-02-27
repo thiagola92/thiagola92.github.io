@@ -1,6 +1,6 @@
 ---
 authors: thiagola92
-tags: [c, c++, libs]
+tags: [c, c++, libs, lib]
 ---
 
 # C/C++ Libs
