@@ -267,6 +267,8 @@ executable('my_project',
 ```
 :::
 
+Meson também cria um arquivo `compile_commands.json` dentro da nossa pasta `builddir`, então se quiser copiar e botar na raiz do seu projeto seu `clangd` irá agradecer!  
+
 # References
 - https://linuxcommand.org/lc3_lts0040.php
 - https://github.com/rizsotto/Bear
