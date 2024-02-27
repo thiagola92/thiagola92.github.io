@@ -168,6 +168,8 @@ Graças a este programa podemos gerar facilmente as flags e finalmente executar 
 $ clang `pkg-config --cflags gtk4` -o my_project main.c `pkg-config --libs gtk4`
 ```
 
+![headers entrando numa caixa que representa o binário](./filling_box.svg)  
+
 # Language Server
 Sabe aquela ferramenta responsável por completar o código, avisar de errors, te levar à definições...  
 Bem, ela está reclamando e não queremos deixar ela assim :^).  
