@@ -6,7 +6,9 @@ tags: [c, libs, lib, package, packages]
 # C lib package
 Não bastava meu sofrimento com [utilização de bibliotecas](../2024-02-12-c-cpp-lib/index.md), agora tive mais dor de cabeça por elas virem do package manager (`apt`).  
 
-Meu sofrimento foi com a biblioteca [GTK](https://www.gtk.org/).  
+Meu sofrimento foi enquanto tentava usar a biblioteca [GTK](https://www.gtk.org/) em C.  
+
+![Rosto sorrindo com os olhos de forma idiota (e com um chápeu de mágico)](./hazbin_hotel_lucifer.svg)  
 
 # Installing
 Duas opções:  
@@ -25,6 +27,8 @@ $ dpkg -L libgtk-4-1 libgtk-4-dev
 
 O que nos mostra que o pacote responsável por desenvolvimento (`libgtk-4-dev`) trouxe **muitos** headers files e uma biblioteca compartilhada (`/usr/lib/x86_64-linux-gnu/libgtk-4.so`).  
 
+![Alguns nomes de headers](./headers.svg)
+
 # Code
 Qual será o grande código utilizado durante este post???  
 ```C
@@ -34,8 +38,9 @@ int main() { return 0; }
 ```
 
 Exatamente! Estou cagando para o código, apenas quero acessar a biblioteca!  
-> Deadpool: ¿Donde está la biblioteca?  
+> ¿Donde esta la biblioteca?  
 
+![Rosto do Deadpool](./deadpool.svg)
 
 # Includes
 Talvez seja meio óbvio mas o código não vai ser executado com um simples  
@@ -97,7 +102,9 @@ In file included from main.c:1:
 1 error generated.
 ```
 
-Nope! :^)  
+Nope!  
+
+![emoticon :^)](./stupid_face.svg)  
 
 # Packages
 Está é a organização do desenvolvedor da biblioteca:  
@@ -132,7 +139,9 @@ In file included from /usr/include/gtk-4.0/gtk/gtk.h:29:
 1 error generated.
 ```
 
-Você esqueceu que está biblioteca pode usar outras bibliotecas e precisamos adicionar o diretório delas também! :^)  
+Você esqueceu que está biblioteca pode usar outras bibliotecas e precisamos adicionar o diretório delas também!  
+
+![emoticon :^) feito de emoticons :^) menores](./stupid_face_2.svg)  
 
 # Dependecies
 Existe um programa justamente para ajudar a descobrir as depêndencias de um módulo.  
