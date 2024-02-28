@@ -10,7 +10,7 @@ Meu sofrimento foi enquanto tentava usar a biblioteca [GTK](https://www.gtk.org/
 
 ![Rosto sorrindo com os olhos de forma idiota (e com um chápeu de mágico)](./hazbin_hotel_lucifer.svg)  
 
-# Installing
+## Installing
 Duas opções:  
 - Instalar o pacote pronto da minha distribuição
 - Baixar e compilar o código fonte
@@ -29,7 +29,7 @@ O que nos mostra que o pacote responsável por desenvolvimento (`libgtk-4-dev`) 
 
 ![Alguns nomes de headers](./headers.svg)
 
-# Code
+## Code
 Qual será o grande código utilizado durante este post???  
 ```C
 #include <gtk/gtk.h>
@@ -42,7 +42,7 @@ Exatamente! Estou cagando para o código, apenas quero acessar a biblioteca!
 
 ![Rosto do Deadpool](./deadpool.svg)
 
-# Includes
+## Includes
 Talvez seja meio óbvio mas o código não vai ser executado com um simples  
 ```bash
 $ clang -o my_project main.c
@@ -106,7 +106,7 @@ Nope!
 
 ![emoticon :^)](./stupid_face.svg)  
 
-# Packages
+## Packages
 Está é a organização do desenvolvedor da biblioteca:  
 ```
 project/
@@ -143,7 +143,7 @@ Você esqueceu que está biblioteca pode usar outras bibliotecas e precisamos ad
 
 ![emoticon :^) feito de emoticons :^) menores](./stupid_face_2.svg)  
 
-# Dependecies
+## Dependecies
 Existe um programa justamente para ajudar a descobrir as depêndencias de um módulo.  
 
 ```bash
@@ -170,9 +170,9 @@ $ clang `pkg-config --cflags gtk4` -o my_project main.c `pkg-config --libs gtk4`
 
 ![headers entrando numa caixa que representa o binário](./filling_box.svg)  
 
-# Language Server
+## Language Server
 Sabe aquela ferramenta responsável por completar o código, avisar de errors, te levar à definições...  
-Bem, ela está reclamando e não queremos deixar ela assim :^).  
+Bem, ela está reclamando e não queremos deixar ela assim né?.  
 
 ```C
 #include <gtk/gtk.h> // 'gtk/gtk.h' file not found
@@ -189,10 +189,14 @@ E[01:35:13.895] [pp_file_not_found] Line 1: 'gtk/gtk.h' file not found
 ...
 ```
 
-# Project dependencies
+![Pessoa representando Clang com informações e outra pessoa representando Clangd pedindo também](./two_asking_for_data.svg)
+
+## Project Dependencies
 Poderiamos pesquisar e descobrir os argumentos a se passar ao `clangd` mas isso é algo que varia de projeto a projeto e última coisa que queremos é ficar configurando no Visual Studio os argumentos para cada projeto.  
 
 Por isso que `clangd` por padrão sempre procura configurações do projeto em certos arquivos do projeto como `compile_commands.json`! Poderiamos escrever este arquivo na mão... mas não queremos então vamos utilizar um programinha amigo chamado `bear`!  
+
+Ele recebe o comando que você está utilizando para criar o executável e cria o `compile_commands.json`:  
 
 ```bash
 $ sudo apt install bear
@@ -200,27 +204,52 @@ $ bear -- clang `pkg-config --cflags gtk4` -o my_project main.c `pkg-config --li
 ```
 
 Pronto, conseguimos o arquivo de configuração para o `clangd`.  
+
+```
+my_project/
+├── compile_commands.json
+├── main.c
+└── my_project
+```
+
+
 Basta dar um tempo (ou reniciar o editor de texto) e seu language server deve perceber que está tudo certo!  
 
 Fim!  
 Código funciona!  
 Language server funciona!  
 Você está pronto para desenvolver com GTK!  
-O resto que vou escrever é extra, pois não estou satisfeito com o quanto sofri até agora :').  
+Não se sente uma nova pessoa com todo esse conhecimento?  
 
-# [Extra] Project dependencies with Meson
+![Rosto cansado](./tired_face.svg)  
+
+Bem, você não é a primeira pessoa a achar tudo isso desnecessariamente complicado para começar a programar... 
+Outras pessoas criaram ferramentas para ajudar nisso!  
+
+Então continue lendo se quiser jogar tudo que viu até aqui no lixo e descobrir uma maneira mais fácil!  
+
+![Rosto cansado e puto](./tired_and_angry_face.svg)  
+
+## Meson!
 GTK adora falar do [Meson](https://mesonbuild.com/) e como já estou sofrendo mesmo... Por que não parar pra ver?  
+Instalando!  
 
 ```
 $ sudo apt install meson ninja-build
 ```
 
-Já possuo um diretório com o projeto então vamos inicializar nele mesmo:
+Claro que se vamos testar outra ferramenta, precisamos testar do zero! Apenas com o nosso querido arquivo `main.c`:  
+```
+my_project/
+└── main.c
+```
+
+### Setuping
 ```bash
 $ meson init
 ```
 
-O arquivo `meson.build` é criado com a seguinte informação:  
+Isso cria o arquivo de configuração chamado `meson.build`, nele tem diversas informações mais sofisticadas sobre o projeto:  
 ```meson
 project('my_project', 'c',
   version : '0.1',
@@ -231,30 +260,31 @@ executable('my_project',
            install : true)
 ```
 
-Meson separa todos os arquivos dele em uma pasta que é definida durante o setup (eu dei o nome de `builddir`):  
+Viu?  
+Ele não é apenas _"estou rodando um código"_.  
+Ele é _"estou criando um ⭐projeto⭐"_.  
+
+Como ele é um projeto sério, ele vai guardar todas as informações dele em um pasta separada para não sujar o **seu** projeto ❤️!  
+
+Então diga para ele onde botar os arquivos dele (eu escolhi `builddir`):  
 ```bash
 $ meson setup builddir
 ```
 
-Se entrarmos nesta pasta podemos compilar o projeto:
-```bash
-$ cd builddir
-$ meson compile
-INFO: autodetecting backend as ninja
-INFO: calculating backend command to run: /usr/bin/ninja
-[1/2] Compiling C object my_project.p/main.c.o
-FAILED: my_project.p/main.c.o 
-cc -Imy_project.p -I. -I.. -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wextra -Wpedantic -O0 -g -MD -MQ my_project.p/main.c.o -MF my_project.p/main.c.o.d -o my_project.p/main.c.o -c ../main.c
-../main.c:1:10: fatal error: gtk/gtk.h: No such file or directory
-    1 | #include <gtk/gtk.h>
-      |          ^~~~~~~~~~~
-compilation terminated.
-ninja: build stopped: subcommand failed.
+Seu projeto deve acabar com a estrutura:  
+```
+my_project/
+├── builddir/
+├── main.c
+└── meson.build
 ```
 
-Reconhece este erro? Yeaaahhh :^D.  
+### Project Dependencies
+Sim! Em toda ferramenta é necessário que você a biblioteca que quer usar!  
+Você não quer que ela ande por todos os diretórios do seu computador procurando a sua biblioteca, né?  
+Imagina se pega a errada por acidente!  
 
-Quando utilizando Meson, também é preciso informar as dependências! Isto é feito pelo arquivo `meson.build`:  
+Fazemos isso pelo `meson.build`!  
 ```meson
 project('my_project', 'c',
   version : '0.1',
@@ -266,10 +296,12 @@ executable('my_project',
            dependencies: dependency('gtk4'))
 ```
 
-Pronto! Execute `meson compile` novamente do diretório `builddir` e não vai ter erros (talvez warnings).  
+:::note
+Eu ainda não sei o como se descobre que o nome do módulo é `gtk4`!
+:::
 
 :::info
-Note que `dependencies` aceita lista para caso você tenha várias:  
+Caso você tenha mais que uma dependência, o parâmetro `dependencies` aceita lista:  
 ```meson
 executable('my_project',
            'main.c',
@@ -278,9 +310,60 @@ executable('my_project',
 ```
 :::
 
-Meson também cria um arquivo `compile_commands.json` dentro da nossa pasta `builddir`, então se quiser copiar e botar na raiz do seu projeto seu `clangd` irá agradecer!  
+### Compiling
+Pronto! Você está pronto para ter seu projeto compilado **sem erro**! <sub>Talvez warnings coff coff...</sub>  
 
-# References
+Entre na pasta de configuração do Meson (no meu caso `builddir`) e execute o comando de compilação:  
+```bash
+$ cd builddir
+$ meson compile
+```
+
+"`clangd` está reclamando daquele erro novamente!"  
+Não se desespere pois se você para pra olhar os arquivos criados após compilação!  
+```
+my_project/
+├── builddir/
+│   ├── ...
+│   ├── compile_commands.json
+│   └── my_project
+├── main.c
+└── meson.build
+```
+
+Olha lá arquivo que o `clangd` quer!  
+E o seu executável mas isso era de se esperar...  
+
+Copie ele para a raiz do seu projeto e pronto, seu `clangd` deve parar de chorar erro!  
+```
+my_project/
+├── builddir/
+│   ├── ...
+│   ├── compile_commands.json
+│   └── my_project
+├── compile_commands.json
+├── main.c
+└── meson.build
+```
+
+### Conclusion
+Meson possui uma etapa de configuração, mas tirando isso os comandos depois ficam bem mais sensatos!  
+
+Compilando com `clang` e atualizando `compile_commands.json`:  
+```bash
+$ clang `pkg-config --cflags gtk4` -o my_project main.c `pkg-config --libs gtk4`
+$ bear -- clang `pkg-config --cflags gtk4` -o my_project main.c `pkg-config --libs gtk4`
+```
+
+Compilando com `meson` e atualizando `compile_commands.json`:  
+```bash
+$ meson compile
+$ cp compile_commands.json ../compile_commands.json
+```
+
+Se eu descobrir uma maneira de após compilação já copiar o arquivo `compile_commands.json`, tudo vai ficar perfeito!  
+
+## References
 - https://linuxcommand.org/lc3_lts0040.php
 - https://github.com/rizsotto/Bear
 - https://mesonbuild.com/Tutorial.html
