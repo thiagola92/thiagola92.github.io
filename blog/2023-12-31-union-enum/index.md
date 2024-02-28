@@ -7,7 +7,7 @@ tags: [enum, rust, union]
 
 Ao começar a estudar Rust percebi o quão a relação deste dois são próxima, porém primeiro precisamos rever unions e enums.  
 
-# Union
+## Union
 
 Se trata de utilizar o mesmo espaço de memória para armazenar um entre diversos tipos.  
 
@@ -125,7 +125,7 @@ printf("%i\n", content.i); // print "97"
 
 Como podemos ver, é essencial termos uma maneira de identificar qual é o tipo atual na union.  
 
-# Enum
+## Enum
 
 Se trata de ligar um identificador a um número único dentro de um agrupamento.  
 
@@ -198,7 +198,7 @@ if (type == Floating) {
 
 Este tipo de estrutura é tão comum que tem o nome de [Tagged Union](https://en.wikipedia.org/wiki/Tagged_union).  
 
-# Rust Enum
+## Rust Enum
 
 Acredito que o `enum` do Rust seja nada mais que um tagged union.  
 
@@ -243,7 +243,7 @@ let content: Type = Type::Floating(5.0);
 
 Rust é linguagem que preza bastante segurança, então faria sentido tratar como se fosse uma única estrutura para evitar os problemas de union (embora Rust tenha o tipo union).  
 
-# Comparison
+## Comparison
 
 ### C
 

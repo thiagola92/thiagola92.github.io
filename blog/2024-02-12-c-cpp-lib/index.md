@@ -27,19 +27,19 @@ gcc main.c -o main
 
 Bem, vamos entender cada um dois formatos primeiro.
 
-# `.a` (archive)
+## `.a` (archive)
 
 Se trata de uma biblioteca estática (**static library**), ou seja, podemos ver como um conjunto de funções/variáveis que seram anexadas ao seu executável durante a etapa de compilação (na etapa do **linker**).  
 
 Ótimo quando você quer que seu programa tenha toda a lógica.  
 
-# `.so` (shared object)
+## `.so` (shared object)
 
 Se trata de uma biblioteca compartilhada (**shared library**), ou seja, podemos ver como um executável que será utilizado por qualquer programa que precise dele (ainda é preciso avisar ao **linker** da existencia da biblioteca).  
 
 Ótimo pois ocupa menos espaço do computador da pessoa com a mesma lógica.  
 
-# GCC 4 Steps
+## GCC 4 Steps
 
 Eu já mencionei linker duas vezes, para entender o que ele é precisamos olhar para cada etapa do GCC.  
 
@@ -58,7 +58,7 @@ Um resumo seria:
 - Linker
     - Responsável por encontrar as referências de um arquivo e linkar elas, a saída é justamente o executável final.
 
-# Project from Zero
+## Project from Zero
 
 Começamos com uma estrutura bem vazia de projeto:  
 
@@ -183,7 +183,7 @@ gcc main.c -o main -Iinclude -Llib -lname -Wl,-Rlib
 
 Nosso executável agora vai sempre tentar buscar a biblioteca na pasta `lib` que estiver no mesmo diretório que ele.  
 
-# References
+## References
 - https://en.wikipedia.org/wiki/GNU_Compiler_Collection#Design  
 - https://en.wikipedia.org/wiki/Preprocessor  
 - https://en.wikipedia.org/wiki/Linker_(computing)  

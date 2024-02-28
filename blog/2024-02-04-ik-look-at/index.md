@@ -13,7 +13,7 @@ Ser capaz de fazer uma mão apontar para uma posição ou a cabeça olhar para u
 
 ![Jogador 2D movendo a cabeça para cima](./player_looking_animated.svg)  
 
-# Look At
+## Look At
 
 Lembrando que articulações sempre possuem as suas informações locais e que as informações globais são facilmente calculáveis, nossa tarefa é descobrir como queremos alterar qualquer uma delas para alcançar nosso objetivo.  
 
@@ -28,7 +28,7 @@ Olhando a imagem nós conseguimos saber que para continuar apontando para X temo
 
 Talvez você já tenha notado mas vamos fazer isto usando trigonometria (se prepare que IK é triângulo para tudo que é lado).  
 
-# 0º ~ 90º
+## 0º ~ 90º
 
 Um bom começo é sabermos calcular o ângulo para uma posição, sem se preocupar com detalhes como global e local.  
 
@@ -65,7 +65,7 @@ Se você bem se lembra, existem funções trigonométricas inversas que são jus
             * 60.255118703
 
 
-# 0º ~ 360º
+## 0º ~ 360º
 
 Um problema que cedo ou tarde iriamos notar é que dos valores da tangete não é possível definir qual quadrante se trata.  
 
@@ -88,7 +88,7 @@ Um problema que cedo ou tarde iriamos notar é que dos valores da tangete não �
 É por isso que em muitas bibliotecas matemáticas existe a função `atan(v)` e a função `atan2(x, y)`.  
 A segunda utiliza os eixos para saber o real ângulo.  
 
-# Rotating
+## Rotating
 
 Agora que sabemos como obter o ângulo do ponto (0,0) até uma posição qualquer, podemos finalmente rotacionar a articulação.  
 
@@ -122,12 +122,12 @@ Posição do ponto relativa à articulação: (25, 20)
 
 Pronto, agora sabemos qual deveria ser a rotação daquela articulação!  
 
-# Conclusion
+## Conclusion
 
 Você provavelmente não terá que pensar em nada disso pois muitas game engines já possuem métodos para lidar com isto, por exemplo em Godot podemos encontrar algo como:  
 
 `get_angle_to(global_position)`  
 
-# References
+## References
 - https://www.youtube.com/watch?v=8Eur16foTMw  
 - https://cplusplus.com/reference/cmath/atan2/  
