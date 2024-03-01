@@ -313,14 +313,22 @@ executable('my_project',
 ### Compiling
 Pronto! Você está pronto para ter seu projeto compilado **sem erro**! <sub>Talvez warnings coff coff...</sub>  
 
-Entre na pasta de configuração do Meson (no meu caso `builddir`) e execute o comando de compilação:  
+Entre no diretório de configuração do Meson (no meu caso `builddir`) e execute o comando de compilação:  
 ```bash
 $ cd builddir
 $ meson compile
 ```
 
-"`clangd` está reclamando daquele erro novamente!"  
-Não se desespere pois se você para pra olhar os arquivos criados após compilação!  
+:::note
+Por que entrar no diretório antes? Meson permite que você tenha diversos setups.  
+Se você estiver fora do diretório é possível rodar o comando se adicionar o argumento para `-C`:  
+```bash
+$ meson compile -C builddir
+```
+:::
+
+"`clangd` está reclamando novamente de `'gtk/gtk.h' file not found`!"  
+Não se desespere pois se você olhar os arquivos criados após compilação, um deles é bem útil.  
 ```
 my_project/
 ├── builddir/
@@ -364,6 +372,7 @@ $ cp compile_commands.json ../compile_commands.json
 Se eu descobrir uma maneira de após compilação já copiar o arquivo `compile_commands.json`, tudo vai ficar perfeito!  
 
 ## References
+- https://docs.gtk.org/gtk4/compiling.html
 - https://linuxcommand.org/lc3_lts0040.php
 - https://github.com/rizsotto/Bear
 - https://mesonbuild.com/Tutorial.html
