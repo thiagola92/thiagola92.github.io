@@ -173,7 +173,9 @@ gcc main.c -o main -Iinclude -Llib -lname
 `-l:libname.so` pode ser usado em casos que o nome da biblioteca não segue estes padrões.  
 :::
 
-Ainda precisamos passar ao linker onde ele deve buscar essa biblioteca durante a execução do código (dentro do seu projeto sabemos que está no diretório `lib` mas na máquina de quem estiver executando vai estar aonde?).  
+Durante a execução do código o sistema operacional vai buscar a biblioteca em lugares predefinidos (linux busca em lugares como `/usr/lib`).  
+
+Mas se nossa biblioteca não for estar em um destes lugares predefinidos? Ainda é possível adicionar lugares onde se buscar durante a execução.  
 
 Podemos passar argumentos ao linker com `-Wl` seguido pelos argumentos que ele deve receber, no caso `-Rlib` (argumentos separados por virgula):  
 
