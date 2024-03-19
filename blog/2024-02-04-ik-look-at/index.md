@@ -128,6 +128,8 @@ Você provavelmente não terá que pensar em nada disso pois muitas game engines
 
 `Node2D.get_angle_to(global_position)`  
 
+Essa função retorna o ângulo global que falta para estar em direção ao ponto global.  
+
 ## References
 - https://www.youtube.com/watch?v=8Eur16foTMw  
 - https://cplusplus.com/reference/cmath/atan2/  

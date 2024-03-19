@@ -61,7 +61,22 @@ Bote o osso 1 corretamente antes de ajustar o osso 2.
 
 ## In range
 
-![Mostrando que braço curvado pode ser visto como um triângulo](./arm_triangle.svg)  
+Espero que este desenho já deixe claro como utilizaremos trigonometria com braços curvados.  
+
+![Mostrando que braços curvados podem ser vistos como triângulos](./arm_triangle.svg)  
+
+Neste caso o ponto onde desejamos posicionar a mão está dentro do alcance dela, então irá acabar sendo a mão.  
+
+Quando resolvendo problemas matemáticos é sempre bom listar as coisas que você sabe do problema:  
+
+- Lados do triângulo (calculamos eles agora a pouco)
+  - Distância da base para a mão
+  - Tamanho do osso 1
+  - Tamanho do osso 2
+- Ânuglos do triângulo
+  - Isso vai permitir posicionarmos os ossos corretamente
+- Ângulo do braço
+  - Temos que levar em conta que o braço pode não estar bonitinho no eixo X
 
 # References
 - https://www.alanzucconi.com/2018/05/02/ik-2d-1/
