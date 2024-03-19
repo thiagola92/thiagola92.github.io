@@ -126,7 +126,7 @@ Pronto, agora sabemos qual deveria ser a rotação daquela articulação!
 
 Você provavelmente não terá que pensar em nada disso pois muitas game engines já possuem métodos para lidar com isto, por exemplo em Godot podemos encontrar algo como:  
 
-`get_angle_to(global_position)`  
+`Node2D.get_angle_to(global_position)`  
 
 ## References
 - https://www.youtube.com/watch?v=8Eur16foTMw  
