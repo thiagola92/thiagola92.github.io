@@ -15,28 +15,35 @@ Note que não vamos ditar onde a mão vai estar, porém onde desejamos que ela e
 
 ## Two Bone
 
-O que você faz quando tentando alcançar algo longe de você? Estica o máximo possível. Esse é o caso simples de se resolver pois a ideia é fazer os ossos apontarem para a posição desejada.  
-
 ![Braço estendido](./arm_extended.svg)  
 
-Primeira coisa a se fazer é descobrir se está fora do alcance 🤣, ou seja, a base do braço até o ponto desejado é maior que o braço todo?  
+O que você faz quando tenta alcançar algo longe de você?  
+Estica o máximo possível. 
 
-- Distância da base do braço até o ponto desejado
-  - Primeiro o vetor representando distância: `T-B`
-  - Segundo o tamanho do vetor: `√x²+y²`
-- Tamanho do braço
-  - Osso 1, vetor representando distância: `B2-B`
-  - Osso 1, tamanho do vetor: `√x²+y²`
-  - Osso 2, vetor representando distância: `H-B2`
-  - Osso 2, tamanho do vetor: `√x²+y²`
-  - Tamanho do osso 1 + tamanho do osso 2
+O que você faz quando tenta alcançar algo perto de você?  
+Curva o braço de forma que sua mão acabe na posição desejada.  
+
+Primeira coisa a se fazer é descobrir se está fora ou dentro do alcance 🤣.  
+Em outras palavras, a base do braço até o ponto desejado é maior ou menor que o braço todo?  
 
 ![Braço estendido com vetor para um ponto fora do alcance](./arm_extended_vec.svg)  
 
-Se a soma dos ossos for menor que a distância ao ponto desejado, podemos aplicar a lógica para pontos fora do alcance!  
+Podemos descobrir a distância entre dois pontos se calcularmos o vetor entre eles e depois usarmos a clássica formúla para distância. Resumidamente:  
+- `P2-P1`
+- `√(x²+y²)`
+
+Sabendo disso podemos calcular as seguintes distâncias:  
+- `A` -> `T`
+  - Distância até posição desejada
+- `A` -> `B`
+  - Tamanho do osso 1
+- `B` -> `C`
+  - Tamanho do osso 2
+
+Agora podemos verificar justamente se está dentro ou fora do alcance!  
 
 ```
-Target Distance > (Bone1 length + Bone2 length)
+Distância até posição desejada > (Tamanho do osso 1 + Tamanho do osso 2)
 ```
 
 ## Out of Range
@@ -54,29 +61,37 @@ Já vimos em [IK Look at](../2024-02-04-ik-look-at/index.md) como fazer um osso/
 
 Fim.
 
-:::note
-A ordem é importante, pois a rotação do osso 1 afeta a do osso 2.  
-Bote o osso 1 corretamente antes de ajustar o osso 2.  
-:::
-
 ## In range
 
 Espero que este desenho já deixe claro como utilizaremos trigonometria com braços curvados.  
 
 ![Mostrando que braços curvados podem ser vistos como triângulos](./arm_triangle.svg)  
 
-Neste caso o ponto onde desejamos posicionar a mão está dentro do alcance dela, então irá acabar sendo a mão.  
+Neste caso o ponto onde desejamos posicionar a mão está dentro do alcance dela, então irá acabar sendo exatamente a posição da mão (utilizaremos `C` mas poderia ser `T`).  
 
-Quando resolvendo problemas matemáticos é sempre bom listar as coisas que você sabe do problema:  
+![Mostrando um braço curvado e que utilizaremos as letras `A,B,C` para representar pontos e `a,b,c` para representar tamanho do lado do triângulo](./arm_triangle_curved.svg)  
 
-- Lados do triângulo (calculamos eles agora a pouco)
-  - Distância da base para a mão
-  - Tamanho do osso 1
-  - Tamanho do osso 2
-- Ânuglos do triângulo
-  - Isso vai permitir posicionarmos os ossos corretamente
-- Ângulo do braço
-  - Temos que levar em conta que o braço pode não estar bonitinho no eixo X
+Já calculamos os lados do triângulo, então agora vamos focar no seus ângulos internos (utilizaremos `α β γ`).  
+
+![Mostrando um braço curvado e que utilizaremos as letras `A,B,C` para representar pontos e `a,b,c` para representar tamanho do lado do triângulo](./arm_triangle_curved2.svg)  
+
+Sabendo todos os lados do triângulo podemos utilizar leis do cossenos para descobrir cada ângulo interno:  
+
+```
+a² = b² + c² - 2bc*cos(α)
+b² = a² + c² - 2ac*cos(β)
+c² = a² + b² - 2ab*cos(γ)
+```
+
+Porém apenas os dois ângulos internos são interessantes para nós (`α β`), pois eles que tem relação com a rotação do braço.  
+
+O que eu quero dizer com isto?  Note que estes ângulos internos não nos dizem o quanto rotacionar os ossos.  
+
+
+![Mostrando um braço curvado e que utilizaremos as letras `A,B,C` para representar pontos e `a,b,c` para representar tamanho do lado do triângulo](./arm_triangle_curved3.svg)  
+
+Podemos ver que `α` não nos diz o quanto rotacionar o primeiro osso **em relação ao eixo X** então não conseguimos.  
+
 
 # References
 - https://www.alanzucconi.com/2018/05/02/ik-2d-1/

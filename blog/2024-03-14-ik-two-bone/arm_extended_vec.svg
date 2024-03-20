@@ -28,12 +28,12 @@
      inkscape:document-units="px"
      showgrid="true"
      inkscape:zoom="2.043487"
-     inkscape:cx="16.393547"
-     inkscape:cy="286.52005"
+     inkscape:cx="48.691281"
+     inkscape:cy="321.26458"
      inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-height="1011"
+     inkscape:window-x="1920"
+     inkscape:window-y="32"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"><inkscape:grid
        id="grid1"
@@ -163,7 +163,7 @@
          sodipodi:role="line"
          id="tspan9-9-6-2"
          x="99.87999"
-         y="349.82001">B2</tspan></text><text
+         y="349.82001">B</tspan></text><text
        xml:space="preserve"
        style="font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
        x="204.26801"
@@ -172,7 +172,7 @@
          sodipodi:role="line"
          id="tspan9-9-6-2-9"
          x="204.26801"
-         y="348.496">H</tspan></text><text
+         y="348.496">C</tspan></text><text
        xml:space="preserve"
        style="font-family:Ubuntu;-inkscape-font-specification:Ubuntu;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;paint-order:stroke fill markers"
        x="3.9319999"
@@ -181,7 +181,7 @@
          sodipodi:role="line"
          id="tspan9-9-6-7"
          x="3.9319999"
-         y="345">B</tspan></text><g
+         y="345">A</tspan></text><g
        id="path10"><path
          style="color:#000000;fill:#3ecc5f;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
          d="m 8.6757813,353.39453 a 1.5,1.5 0 0 0 -1.5000001,1.5 1.5,1.5 0 0 0 1.5000001,1.5 H 94.458984 a 1.5,1.5 0 0 0 1.5,-1.5 1.5,1.5 0 0 0 -1.5,-1.5 z"
