@@ -83,15 +83,38 @@ b² = a² + c² - 2ac*cos(β)
 c² = a² + b² - 2ab*cos(γ)
 ```
 
-Porém apenas os dois ângulos internos são interessantes para nós (`α β`), pois eles que tem relação com a rotação do braço.  
+Poderiamos calcular todos ângulos internos porém apenas dois são interessante para nós: `α` e `β`.  
 
-O que eu quero dizer com isto?  Note que estes ângulos internos não nos dizem o quanto rotacionar os ossos.  
+Para entender o porque eles são interessantes, primeiro temos que lembrar quais os dois ângulos que estamos buscando:  
+
+![Mostrando rotação por rotação a se fazer em um braço que está inicialmente apontando para o eixo X](./arm_triangle_curved5.svg)  
+
+Nessa imagem o braço estava esticado em direção ao eixo X, rotacionamos osso 1 por `θ1` e osso 2 por `θ2` para obter exatamente o braço no formato que queriamos.  
+
+---
+
+WIP  
+
+![Zoom no ponto incial do osso 1 e mostrando o ângulo interno dele](./arm_triangle_curved3.svg)  
+
+Dando zoom no ponto inicial do osso 1 podemos analisar melhor a relação de `α` com `θ1`...  
+
+O que eu quero dizer com isto? Primeiro é bom entender que `α` e `β` não nos dizem o quanto rotacionar os ossos, apenas o estado final dos ossos entre si! 
+
+![Mostrando diferentes maneiras que o braço pode estar rotacionado](./arm_triangle_curved4.svg)  
+
+Se o braço estivesse esticado para a direita, as ações que fariamos seria:  
+
+:::note
+Eu sei que os desenhos tem ficado cada vez piores, eu deveria estar usando uma ferramenta apropriada ou organizando melhor os desenhos...  
+
+Mas aqui eu estou inventando enquanto escrevo kkkkkkk  
+:::
 
 
-![Mostrando um braço curvado e que utilizaremos as letras `A,B,C` para representar pontos e `a,b,c` para representar tamanho do lado do triângulo](./arm_triangle_curved3.svg)  
 
-Podemos ver que `α` não nos diz o quanto rotacionar o primeiro osso **em relação ao eixo X** então não conseguimos.  
 
+O nosso problema deixa de ser 
 
 # References
 - https://www.alanzucconi.com/2018/05/02/ik-2d-1/
