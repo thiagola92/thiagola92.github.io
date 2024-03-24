@@ -103,5 +103,30 @@ Mas a preguiça ganhou 🙂
 
 Como podemos obter `θ1`?  
 
+Se você estava pensando *"é só calcular o ângulo do eixo X até o osso 2 que você consegue o `θ1`"*, deixe-me lembra-lo que o braço vai começar de forma desconhecida.  
+
+Mesmo se estivesse esticado no eixo X, o osso 2 não vai estar na posição desejada ainda!  
+
+![Mostrando o braço no eixo X e o ponto desejado acima dele](./arm_triangle_curved5.svg)  
+
+Mas sabe o que podemos fazer? Calcular o ângulo do eixo X até o ponto desejado (`T`).  
+
+![TODO](./arm_triangle_curved6.svg)  
+
+Sabe o porque eu chamei ele de `α'`? Porque ele está relacionado com `α`!  
+
+Acontece que para obter o ângulo desejado, podemos rotacionar até a direção de `T` e depois remover a rotação interna do triângulo (`α`).  
+
+![TODO](./arm_triangle_curved7.svg)  
+
+Não precisamos literalmente rotacionar, podemos calcular o ângulo e depois rotacionar: `α' - α`  
+
+![TODO](./arm_triangle_curved8.svg)  
+
+
+Como podemos obter `θ2`?  
+
+
+
 # References
 - https://www.alanzucconi.com/2018/05/02/ik-2d-1/
