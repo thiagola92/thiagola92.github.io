@@ -126,7 +126,39 @@ Não precisamos literalmente rotacionar, podemos calcular o ângulo e depois rot
 
 Como podemos obter `θ2`?  
 
+Felizmente o osso 2 não rotacionado faz um ângulo de 180º com o osso 1.  
 
+![TODO](./arm_triangle_curved9.svg)  
+
+Se rotacionarmos por 180º e diminuirmos pelo ângulo interno (`β`), obtemos justamente o ângulo que queriamos.  
+
+![TODO](./arm_triangle_curved10.svg)  
+
+Novamente não precisamos literalmente rotacionar, podemos calcular o ângulo e depois rotacionar: `180º - β`  
+
+![TODO](./arm_triangle_curved11.svg)  
+
+No final chegamos aos ângulos graças aos ângulos internos do triângulo:  
+
+```
+θ1 = α' - α
+θ2 = 180º - β
+```
+
+## Bend direction
+
+Mas se nós quisermos que o braço fique curvado para o outro lado?  
+
+Acontece que mesmo curvando para o outro lado, os valores internos do triângulo não se alteram.  
+
+![TODO](./arm_triangle_curved12.svg)  
+
+Então todo o calculo se mantém até a última etapa, onde precisamos mudar o sinal da rotação interna.  
+
+```
+θ1 = α' + α
+θ2 = 180º + β
+```
 
 # References
 - https://www.alanzucconi.com/2018/05/02/ik-2d-1/
