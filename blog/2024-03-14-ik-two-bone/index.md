@@ -61,7 +61,7 @@ Já vimos em [IK Look at](../2024-02-04-ik-look-at/index.md) como fazer um osso/
 
 Fim.
 
-## In range
+## In range - Triangle
 
 Espero que este desenho já deixe claro como utilizaremos trigonometria com braços curvados.  
 
@@ -83,38 +83,25 @@ b² = a² + c² - 2ac*cos(β)
 c² = a² + b² - 2ab*cos(γ)
 ```
 
-Poderiamos calcular todos ângulos internos porém apenas dois são interessante para nós: `α` e `β`.  
+Sabendo os lados e sabendo os ângulos internos nós conseguimos dizer como o braço precisa estar dobrado. O problema é que ele ainda pode estar dessa forma de diversas maneiras 🤣:  
 
-Para entender o porque eles são interessantes, primeiro temos que lembrar quais os dois ângulos que estamos buscando:  
+![Mostrando diferentes maneiras que o braço pode estar rotacionado](./arm_triangle_curved3.svg)  
 
-![Mostrando rotação por rotação a se fazer em um braço que está inicialmente apontando para o eixo X](./arm_triangle_curved5.svg)  
+## In range - Two Angles
 
-Nessa imagem o braço estava esticado em direção ao eixo X, rotacionamos osso 1 por `θ1` e osso 2 por `θ2` para obter exatamente o braço no formato que queriamos.  
+Existem dois ângulos que estamos buscando descobrir, rotacionando eles conseguiremos os ossos exatamente onde queremos:  
 
----
+![Mostrando rotação por rotação a se fazer em um braço que está inicialmente apontando para o eixo X](./arm_triangle_curved4.svg)  
 
-WIP  
-
-![Zoom no ponto incial do osso 1 e mostrando o ângulo interno dele](./arm_triangle_curved3.svg)  
-
-Dando zoom no ponto inicial do osso 1 podemos analisar melhor a relação de `α` com `θ1`...  
-
-O que eu quero dizer com isto? Primeiro é bom entender que `α` e `β` não nos dizem o quanto rotacionar os ossos, apenas o estado final dos ossos entre si! 
-
-![Mostrando diferentes maneiras que o braço pode estar rotacionado](./arm_triangle_curved4.svg)  
-
-Se o braço estivesse esticado para a direita, as ações que fariamos seria:  
+Nessa imagem o braço estava esticado em direção ao eixo X, rotacionamos osso 1 por `θ1` e osso 2 por `θ2` para obter o braço no formato que queriamos.  
 
 :::note
 Eu sei que os desenhos tem ficado cada vez piores, eu deveria estar usando uma ferramenta apropriada ou organizando melhor os desenhos...  
 
-Mas aqui eu estou inventando enquanto escrevo kkkkkkk  
+Mas a preguiça ganhou 🙂  
 :::
 
-
-
-
-O nosso problema deixa de ser 
+Como podemos obter `θ1`?  
 
 # References
 - https://www.alanzucconi.com/2018/05/02/ik-2d-1/
