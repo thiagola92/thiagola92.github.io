@@ -111,32 +111,32 @@ Mesmo se estivesse esticado no eixo X, o osso 2 não vai estar na posição dese
 
 Mas sabe o que podemos fazer? Calcular o ângulo do eixo X até o ponto desejado (`T`).  
 
-![TODO](./arm_triangle_curved6.svg)  
+![Mostrando o ângulo do eixo X até o vetor feito do osso 1 até o ponto desejado](./arm_triangle_curved6.svg)  
 
 Sabe o porque eu chamei ele de `α'`? Porque ele está relacionado com `α`!  
 
 Acontece que para obter o ângulo desejado, podemos rotacionar até a direção de `T` e depois remover a rotação interna do triângulo (`α`).  
 
-![TODO](./arm_triangle_curved7.svg)  
+![Mostrando os ângulos α' e α](./arm_triangle_curved7.svg)  
 
 Não precisamos literalmente rotacionar, podemos calcular o ângulo e depois rotacionar: `α' - α`  
 
-![TODO](./arm_triangle_curved8.svg)  
+![Mostrando que se reduzirmos α' pelo ângulo interno α conseguimos o osso 1 apontando na direção certa](./arm_triangle_curved8.svg)  
 
 
 Como podemos obter `θ2`?  
 
 Felizmente o osso 2 não rotacionado faz um ângulo de 180º com o osso 1.  
 
-![TODO](./arm_triangle_curved9.svg)  
+![Mostrando que o osso 2 quando tem rotação 0º, faz um ângulo de 180º com osso 1](./arm_triangle_curved9.svg)  
 
 Se rotacionarmos por 180º e diminuirmos pelo ângulo interno (`β`), obtemos justamente o ângulo que queriamos.  
 
-![TODO](./arm_triangle_curved10.svg)  
+![Mostrando o ângulo de 180º e β para melhor ver que é possível conseguir o ângulo do osso 2](./arm_triangle_curved10.svg)  
 
 Novamente não precisamos literalmente rotacionar, podemos calcular o ângulo e depois rotacionar: `180º - β`  
 
-![TODO](./arm_triangle_curved11.svg)  
+![Mostrando que se reduzirmos β do 180º conseguimos o osso 2 apontando corretamente](./arm_triangle_curved11.svg)  
 
 No final chegamos aos ângulos graças aos ângulos internos do triângulo:  
 
@@ -151,7 +151,7 @@ Mas se nós quisermos que o braço fique curvado para o outro lado?
 
 Acontece que mesmo curvando para o outro lado, os valores internos do triângulo não se alteram.  
 
-![TODO](./arm_triangle_curved12.svg)  
+![Mostrando que mudar a direção que o braço curva não afeta o triângulo interno](./arm_triangle_curved12.svg)  
 
 Então todo o calculo se mantém até a última etapa, onde precisamos mudar o sinal da rotação interna.  
 
