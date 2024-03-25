@@ -145,7 +145,7 @@ No final chegamos aos ângulos graças aos ângulos internos do triângulo:
 θ2 = 180º - β
 ```
 
-## Bend direction
+## In range - Bend Direction
 
 Mas se nós quisermos que o braço fique curvado para o outro lado?  
 
@@ -160,5 +160,98 @@ Então todo o calculo se mantém até a última etapa, onde precisamos mudar o s
 θ2 = 180º + β
 ```
 
+## In range - Negative Scale
+
+Quando você escala qualquer um dos eixos por negativo, você também está dizendo que a direção para qual ele está rotacionando trocou:  
+
+![Vetor (1,1) antes e após escalar X por -1](./vector_x_negative.svg)  
+
+Se agora escalarmos o eixo Y negativamente, a rotação irá voltar a ser igual o início.  
+Cada vez que você escala um eixo negativamente, você troca a direção das rotações.  
+
+Como isso afeta nossos calculos?  
+
+Apenas o ângulo que utiliza o eixo X como referência é afetado (pois o eixo X nunca é escalado negativamente)  
+
+![Mesma imagem anterior porém mostrando o segundo ângulo do ponto de vista do eixo X](./vector_x_negative_x_axis.svg)  
+
+Agora não queremos reduzir do ângulo `α'`, mas sim acrescentar:  
+
+```
+θ1 = α' + α
+```
+
+Mas se quisermos o osso curvado para a outra direção? É, então queremos novamente reduzir...  
+
+```
+θ1 = α' - α
+```
+
+Err... basicamente estamos bricando de jogo do troca, dependendo da situação queremos rotacionar para diferentes direções.  
+
+## Conclusion
+
+Este é o meu código escrito em GDScript (linguagem do Godot):  
+
+```python
+var flip_bend: bool = false
+var target_distance: float = bone_one.global_position.distance_to(target.global_position)
+var bone_one_length: float = bone_one.get_bone_length()
+var bone_two_length: float = bone_two.get_bone_length()
+var angle_to_x_axis: float = (target.global_position - bone_one.global_position).angle()
+
+# Fora do alcance
+if target_distance > bone_one_length + bone_two_length:
+  bone_one.global_rotation = angle_to_x_axis
+  return
+
+# Lei dos cossenos
+var angle_0: float = acos(
+  (target_distance ** 2 + bone_one_length ** 2 - bone_two_length ** 2) / (2 * target_distance * bone_one_length)
+)
+
+var angle_1: float = acos(
+  (bone_two_length ** 2 + bone_one_length ** 2 - target_distance ** 2) / (2 * bone_two_length * bone_one_length)
+)
+
+# Direção da curva do braço
+if flip_bend:
+  angle_0 = -angle_0
+  angle_1 = -angle_1
+
+# Escala negativa ou não
+if bone_one.global_scale.sign().x == bone_one.global_scale.sign().y:
+  bone_one.global_rotation = angle_to_x_axis - angle_0
+else:
+  bone_one.global_rotation = angle_to_x_axis + angle_0
+
+bone_two.rotation = PI + angle_1
+```
+
+## Extra - Negative Scale in Godot
+
+Este é extra pois depende muito da ferramenta que está utilizando, no meu caso Godot em 2D.  
+
+Godot representa translação, rotação e escala utilizando matriz. Entenda mais sobre transforms na [documentação do Godot](https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html), aqui iremos direto ao assunto.  
+
+Matriz identidade representa um transform sem alteração nenhuma (translação, rotação e escala)
+
+![Matriz identidade](./transform.svg)  
+
+A desvantagem de utilizar uma matriz para armazenar todas essas informações é que algumas são impossíveis de extrarir corretamente. Olhe a matriz após escalar X por -1:  
+
+![Matriz com X escalado por -1](./transform_x_negative.svg)  
+
+Agora olhe a matriz após rotacionar por 180º e escalar Y por -1:  
+
+![Mesma matriz apresentada anteriormente](./transform_x_negative.svg)  
+
+Exatamente a mesma matriz... Se você der essa matriz para Godot, ele vai assumir que você fez a segunda opção (rotacionou e escalou Y por -1).  
+
+Como isso afeta nossa Inverse Kinematic?  
+
+Não afeta se você utilizou funções que já levam esse problema em conta, porém se vc operou diretamente sobre os transforms... Você talvez note alguns problemas.  
+
 # References
 - https://www.alanzucconi.com/2018/05/02/ik-2d-1/
+- https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
