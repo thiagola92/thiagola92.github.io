@@ -200,12 +200,12 @@ var bone_one_length: float = bone_one.get_bone_length()
 var bone_two_length: float = bone_two.get_bone_length()
 var angle_to_x_axis: float = (target.global_position - bone_one.global_position).angle()
 
-# Fora do alcance
+# Fora do alcance.
 if target_distance > bone_one_length + bone_two_length:
   bone_one.global_rotation = angle_to_x_axis
   return
 
-# Lei dos cossenos
+# Lei dos cossenos.
 var angle_0: float = acos(
   (target_distance ** 2 + bone_one_length ** 2 - bone_two_length ** 2) / (2 * target_distance * bone_one_length)
 )
@@ -214,12 +214,12 @@ var angle_1: float = acos(
   (bone_two_length ** 2 + bone_one_length ** 2 - target_distance ** 2) / (2 * bone_two_length * bone_one_length)
 )
 
-# Direção da curva do braço
+# Direção da curva do braço.
 if flip_bend:
   angle_0 = -angle_0
   angle_1 = -angle_1
 
-# Escala negativa ou não
+# Escala negativa ou não.
 if bone_one.global_scale.sign().x == bone_one.global_scale.sign().y:
   bone_one.global_rotation = angle_to_x_axis - angle_0
 else:
