@@ -71,3 +71,7 @@ Normalmente toda iteração você verificaria se chegou em um resultado aceitáv
 
 No meu caso (game engine), estou fazendo uma iteração por frame e sem pensar se chegou ou não em um resultado aceitável.  
 :::
+
+## References
+
+- https://www.ryanjuckett.com/cyclic-coordinate-descent-in-2d/
