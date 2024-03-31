@@ -21,7 +21,7 @@ Alcançar um alvo é dividido em 2 etapas, olhar para o alvo e mover até o alvo
 
 ![Um osso e um alvo fora do alcance](./reach.svg)  
 
-Na primeira etapa podemos utilizar a mesma lógica do [look at](../2024-02-04-ik-look-at/) ou usar a função que sua game engine disponibilizar para rotacionar até um ponto.  
+Na primeira etapa podemos utilizar a mesma lógica do [look at](../2024-02-04-ik-look-at/index.md) ou usar a função que sua game engine disponibilizar para rotacionar até um ponto.  
 
 ![Osso rotacionando até o alvo](./reach2.svg)  
 
@@ -162,6 +162,10 @@ func _apply_forwards() -> void:
     for bone in chain:
         # Rotaciona em direção ao alvo.
         bone.look_at(target_global_position)
+
+        # Evita calcular ratio como infinito.
+        if target_global_position == bone.global_position:
+            continue
         
         # Calcula a nova posição do osso.
         var stretch: Vector2 = target_global_position - bone.global_position
@@ -182,7 +186,6 @@ func _apply_backwards(base_global_position: Vector2) -> void:
         # Calcula a posição do osso seguinte.
         var direction := Vector2(cos(bone.global_rotation), sin(bone.global_rotation))
         base_global_position = bone.global_position + direction * bone.get_bone_length()
-
 ```
 
 ## References
