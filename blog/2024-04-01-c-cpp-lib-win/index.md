@@ -5,12 +5,12 @@ tags: [c, c++, libs, lib, windows]
 
 # C/C++ Libs (Win)
 
-Durante o post [C/C++ Libs](../2024-02-12-c-cpp-lib/) escrevi sobre usar bibliotecas no Linux e nunca imaginaria que teria novamente a dor de cabeça de ver o assunto quando fosse fazer o mesmo no Windows.  
+Durante o post [C/C++ Libs](../2024-02-12-c-cpp-lib/index.md) escrevi sobre usar bibliotecas no Linux e nunca imaginaria que teria novamente a dor de cabeça de ver o assunto quando fosse fazer o mesmo no Windows.  
 
 ![Personagem do desenho The Owl House chorando](./hooty_crying.svg)  
 
 :::warning
-Importante avisar que eu irei escrever este post contando que você leu o [post passado](../2024-02-12-c-cpp-lib/) sobre Linux.  
+Importante avisar que eu irei escrever este post contando que você leu o [post passado](../2024-02-12-c-cpp-lib/index.md) sobre Linux.  
 
 Irei ser breve e não irei estudar detalhes que nem fiz no do linux (pois estou cansado do assunto).  
 :::
