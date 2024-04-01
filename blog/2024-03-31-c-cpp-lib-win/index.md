@@ -48,8 +48,6 @@ cl src\main.c
 
 ---
 
-Quando decidirmos utilizar bibliotecas de terceiro e deixar o headers deles separado.  
-
 ```
 project/
 ├── include/
@@ -67,5 +65,76 @@ cl src/main.c /Iinclude
 
 ### `.lib`
 
+```
+project/
+├── include/
+│   └── header.h
+├── lib/
+│   └── name.lib
+└── src/
+    ├── main.c
+    └── ...
+```
+
+```
+cl src/main.c /Iinclude lib/name.lib
+```
+
+::note
+Windows não tem o padrão de botar `lib` na frente das bibliotecas então não precisa nem pensar nisso.
+:::
+
 ### `.dll`
+
+Dessa vez vamos separar em duas etapas: compilar o código para `.obj` e depois linkar (gerar o `.exe`), isso torna mais fácil adicionar explicações no meio.  
+
+```
+project/
+├── include/
+│   └── header.h
+├── lib/
+│   └── name.lib
+└── src/
+│   ├── main.c
+│   └── ...
+└──  name.dll
+```
+
+Lembre que bibliotecas dinâmicas no Windows utilizam um arquivo `.dll` e um `.lib` (por isso temos os dois no projeto).  
+Windows busca os arquivos `.dll` na mesma pasta do executável, por isso ele não está na pasta lib.  
+
+```
+cl src/main.c /c /Iinclude /Dexample
+```
+
+`/c` é justamente para pausar antes de linkar.  
+`/Dexample` é uma maneira de adicionar uma definição no início do código, equivalente a `#define example`.  
+
+> Por que precisamos definir?
+
+Em bibliotecas do Windows, muitas vezes pode se encontrar código como o seguinte:  
+
+```C
+#if defined(EXPORT_DLL)
+    #define LIB_API __declspec(dllexport)
+#elif defined(IMPORT_DLL)
+    #define LIB_API __declspec(dllimport)
+#else
+    #define LIB_API
+#endif
+```
+
+Onde `LIB_API` é substituido por:
+- `__declspec(dllexport)` quando criando uma biblioteca dinânmica
+- `__declspec(dllimport)` quando importando uma biblioteca dinâmica
+- nada quando é uma biblioteca estática
+
+Não entendo bem do assunto e não pretendo me aprofundar hoje nisto, mas é a maneira do windows lidar com bibliotecas dinâmicas. Biblitoecas geralmente requerem que você passe essa definição para que ela adicione o contexto certo ao código durante a criação do objeto.  
+
+```
+link /LIBPATH:lib name.lib main.obj
+```
+
+É durante a etapa de linkar que o arquivo `.lib` é utilizado!  
+Lembrando novamente que o executável busca o `.dll` na pasta dele.  
 
