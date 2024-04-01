@@ -69,7 +69,7 @@ project/
     └── ...
 ```
 
-Apens possuimos código nosso então tudo que precisamos fazer para criar o executável é  
+Apens possuimos código nosso, então tudo que precisamos fazer para criar o executável é  
 
 ```
 gcc src/main.c -o main
