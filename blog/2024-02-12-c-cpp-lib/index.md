@@ -72,7 +72,7 @@ project/
 Apens possuimos código nosso então tudo que precisamos fazer para criar o executável é  
 
 ```
-gcc main.c -o main
+gcc src/main.c -o main
 ``` 
 
 ---
@@ -93,7 +93,7 @@ project/
 Podemos adicionar um diretório onde se buscar headers com o argumento `-I` seguido pelo diretório (não é separado por espaço):  
 
 ```
-gcc main.c -o main -Iinclude
+gcc src/main.c -o main -Iinclude
 ```
 
 Agora podemos adicionar `#include <header.h>` sem o compilador reclamar que `header.h` não foi encontrado.  
@@ -125,13 +125,13 @@ project/
 Podemos passar ao compilador diretório onde as nossas bibliotecas se encontram com o argumento `-L` seguido pelo diretório (não é separado por espaço):  
 
 ```
-gcc main.c -o main -Iinclude -Llib
+gcc src/main.c -o main -Iinclude -Llib
 ```
 
 Precisamos especificar as que desajamos usar e isso é feito com o argumento `-l` seguido pelo nome base da biblitoeca (não é separado por espaço):  
 
 ```
-gcc main.c -o main -Iinclude -Llib -lname
+gcc src/main.c -o main -Iinclude -Llib -lname
 ```
 
 :::note
@@ -159,13 +159,13 @@ project/
 Passar ao compilador diretório onde as nossas bibliotecas se encontram com o argumento `-L` seguido pelo diretório (não é separado por espaço):  
 
 ```
-gcc main.c -o main -Iinclude -Llib
+gcc src/main.c -o main -Iinclude -Llib
 ```
 
 No caso de bibliotecas compartilhadas este diretório pode possuir centenas de bibliotecas, então faz sentido você ter que especificar as que você quer usar. Novamente usamos o argumento `-l` seguido pelo nome base da biblitoeca (não é separado por espaço):  
 
 ```
-gcc main.c -o main -Iinclude -Llib -lname
+gcc src/main.c -o main -Iinclude -Llib -lname
 ```
 
 :::note
@@ -180,7 +180,7 @@ Mas se nossa biblioteca não for estar em um destes lugares predefinidos? Ainda 
 Podemos passar argumentos ao linker com `-Wl` seguido pelos argumentos que ele deve receber, no caso `-Rlib` (argumentos separados por virgula):  
 
 ```
-gcc main.c -o main -Iinclude -Llib -lname -Wl,-Rlib
+gcc src/main.c -o main -Iinclude -Llib -lname -Wl,-Rlib
 ```
 
 Nosso executável agora vai sempre tentar buscar a biblioteca na pasta `lib` que estiver no mesmo diretório que ele.  
