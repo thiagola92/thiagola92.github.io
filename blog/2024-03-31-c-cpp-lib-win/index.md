@@ -33,4 +33,39 @@ Onde o arquivo `.lib` **NÃO** é o mesmo que o gerado durante a biblioteca est�
 
 ## Project from Zero
 
-Utilizaremos duas ferramentas do windows
+Seguiremos a mesma ideia do post no Linux.  
+
+```
+project/
+└── src/
+    ├── main.c
+    └── ...
+```
+
+```
+cl src\main.c
+```
+
+---
+
+Quando decidirmos utilizar bibliotecas de terceiro e deixar o headers deles separado.  
+
+```
+project/
+├── include/
+│   └── header.h
+└── src/
+    ├── main.c
+    └── ...
+```
+
+```
+cl src/main.c /Iinclude
+```
+
+---
+
+### `.lib`
+
+### `.dll`
+
