@@ -25,8 +25,12 @@ O que faz total sentido dado que eles programas para lidar com "File archive and
 
 ## `.dll` (dynamic-link library)
 
-Seria o próximo do `.so` do Linux e serve o mesmo propósito de uma biblioteca compartilhada (**shared library**) porém o Windows possui uma implementação própria deles (**dynamic-link library**).  
+Seria o próximo do `.so` do Linux, servindo o mesmo propósito de uma biblioteca compartilhada (**shared library**) porém o Windows possui uma implementação própria deles (**dynamic-link library**).  
 
-A grande diferença que precisamos saber é que durante a criação de bibliotecas compartilhadas, dois formatos de arquivos são criados: `.dll` e `.lib`.  
+A grande diferença que precisamos saber é que durante a criação de bibliotecas compartilhadas, três formatos de arquivos são criados: `.dll`, `.lib` e `.exp` (vamos ignorar este último).  
 
-Onde o arquivo `.lib` **NÃO** é o mesmo que o gerado durante a biblioteca estática porém ainda é necessário para a utilização da biblioteca compartilhada!  
+Onde o arquivo `.lib` **NÃO** é o mesmo que o gerado durante a biblioteca estática! Porém ainda é necessário para a utilização da biblioteca compartilhada.  
+
+## Project from Zero
+
+Utilizaremos duas ferramentas do windows
