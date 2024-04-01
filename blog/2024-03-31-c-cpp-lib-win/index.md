@@ -10,7 +10,9 @@ Durante o post [C/C++ Libs](../2024-02-12-c-cpp-lib/) escrevi sobre usar bibliot
 ![Personagem do desenho The Owl House chorando](./hooty_crying.svg)  
 
 :::warning
-Importante avisar que eu irei escrever este post contando que você leu o [post passado](../2024-02-12-c-cpp-lib/) sobre Linux.
+Importante avisar que eu irei escrever este post contando que você leu o [post passado](../2024-02-12-c-cpp-lib/) sobre Linux.  
+
+Irei ser breve e não irei estudar detalhes que nem fiz no do linux (pois estou cansado do assunto).  
 :::
 
 ## `.lib` (library)
@@ -33,7 +35,7 @@ Onde o arquivo `.lib` **NÃO** é o mesmo que o gerado durante a biblioteca est�
 
 ## Project from Zero
 
-Seguiremos a mesma ideia do post no Linux.  
+Seguiremos a mesma ideia do post no Linux. Apenas tendo o nosso código:  
 
 ```
 project/
@@ -47,6 +49,8 @@ cl src\main.c
 ```
 
 ---
+
+Agora com um header:  
 
 ```
 project/
@@ -80,7 +84,7 @@ project/
 cl src/main.c /Iinclude lib/name.lib
 ```
 
-::note
+:::note
 Windows não tem o padrão de botar `lib` na frente das bibliotecas então não precisa nem pensar nisso.
 :::
 
@@ -108,11 +112,13 @@ cl src/main.c /c /Iinclude /Dexample
 ```
 
 `/c` é justamente para pausar antes de linkar.  
-`/Dexample` é uma maneira de adicionar uma definição no início do código, equivalente a `#define example`.  
+`/Dexample` é uma maneira de adicionar uma definição no início do código, equivalente a 
 
-> Por que precisamos definir?
+```C
+#define example
+```
 
-Em bibliotecas do Windows, muitas vezes pode se encontrar código como o seguinte:  
+Por que precisamos definir? Em bibliotecas do Windows, muitas vezes pode se encontrar código como o seguinte:  
 
 ```C
 #if defined(EXPORT_DLL)
@@ -129,12 +135,17 @@ Onde `LIB_API` é substituido por:
 - `__declspec(dllimport)` quando importando uma biblioteca dinâmica
 - nada quando é uma biblioteca estática
 
-Não entendo bem do assunto e não pretendo me aprofundar hoje nisto, mas é a maneira do windows lidar com bibliotecas dinâmicas. Biblitoecas geralmente requerem que você passe essa definição para que ela adicione o contexto certo ao código durante a criação do objeto.  
+Não entendo bem do assunto então não pretendo entrar no assunto, mas é a maneira do windows lidar com bibliotecas dinâmicas.  
+
+Biblitoecas geralmente requerem que você passe essa definição para que ela adicione o contexto certo ao código durante a criação do objeto (para fazer [name mangling](https://en.wikipedia.org/wiki/Name_mangling) corretamente?).  
+
+---
 
 ```
 link /LIBPATH:lib name.lib main.obj
 ```
 
-É durante a etapa de linkar que o arquivo `.lib` é utilizado!  
-Lembrando novamente que o executável busca o `.dll` na pasta dele.  
+É durante a etapa de linkar que o arquivo `.lib` é finalmente utilizado!  
+
+Lembrando novamente que o executável vai buscar o `.dll` na pasta do executável, então bote ambos juntos.  
 
