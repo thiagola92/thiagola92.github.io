@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[330],{74147:e=>{e.exports=JSON.parse('{"label":"ia","permalink":"/pt-br/tags/ia","allTagsPath":"/pt-br/tags","count":1,"items":[{"id":"open_source/2019","title":"2019","description":"Explosion","permalink":"/pt-br/open_source/2019"}],"unlisted":false}')}}]);

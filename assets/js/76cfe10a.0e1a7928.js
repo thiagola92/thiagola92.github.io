@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[3053],{42083:e=>{e.exports=JSON.parse('{"label":"sql","permalink":"/tags/sql","allTagsPath":"/tags","count":1,"items":[{"id":"open_source/2020","title":"2020","description":"Beekeeper Studio","permalink":"/open_source/2020"}],"unlisted":false}')}}]);
