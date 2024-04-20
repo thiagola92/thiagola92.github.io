@@ -76,13 +76,39 @@ Existem variações e alternativas de shell:
 - [Zsh](https://www.zsh.org/)
 - [Fish](https://fishshell.com/)
 
+![Shell](./shell.svg)  
+
 ## CLI
 **C**ommand-**l**ine **i**nterface  
 *(https://en.wikipedia.org/wiki/Command-line_interface)*  
 
+É uma interface, ou seja, maneira do programa dar mais controle ao usuário sobre o programa.  
+
+Está interface se basea no usuário passar flags em conjunto ao comando, dessa maneira mudando o comportamento do commando. Por exemplo, o programa `ls` disponibiliza diversas flags para alterar o comportamento:  
+- `ls`
+    - Lista tudo no diretório atual mas ignora os começando com `.`
+- `ls -a`
+    - Lista tudo no diretório atual e **não** ignora os começando com `.`
+- `ls -l`
+    - Lista tudo no diretório atual mas com mais detalhes
+
+Fique bem claro que é o programa te dando opções de como interagir com ele, não o shell ou terminal, então resta ao programa implementar comportamentos para certas flags.  
+
+:::note
+É muito comum programas oferecerem detalhes sobre as flags quando utilizando a flag `--help` (`ls --help`).  
+:::
+
 ## TUI
 **T**erminal **u**ser **i**nterface  
 *(https://en.wikipedia.org/wiki/Text-based_user_interface)*  
+
+Novamente é uma interface, ou seja, maneira do programa dar mais controle ao usuário sobre o programa. Porém está foca em dar uma interação mais visual e continua.  
+
+Diferente de CLI's onde toda a interação começa e termina em um comando só, TUI's continuam esperando mais interações do usuário até um dos dois decidirem terminar.  
+
+Um exemplo bem comum é `top` que providência uma visão dos programas/processos/threads em execução do sistema, uma vez inicializado ele esperar por mais interações do usuário. Se você apertar `q` ele termina, se você apertar `h` ele fornece a lista de comandos, etc.  
+
+Note que a TUI's ainda podem providênciar flags para alterar o comportamento (`top --help`).  
 
 ## GUI
 **G**raphical **u**ser **i**nterface  
