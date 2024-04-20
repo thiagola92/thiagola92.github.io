@@ -84,7 +84,7 @@ Existem variações e alternativas de shell:
 
 É uma interface, ou seja, maneira do programa dar mais controle ao usuário sobre o programa.  
 
-Está interface se basea no usuário passar flags em conjunto ao comando, dessa maneira mudando o comportamento do commando. Por exemplo, o programa `ls` disponibiliza diversas flags para alterar o comportamento:  
+Está interface se basea no usuário passar flags e mais informações em conjunto ao comando, dessa maneira mudando o comportamento do commando. Por exemplo, o programa `ls` disponibiliza diversas flags para alterar o comportamento:  
 - `ls`
     - Lista tudo no diretório atual mas ignora os começando com `.`
 - `ls -a`
@@ -98,6 +98,8 @@ Fique bem claro que é o programa te dando opções de como interagir com ele, n
 É muito comum programas oferecerem detalhes sobre as flags quando utilizando a flag `--help` (`ls --help`).  
 :::
 
+![CLI](./cli.svg)  
+
 ## TUI
 **T**erminal **u**ser **i**nterface  
 *(https://en.wikipedia.org/wiki/Text-based_user_interface)*  
@@ -110,6 +112,8 @@ Um exemplo bem comum é `top` que providência uma visão dos programas/processo
 
 Note que a TUI's ainda podem providênciar flags para alterar o comportamento (`top --help`).  
 
+![TUI](./tui.svg)  
+
 ## GUI
 **G**raphical **u**ser **i**nterface  
 *(https://en.wikipedia.org/wiki/Graphical_user_interface)*  
@@ -119,6 +123,8 @@ Novamente é uma interface, ou seja, maneira do programa dar mais controle ao us
 Hoje em dia é o meio mais popular de se usar uma aplicação, quando se abre VSCode, Google Chrome, Discord... Todos são GUI's pois utilizaram a capacidade de desenhar para dar uma interface ao usuário.  
 
 Mesmo programas focados em GUI's podem aceitar flags (VSCode: `code --help`).  
+
+![GUI](./gui.svg)  
 
 ## References
 - https://en.wikipedia.org/wiki/System_console
