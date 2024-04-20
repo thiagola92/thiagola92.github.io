@@ -114,6 +114,12 @@ Note que a TUI's ainda podem providênciar flags para alterar o comportamento (`
 **G**raphical **u**ser **i**nterface  
 *(https://en.wikipedia.org/wiki/Graphical_user_interface)*  
 
+Novamente é uma interface, ou seja, maneira do programa dar mais controle ao usuário sobre o programa. Porém não está limitada a usar texto para a visualização, pois tem a capacidade de desenhar na tela.  
+
+Hoje em dia é o meio mais popular de se usar uma aplicação, quando se abre VSCode, Google Chrome, Discord... Todos são GUI's pois utilizaram a capacidade de desenhar para dar uma interface ao usuário.  
+
+Mesmo programas focados em GUI's podem aceitar flags (VSCode: `code --help`).  
+
 ## References
 - https://en.wikipedia.org/wiki/System_console
 - https://linuxcommand.org/lc3_lts0010.php
