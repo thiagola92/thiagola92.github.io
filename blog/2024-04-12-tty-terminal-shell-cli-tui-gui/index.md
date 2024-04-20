@@ -51,14 +51,30 @@ Diferentemente de terminais, estes estão fortemente ligados a computador e não
 ## Shell
 *(https://en.wikipedia.org/wiki/Shell_script)*  
 
-A linguagem de programação mais popular para scripts do terminal.  
+Um **programa** responsável por ficar em loop esperando **comandos** do usuário para serem executados.  
 
-Isso quer dizer que existem outras e também variações:  
+Comandos podem ser:
+    - Programas
+        - `echo`
+        - `ls`
+        - `touch`
+        - `mkdir`
+        - Buscados em lugares pré definidos (`/bin`, `/usr/bin`, ...)
+            - Use `echo $PATH` para ver a lista de lugares a se olhar
+    - Comandos do próprio shell
+        - `type`
+        - `which`
+        - `help`
+        - `man`
+        - Estes existem dentro do shell e não precisam ser buscados.
+    - Shell functions
+    - Aliases
+        - Comandos definidos por nós, construido de outros comandos
+
+Existem variações e alternativas de shell:  
 - [Bash](https://www.gnu.org/software/bash/)
 - [Zsh](https://www.zsh.org/)
 - [Fish](https://fishshell.com/)
-
-Mas no final é apenas uma linguagem de programação!  
 
 ## CLI
 **C**ommand-**l**ine **i**nterface  
@@ -74,6 +90,8 @@ Mas no final é apenas uma linguagem de programação!
 
 ## References
 - https://en.wikipedia.org/wiki/System_console
+- https://linuxcommand.org/lc3_lts0010.php
+- https://linuxcommand.org/lc3_lts0060.php
 - https://www.youtube.com/watch?v=ztsOwk1zB3o
 - https://www.youtube.com/watch?v=SYwbEcNrcjI
 - https://www.youtube.com/watch?v=byMwNPj47X8
