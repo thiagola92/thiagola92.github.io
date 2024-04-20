@@ -29,6 +29,8 @@ https://www.youtube.com/watch?v=S81GyMKH7zw
 É baseado nessa ferramenta que TTY em linux existe, infelizmente ainda não terminei o estudo de como funciona e o que faz:  
 https://www.linusakesson.net/programming/tty/  
 
+![TTY](./tty.svg)  
+
 ## Terminal
 *(https://en.wikipedia.org/wiki/Computer_terminal)*  
 
@@ -134,6 +136,7 @@ Mesmo programas focados em GUI's podem aceitar flags (VSCode: `code --help`).
 - https://www.linusakesson.net/programming/tty/
 - https://linuxcommand.org/lc3_lts0010.php
 - https://linuxcommand.org/lc3_lts0060.php
+- https://www.youtube.com/watch?v=wIjgZhAjQS4
 - https://www.youtube.com/watch?v=ztsOwk1zB3o
 - https://www.youtube.com/watch?v=SYwbEcNrcjI
 - https://www.youtube.com/watch?v=byMwNPj47X8
