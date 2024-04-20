@@ -10,7 +10,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/styles.4ed44873.css">
-<script src="/assets/js/runtime~main.fee410a4.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.33940845.js" defer="defer"></script>
 <script src="/assets/js/main.ab5a0f4c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -27,6 +27,8 @@
 </ul>
 <p>Não existe melhor maneira de entender do que ver pessoas que restauraram esse tipo de ferramenta:<br>
 <a href="https://www.youtube.com/watch?v=S81GyMKH7zw" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=S81GyMKH7zw</a></p>
+<p>É baseado nessa ferramenta que TTY em linux existe, infelizmente ainda não terminei o estudo de como funciona e o que faz:<br>
+<a href="https://www.linusakesson.net/programming/tty/" target="_blank" rel="noopener noreferrer">https://www.linusakesson.net/programming/tty/</a></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="terminal">Terminal<a href="#terminal" class="hash-link" aria-label="Direct link to Terminal" title="Direct link to Terminal">​</a></h2>
 <p><em>(<a href="https://en.wikipedia.org/wiki/Computer_terminal" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Computer_terminal</a>)</em></p>
 <p>Teletypes originalmente eram conhecidas como &quot;hard-copy terminals&quot; por usarem papel, mas com a vinda de telas nós formamos uma nova ideia de terminal nas nossas cabeças (a tela preta).</p>
@@ -124,6 +126,7 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="references">References<a href="#references" class="hash-link" aria-label="Direct link to References" title="Direct link to References">​</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/System_console" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/System_console</a></li>
+<li><a href="https://www.linusakesson.net/programming/tty/" target="_blank" rel="noopener noreferrer">https://www.linusakesson.net/programming/tty/</a></li>
 <li><a href="https://linuxcommand.org/lc3_lts0010.php" target="_blank" rel="noopener noreferrer">https://linuxcommand.org/lc3_lts0010.php</a></li>
 <li><a href="https://linuxcommand.org/lc3_lts0060.php" target="_blank" rel="noopener noreferrer">https://linuxcommand.org/lc3_lts0060.php</a></li>
 <li><a href="https://www.youtube.com/watch?v=ztsOwk1zB3o" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=ztsOwk1zB3o</a></li>
@@ -137,7 +140,7 @@
 <p>Basicamente idêntico ao <code>.a</code> do Linux, uma biblioteca estática (<strong>static library</strong>).</p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Descobri que estes arquivos podem ser abertos tranquilamente com programas de zip tipo: Winrar, 7zip, PeaZip.</p><p>O que faz total sentido dado que eles programas para lidar com &quot;File archive and extractor&quot; e no Linux usando o formato <code>.a</code> de &quot;archive&quot;.</p></div></div>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="dll-dynamic-link-library"><code>.dll</code> (dynamic-link library)<a href="#dll-dynamic-link-library" class="hash-link" aria-label="Direct link to dll-dynamic-link-library" title="Direct link to dll-dynamic-link-library">​</a></h2>
-<p>Seria o próximo do <code>.so</code> do Linux, servindo o mesmo propósito de uma biblioteca compartilhada (<strong>shared library</strong>) porém o Windows possui uma implementação própria deles (<strong>dynamic-link library</strong>).</p>
+<p>Seria o próximo do <code>.so</code> do Linux, servindo o mesmo propósito de uma biblioteca compartilhada (<strong>shared library</strong>) porém o Windows possui uma implementaç ão própria deles (<strong>dynamic-link library</strong>).</p>
 <p>A grande diferença que precisamos saber é que durante a criação de bibliotecas compartilhadas, três formatos de arquivos são criados: <code>.dll</code>, <code>.lib</code> e <code>.exp</code> (vamos ignorar este último).</p>
 <p>Onde o arquivo <code>.lib</code> <strong>NÃO</strong> é o mesmo que o gerado durante a biblioteca estática! Porém ainda é necessário para a utilização da biblioteca compartilhada.</p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="project-from-zero">Project from Zero<a href="#project-from-zero" class="hash-link" aria-label="Direct link to Project from Zero" title="Direct link to Project from Zero">​</a></h2>

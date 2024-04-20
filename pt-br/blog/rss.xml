@@ -27,6 +27,8 @@
 </ul>
 <p>Não existe melhor maneira de entender do que ver pessoas que restauraram esse tipo de ferramenta:<br>
 <a href="https://www.youtube.com/watch?v=S81GyMKH7zw" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=S81GyMKH7zw</a></p>
+<p>É baseado nessa ferramenta que TTY em linux existe, infelizmente ainda não terminei o estudo de como funciona e o que faz:<br>
+<a href="https://www.linusakesson.net/programming/tty/" target="_blank" rel="noopener noreferrer">https://www.linusakesson.net/programming/tty/</a></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="terminal">Terminal<a href="https://thiagola92.github.io/pt-br/blog/2024/04/20/tty-terminal-shell-cli-tui-gui#terminal" class="hash-link" aria-label="Link direto para Terminal" title="Link direto para Terminal">​</a></h2>
 <p><em>(<a href="https://en.wikipedia.org/wiki/Computer_terminal" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Computer_terminal</a>)</em></p>
 <p>Teletypes originalmente eram conhecidas como "hard-copy terminals" por usarem papel, mas com a vinda de telas nós formamos uma nova ideia de terminal nas nossas cabeças (a tela preta).</p>
@@ -124,6 +126,7 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="references">References<a href="https://thiagola92.github.io/pt-br/blog/2024/04/20/tty-terminal-shell-cli-tui-gui#references" class="hash-link" aria-label="Link direto para References" title="Link direto para References">​</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/System_console" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/System_console</a></li>
+<li><a href="https://www.linusakesson.net/programming/tty/" target="_blank" rel="noopener noreferrer">https://www.linusakesson.net/programming/tty/</a></li>
 <li><a href="https://linuxcommand.org/lc3_lts0010.php" target="_blank" rel="noopener noreferrer">https://linuxcommand.org/lc3_lts0010.php</a></li>
 <li><a href="https://linuxcommand.org/lc3_lts0060.php" target="_blank" rel="noopener noreferrer">https://linuxcommand.org/lc3_lts0060.php</a></li>
 <li><a href="https://www.youtube.com/watch?v=ztsOwk1zB3o" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=ztsOwk1zB3o</a></li>
