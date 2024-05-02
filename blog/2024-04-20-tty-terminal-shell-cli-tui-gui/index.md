@@ -47,6 +47,10 @@ Exemplo disso seria:
 
       os.isatty(fd)
       ```
+- NodeJS
+    - ```javascript
+      tty.isatty(fd)
+      ```
 
 Onde a funcionalidade das funções é identificar se a input/ouput está vinculada a um aparelho (device).  
 
