@@ -16,17 +16,43 @@
         <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tty">TTY<a href="https://thiagola92.github.io/pt-br/blog/2024/04/20/tty-terminal-shell-cli-tui-gui#tty" class="hash-link" aria-label="Link direto para TTY" title="Link direto para TTY">​</a></h2>
 <p><strong>T</strong>ele<strong>ty</strong>pe<br>
 <em>(<a href="https://en.wikipedia.org/wiki/Teleprinter" target="_blank" rel="noopener noreferrer">https://en.wikipedia.org/wiki/Teleprinter</a>)</em></p>
-<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Já notou que muitas coisas no computador possuem o nome de objetos que existem fora do computador? Acontece que o nome é dado baseado nestes objetos, isso ajuda usuários a entenderem melhor o uso dele no computador!</p><p>Infelizmente é por isso que para entendermos o TTY do computador, iremos entender no que ele é inspirado.</p></div></div>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>Já notou que muitas coisas no computador possuem o nome de objetos que existem fora do computador?</p><p>Acontece que o nome é dado baseado nestes objetos para ajudar usuários a entenderem melhor o uso deles no computador! Por exemplo:</p><ul>
+<li>file</li>
+<li>folder</li>
+<li>trash can</li>
+<li>window</li>
+</ul><p>Infelizmente é por isso que para entendermos o TTY do computador, iremos entender no que ele é inspirado.</p></div></div>
 <p>Teletype é uma <a href="https://en.wikipedia.org/wiki/Typewriter" target="_blank" rel="noopener noreferrer">typewriter</a> elétrica com o propósito de enviar e receber dados.</p>
-<p>Tenha em mente que estamos falando de uma época que inicialmente não possuia monitores (onde o meio de comunicação principal era papel) e de uma máquina que mudou bastante durante o tempo... Não espere precisão de mim.</p>
-<ul>
+<p>Tenha em mente que estamos falando de uma época que inicialmente não possuia monitores (onde o meio de comunicação principal era papel) e de uma máquina que mudou bastante durante o tempo:</p>
+<ol>
 <li>Originalmente substituiu os tradutores de <a href="https://en.wikipedia.org/wiki/Morse_code" target="_blank" rel="noopener noreferrer">morse code</a>, pois elas conseguiam ler e escrever morse code.</li>
 <li>Com o tempo elas evoluiram para ler e escrever <a href="https://en.wikipedia.org/wiki/Punched_tape" target="_blank" rel="noopener noreferrer">punched tapes</a>, que eram a maneira de computadores armazenarem dados na época (antes de HD/SSD).</li>
-<li>Consequentemente evoluiram para quando conectadas a um computador (na época antes de <a href="https://en.wikipedia.org/wiki/Computer_monitor" target="_blank" rel="noopener noreferrer">monitores</a> aparecerem) serem capazes de ler e escrever a ele.</li>
-</ul>
+<li>E consequentemente evoluiram para quando conectadas a um computador (antes de termos <a href="https://en.wikipedia.org/wiki/Computer_monitor" target="_blank" rel="noopener noreferrer">monitores</a>) serem capazes de ler e escrever a ele.</li>
+</ol>
 <p>Não existe melhor maneira de entender do que ver pessoas que restauraram esse tipo de ferramenta:<br>
 <a href="https://www.youtube.com/watch?v=S81GyMKH7zw" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=S81GyMKH7zw</a></p>
-<p>É baseado nessa ferramenta que TTY em linux existe, infelizmente ainda não terminei o estudo de como funciona e o que faz:<br>
+<p>Por isto que o termo TTY era utilizado para referência aparelhos enviando/recebendo (input/output) mensagem do computador.</p>
+<p>Exemplo disso seria:</p>
+<ul>
+<li>C<!-- -->
+<ul>
+<li>
+<div class="language-C language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token macro property directive-hash" style="color:#36acaa">#</span><span class="token macro property directive keyword" style="color:#00009f">include</span><span class="token macro property" style="color:#36acaa"> </span><span class="token macro property string" style="color:#e3116c">&lt;unistd.h&gt;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">isatty</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">fildes</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+<li>Python<!-- -->
+<ul>
+<li>
+<div class="language-python codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-python codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">import</span><span class="token plain"> os</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">os</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">isatty</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">fd</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+</ul>
+<p>Onde a funcionalidade das funções é identificar se a input/ouput está vinculada a um aparelho (device).</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>Preste bem atenção que sua input pode estar ligada ou não a um aparelho <strong>E</strong> sua output pode estar ligada ou não a um aparelho.</p><p>Um deles estar ligado não quer dizer que ambos estão.</p><p>As funções recebem um file descriptor e dizem se ele está ou não linkado a um aparelho.<br>
+<!-- -->Você poderia passar <code>STDIN</code>, <code>STDOUT</code> ou até <code>STDERR</code> para a função analisar.</p><p>Esse video cobre bem o assunto: <a href="https://www.youtube.com/watch?v=SYwbEcNrcjI" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=SYwbEcNrcjI</a></p></div></div>
+<p>Se realmente quiser saber detalhes sobre TTY, existe este blog <strong>cheio</strong> de informações:<br>
 <a href="https://www.linusakesson.net/programming/tty/" target="_blank" rel="noopener noreferrer">https://www.linusakesson.net/programming/tty/</a></p>
 <p><img loading="lazy" alt="TTY" src="https://thiagola92.github.io/pt-br/assets/images/tty-7bcfe8bd2cf563b9e6702727051b651d.svg" width="400" height="400" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="terminal">Terminal<a href="https://thiagola92.github.io/pt-br/blog/2024/04/20/tty-terminal-shell-cli-tui-gui#terminal" class="hash-link" aria-label="Link direto para Terminal" title="Link direto para Terminal">​</a></h2>
@@ -131,9 +157,7 @@
 <li><a href="https://linuxcommand.org/lc3_lts0060.php" target="_blank" rel="noopener noreferrer">https://linuxcommand.org/lc3_lts0060.php</a></li>
 <li><a href="https://www.youtube.com/watch?v=wIjgZhAjQS4" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=wIjgZhAjQS4</a></li>
 <li><a href="https://www.youtube.com/watch?v=ztsOwk1zB3o" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=ztsOwk1zB3o</a></li>
-<li><a href="https://www.youtube.com/watch?v=SYwbEcNrcjI" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=SYwbEcNrcjI</a></li>
 <li><a href="https://www.youtube.com/watch?v=byMwNPj47X8" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=byMwNPj47X8</a></li>
-<li><a href="https://www.youtube.com/watch?v=S81GyMKH7zw" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=S81GyMKH7zw</a></li>
 </ul>]]></content>
         <author>
             <name>Thiago Lages de Alencar</name>
