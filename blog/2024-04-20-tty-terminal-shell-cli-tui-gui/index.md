@@ -10,23 +10,58 @@ tags: [tty, terminal, shell, cli, tui, gui, command line interface, terminal use
 *(https://en.wikipedia.org/wiki/Teleprinter)*  
 
 :::note
-Já notou que muitas coisas no computador possuem o nome de objetos que existem fora do computador? Acontece que o nome é dado baseado nestes objetos, isso ajuda usuários a entenderem melhor o uso dele no computador!  
+Já notou que muitas coisas no computador possuem o nome de objetos que existem fora do computador?  
+
+Acontece que o nome é dado baseado nestes objetos para ajudar usuários a entenderem melhor o uso deles no computador! Por exemplo:  
+- file
+- folder
+- trash can
+- window  
 
 Infelizmente é por isso que para entendermos o TTY do computador, iremos entender no que ele é inspirado.  
 :::
 
 Teletype é uma [typewriter](https://en.wikipedia.org/wiki/Typewriter) elétrica com o propósito de enviar e receber dados.  
 
-Tenha em mente que estamos falando de uma época que inicialmente não possuia monitores (onde o meio de comunicação principal era papel) e de uma máquina que mudou bastante durante o tempo... Não espere precisão de mim.  
+Tenha em mente que estamos falando de uma época que inicialmente não possuia monitores (onde o meio de comunicação principal era papel) e de uma máquina que mudou bastante durante o tempo:  
 
-- Originalmente substituiu os tradutores de [morse code](https://en.wikipedia.org/wiki/Morse_code), pois elas conseguiam ler e escrever morse code.  
-- Com o tempo elas evoluiram para ler e escrever [punched tapes](https://en.wikipedia.org/wiki/Punched_tape), que eram a maneira de computadores armazenarem dados na época (antes de HD/SSD).  
-- Consequentemente evoluiram para quando conectadas a um computador (na época antes de [monitores](https://en.wikipedia.org/wiki/Computer_monitor) aparecerem) serem capazes de ler e escrever a ele.  
+1. Originalmente substituiu os tradutores de [morse code](https://en.wikipedia.org/wiki/Morse_code), pois elas conseguiam ler e escrever morse code.  
+2. Com o tempo elas evoluiram para ler e escrever [punched tapes](https://en.wikipedia.org/wiki/Punched_tape), que eram a maneira de computadores armazenarem dados na época (antes de HD/SSD).  
+3. E consequentemente evoluiram para quando conectadas a um computador (antes de termos [monitores](https://en.wikipedia.org/wiki/Computer_monitor)) serem capazes de ler e escrever a ele.  
 
 Não existe melhor maneira de entender do que ver pessoas que restauraram esse tipo de ferramenta:  
 https://www.youtube.com/watch?v=S81GyMKH7zw  
 
-É baseado nessa ferramenta que TTY em linux existe, infelizmente ainda não terminei o estudo de como funciona e o que faz:  
+Por isto que o termo TTY era utilizado para referência aparelhos enviando/recebendo (input/output) mensagem do computador.  
+
+Exemplo disso seria:
+- C
+    - ```C
+      #include <unistd.h>
+
+      isatty(fildes);
+      ```
+- Python
+    - ```python
+      import os
+
+      os.isatty(fd)
+      ```
+
+Onde a funcionalidade das funções é identificar se a input/ouput está vinculada a um aparelho (device).  
+
+:::warning
+Preste bem atenção que sua input pode estar ligada ou não a um aparelho **E** sua output pode estar ligada ou não a um aparelho.  
+
+Um deles estar ligado não quer dizer que ambos estão.  
+
+As funções recebem um file descriptor e dizem se ele está ou não linkado a um aparelho.  
+Você poderia passar `STDIN`, `STDOUT` ou até `STDERR` para a função analisar.  
+
+Esse video cobre bem o assunto: https://www.youtube.com/watch?v=SYwbEcNrcjI  
+:::
+
+Se realmente quiser saber detalhes sobre TTY, existe este blog **cheio** de informações:  
 https://www.linusakesson.net/programming/tty/  
 
 ![TTY](./tty.svg)  
@@ -138,6 +173,4 @@ Mesmo programas focados em GUI's podem aceitar flags (VSCode: `code --help`).
 - https://linuxcommand.org/lc3_lts0060.php
 - https://www.youtube.com/watch?v=wIjgZhAjQS4
 - https://www.youtube.com/watch?v=ztsOwk1zB3o
-- https://www.youtube.com/watch?v=SYwbEcNrcjI
 - https://www.youtube.com/watch?v=byMwNPj47X8
-- https://www.youtube.com/watch?v=S81GyMKH7zw
