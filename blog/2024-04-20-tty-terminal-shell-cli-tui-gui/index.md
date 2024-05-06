@@ -5,11 +5,31 @@ tags: [tty, terminal, shell, cli, tui, gui, command line interface, terminal use
 
 # TTY, Terminal, Shell, CLI, TUI, GUI
 
+Esse post é meio que uma compilação do que eu entendi de cada assunto após de horas lendo na internet e perguntando para meu pai.  
+Em outras palavras: Pode ter informação incorreta!  
+
 ## TTY
 **T**ele**ty**pe  
 *(https://en.wikipedia.org/wiki/Teleprinter)*  
 
-:::note
+TTY é um comando em linux para saber o nome do terminal o qual a input está **diretamente conectada**.  
+
+```C
+$ tty
+/dev/pts/1
+
+$ echo "example" | tty
+not a tty
+```
+
+No primeiro exemplo, o comando `tty` veio como input diretamente do terminal.  
+
+No segundo exemplo, o comando `tty` recebeu a input `example` do comando anterior (não de um terminal).  
+
+Fim! Pode ir para a próxima sessão, ao menos que você queira saber o que diabos é uma teletype.  
+
+![Rosto curioso](./curious.svg)  
+
 Já notou que muitas coisas no computador possuem o nome de objetos que existem fora do computador?  
 
 Acontece que o nome é dado baseado nestes objetos para ajudar usuários a entenderem melhor o uso deles no computador! Por exemplo:  
@@ -18,45 +38,46 @@ Acontece que o nome é dado baseado nestes objetos para ajudar usuários a enten
 - trash can
 - window  
 
-Infelizmente é por isso que para entendermos o TTY do computador, iremos entender no que ele é inspirado.  
-:::
+O mesmo vale para TTY, onde o nome veio de teletypes. Infelizmente não é um nome que ajude muito pois computadores já subsittuiram o uso delas então esse nome não ajuda ninguém a saber do que o comando se trata 🤣.  
 
-Teletype é uma [typewriter](https://en.wikipedia.org/wiki/Typewriter) elétrica com o propósito de enviar e receber dados.  
+O que são teletypes?  
+Entenda que elas são uma junção de [typewriters](https://en.wikipedia.org/wiki/Typewriter) e [telegraph key](https://en.wikipedia.org/wiki/Telegraph_key).  
+O primeiro utilizado para escrever em papel e o segundo utilizado para enviar morse code a distância.  
 
-Tenha em mente que estamos falando de uma época que inicialmente não possuia monitores (onde o meio de comunicação principal era papel) e de uma máquina que mudou bastante durante o tempo:  
+Morse code era muito utilizado como uma forma de comunicação binária via cabo (som curto/longo), então teletypes desenvolveram lógicas para converter esses sinais para letras e vice-versa. Por isto a chegada delas subistituiu tradutores de morse code, elas viraram como novo meio de enviar e receber mensagens.  
 
-1. Originalmente substituiu os tradutores de [morse code](https://en.wikipedia.org/wiki/Morse_code), pois elas conseguiam ler e escrever morse code.  
-2. Com o tempo elas evoluiram para ler e escrever [punched tapes](https://en.wikipedia.org/wiki/Punched_tape), que eram a maneira de computadores armazenarem dados na época (antes de HD/SSD).  
-3. E consequentemente evoluiram para quando conectadas a um computador (antes de termos [monitores](https://en.wikipedia.org/wiki/Computer_monitor)) serem capazes de ler e escrever a ele.  
+Ao mesmo tempo computadores e terminais estavam nascendo. Alguns terminais vinham com capacidade de receber/escrever informação das/nas teletypes (afinal é tudo binário).  
 
-Não existe melhor maneira de entender do que ver pessoas que restauraram esse tipo de ferramenta:  
+Uma coisa que não ficou claro para mim é se inicialmente teletypes eram usadas para enviar/receber mensagem dos computadores iniciais.  
+Bem, a essa altura pelo menos ficou claro que a funcionalidade a qual elas foram inspiradas era a capacidade de enviar/receber **dados**.  
+
+Este video mostra uma teletype recebendo e enviando dados de/a um terminal:  
 https://www.youtube.com/watch?v=S81GyMKH7zw  
 
 Por isto que o termo TTY era utilizado para referência aparelhos enviando/recebendo (input/output) mensagem do computador.  
 
-Exemplo disso seria:
+Algumas linguagens até incluem código para fazer essa verificação:
 - C
-    - ```C
-      #include <unistd.h>
+    -   ```C
+        #include <unistd.h>
 
-      isatty(fildes);
-      ```
+        isatty(fildes);
+        ```
 - Python
-    - ```python
-      import os
+    -   ```python
+        import os
 
-      os.isatty(fd)
-      ```
+        os.isatty(fd)
+        ```
 - NodeJS
-    - ```javascript
-      tty.isatty(fd)
-      ```
+    -   ```javascript
+        tty.isatty(fd)
+        ```
 
 Onde a funcionalidade das funções é identificar se a input/ouput está vinculada a um aparelho (device).  
 
 :::warning
 Preste bem atenção que sua input pode estar ligada ou não a um aparelho **E** sua output pode estar ligada ou não a um aparelho.  
-
 Um deles estar ligado não quer dizer que ambos estão.  
 
 As funções recebem um file descriptor e dizem se ele está ou não linkado a um aparelho.  
@@ -65,7 +86,7 @@ Você poderia passar `STDIN`, `STDOUT` ou até `STDERR` para a função analisar
 Esse video cobre bem o assunto: https://www.youtube.com/watch?v=SYwbEcNrcjI  
 :::
 
-Se realmente quiser saber detalhes sobre TTY, existe este blog **cheio** de informações:  
+Se realmente quiser saber detalhes sobre TTY, existe este blog **cheio** de informações (que eu não li):  
 https://www.linusakesson.net/programming/tty/  
 
 ![TTY](./tty.svg)  
