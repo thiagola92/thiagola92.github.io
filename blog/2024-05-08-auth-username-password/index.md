@@ -64,7 +64,7 @@ usuário 2 => 2ncWQsenha_secreta => "81feed1d27d67d6da5ebfa18ce58255d2822d95d286
 Agora ninguém sabe que os dois usuários tem a mesma senha, porém vamos precisar salvar o salt para reproduzir o resultado.  
 
 ## Server
-Script para preparar o repositório dos exemplos:  
+Script para preparar o diretório dos exemplos:  
 ```shell
 mkdir server
 cd server
@@ -95,7 +95,7 @@ def setup():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id      integer     primary key     default nextval('user_id_sequence'),
-            user    text        not null,
+            user    text        not null        unique,
             salt    text        not null,
             hash    text        not null
         )
@@ -228,7 +228,7 @@ async def register(request: Request):
     if database.get_user_auth(username)[0] != "":
         return PlainTextResponse("User already exist", 403)
 
-    # Create salt and password
+    # Create salt and password hash
     salt = os.urandom(16)
     password = password.encode()
     hash = hashlib.scrypt(password, salt=salt, n=2, r=64, p=1)
@@ -261,7 +261,7 @@ uvicorn --reload main:app
 ```
 
 ## Client
-Script para preparar o repositório dos exemplos:  
+Script para preparar o diretório dos exemplos:  
 ```shell
 mkdir client
 cd client
