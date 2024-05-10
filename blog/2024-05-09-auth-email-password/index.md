@@ -63,7 +63,15 @@ python -m aiosmtpd -n
 ```
 
 ## Server
-Script para preparar repositório é o mesmo do post anterior.  
+Script para preparar o diretório dos exemplos:  
+```shell
+mkdir server
+cd server
+python3 -m venv venv
+. venv/bin/activate
+pip install duckdb starlette uvicorn pytz
+touch main.py auth.py database.py
+```
 
 ### Server - Database Operations
 Alteraremos as antigas para usarem email em vez de usuário.  
@@ -398,13 +406,91 @@ uvicorn --reload main:app
 ```
 
 ## Client
-Script para preparar repositório é o mesmo do post anterior, porém é necessário adicionar dois arquivos:  
+Script para preparar o diretório dos exemplos:  
 ```shell
-touch recover_account.py change_account.py
+mkdir client
+cd client
+python3 -m venv venv
+. venv/bin/activate
+pip install httpx
+touch content.py register.py recover_account.py change_account.py
 ```
 
 ### Client - Access Content
+Mesmo que o post anterior porém trocando usuário por email.  
 
+```python
+import sys
+import httpx
+import base64
+
+# Get username and password from command line
+username = sys.argv[1]
+password = sys.argv[2]
+
+# Setup credentials string
+credentials = f"{username}:{password}"
+credentials = credentials.encode()
+credentials = base64.b64encode(credentials)
+credentials = credentials.decode()
+
+# Get content
+response = httpx.get("http://127.0.0.1:8000/", headers={"Authorization": f"Basic {credentials}"})
+print(response.content)
+
+```
 
 ### Client - Register User
+Mesmo que o post anterior porém trocando usuário por email.  
 
+```python
+import sys
+import httpx
+
+# Get username and password from command line
+email = sys.argv[1]
+password = sys.argv[2]
+
+# Setup body string
+body = f"email={email}&password={password}"
+
+# Register user
+response = httpx.post("http://127.0.0.1:8000/register", content=body)
+print(response.content)
+```
+
+### Client - Recover Account
+Bem mais simples pois só precisamos enviar o email.  
+
+```python
+import sys
+import httpx
+
+# Get email from command line
+email = sys.argv[1]
+content = f"{email}"
+
+# Request recovery code
+response = httpx.post("http://127.0.0.1:8000/recover_account", content=content)
+print(response.content)
+```
+
+### Client - Change Account
+Agora podemos cobrar do usuário o código de recuperação ao mesmo tempo que a nova senha.  
+
+```python
+import sys
+import httpx
+
+# Get username, code and new password from command line
+email = sys.argv[1]
+code = sys.argv[2]
+password = sys.argv[3]
+
+# Setup body string
+body = f"email={email}&code={code}&password={password}"
+
+# Change account password
+response = httpx.post("http://127.0.0.1:8000/change_account", content=body)
+print(response.content)
+```
