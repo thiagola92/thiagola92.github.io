@@ -228,7 +228,8 @@ async def register(request: Request):
     if not username or not password:
         return PlainTextResponse("Missing username or password", 400)
 
-    if database.get_user_auth(username)[0] != "":
+    # Found user with this username
+    if database.get_user_auth(username)[0]:
         return PlainTextResponse("User already exist", 403)
 
     # Create salt and password hash

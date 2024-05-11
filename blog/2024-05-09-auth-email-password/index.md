@@ -303,7 +303,8 @@ async def register(request: Request):
     if not email or not password:
         return PlainTextResponse("Missing email or password", 400)
 
-    if database.get_user_auth(email)[0] != "":
+    # Found user with this email
+    if database.get_user_auth(email)[0]:
         return PlainTextResponse("User already exist", 403)
 
     # Create salt and password hash
@@ -323,7 +324,8 @@ async def recover_account(request: Request):
     email = await request.body()
     email = email.decode()
 
-    if database.get_user_auth(email)[0] != "":
+    # Didn't find user with this email
+    if not database.get_user_auth(email)[0]:
         return PlainTextResponse("No account with this email", 403)
 
     # Create recovery code
@@ -347,7 +349,7 @@ async def recover_account(request: Request):
     return PlainTextResponse("Recovery code sent to your email")
 
 
-async def change_password(request: Request):
+async def change_account(request: Request):
     # Break down body
     body = await request.body()
     body = body.decode()
@@ -380,7 +382,7 @@ async def change_password(request: Request):
     hash = binascii.b2a_hex(hash)
 
     # Change password and remove recovery code
-    database.change_password(email, salt, hash)
+    database.change_account(email, salt, hash)
     database.delete_recovery_code(email)
 
     return PlainTextResponse("Password changed")
