@@ -325,7 +325,6 @@ Enquanto a convenção do body é:
 ```python title='register.py'
 import sys
 import httpx
-import base64
 
 # Get username and password from command line
 username = sys.argv[1]
