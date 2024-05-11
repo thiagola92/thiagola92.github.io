@@ -4,14 +4,18 @@ tags: [authentication, auth, python, email, mail, password, duckdb, starlette, a
 ---
 
 # Authentication - email & password
-(Continuação de [authenticação - username & password](./../2024-05-08-auth-username-password/index.md))  
-
-Basicamente igual ao método de usuário e senha, mas agora você tem um email como identificador da conta.  
+No post anterior vimos como fazer [authenticação com usuário e senha](./../2024-05-08-auth-username-password/index.md).  
+Agora vamos ver com email e senha, basicamente igual ao outro porém email é o identificador da conta.  
 
 Precisaremos de um servidor de email para receber email:
 - [aiosmtpd](https://aiosmtpd.aio-libs.org/en/latest/)
 
-Não iremos repetir o que já foi mostrado do post anterior.  
+No lado do server utilizaremos:
+- [DuckDB](https://duckdb.org/) como banco de dados
+- [Starlette](https://www.starlette.io/) como RESTful API
+
+No lado do client utilizaremos:
+- [httpx](https://www.python-httpx.org/) para fazer requisições
 
 ## Questions
 
@@ -74,9 +78,9 @@ touch main.py auth.py database.py
 ```
 
 ### Server - Database Operations
-Alteraremos as antigas para usarem email em vez de usuário.  
+Alteraremos as operações do post anterior para usarem email em vez de usuário.  
 
-Adicionaremos 4 operações ao banco no nosso código:  
+E adicionaremos 4 operações ao banco no nosso código:  
 - Criar código de recuperação de conta
 - Validar o código de recuperação
     - Isso inclui ver se o usuário está passando o código dentro de um tempo limite
@@ -200,7 +204,7 @@ def change_account(email: str, salt: str, hash: str):
 ```
 
 ### Server - Authentication
-Apenas trocar usuário por email.  
+Igual post anterior porém trocamos usuário por email.  
 
 ```python title="auth.py"
 import base64
@@ -256,9 +260,11 @@ class AuthBackend(AuthenticationBackend):
 ```
 
 ### Server - Main
-Adicionamos o endpoint para pedir o código de recuperação e o endpoint para mudar a senha da conta.  
+Trocamos usuário por email e adicionamos dois 2 endpoints novos:  
+- Pedir o código de recuperação
+- Mudar a senha da conta
 
-```python title="auth.py"
+```python title="main.py"
 import os
 import hashlib
 import binascii
@@ -400,7 +406,7 @@ app = Starlette(
 )
 ```
 
-Agora você pode iniciar o server com:
+Agora podemos iniciar o server com:
 ```
 uvicorn --reload main:app
 ```
@@ -419,7 +425,7 @@ touch content.py register.py recover_account.py change_account.py
 ### Client - Access Content
 Mesmo que o post anterior porém trocando usuário por email.  
 
-```python
+```python title='content.py'
 import sys
 import httpx
 import base64
@@ -437,13 +443,19 @@ credentials = credentials.decode()
 # Get content
 response = httpx.get("http://127.0.0.1:8000/", headers={"Authorization": f"Basic {credentials}"})
 print(response.content)
-
 ```
+
+Execute o código para testar obter o conteúdo do sistema:  
+```
+python content.py username@email.com password
+```
+
+Se você ainda não escreveu o código de registar, isto deve estar proibindo você de ver o conteúdo da página.
 
 ### Client - Register User
 Mesmo que o post anterior porém trocando usuário por email.  
 
-```python
+```python title='register.py'
 import sys
 import httpx
 
@@ -459,10 +471,20 @@ response = httpx.post("http://127.0.0.1:8000/register", content=body)
 print(response.content)
 ```
 
-### Client - Recover Account
-Bem mais simples pois só precisamos enviar o email.  
+Execute o código para registar seu email e senha:  
+```
+python register.py username@email.com password
+```
 
-```python
+Agora se executar novamente o código de pegar conteúdo, deve conseguir ler o conteúdo da página.  
+```
+python content.py username@email.com password
+```
+
+### Client - Recover Account
+Nosso endpoint de requisitar senha só precisa do email, então esse código é o mais curto que veremos.  
+
+```python title='recover_account.py'
 import sys
 import httpx
 
@@ -475,10 +497,17 @@ response = httpx.post("http://127.0.0.1:8000/recover_account", content=content)
 print(response.content)
 ```
 
+Execute o código para requisitar um email com o código de recuperação:  
+```
+python recover_account.py username@email.com
+```
+
+Olhe no terminal que está executando o server de email, nele você deve receber um email com o código.  
+
 ### Client - Change Account
 Agora podemos cobrar do usuário o código de recuperação ao mesmo tempo que a nova senha.  
 
-```python
+```python title='change_account.py'
 import sys
 import httpx
 
@@ -493,4 +522,19 @@ body = f"email={email}&code={code}&password={password}"
 # Change account password
 response = httpx.post("http://127.0.0.1:8000/change_account", content=body)
 print(response.content)
+```
+
+Após receber o código, execute este código para trocar a senha e lembre de informar o código de recuperação visto no servidor de email:  
+```
+python change_account.py username@email.com fasdfasfasdfasdf new_password
+```
+
+Tente acessar o conteúdo da página com a senha velha e veja falhar.  
+```
+python content.py username@email.com password
+```
+
+Tente acessar o conteúdo da página com a senha nova e veja o conteúdo privido.  
+```
+python content.py username@email.com new_password
 ```

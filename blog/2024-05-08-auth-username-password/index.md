@@ -188,8 +188,11 @@ Note que `hashlib.scrypt()` retorna bytes e que eles podem não ser conversiveis
 Então para facilitar a comparação, convertemos para uma string hexadecimal e armazenamos desta maneira.  
 
 ### Server - Main
+Criamos 2 endpoints:
+- Registrar usuário
+- Acessar um conteúdo exclusivo para usuários
 
-```python title="auth.py"
+```python title="main.py"
 import os
 import hashlib
 import binascii
