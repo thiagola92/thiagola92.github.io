@@ -210,6 +210,10 @@ from auth import AuthBackend
 
 
 async def register(request: Request):
+    # Refuse if not in the right format
+    if request.headers.get("Content-Type") != "application/x-www-form-urlencoded":
+        return PlainTextResponse("Invalid body format", 400)
+
     # Break down body
     body = await request.body()
     body = body.decode()
@@ -334,7 +338,11 @@ password = sys.argv[2]
 body = f"username={username}&password={password}"
 
 # Register user
-response = httpx.post("http://127.0.0.1:8000/register", content=body)
+response = httpx.post(
+    "http://127.0.0.1:8000/register",
+    headers={"Content-Type": "application/x-www-form-urlencoded"},
+    content=body,
+)
 print(response.content)
 ```
 
@@ -350,3 +358,5 @@ python content.py username password
 
 ## References
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
