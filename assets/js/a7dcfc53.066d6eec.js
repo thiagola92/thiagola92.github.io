@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[9426],{90021:t=>{t.exports=JSON.parse('{"label":"starlette","permalink":"/blog/tags/starlette","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);
