@@ -270,6 +270,7 @@ import hashlib
 import binascii
 import secrets
 import smtplib
+from urllib.parse import parse_qs
 from email.message import EmailMessage
 
 from starlette.applications import Starlette
@@ -292,20 +293,15 @@ async def register(request: Request):
     # Break down body
     body = await request.body()
     body = body.decode()
-    parts = body.split("&")
-    parts = [part.partition("=") for part in parts]
+    fields = parse_qs(body)
 
-    # Get email and password
-    email = ""
-    password = ""
-    for part in parts:
-        if part[0] == "email":
-            email = part[2]
-        elif part[0] == "password":
-            password = part[2]
+    # Body must have username and password
+    if "username" not in fields or "password" not in fields:
+        return PlainTextResponse("Missing username or password", 400)
 
-    if not email or not password:
-        return PlainTextResponse("Missing email or password", 400)
+    # Get username and password
+    email = fields["username"][0]
+    password = fields["password"][0]
 
     # Found user with this email
     if database.get_user_auth(email)[0]:
@@ -357,20 +353,16 @@ async def change_account(request: Request):
     # Break down body
     body = await request.body()
     body = body.decode()
-    parts = body.split("&")
-    parts = [part.partition("=") for part in parts]
+    fields = parse_qs(body)
+
+    # Body must have email, code and password
+    if "email" not in fields or "code" not in fields or "password" not in fields:
+        return PlainTextResponse("Missing email or password", 400)
 
     # Get email, recovery code and new password
-    email = ""
-    code = ""
-    password = ""
-    for part in parts:
-        if part[0] == "email":
-            email = part[2]
-        elif part[0] == "code":
-            code = part[2]
-        elif part[0] == "password":
-            password = part[2]
+    email = fields["email"][0]
+    code = fields["code"][0]
+    password = fields["password"][0]
 
     if not email or not code or not password:
         return PlainTextResponse("Missing email/code/password", 400)
@@ -464,13 +456,14 @@ Mesmo que o post anterior porém trocando usuário por email.
 ```python title='register.py'
 import sys
 import httpx
+from urllib.parse import urlencode
 
-# Get username and password from command line
+# Get email and password from command line
 email = sys.argv[1]
 password = sys.argv[2]
 
 # Setup body string
-body = f"email={email}&password={password}"
+body = urlencode({"email": email, "password": password})
 
 # Register user
 response = httpx.post(
@@ -520,14 +513,15 @@ Agora podemos cobrar do usuário o código de recuperação ao mesmo tempo que a
 ```python title='change_account.py'
 import sys
 import httpx
+from urllib.parse import urlencode
 
-# Get username, code and new password from command line
+# Get email, code and new password from command line
 email = sys.argv[1]
 code = sys.argv[2]
 password = sys.argv[3]
 
 # Setup body string
-body = f"email={email}&code={code}&password={password}"
+body = urlencode({"email": email, "code": code, "password": password})
 
 # Change account password
 response = httpx.post("http://127.0.0.1:8000/change_account", content=body)
