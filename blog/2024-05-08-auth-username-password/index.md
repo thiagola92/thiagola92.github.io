@@ -15,8 +15,10 @@ No lado do client utilizaremos:
 
 Essa maneira de autenticação envolve armazenar no banco o **hash** da senha e o **salt** utilizado durante o hash.  
 
-Hash, formalmente conhecido como digest, é o resultado de obtido ao se passar um array de bytes à uma função hash.  
-Salt, um array de bytes gerado randomicamente para ser usado durante a função hash.  
+- Hash
+    - Formalmente conhecido como digest, é o resultado de obtido ao se passar um array de bytes à uma função hash  
+- Salt
+    - Array de bytes gerado randomicamente para ser usado durante a função hash  
 
 ## Questions
 
