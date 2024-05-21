@@ -4,14 +4,93 @@ tags: [authentication, auth, python, user, username, password, duckdb, starlette
 ---
 
 # Authentication - username & password
+:::warning
+Eu não estava feliz que o post era muito "aqui o código de X/Y/Z", pois gerava paredão de texto. E quando escrevo estes posts, a intenção é reforçar conhecimento para no futuro eu conseguir voltar e relembrar do assunto (e não do código em específico).  
+
+O repositório com exemplos continua vivo em:  
+https://github.com/thiagola92/learning-authentication  
+:::
+
 Username com password é uma das maneiras mais velhas de se criar autenticação no seu sistema.  
 
-No lado do server utilizaremos:
-- [DuckDB](https://duckdb.org/) como banco de dados
-- [Starlette](https://www.starlette.io/) como RESTful API
+![UI para login](./username_password.svg)  
 
-No lado do client utilizaremos:
-- [httpx](https://www.python-httpx.org/) para fazer requisições
+Nós confiaremos que aquele usuário é o dono da conta se ele souber a senha que está relacionada àquele username. Note que falei "confiaremos" pois nunca podemos ter 100% de certeza, só estamos tentando reduzir a possibilidade de ser alguém indesejado na conta.  
+
+## Clint - register
+![UI para registrar](./register.svg)  
+
+Para entender como o registro de novos usuários funciona, podemos olhar como formulários em HTML funcionam.  
+
+```html
+<form action="./register">
+</form>
+```
+
+Formulários coletam todos os dados dos elementos `<input>` dentro deles e enviam para o endereço especificado no atributo `action`. Tenha em mente que enviar quer dizer "mandar para aquele **endpoint** um request **HTTP**".  
+
+:::note
+Caso você já tenha feito uma API REST em qualquer linguagem, você pode começar a notar detalhes familiares. Acontece que os navegadores não fazem nenhuma mágica, eles enviam o mesmo tipo de request que você está acostumado a lidar no backend de APIs REST.  
+:::
+
+Como eu estou escrevendo isto ao mesmo tempo que testo o código, eu vou trocar o endpoint para a minha API (`http://127.0.0.1:8000/register`).  
+
+```html
+<form action="http://127.0.0.1:8000/register">
+</form>
+```
+
+Nós precisamos adicionar o input do tipo `submit` pois ele é utilizado para engatilhar o envio.  
+
+```html
+<form action="http://127.0.0.1:8000/register">
+  <input type="submit" value="register">
+</form>
+```
+
+Se você clicar no botão de registrar, você mandara um request GET para o endpoint `register`, com nenhuma informação pois não existe nenhum campo `input` que segure informação.  
+
+No nosso caso precisamos de um campo para o username e outro para o password:  
+```html
+<form action="http://127.0.0.1:8000/register">
+  <input type="text" name="username" value="username"><br>
+  <input type="password" name="password" value="password"><br>
+  <input type="submit" value="register">
+</form>
+```
+
+Note que utilizamos os tipos `text` e `password` apenas para dar o comportamento correto no navegador. O importante mesmo é o atributo `name` pois ele define o nome a qual o valor vai estar relacionado quando enviado.  
+
+Se clicarmos no botão de registrar, enviaremos as informações na URL:  
+`/register?username=username&password=password`  
+
+Por padrão o formulário envia um request GET, o que é ótimo se você quiser compartilhar URL com alguém ou salvar no favoritos.  
+
+Porém não é nada seguro quando estamos falando de informação sensível como a senha do usuário! Neste caso queremos enviar no corpo do request POST (onde não fica visível a qualquer pessoa olhando a tela do seu computador).  
+
+Podemos especificar o método utilizado no request atráves do atributo `method`:  
+```html
+<form action="http://127.0.0.1:8000/register" method="post">
+  <input type="text" name="username" value="username"><br>
+  <input type="password" name="password" value="password"><br>
+  <input type="submit" value="register">
+</form>
+```
+
+Agora ao clicar no botão de registrar, enviaremos as informações no corpo do request e a URL para qual você vai ser direcionado **não** vai conter seus dados (`/register`).  
+
+Corpo do request: `username=username&password=password`  
+
+:::note
+Note que no final das contas é o mesmo formato porém em lugares diferentes.  
+
+Se você tiver uma API, conseguirá ver que ambos possuem o campo `content-type` da requisição com o valor `application/x-www-form-urlencoded`.  
+:::
+
+## Server - register
+Okay, seu server recebeu a requisição de cadastro do usuário. O que fazer agora?  
+
+-------------
 
 Essa maneira de autenticação envolve armazenar no banco o **hash** da senha e o **salt** utilizado durante o hash.  
 
@@ -359,3 +438,4 @@ python content.py username password
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
+- https://www.w3schools.com/tags/att_form_enctype.asp
