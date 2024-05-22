@@ -87,8 +87,54 @@ Note que no final das contas é o mesmo formato porém em lugares diferentes.
 Se você tiver uma API, conseguirá ver que ambos possuem o campo `content-type` da requisição com o valor `application/x-www-form-urlencoded`.  
 :::
 
+Tudo isto poderia ser reproduzido em python com:  
+```python
+import httpx
+from urllib.parse import urlencode
+
+body = urlencode({"username": username, "password": password})
+headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
+httpx.post("http://127.0.0.1:8000/register", headers=headers, content=body)
+```
+
 ## Server - register
-Okay, seu server recebeu a requisição de cadastro do usuário. O que fazer agora?  
+Okay, seu server recebeu a requisição de cadastro do usuário. O que fazer agora? Validações!  
+
+![Robo lendo um papel](./server_reading.svg)  
+
+O conteúdo da requisição está no formato esperado?  
+
+Podemos verificar se o campo `content-type` está com `application/x-www-form-urlencoded`.  
+```python
+if request.headers.get("Content-Type") != "application/x-www-form-urlencoded":
+    raise Exception("Invalid body format")
+```
+
+Claro que isso não impede o usuário de formatar o conteúdo incorretamente, porém agora podemos assumir que ele errou o formato e enviarmos uma mensagem de erro coerente com o problema.  
+```python
+try:
+    body = await request.body()
+    body = body.decode()
+    fields = parse_qs(body)
+except ValueError:
+    raise Exception("Body incorrectly formatted")
+```
+
+E se o usuário esquecer um dos campos? Sim, precisamos validar isto também.  
+```python
+if "username" not in fields or "password" not in fields:
+    return Exception("Missing username or password")
+```
+
+E se o usuário tiver caracters inválido?  
+E se a senha tiver caracters inválido?  
+E se o usuário já existir no banco?  
+...  
+
+Acho que você já entendeu que validação é importante.  
+
+Agora vamos falar de storage!  
 
 -------------
 
