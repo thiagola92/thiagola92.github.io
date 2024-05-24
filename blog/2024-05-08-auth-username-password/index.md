@@ -141,13 +141,13 @@ Como se armazena o username?
 Igual a qualquer outro campo texto...  
 
 Como se armazena a senha?  
-Não se armazena senhas...  
+Não se armazena senha...  
 
 Pode parecer estranho a primeira vista mas não precisamos armazenar a senha para conferir se alguém nos deus a senha correta.  
 
-Existem funções chamadas **funções hash** que produzem saídas com propriedades que nos ajudam a conferir se a senha de um usuário está correta.  
+Existem **funções hash criptográficas** que produzem saídas com propriedades que nos ajudam a conferir se a senha de um usuário está correta.  
 
-Propriedades que nos interessão em uma função hash:
+Propriedades que nos interessão nessas funções:
 - Dada uma entrada de bytes, sempre produz a mesma saída de bytes
     - Nada de especial aqui, apenas está garantindo que não é afetado por outro fatores aleatórios (tempo, temperatura, etc)
 - Não existe função que reverte a operação
@@ -155,16 +155,18 @@ Propriedades que nos interessão em uma função hash:
 - Qualquer mudança na entrada de bytes gera uma saída de bytes muito diferente
     - A ideia é que as pessoas não devem saber que as entradas são parecidas a partir da saída
 
-Diversas funções hash existem, cada uma com o próprio algoritmo.  
+Diversas funções hash criptográficas existem, cada uma com o próprio algoritmo.  
 No nosso caso vamos utilizar o algoritmo sha256 para os exemplos!  
 
 ```shell
-$ sha256(entrada) => saida
+>>> sha256(entrada)
+saida
 ```
 
 :::note
-Segurança é algo que muda com o tempo, então funções hash seguras de antigamente podem já não ser mais seguras.  
-Estou usando a função hash sha256 apenas para exemplo, não estou considerando se é segura ou não para o ano atual.  
+Segurança é algo que muda com o tempo, então funções hash criptográficas seguras de antigamente podem já não ser mais seguras.  
+
+Estou usando a função hash que usa o algoritmo sha256 apenas de exemplo, não estou considerando se é segura ou não para o ano atual.  
 :::
 
 | entrada | saída                                                            |
@@ -174,84 +176,113 @@ Estou usando a função hash sha256 apenas para exemplo, não estou considerando
 | ABC     | b5d4045c3f466fa91fe2cc6abe79232a1a57cdf104f7a26e716e0a1e2789df78 |
 | 123     | a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3 |
 
-Se você der a mesma entrada, vai receber a mesma saída.  
-Olhando a saída você não sabe a entrada.  
-A mudanaça de um bit entre "abc" e "abd" mudou totalmente a saída.  
+- Se você der a mesma entrada, vai receber a mesma saída  
+- Olhando a saída você não sabe a entrada  
+- A mudanaça de um bit entre "abc" e "abd" mudou totalmente a saída  
 
 Não sei se ficou claro, mas isso é perfeito para podermos conferir se alguém acertou a senha.  
-Quando alguém registra no nosso serviço, nós armazenamos o hash da senha (saída da função hash dado que recebeu a senha como entrada).  
+
+Assim que um usuário registra no serviço e nos da senha, podemos calcular o hash da senha (saída da função hash para a senha) para armazenar.  
+
+```shell
+>>> sha256(b"password").hexdigest()
+'5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
+
+>>> sha256(b"mega_password").hexdigest()
+'2d2c3f7eb9152d67258cd1068a64a746c130d4cca3f571bd28a86d7f7589aa25'
+
+>>> sha256(b"senha").hexdigest()
+'b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c'
+```
 
 | username   | hash                                                             |
+| ---------- | ---------------------------------------------------------------- |
 | thiagola92 | 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 |
 | darklord   | 2d2c3f7eb9152d67258cd1068a64a746c130d4cca3f571bd28a86d7f7589aa25 |
 | juninho    | b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c |
 
 Quando alguém for logar no nosso serviço, a pessoa vai inserir a senha e nós vamos conferir se o hash dessa senha é igual ao que temos no banco.  
-Se for igual, você sabe a senha da conta e pode ter acesso ao serviço.  
-Se não for igual, vai gerar um hash que é diferente deste e nós não daremos acesso ao serviço.  
+- Se for igual, a pessoa sabe a senha e nós podemos autorizar o acesso ao serviço  
+- Se não for igual, a pessoa **não** sabe a senha e nós devemos negar o acesso ao serviço  
 
 Qual a vantagem de armazenar assim?  
 Se algum hacker acessar nosso banco, ele não vai conseguir saber a senha das pessoas.  
-Mesmo que a pessoa saiba que meu hash é `5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8`, se ela tentar passar isto como senha, o hash gerado vai ser totalmente diferente!  
+
+Mesmo que a pessoa saiba que meu hash é:  
+`5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8`  
+Se ela tentar o hash como senha, o hash do hash vai ser totalmente diferente.  
 
 ```shell
-5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 => 113459eb7bb31bddee85ade5230d6ad5d8b2fb52879e00a84ff6ae1067a210d3
+>>> sha256(b"5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8").hexdigest()
+'113459eb7bb31bddee85ade5230d6ad5d8b2fb52879e00a84ff6ae1067a210d3'
 ```
 
+Então é isso? Temos que armazenar o hash da senha? Nope.  
+
+![Face saying nope](./nope.svg)  
+
+O que acontece quando dois usuários possuem a mesma senha?  
+
+| username   | hash                                                             |
+| ---------- | ---------------------------------------------------------------- |
+| thiagola92 | 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 |
+| darklord   | **2d2c3f7eb9152d67258cd1068a64a746c130d4cca3f571bd28a86d7f7589aa25** |
+| juninho    | b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c |
+| mmiguel    | **2d2c3f7eb9152d67258cd1068a64a746c130d4cca3f571bd28a86d7f7589aa25** |
+
+Isso quer dizer que se um hacker advinhar a senha de `mmiguel`, ele também sabe a senha de `darklord`.  
+
+Para previnir isso é normal adicionar **salt** às senhas, ou seja, concatenar bytes extras na senha antes de fazer o hash.  
+
+Assim que o usuário criar a conta, criaremos um salt para ele com uma função que gera X bytes aleatórios (`os.urandom(X)`):  
+
+```python
+# No caso vamos gerar 10 bytes aleatórios.
+salt = os.urandom(10)
+```
+
+| username   | salt                 |
+| ---------- | -------------------- |
+| thiagola92 | cea3a49482094b096acb |
+| darklord   | b9f195b7ce55a51fdc0d |
+| juninho    | 885cfd855add75c08a7a |
+| mmiguel    | 10cc25d0c8adcbc44e9a |
+
+Iremos inserir na função hash a concatenação de `senha + salt`.  
+
+```shell
+>>> sha256(b"password" + b"cea3a49482094b096acb").hexdigest()
+'a15760e9639bc64e8908d5d2109900dcbc508e6fc5fa7b161e5149fcdaa04eee'
+
+>>> sha256(b"mega_password" + b"b9f195b7ce55a51fdc0d").hexdigest()
+'8c7044c8e42efebbf7d19027db0a00c8d2242197a0e001d5d0d977cccfaa020c'
+
+>>> sha256(b"senha" + b"885cfd855add75c08a7a").hexdigest()
+'f51f77c4575127dbf8906c60b7b1c80e01772be217c8a1c9df68e4f527b7f8eb'
+
+>>> sha256(b"mega_password" + b"10cc25d0c8adcbc44e9a").hexdigest()
+'bbb70b912376b0c266d90cd3ebd1ffa99f6c439a50ed6481bb809b99fd93d300'
+```
+
+| username   | salt                 | hash                                                             |
+| ---------- | -------------------- | ---------------------------------------------------------------- |
+| thiagola92 | cea3a49482094b096acb | a15760e9639bc64e8908d5d2109900dcbc508e6fc5fa7b161e5149fcdaa04eee |
+| darklord   | b9f195b7ce55a51fdc0d | 8c7044c8e42efebbf7d19027db0a00c8d2242197a0e001d5d0d977cccfaa020c |
+| juninho    | 885cfd855add75c08a7a | f51f77c4575127dbf8906c60b7b1c80e01772be217c8a1c9df68e4f527b7f8eb |
+| mmiguel    | 10cc25d0c8adcbc44e9a | bbb70b912376b0c266d90cd3ebd1ffa99f6c439a50ed6481bb809b99fd93d300 |
+
+Agora se um hacker tentar todas as possibilidades de senhas para o `mmiguel` e um dia acertar, ele jamais vai ser que é a mesma senha para `darklord`.  
+
+> E se o salt gerado for o mesmo para ambos?  
+
+Uma maneira de solucionar isto é verificar se já existe alguém com o mesmo hash e salt.  
+Caso sim, gere um novo salt...  
+
+## Client - login
+
+![UI para login](./login.svg)  
 
 -------------
-
-Essa maneira de autenticação envolve armazenar no banco o **hash** da senha e o **salt** utilizado durante o hash.  
-
-- Hash
-    - Formalmente conhecido como digest, é o resultado de obtido ao se passar um array de bytes à uma função hash  
-- Salt
-    - Array de bytes gerado randomicamente para ser usado durante a função hash  
-
-## Questions
-
-> Por que não salvar a senha direto no banco de dados?
-
-Pois se alguém olhar o banco, vai conseguir todas as senhas dos seus usuários.  
-
-> O que é função hash?
-
-Uma função que dada uma entrada de bytes, sempre produz a mesma saída de bytes.  
-
-```
-funcao("senha_secreta") => "2c005c01d9b373a068941949669ccfb69ef1b4a0315b10313185761803e05e69"
-```
-
-Se você tiver uma a saída de bytes, **não** temos algoritmo para descobrir qual foi a entrada de bytes.  
-```
-funcao(???) <= "f00c15643396616a89a0cb79039f740575defe9dbe307cccdaf8ae210e1c9cc6"
-```
-
-> O que acontece se alguém conseguir acesso ao banco de dados neste caso?
-
-A pessoa vai ter acesso a todos os hash, mas não vai ter a senha então não vai conseguir acessar a conta.  
-
-> Como vamos saber se o usuário acertou a senha se não sabemos a senha?
-
-Iremos comparar o hash da senha que o usuário nos der.  
-
-Se no banco nos temos o hash `fn54978fn435u9gnweru` e o usuário nos der uma senha que gere esse hash, então ele sabe a senha certa.  
-
-> Por que a função hash usa salt?
-
-Se duas pessoas tiverem a mesma senha e jogarem na função hash, o resultado será o mesmo.  
-```
-usuário 1 => senha_secreta => "2c005c01d9b373a068941949669ccfb69ef1b4a0315b10313185761803e05e69"
-usuário 2 => senha_secreta => "2c005c01d9b373a068941949669ccfb69ef1b4a0315b10313185761803e05e69"
-```
-
-Se gerarmos algo aleatório para adicionar na entrada da função hash, o resultado muda completamente.  
-```
-usuário 1 => uejfisenha_secreta => "1c131f765a97e3bcf5101cd3e9e269e552716ad30be97e54f852e4f78ed90e44"
-usuário 2 => 2ncWQsenha_secreta => "81feed1d27d67d6da5ebfa18ce58255d2822d95d286161fa3e42e323415d8263"
-```
-
-Agora ninguém sabe que os dois usuários tem a mesma senha, porém vamos precisar salvar o salt para reproduzir o resultado.  
 
 ## Server
 Script para preparar o diretório dos exemplos:  
