@@ -133,8 +133,71 @@ E se o usuário já existir no banco?
 ...  
 
 Acho que você já entendeu que validação é importante.  
-
 Agora vamos falar de storage!  
+
+![Database](./database.svg)  
+
+Como se armazena o username?  
+Igual a qualquer outro campo texto...  
+
+Como se armazena a senha?  
+Não se armazena senhas...  
+
+Pode parecer estranho a primeira vista mas não precisamos armazenar a senha para conferir se alguém nos deus a senha correta.  
+
+Existem funções chamadas **funções hash** que produzem saídas com propriedades que nos ajudam a conferir se a senha de um usuário está correta.  
+
+Propriedades que nos interessão em uma função hash:
+- Dada uma entrada de bytes, sempre produz a mesma saída de bytes
+    - Nada de especial aqui, apenas está garantindo que não é afetado por outro fatores aleatórios (tempo, temperatura, etc)
+- Não existe função que reverte a operação
+    - Em outras palavras, tendo a saída de bytes da função você não consegue saber a entrada que foi dada para a função hash (sem ir chutando todas as possibilidades)
+- Qualquer mudança na entrada de bytes gera uma saída de bytes muito diferente
+    - A ideia é que as pessoas não devem saber que as entradas são parecidas a partir da saída
+
+Diversas funções hash existem, cada uma com o próprio algoritmo.  
+No nosso caso vamos utilizar o algoritmo sha256 para os exemplos!  
+
+```shell
+$ sha256(entrada) => saida
+```
+
+:::note
+Segurança é algo que muda com o tempo, então funções hash seguras de antigamente podem já não ser mais seguras.  
+Estou usando a função hash sha256 apenas para exemplo, não estou considerando se é segura ou não para o ano atual.  
+:::
+
+| entrada | saída                                                            |
+| ------- | ---------------------------------------------------------------- |
+| abc     | ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad |
+| abd     | a52d159f262b2c6ddb724a61840befc36eb30c88877a4030b65cbe86298449c9 |
+| ABC     | b5d4045c3f466fa91fe2cc6abe79232a1a57cdf104f7a26e716e0a1e2789df78 |
+| 123     | a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3 |
+
+Se você der a mesma entrada, vai receber a mesma saída.  
+Olhando a saída você não sabe a entrada.  
+A mudanaça de um bit entre "abc" e "abd" mudou totalmente a saída.  
+
+Não sei se ficou claro, mas isso é perfeito para podermos conferir se alguém acertou a senha.  
+Quando alguém registra no nosso serviço, nós armazenamos o hash da senha (saída da função hash dado que recebeu a senha como entrada).  
+
+| username   | hash                                                             |
+| thiagola92 | 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 |
+| darklord   | 2d2c3f7eb9152d67258cd1068a64a746c130d4cca3f571bd28a86d7f7589aa25 |
+| juninho    | b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c |
+
+Quando alguém for logar no nosso serviço, a pessoa vai inserir a senha e nós vamos conferir se o hash dessa senha é igual ao que temos no banco.  
+Se for igual, você sabe a senha da conta e pode ter acesso ao serviço.  
+Se não for igual, vai gerar um hash que é diferente deste e nós não daremos acesso ao serviço.  
+
+Qual a vantagem de armazenar assim?  
+Se algum hacker acessar nosso banco, ele não vai conseguir saber a senha das pessoas.  
+Mesmo que a pessoa saiba que meu hash é `5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8`, se ela tentar passar isto como senha, o hash gerado vai ser totalmente diferente!  
+
+```shell
+5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 => 113459eb7bb31bddee85ade5230d6ad5d8b2fb52879e00a84ff6ae1067a210d3
+```
+
 
 -------------
 
