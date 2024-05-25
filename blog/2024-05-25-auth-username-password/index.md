@@ -278,6 +278,14 @@ Agora se um hacker tentar todas as possibilidades de senhas para o `mmiguel` e u
 Uma maneira de solucionar isto é verificar se já existe alguém com o mesmo hash e salt.  
 Caso sim, gere um novo salt...  
 
+:::warning
+Minha intenção aqui era explicar o conceito.  
+
+É importante olhar a documentação da sua linguagem/biblioteca para saber a melhor função hash a se usar!  
+
+Por exemplo, python já disponibiliza uma função que já concatena senha e salt, e depois faz o hash (`hashlib.scrypt()`). Então não existe necessidade de fazer cada etapa dita neste post.  
+:::
+
 ## Client - login
 
 ![UI para login](./login.svg)  
