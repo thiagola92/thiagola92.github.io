@@ -397,9 +397,9 @@ if sha256(password + salt).hexdigest() != hash:
     raise Exception("Wrong password")
 ```
 
-Fim! Principalmente porque não pretendo cobrir a fundo assuntos como cookies e tokens.  
+Fim!  
 
-Mesmo assim isso coberto da um ótimo início para entender mais de autenticação, login, cadastro, etc.  
+Principalmente porque não pretendo cobrir a fundo assuntos como cookies e tokens. Mas tudo coberto já da um ótimo início para entender autenticação/login/cadastro/etc.  
 
 ## References
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
