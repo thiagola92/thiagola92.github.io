@@ -4,7 +4,7 @@ tags: [authentication, auth, python, email, mail, password, duckdb, starlette, a
 ---
 
 # Authentication - email & password
-No post anterior vimos como fazer [authenticação com usuário e senha](./../2024-05-08-auth-username-password/index.md).  
+No post anterior vimos como fazer [authenticação com usuário e senha](./../2024-05-25-auth-username-password/index.md).  
 Agora vamos ver com email e senha, basicamente igual ao outro porém email é o identificador da conta.  
 
 Precisaremos de um servidor de email para receber email:
