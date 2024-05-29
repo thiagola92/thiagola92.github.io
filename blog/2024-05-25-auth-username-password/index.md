@@ -1,6 +1,6 @@
 ---
 authors: thiagola92
-tags: [authentication, auth, python, user, username, password, duckdb, starlette]
+tags: [authentication, auth, user, username, password]
 ---
 
 # Authentication - username & password

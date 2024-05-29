@@ -1,7 +1,30 @@
 ---
 authors: thiagola92
-tags: [authentication, auth, python, email, mail, password, duckdb, starlette, aiosmtpd]
+tags: [authentication, auth, email, mail, password]
 ---
+
+# Authentication - email & password
+:::warning
+Este post parte do princípio que o leitor viu o post anterior!  
+
+Além disto este post for reescrito pois o formato não estava do meu agrado (igual ao post anterior).  
+
+O repositório com exemplos continua vivo em:  
+https://github.com/thiagola92/learning-authentication  
+:::
+
+Sinceramente a lógica é a mesma que o post anterior, porém usando o email no lugar do username.  
+
+![duas UIs, uma de login com username e outra com email](./email_password.svg)  
+
+E nem existe motivo para uma maneira excluir a outra. Qualquer vantagem que uma maneira daria, poderia ser replicada na outra maneira:  
+- email & password
+    - Conseguiriamos recuperar a senha mandando email com código para alterar senha
+    - Conseguiriamos fazer login atráves de um link mágico mandado para o email
+- username & password
+    - Poderiamos fazer todos usuários serem obrigado a ter email e replicar qualquer funcionalidade acima
+
+-----------------
 
 # Authentication - email & password
 No post anterior vimos como fazer [authenticação com usuário e senha](./../2024-05-25-auth-username-password/index.md).  
