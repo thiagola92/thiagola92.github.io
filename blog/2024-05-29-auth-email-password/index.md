@@ -13,16 +13,96 @@ O repositório com exemplos continua vivo em:
 https://github.com/thiagola92/learning-authentication  
 :::
 
-Sinceramente a lógica é a mesma que o post anterior, porém usando o email no lugar do username.  
+A lógica básica é a mesma que o post anterior, porém usando o email no lugar do username.  
 
-![duas UIs, uma de login com username e outra com email](./email_password.svg)  
+![UI de login com email e password](./email_password.svg)  
 
-E nem existe motivo para uma maneira excluir a outra. Qualquer vantagem que uma maneira daria, poderia ser replicada na outra maneira:  
-- email & password
-    - Conseguiriamos recuperar a senha mandando email com código para alterar senha
-    - Conseguiriamos fazer login atráves de um link mágico mandado para o email
-- username & password
-    - Poderiamos fazer todos usuários serem obrigado a ter email e replicar qualquer funcionalidade acima
+O que temos de extra é que podemos utilizar o email do usuário para nos dar mais confiança que a pessoa acessando é o dono da conta.  
+
+## Client - register
+Segue exatamente o mesmo passo a passo do post anterior (utilizando o email em vez de usuário).  
+
+## Server - register
+Segue exatamente o mesmo passo a passo do post anterior (utilizando o email em vez de usuário) porém não cadastramos o usuário ao final!  
+
+O motivo é bem simples: O email fornecido é realmente da pessoa que cadastrou a conta?  
+
+Imagina se nós terminassemos o cadastro acreditando naquele email... Dia seguinte aquele email poderia receber emails nosso, achar super esquisito e nos marcar como spam. Se isso acontecesse muito o Google iria acabar marcando nosso email corporativo como spam!  
+
+Para resolver esse problema basta cobrarmos uma prova que a pessoa é a dona do email. Podemos fazer isso enviando um email para ela e esperando que ela nos diga algo que possue no email.  
+
+:::note
+Partindo do princípio que a pessoa dona do email é a única que deveria ter acesso ao email.  
+:::
+
+O modo clássico é gerar um código no servidor e enviar para o email da pessoa este código, agora ela precisa acessar o email e nos dizer o código para provar que ela conseguiu o código certo.  
+
+Email é bom pois nós não precisamos ser dependentes de terceiros para utilizar (gmail/outlook/etc).  
+```python
+import smtplib
+from email.message import EmailMessage
+
+message = EmailMessage()
+message["Subject"] = "Confirmation code"
+message["From"] = "noreply@yourwebsite.com"
+message["To"] = "user@example.com"
+message["Content"] = "Your confirmation code is 123"
+
+# I'm running my own email server for tests
+with smtplib.SMTP("localhost", 8025) as s:
+    s.send_message(message)
+```
+
+:::note
+Utilizei a biblioteca [aiosmtpd](https://aiosmtpd.aio-libs.org/en/latest/) para criar o server de test:  
+`python -m aiosmtpd -n`  
+
+Se tudo foi feito corretamente, todo email novo deve aparecer lá no formato:  
+```
+---------- MESSAGE FOLLOWS ----------
+Subject: Confirmation code
+From: noreply@yourwebsite.com
+To: user@example.com
+Content: Your confirmation code is 123
+X-Peer: ('127.0.0.1', 52020)
+
+------------ END MESSAGE ------------
+```
+:::
+
+Porém o exemplo acima é inseguro, pois não utiliza a SLL (que ajuda a criar uma camada de segurança entre nós e o serviço). Hoje em dia isso é obrigatório para interagir com quase todos os serviços de email (eles não vão aceitar emails sem essa segurança).  
+```python
+import smtplib
+from email.message import EmailMessage
+
+message = EmailMessage()
+message["Subject"] = "Confirmation code"
+message["From"] = "noreply@yourwebsite.com"
+message["To"] = "user@example.com"
+message["Content"] = "Your confirmation code is 123"
+
+with smtplib.SMTP("localhost", 8024) as s:
+    s.starttls()
+    s.send_message(message)
+```
+
+:::note
+Levantei outro server de email e nele estou utilizando TLS.  
+
+Criei meu certificado auto-assinado:  
+`openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes -subj '/CN=localhost'`  
+
+E utilizei ele durante a inicialização do server:  
+`python -m aiosmtpd -n --tlscert cert.pem --tlskey key.pem -l localhost:8024`  
+:::
+
+## Client - register
+
+## Client - recovery
+
+A grande vantagem é adicionar um ponto de recuperação de senha.  
+
+## Server - recovery
 
 -----------------
 

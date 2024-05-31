@@ -17,7 +17,7 @@ Username com password é uma das maneiras mais velhas de se criar autenticação
 
 Nós confiaremos que aquele usuário é o dono da conta se ele souber a senha que está relacionada àquele username. Note que falei "confiaremos" pois nunca podemos ter 100% de certeza, só estamos tentando reduzir a possibilidade de ser alguém indesejado na conta.  
 
-## Clint - register
+## Client - register
 ![UI para registrar](./register.svg)  
 
 Para entender como o registro de novos usuários funciona, podemos olhar como formulários em HTML funcionam.  
