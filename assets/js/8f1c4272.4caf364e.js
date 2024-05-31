@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[3730],{62217:a=>{a.exports=JSON.parse('{"label":"duckdb","permalink":"/blog/tags/duckdb","allTagsPath":"/blog/tags","count":2,"unlisted":false}')}}]);
