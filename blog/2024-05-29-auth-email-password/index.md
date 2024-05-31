@@ -134,7 +134,47 @@ Google requer que você explicitamente adicione uma senha para aquele "app" e me
 
 Bem, vamos parar por aqui pois eu apenas tenho interesse em ver o conceito de segurança com o email (não quero ensinar a se autenticar em diversos provedores com email).  
 
-## Client - register 2
+## Client - register again
+Existe duas opções aqui, a primeira é o server ter armazenado numa tabela temporária seu email, hash da senha e o código enviado por email.  
+
+| email                | hash                                                             | code |
+| -------------------- | ---------------------------------------------------------------- | 1234 |
+| thiagola92@email.com | 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8 | 4893 |
+| darklord@email.com   | 2d2c3f7eb9152d67258cd1068a64a746c130d4cca3f571bd28a86d7f7589aa25 | 3892 |
+| juninho@email.com    | b7e94be513e96e8c45cd23d162275e5a12ebde9100a425c4ebcdd7fa4dcd897c | 0283 |
+
+Neste caso basta o usuário enviar o código para o server validar a conta.  
+```python
+import httpx
+from urllib.parse import urlencode
+
+body = urlencode({"code": code})
+headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
+httpx.post("http://127.0.0.1:8000/register/code", headers=headers, content=body)
+```
+
+A outra é ele não ter armazenado o hash e só esperar que você envie a senha novamente.  
+
+| email                | code |
+| -------------------- | 1234 |
+| thiagola92@email.com | 4893 |
+| darklord@email.com   | 3892 |
+| juninho@email.com    | 0283 |
+
+```python
+import httpx
+from urllib.parse import urlencode
+
+body = urlencode({"username": username, "password": password, "code": code})
+headers = {"Content-Type": "application/x-www-form-urlencoded"}
+
+httpx.post("http://127.0.0.1:8000/register/code", headers=headers, content=body)
+```
+
+:::note
+Em ambas as tabelas é normal de ter a data de criação do código, para que ele não fique válido para sempre (não queremos que ninguém chute todas as opções de código).  
+:::
 
 ## Client - recovery
 
