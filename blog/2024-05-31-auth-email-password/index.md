@@ -227,6 +227,8 @@ Cada tentativa errada é um sinal de perigo, por isso é importante lembrar:
 - Contar o número de tentativas de acertar o código/token para um email
     - Importante invalidar o código depois de certo número de tentativas, não queremos X máquinas tentando acertar o código
 
+![Carimbo](./stamp.svg)  
+
 ## References
 - https://docs.python.org/3/library/smtplib.html
 - https://aiosmtpd.aio-libs.org/en/latest/
