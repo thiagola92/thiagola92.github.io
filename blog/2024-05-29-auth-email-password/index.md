@@ -156,6 +156,15 @@ headers = {"Content-Type": "application/x-www-form-urlencoded"}
 httpx.post("http://127.0.0.1:8000/register/code", headers=headers, content=body)
 ```
 
+:::note
+Embora eu tenha feito como um requisição POST, não existe nenhuma obrigação de ser assim.  
+
+Uma maneira mais familiar é o usuário receber uma URL com o código/token para o usuário acessar e isto seria o suficiente para confirmar.  
+```
+http://127.0.0.1:8000/register/{code}
+```
+:::
+
 A outra é ele não ter armazenado o hash e só esperar que você envie a senha novamente.  
 
 | email                | code |
@@ -178,6 +187,9 @@ httpx.post("http://127.0.0.1:8000/register/code", headers=headers, content=body)
 Em ambas as tabelas é normal de ter a data de criação do código, para que ele não fique válido para sempre (não queremos que ninguém chute todas as opções de código).  
 :::
 
+### Server 2
+Segue exatamente o mesmo passo a passo do post anterior (utilizando o email em vez de usuário).  
+
 ## Recovery
 
 ### Client
@@ -199,10 +211,21 @@ httpx.post("http://127.0.0.1:8000/recovery", headers=headers, content=body)
 Como estamos falando do caso em que o usuário não lembra a senha, não podemos cobrar nenhuma autenticação... Em outras palavras, qualquer pessoa má intencionada pode ficar requisitando e resta ao server tomar cuidados para elas não conseguirem acesso.  
 
 ### Server
+É a mesma ideia do login, queremos confirmar que é o dono da conta então mandamos para o email dele um código/token para ele utilizar na alteração da senha atual dele.  
 
-### Client
+Lembrando que é importante botarmos tempo para o usuário fazer essa alteração e limite de tentativas, pois não queremos que usuários má intencionados usem força bruta para descobrir o código/token.  
 
-### Server
+### Client 2
+Basicamente idêntico ao registrar, porém temos que fornecer a nova senha. Isto pode ser feito tudo em uma requisição ou em duas (acessar o URL com token e inserir a nova senha em um form).  
+
+### Server 2
+Valide o código/token!  
+
+Cada tentativa errada é um sinal de perigo, por isso é importante lembrar:  
+- Invalidar o código/token depois de certo tempo
+    - Por isto alguns tokens são grandes, pois nunca é possível chutar todas as possibilidades antes do tempo esgotar
+- Contar o número de tentativas de acertar o código/token para um email
+    - Importante invalidar o código depois de certo número de tentativas, não queremos X máquinas tentando acertar o código
 
 ## References
 - https://docs.python.org/3/library/smtplib.html
