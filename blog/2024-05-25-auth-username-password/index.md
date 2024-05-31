@@ -17,7 +17,9 @@ Username com password é uma das maneiras mais velhas de se criar autenticação
 
 Nós confiaremos que aquele usuário é o dono da conta se ele souber a senha que está relacionada àquele username. Note que falei "confiaremos" pois nunca podemos ter 100% de certeza, só estamos tentando reduzir a possibilidade de ser alguém indesejado na conta.  
 
-## Client - register
+## Register
+
+### Client
 ![UI para registrar](./register.svg)  
 
 Para entender como o registro de novos usuários funciona, podemos olhar como formulários em HTML funcionam.  
@@ -98,7 +100,11 @@ headers = {"Content-Type": "application/x-www-form-urlencoded"}
 httpx.post("http://127.0.0.1:8000/register", headers=headers, content=body)
 ```
 
-## Server - register
+:::note
+Eu continuarei mostrando o código Python equivalente ao que seria feito pelo navegador/server pois acho que da uma visão lógica de como as coisas são feitas por baixo dos panos.  
+:::
+
+### Server
 Okay, seu server recebeu a requisição de cadastro do usuário. O que fazer agora? Validações!  
 
 ![Robo lendo um papel](./server_reading.svg)  
@@ -286,8 +292,9 @@ Minha intenção aqui era explicar o conceito.
 Por exemplo, python já disponibiliza uma função que já concatena senha e salt, e depois faz o hash (`hashlib.scrypt()`). Então não existe necessidade de fazer cada etapa dita neste post.  
 :::
 
-## Client - login
+## Login
 
+### Client
 ![UI para login](./login.svg)  
 
 Quando falando de website, a maneira para logar é a mesma de se registrar:  
@@ -332,8 +339,7 @@ Essa maneira não é incentivada pois passar em toda requisição username e pas
 Passar em uma requisição para obter um token/cookie é válido, pois toda requisição seguinte nós utilizariamos esse token/cookie para sermos validados no server.  
 :::
 
-## Server - login
-
+### Server
 Okay, seu servidor recebeu o request de logar... O que fazer? Validações! (novamente)  
 
 ![Robo lendo um papel com os olhos estressados](./server_angrily_reading.svg)  
