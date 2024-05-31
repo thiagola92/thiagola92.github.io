@@ -25,6 +25,8 @@ Segue exatamente o mesmo passo a passo do post anterior (utilizando o email em v
 ## Server - register
 Segue exatamente o mesmo passo a passo do post anterior (utilizando o email em vez de usuário) porém não cadastramos o usuário ao final!  
 
+![Carta representando um email](email.svg)  
+
 O motivo é bem simples: O email fornecido é realmente da pessoa que cadastrou a conta?  
 
 Imagina se nós terminassemos o cadastro acreditando naquele email... Dia seguinte aquele email poderia receber emails nosso, achar super esquisito e nos marcar como spam. Se isso acontecesse muito o Google iria acabar marcando nosso email corporativo como spam!  
@@ -37,7 +39,9 @@ Partindo do princípio que a pessoa dona do email é a única que deveria ter ac
 
 O modo clássico é gerar um código no servidor e enviar para o email da pessoa este código, agora ela precisa acessar o email e nos dizer o código para provar que ela conseguiu o código certo.  
 
-Email é bom pois nós não precisamos ser dependentes de terceiros para utilizar (gmail/outlook/etc).  
+![Visão geral do processo](send_email.svg)  
+
+Email é bom pois nós não precisamos ser dependentes de terceiros para utilizar (Gmail/Outlook/etc).  
 ```python
 import smtplib
 from email.message import EmailMessage
@@ -46,14 +50,14 @@ message = EmailMessage()
 message["Subject"] = "Confirmation code"
 message["From"] = "noreply@yourwebsite.com"
 message["To"] = "user@example.com"
-message["Content"] = "Your confirmation code is 123"
+message.set_content("Your confirmation code is 123")
 
 # I'm running my own email server for tests
 with smtplib.SMTP("localhost", 8025) as s:
     s.send_message(message)
 ```
 
-:::note
+:::info
 Utilizei a biblioteca [aiosmtpd](https://aiosmtpd.aio-libs.org/en/latest/) para criar o server de test:  
 `python -m aiosmtpd -n`  
 
@@ -79,14 +83,14 @@ message = EmailMessage()
 message["Subject"] = "Confirmation code"
 message["From"] = "noreply@yourwebsite.com"
 message["To"] = "user@example.com"
-message["Content"] = "Your confirmation code is 123"
+message.set_content("Your confirmation code is 123")
 
 with smtplib.SMTP("localhost", 8024) as s:
     s.starttls()
     s.send_message(message)
 ```
 
-:::note
+:::info
 Levantei outro server de email e nele estou utilizando TLS.  
 
 Criei meu certificado auto-assinado:  
@@ -96,13 +100,55 @@ E utilizei ele durante a inicialização do server:
 `python -m aiosmtpd -n --tlscert cert.pem --tlskey key.pem -l localhost:8024`  
 :::
 
-## Client - register
+Então é isso? Podemos mandar email para provedores como Gmail? Nope.  
+
+![Rosto chorando](./sad.svg)  
+
+Deve ser bem óbvio que embora este código funcione localmente, ele jamais passaria por qualquer segurança do nível de aplicação.  
+
+Ele possui TLS para proteger contra [man-in-the-middle](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) mas como que o provedor vai saber que nós somos os donos daquele email? Se nós botarmos `noreply@gmail.com`, nós temos que provar que temos acesso à aquela conta no Gmail.  
+
+A maneira clássica é logar na conta.  
+```python
+import smtplib
+from email.message import EmailMessage
+
+# Removed "From" because providers will use the email used in s.login()
+message = EmailMessage()
+message["Subject"] = "Confirmation code"
+message["To"] = "user@example.com"
+message.set_content("Your confirmation code is 123")
+
+with smtplib.SMTP("localhost", 8024) as s:
+    s.starttls()
+    s.login("noreply@gmail.com", "password")
+    s.send_message(message)
+```
+
+Este código **não** vai funcionar!  
+
+Hoje em dia já sabemos que usuário e senha sozinhos não providênciam uma segurança forte durante a autenticação, por isso que Google nos cobra outros métodos de [MFA](https://en.wikipedia.org/wiki/Multi-factor_authentication) para provar que nós somos nós mesmos durante os logins (telefone, passkeys, authenticators, ...).  
+
+Google requer que você explicitamente adicione uma senha para aquele "app" e mesmo assim ele não recomenda fazer isto!  
+[Link para a resposta no StackOverflow](https://stackoverflow.com/questions/10147455/how-to-send-an-email-with-gmail-as-provider-using-python/27515833#comment138495306_27515833)  
+
+Bem, vamos parar por aqui pois eu apenas tenho interesse em ver o conceito de segurança com o email (não quero ensinar a se autenticar em diversos provedores com email).  
+
+## Client - register 2
 
 ## Client - recovery
 
 A grande vantagem é adicionar um ponto de recuperação de senha.  
 
 ## Server - recovery
+
+## References
+- https://docs.python.org/3/library/smtplib.html
+- https://aiosmtpd.aio-libs.org/en/latest/
+- https://stackabuse.com/how-to-send-emails-with-gmail-using-python/
+- https://www.youtube.com/watch?v=PJo5yOtu7o8
+- https://mailtrap.io/blog/smtp/
+- https://stackoverflow.com/questions/10147455/how-to-send-an-email-with-gmail-as-provider-using-python/27515833#comment138495306_27515833
 
 -----------------
 
