@@ -221,13 +221,13 @@ Basicamente idêntico ao registrar, porém temos que fornecer a nova senha. Isto
 ### Server 2
 Valide o código/token!  
 
+![Carimbo](./stamp.svg)  
+
 Cada tentativa errada é um sinal de perigo, por isso é importante lembrar:  
 - Invalidar o código/token depois de certo tempo
     - Por isto alguns tokens são grandes, pois nunca é possível chutar todas as possibilidades antes do tempo esgotar
 - Contar o número de tentativas de acertar o código/token para um email
     - Importante invalidar o código depois de certo número de tentativas, não queremos X máquinas tentando acertar o código
-
-![Carimbo](./stamp.svg)  
 
 ## References
 - https://docs.python.org/3/library/smtplib.html
