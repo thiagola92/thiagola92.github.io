@@ -42,14 +42,22 @@ O mesmo vale para TTY, onde o nome veio de teletypes. Infelizmente não é um no
 
 O que são teletypes?  
 Entenda que elas são uma junção de [typewriters](https://en.wikipedia.org/wiki/Typewriter) e [telegraph key](https://en.wikipedia.org/wiki/Telegraph_key).  
-O primeiro utilizado para escrever em papel e o segundo utilizado para enviar morse code a distância.  
+O primeiro utilizado para escrever em papel e o segundo utilizado para enviar [morse code](https://en.wikipedia.org/wiki/Morse_code) a distância.  
 
-Morse code era muito utilizado como uma forma de comunicação binária via cabo (som curto/longo), então teletypes desenvolveram lógicas para converter esses sinais para letras e vice-versa. Por isto a chegada delas subistituiu tradutores de morse code, elas viraram como novo meio de enviar e receber mensagens.  
+Morse code era muito utilizado como uma forma de comunicação binária (som curto/longo) via cabo. Porém para isso acontecer era necessário duas pessoas treinadas em morse code (uma para enviar e outra para receber).  
+```
+mensagem <=> tradutor <=> morse code <=> transmissão
+```
 
-Ao mesmo tempo computadores e terminais estavam nascendo. Alguns terminais vinham com capacidade de receber/escrever informação das/nas teletypes (afinal é tudo binário).  
+Com a chegada das teletypes, os tradutores foram substituidos por estas máquinas que eram capaz de traduzir e ler morse code.  
+```
+mensagem <=> teletype <=> morse code <=> transmissão
+```
 
-Uma coisa que não ficou claro para mim é se inicialmente teletypes eram usadas para enviar/receber mensagem dos computadores iniciais.  
-Bem, a essa altura pelo menos ficou claro que a funcionalidade a qual elas foram inspiradas era a capacidade de enviar/receber **dados**.  
+Computadores da época utilizavam [paper tape](https://en.wikipedia.org/wiki/Punched_tape) como forma de armazenamento de dados e [monitores](https://en.wikipedia.org/wiki/Computer_monitor) não eram algo acessível. Teletypes viram está oportunidade para preencher outro meio de comunicação (dado que computadores também utilizam binário).  
+```
+mensagem <=> teletype <=> binário <=> computador
+```
 
 Este video mostra uma teletype recebendo e enviando dados de/a um terminal:  
 https://www.youtube.com/watch?v=S81GyMKH7zw  
@@ -199,3 +207,4 @@ Mesmo programas focados em GUI's podem aceitar flags (VSCode: `code --help`).
 - https://www.youtube.com/watch?v=wIjgZhAjQS4
 - https://www.youtube.com/watch?v=ztsOwk1zB3o
 - https://www.youtube.com/watch?v=byMwNPj47X8
+- https://www.youtube.com/watch?v=3X93PnKRNUo
