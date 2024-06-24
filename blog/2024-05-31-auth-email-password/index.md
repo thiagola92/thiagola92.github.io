@@ -236,4 +236,5 @@ Cada tentativa errada é um sinal de perigo, por isso é importante lembrar:
 - https://www.youtube.com/watch?v=PJo5yOtu7o8
 - https://mailtrap.io/blog/smtp/
 - https://mailtrap.io/blog/setup-smtp-server/
+- https://mailtrap.io/blog/what-is-smtp-server/
 - https://stackoverflow.com/questions/10147455/how-to-send-an-email-with-gmail-as-provider-using-python/27515833#comment138495306_27515833

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="400"
+   height="350"
+   viewBox="0 0 400 350"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (1:1.3.2+202404261509+091e20ef0f)"
+   sodipodi:docname="watching.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="2.0081833"
+     inkscape:cx="172.04605"
+     inkscape:cy="183.74817"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="1920"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="0.26458333"
+       spacingy="0.26458333"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#33c255;stroke-width:0.845324"
+       id="rect1"
+       width="79.899612"
+       height="117.59081"
+       x="256.54868"
+       y="252.62753"
+       rx="27.912851"
+       ry="27.912851" />
+    <path
+       id="path3"
+       style="fill:#33c255;fill-opacity:1;stroke-width:1.07381"
+       d="M 296.49805 108.98633 A 66.013672 66.013672 0 0 0 230.48438 175 A 66.013672 66.013672 0 0 0 296.49805 241.01367 A 66.013672 66.013672 0 0 0 362.51172 175 A 66.013672 66.013672 0 0 0 296.49805 108.98633 z M 258.3457 145.26367 A 14.868465 14.868465 0 0 1 273.21484 160.13086 A 14.868465 14.868465 0 0 1 258.3457 175 A 14.868465 14.868465 0 0 1 243.47852 160.13086 A 14.868465 14.868465 0 0 1 258.3457 145.26367 z M 248.82617 205.5332 L 279.15234 205.5332 C 280.48346 205.5332 281.55469 206.60443 281.55469 207.93555 C 281.55469 209.26666 280.48346 210.33789 279.15234 210.33789 L 248.82617 210.33789 C 247.49506 210.33789 246.42383 209.26666 246.42383 207.93555 C 246.42383 206.60443 247.49506 205.5332 248.82617 205.5332 z " />
+    <circle
+       style="fill:#33c255;fill-opacity:1;stroke-width:0.130325"
+       id="path3-6-6"
+       cx="253.56531"
+       cy="160.13153"
+       r="8.0118961" />
+    <path
+       id="rect3"
+       style="fill:#33c255;fill-opacity:1"
+       d="M 41.359375 135.16406 C 37.304439 135.16406 34.039062 138.42944 34.039062 142.48438 L 34.039062 257.51953 C 34.039062 261.57447 37.304439 264.83789 41.359375 264.83789 L 197.94336 264.83789 C 201.9983 264.83789 205.26367 261.57447 205.26367 257.51953 L 205.26367 142.48438 C 205.26367 138.42944 201.9983 135.16406 197.94336 135.16406 L 41.359375 135.16406 z M 51.333984 143.42578 L 187.96875 143.42578 C 191.50706 143.42578 194.35547 146.27419 194.35547 149.8125 L 194.35547 250.19141 C 194.35547 253.72972 191.50706 256.57812 187.96875 256.57812 L 51.333984 256.57812 C 47.795675 256.57812 44.947266 253.72972 44.947266 250.19141 L 44.947266 149.8125 C 44.947266 146.27419 47.795675 143.42578 51.333984 143.42578 z " />
+    <rect
+       style="fill:#33c255;fill-opacity:1;stroke:none;stroke-width:1.09793;stroke-opacity:1"
+       id="rect4"
+       width="21.079308"
+       height="45.706905"
+       x="109.1117"
+       y="256.578"
+       rx="0"
+       ry="0" />
+    <rect
+       style="fill:#33c255;fill-opacity:1;stroke:none;stroke-width:1.09577;stroke-opacity:1"
+       id="rect4-2"
+       width="15.401663"
+       height="62.309586"
+       x="302.28491"
+       y="-150.58424"
+       rx="2.8899863"
+       ry="2.8899863"
+       transform="rotate(90)" />
+    <rect
+       style="fill:#00ccff;fill-opacity:1;stroke:none;stroke-width:0.889988;stroke-opacity:1"
+       id="rect5"
+       width="10.203187"
+       height="26.768078"
+       x="270.3288"
+       y="210.22241"
+       rx="2.9446313"
+       ry="2.9446313" />
+  </g>
+</svg>
