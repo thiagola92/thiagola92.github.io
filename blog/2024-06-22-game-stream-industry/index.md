@@ -82,6 +82,8 @@ You want me to blame developers? Okay, It's also developers fault for not making
 
 ## Streamers
 
+![Streamer playing](streamer.svg)
+
 > "Making games for streamers seems hard as f***"
 
 How do you capture the attention of someone who may stop to read others people messages and thinking about an answer to them?  
