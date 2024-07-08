@@ -3,6 +3,10 @@ authors: thiagola92
 tags: [game, streaming]
 ---
 
+:::warn
+My english is trash :v
+:::
+
 # Making games for streamers seems hard as f***
 
 Remember the old days where we would immerse ourselfs while reading books?  
