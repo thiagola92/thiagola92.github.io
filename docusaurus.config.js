@@ -102,6 +102,11 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
+            href: 'https://thiagola92.github.io/curriculum.html',
+            label: 'Curriculum',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/thiagola92',
             label: 'GitHub',
             position: 'right',

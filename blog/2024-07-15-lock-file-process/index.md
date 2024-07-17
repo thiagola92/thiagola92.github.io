@@ -49,15 +49,15 @@ No entanto, precisamos de uma maneira de reconhecer quem é o pai e filho, caso 
 #include <unistd.h>
 
 int main() {
-    int pid = fork();
-    
-    if(pid == -1) {
-        printf("Failed to create child process\n");
-    } else if(pid == 0) {
-        printf("I'm the child process\n");
-    } else {
-        printf("I'm the parent process\n");
-    }
+  int pid = fork();
+
+  if (pid == -1) {
+    printf("Failed to create child process\n");
+  } else if (pid == 0) {
+    printf("I'm the child process\n");
+  } else {
+    printf("I'm the parent process\n");
+  }
 }
 ```
 
@@ -69,12 +69,105 @@ Normalmente o código do pai e filho são inseridos em funções em vez de deixa
 
 ```C
 if(pid == 0) {
-    child_code();
+  child_code();
 } else {
-    parent_code();
+  parent_code();
 }
 ```
 :::
+
+## Problem
+Quando dois processos interagem com o mesmo arquivo, pode acontecer da informação ser preenchida incorretamente? Afinal, precisamos primeiramente descobrir se isso é possível ou não de acontecer.  
+
+Como o escalonamento pode ser imprevisivel, uma maneira de testar se durante a interação com um arquivo houve troca de processo é repetindo a ação diversas vezes e ver se pelo menos uma vez ocorreu.  
+
+O seguinte código irá ser executado para o processo pai e filho:  
+
+```C
+int count = 0;
+FILE* file = fopen("example.txt", "w+");
+
+while(count < 10000) {
+    int i;
+    
+    fscanf(file, "%d", &i);
+    fseek(file, 0, SEEK_SET);
+    fprintf(file, "%d     ", ++i);
+    
+    count++;
+}
+
+fclose(file);
+```
+
+O código irá ler o atual número do arquivo, mover o ponteiro para o início do arquivo e sobreescrever o número.  
+
+:::note
+```C
+fprintf(file, "%d     ", ++i);
+```
+
+Por que inserir espaço após o número? Foi uma maneira de evitar que o número de ambos processos se misturem.  
+Por exemplo: Processo 1 escreve 5000 e processo 2 escreve 9, o arquivo irá conter "9000" pois o 9 foi escrito em cima do 5.  
+:::
+
+Agora só precisamos adicionar a lógica de criar processo vista anteriormente:  
+
+```C
+#include <stdio.h>
+#include <unistd.h>
+
+void code() {
+  int count = 0;
+  FILE* file = fopen("example.txt", "w+");
+  
+  while(count < 10000) {
+    int i;
+    
+    fscanf(file, "%d", &i);
+    fseek(file, 0, SEEK_SET);
+    fprintf(file, "%d      ", ++i);
+    
+    count++;
+  }
+  
+  fclose(file);
+}
+
+int main() {
+  FILE* file = fopen("example.txt", "w");
+  fputc('0', file);
+  fclose(file);
+  
+  int pid = fork();
+
+  if (pid == -1) {
+    printf("Failed to create child process\n");
+  } else if (pid == 0) {
+    code();
+    printf("Child finished\n");
+  } else {
+    code();
+    printf("Parent finished\n");
+  }
+}
+```
+
+Quando executei este código para 10 iterações, o valor final do arquivo foi 20.  
+Quando executei este código para 1000 iterações, o valor final do arquivo foi 1000.  
+Quando executei este código para 10000 iterações, o valor final do arquivo foi 10015.  
+
+O que somos capaz de deduzir com isto?  
+
+- O resultado é imprevisível pois não temos controle de quando o escalonador vai trocar os processos
+- Dependendo do volume de iterações e da máquina do usuário, um processo pode ou não conseguir fazer a tarefa antes do escalonador trocar o processo
+- Se houver troca durante uma tarefa, pode corromper o resultado do arquivo
+
+Quais as chances disto acontecer? Depende do software, pois existem arquivos que a chance de dois softwares interagirem ao mesmo tempo é 0%.  
+
+## Lock
+Se você está criando um programa que pode ser inicializado múltiplas vezes e existe possibilidade de interagirem com o mesmo arquivo, talvez você queira considerar utilizar travas.  
+
 
 ## References
 - https://www.youtube.com/watch?v=ioJkA7Mw2-U
