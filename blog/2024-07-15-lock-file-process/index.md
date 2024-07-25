@@ -222,30 +222,41 @@ int main() {
 
 ```C title="flock"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/file.h>
 #include <unistd.h>
+
+#define BUFFER_SIZE 256
 
 void code() {
   int count = 0;
-  FILE* file = fopen("example.txt", "w+");
-  
-  while(count < 10000) {
+  char *buffer = malloc(sizeof(char) * BUFFER_SIZE);
+  int fd = open("example.txt", O_RDWR);
+
+  while (count < 10000) {
     int i;
-    
-    fscanf(file, "%d", &i);
-    fseek(file, 0, SEEK_SET);
-    fprintf(file, "%d      ", ++i);
-    
+
+    flock(fd, LOCK_EX);
+    lseek(fd, 0, SEEK_SET);
+    read(fd, buffer, BUFFER_SIZE);
+    i = atoi(buffer) + 1;
+    sprintf(buffer, "%d     ", i);
+    lseek(fd, 0, SEEK_SET);
+    write(fd, buffer, strlen(buffer));
+    flock(fd, LOCK_UN);
+
     count++;
   }
-  
-  fclose(file);
+
+  close(fd);
 }
 
 int main() {
-  FILE* file = fopen("example.txt", "w");
+  FILE *file = fopen("example.txt", "w");
   fputc('0', file);
   fclose(file);
-  
+
   int pid = fork();
 
   if (pid == -1) {
@@ -261,43 +272,7 @@ int main() {
 ```
 
 ```C title="fcntl"
-#include <stdio.h>
-#include <unistd.h>
-
-void code() {
-  int count = 0;
-  FILE* file = fopen("example.txt", "w+");
-  
-  while(count < 10000) {
-    int i;
-    
-    fscanf(file, "%d", &i);
-    fseek(file, 0, SEEK_SET);
-    fprintf(file, "%d      ", ++i);
-    
-    count++;
-  }
-  
-  fclose(file);
-}
-
-int main() {
-  FILE* file = fopen("example.txt", "w");
-  fputc('0', file);
-  fclose(file);
-  
-  int pid = fork();
-
-  if (pid == -1) {
-    printf("Failed to create child process\n");
-  } else if (pid == 0) {
-    code();
-    printf("Child finished\n");
-  } else {
-    code();
-    printf("Parent finished\n");
-  }
-}
+a
 ```
 
 ## References
