@@ -3,7 +3,7 @@ authors: thiagola92
 tags: [lock, c, file, process]
 ---
 
-# Lock Process
+# Lock Files in Process
 Quando você quer ler o arquivo, você pede ao sistema operacional pelo conteúdo do arquivo.  
 
 Quando você quer escrever no arquivo, você pede ao sistema operacional para inserir o conteúdo no arquivo.  
@@ -74,6 +74,8 @@ if(pid == 0) {
   parent_code();
 }
 ```
+
+Ou se utiliza funções `exec` para transformar completamente o código executado naquele processo.  
 :::
 
 ## Problem
@@ -108,12 +110,117 @@ fprintf(file, "%d     ", ++i);
 ```
 
 Por que inserir espaço após o número? Foi uma maneira de evitar que o número de ambos processos se misturem.  
+
 Por exemplo: Processo 1 escreve 5000 e processo 2 escreve 9, o arquivo irá conter "9000" pois o 9 foi escrito em cima do 5.  
 :::
 
 Agora só precisamos adicionar a lógica de criar processo vista anteriormente:  
 
 ```C
+#include <stdio.h>
+#include <unistd.h>
+
+void code() {
+  int count = 0;
+  FILE* file = fopen("example.txt", "w+");
+  
+  while(count < 10000) {
+    int i;
+    
+    fscanf(file, "%d", &i);
+    fseek(file, 0, SEEK_SET);
+    fprintf(file, "%d     ", ++i);
+    
+    count++;
+  }
+  
+  fclose(file);
+}
+
+int main() {
+  FILE* file = fopen("example.txt", "w");
+  fputc('0', file);
+  fclose(file);
+  
+  int pid = fork();
+
+  if (pid == -1) {
+    printf("Failed to create child process\n");
+  } else if (pid == 0) {
+    code();
+    printf("Child finished\n");
+  } else {
+    code();
+    printf("Parent finished\n");
+  }
+}
+```
+
+Quando executei este código para 10 iterações, o valor final do arquivo foi 20.  
+Quando executei este código para 1000 iterações, o valor final do arquivo foi 1000.  
+Quando executei este código para 10000 iterações, o valor final do arquivo foi 10015.  
+
+O que somos capaz de deduzir com isto?  
+
+- O resultado é imprevisível pois não temos controle de quando o escalonador vai trocar os processos
+- Dependendo do volume de iterações e da máquina do usuário, um processo pode ou não conseguir fazer a tarefa antes do escalonador trocar o processo
+- Se houver troca durante uma tarefa, pode corromper o resultado do arquivo
+
+Quais as chances disto acontecer? Depende do software, pois existem arquivos que a chance de dois softwares interagirem ao mesmo tempo é 0%.  
+
+## Locks
+
+```C title="lockf"
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define BUFFER_SIZE 256
+
+void code() {
+  int count = 0;
+  char *buffer = malloc(sizeof(char) * BUFFER_SIZE);
+  int fd = open("example.txt", O_RDWR);
+
+  while (count < 10000) {
+    int i;
+
+    lockf(fd, F_LOCK, 0);
+    read(fd, buffer, BUFFER_SIZE);
+    i = atoi(buffer) + 1;
+    sprintf(buffer, "%d     ", i);
+    lseek(fd, 0, SEEK_SET);
+    write(fd, buffer, strlen(buffer));
+    lockf(fd, F_ULOCK, 0);
+
+    count++;
+  }
+
+  close(fd);
+}
+
+int main() {
+  FILE *file = fopen("example.txt", "w");
+  fputc('0', file);
+  fclose(file);
+
+  int pid = fork();
+
+  if (pid == -1) {
+    printf("Failed to create child process\n");
+  } else if (pid == 0) {
+    code();
+    printf("Child finished\n");
+  } else {
+    code();
+    printf("Parent finished\n");
+  }
+}
+```
+
+```C title="flock"
 #include <stdio.h>
 #include <unistd.h>
 
@@ -153,30 +260,56 @@ int main() {
 }
 ```
 
-Quando executei este código para 10 iterações, o valor final do arquivo foi 20.  
-Quando executei este código para 1000 iterações, o valor final do arquivo foi 1000.  
-Quando executei este código para 10000 iterações, o valor final do arquivo foi 10015.  
+```C title="fcntl"
+#include <stdio.h>
+#include <unistd.h>
 
-O que somos capaz de deduzir com isto?  
+void code() {
+  int count = 0;
+  FILE* file = fopen("example.txt", "w+");
+  
+  while(count < 10000) {
+    int i;
+    
+    fscanf(file, "%d", &i);
+    fseek(file, 0, SEEK_SET);
+    fprintf(file, "%d      ", ++i);
+    
+    count++;
+  }
+  
+  fclose(file);
+}
 
-- O resultado é imprevisível pois não temos controle de quando o escalonador vai trocar os processos
-- Dependendo do volume de iterações e da máquina do usuário, um processo pode ou não conseguir fazer a tarefa antes do escalonador trocar o processo
-- Se houver troca durante uma tarefa, pode corromper o resultado do arquivo
+int main() {
+  FILE* file = fopen("example.txt", "w");
+  fputc('0', file);
+  fclose(file);
+  
+  int pid = fork();
 
-Quais as chances disto acontecer? Depende do software, pois existem arquivos que a chance de dois softwares interagirem ao mesmo tempo é 0%.  
-
-## Lock
-Se você está criando um programa que pode ser inicializado múltiplas vezes e existe possibilidade de interagirem com o mesmo arquivo, talvez você queira considerar utilizar travas.  
-
+  if (pid == -1) {
+    printf("Failed to create child process\n");
+  } else if (pid == 0) {
+    code();
+    printf("Child finished\n");
+  } else {
+    code();
+    printf("Parent finished\n");
+  }
+}
+```
 
 ## References
 - https://www.youtube.com/watch?v=ioJkA7Mw2-U
     - O importante do video é o início que explica como chamadas ao sistema são feitas
-- https://man7.org/linux/man-pages/man2/flock.2.html
 - https://man7.org/linux/man-pages/man3/lockf.3.html
+- https://man7.org/linux/man-pages/man2/flock.2.html
 - https://man7.org/linux/man-pages/man2/fcntl.2.html
-- https://linux.die.net/man/3/flockfile
+- https://man7.org/linux/man-pages/man3/flockfile.3.html
+- https://linux.die.net/man/3/fdopen
 - https://en.wikipedia.org/wiki/Unistd.h
 - https://en.wikipedia.org/wiki/C_standard_library
 - https://en.wikipedia.org/wiki/C_file_input/output
 - https://en.wikipedia.org/wiki/File_descriptor
+- https://www.geeksforgeeks.org/introduction-of-system-call/
