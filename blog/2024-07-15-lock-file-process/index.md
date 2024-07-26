@@ -169,56 +169,24 @@ O que somos capaz de deduzir com isto?
 Quais as chances disto acontecer? Depende do software, pois existem arquivos que a chance de dois softwares interagirem ao mesmo tempo é 0%.  
 
 ## Locks
+Acontece que existe mais de uma maneira de aplicar locks no Linux.  
 
-```C title="lockf"
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#define BUFFER_SIZE 256
-
-void code() {
-  int count = 0;
-  char *buffer = malloc(sizeof(char) * BUFFER_SIZE);
-  int fd = open("example.txt", O_RDWR);
-
-  while (count < 10000) {
-    int i;
-
-    lockf(fd, F_LOCK, 0);
-    read(fd, buffer, BUFFER_SIZE);
-    i = atoi(buffer) + 1;
-    sprintf(buffer, "%d     ", i);
-    lseek(fd, 0, SEEK_SET);
-    write(fd, buffer, strlen(buffer));
-    lockf(fd, F_ULOCK, 0);
-
-    count++;
-  }
-
-  close(fd);
-}
-
-int main() {
-  FILE *file = fopen("example.txt", "w");
-  fputc('0', file);
-  fclose(file);
-
-  int pid = fork();
-
-  if (pid == -1) {
-    printf("Failed to create child process\n");
-  } else if (pid == 0) {
-    code();
-    printf("Child finished\n");
-  } else {
-    code();
-    printf("Parent finished\n");
-  }
-}
-```
+- [flock](https://man7.org/linux/man-pages/man2/flock.2.html)
+  - **f**ile **lock**
+  - BSD
+- [lockf](https://man7.org/linux/man-pages/man3/lockf.3.html)
+  - **lock** **f**ile
+  - POSIX
+  - É uma versão simplificada do _fcntl "Advisory record locking"_
+- [fcntl "Advisory record locking"](https://man7.org/linux/man-pages/man2/fcntl.2.html)
+  - **f**ile **c**o**nt**ro**l**
+  - POSIX
+  - Uma função capaz de fazer diversas operações sobre file descriptors (uma delas sendo locks)
+- [fcntl "Open file description locks (non-POSIX)"](https://man7.org/linux/man-pages/man2/fcntl.2.html)
+  - **f**ile **c**o**nt**ro**l**
+  - Linux specific
+    - Existem propostas para se adicionado ao padrões POSIX
+  - Uma função capaz de fazer diversas operações sobre file descriptors (uma delas sendo este outro tipo de locks)
 
 ```C title="flock"
 #include <stdio.h>
@@ -271,6 +239,56 @@ int main() {
 }
 ```
 
+```C title="lockf"
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define BUFFER_SIZE 256
+
+void code() {
+  int count = 0;
+  char *buffer = malloc(sizeof(char) * BUFFER_SIZE);
+  int fd = open("example.txt", O_RDWR);
+
+  while (count < 10000) {
+    int i;
+
+    lockf(fd, F_LOCK, 0);
+    read(fd, buffer, BUFFER_SIZE);
+    i = atoi(buffer) + 1;
+    sprintf(buffer, "%d     ", i);
+    lseek(fd, 0, SEEK_SET);
+    write(fd, buffer, strlen(buffer));
+    lockf(fd, F_ULOCK, 0);
+
+    count++;
+  }
+
+  close(fd);
+}
+
+int main() {
+  FILE *file = fopen("example.txt", "w");
+  fputc('0', file);
+  fclose(file);
+
+  int pid = fork();
+
+  if (pid == -1) {
+    printf("Failed to create child process\n");
+  } else if (pid == 0) {
+    code();
+    printf("Child finished\n");
+  } else {
+    code();
+    printf("Parent finished\n");
+  }
+}
+```
+
 ```C title="fcntl"
 a
 ```
@@ -282,9 +300,10 @@ a
 - https://man7.org/linux/man-pages/man2/flock.2.html
 - https://man7.org/linux/man-pages/man2/fcntl.2.html
 - https://man7.org/linux/man-pages/man3/flockfile.3.html
-- https://linux.die.net/man/3/fdopen
+- https://man7.org/linux/man-pages/man3/fdopen.3.html
 - https://en.wikipedia.org/wiki/Unistd.h
 - https://en.wikipedia.org/wiki/C_standard_library
 - https://en.wikipedia.org/wiki/C_file_input/output
 - https://en.wikipedia.org/wiki/File_descriptor
-- https://www.geeksforgeeks.org/introduction-of-system-call/
+- https://en.wikipedia.org/wiki/File_locking
+- https://gavv.net/articles/file-locks/
