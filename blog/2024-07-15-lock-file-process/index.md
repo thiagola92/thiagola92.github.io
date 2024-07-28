@@ -289,8 +289,62 @@ int main() {
 }
 ```
 
-```C title="fcntl"
-a
+```C title="fcntl - Advisory record locking"
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define BUFFER_SIZE 256
+
+void code() {
+  int count = 0;
+  struct flock fl;
+  char *buffer = malloc(sizeof(char) * BUFFER_SIZE);
+  int fd = open("example.txt", O_RDWR);
+
+  fl.l_whence = SEEK_SET;
+  fl.l_start = 0;
+  fl.l_len = 0;
+
+  while (count < 10000) {
+    int i;
+
+    fl.l_type = F_WRLCK;
+    fcntl(fd, F_SETLKW, &fl);
+    lseek(fd, 0, SEEK_SET);
+    read(fd, buffer, BUFFER_SIZE);
+    i = atoi(buffer) + 1;
+    sprintf(buffer, "%d     ", i);
+    lseek(fd, 0, SEEK_SET);
+    write(fd, buffer, strlen(buffer));
+    fl.l_type = F_UNLCK;
+    fcntl(fd, F_SETLKW, &fl);
+
+    count++;
+  }
+
+  close(fd);
+}
+
+int main() {
+  FILE *file = fopen("example.txt", "w");
+  fputc('0', file);
+  fclose(file);
+
+  int pid = fork();
+
+  if (pid == -1) {
+    printf("Failed to create child process\n");
+  } else if (pid == 0) {
+    code();
+    printf("Child finished\n");
+  } else {
+    code();
+    printf("Parent finished\n");
+  }
+}
 ```
 
 ## References
