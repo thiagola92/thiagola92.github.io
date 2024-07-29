@@ -3,11 +3,11 @@ authors: thiagola92
 tags: [game, streaming]
 ---
 
+# Making games for streamers seems hard as f***
+
 :::warn
 My english is trash :v
 :::
-
-# Making games for streamers seems hard as f***
 
 Remember the old days where we would immerse ourselfs while reading books?  
 

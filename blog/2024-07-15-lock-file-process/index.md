@@ -4,6 +4,8 @@ tags: [lock, c, file, process]
 ---
 
 # Lock Files in Process
+![Imagem mostrando camada do App, OS e Hardwares](./os.svg)  
+
 Quando você quer ler o arquivo, você pede ao sistema operacional pelo conteúdo do arquivo.  
 
 Quando você quer escrever no arquivo, você pede ao sistema operacional para inserir o conteúdo no arquivo.  
@@ -79,6 +81,8 @@ Ou se utiliza funções `exec` para transformar completamente o código executad
 :::
 
 ## Problem
+![Imagem ilustrativa do app 1 lendo do arquivo, app 2 lendo do arquivo, app 1 escrevendo no arquivo, app 2 escrevendo no arquivo](./problem.svg)  
+
 Quando dois processos interagem com o mesmo arquivo, pode acontecer da informação ser preenchida incorretamente? Afinal, precisamos primeiramente descobrir se isso é possível ou não de acontecer.  
 
 Como o escalonamento pode ser imprevisivel, uma maneira de testar se durante a interação com um arquivo houve troca de processo é repetindo a ação diversas vezes e ver se pelo menos uma vez ocorreu.  
@@ -171,9 +175,11 @@ Quais as chances disto acontecer? Depende do software, pois existem arquivos que
 ## Locks
 Acontece que existe mais de uma maneira de aplicar locks no Linux.  
 
+![Uma pessoa bem surpresa](./very_surprise.svg)  
+
 - [flock](https://man7.org/linux/man-pages/man2/flock.2.html)
   - **f**ile **lock**
-  - BSD
+  - Origem do sistema operacional BSD
 - [lockf](https://man7.org/linux/man-pages/man3/lockf.3.html)
   - **lock** **f**ile
   - POSIX
@@ -181,14 +187,21 @@ Acontece que existe mais de uma maneira de aplicar locks no Linux.
 - [fcntl "Advisory record locking"](https://man7.org/linux/man-pages/man2/fcntl.2.html)
   - **f**ile **c**o**nt**ro**l**
   - POSIX
-  - Uma função capaz de fazer diversas operações sobre file descriptors (uma delas sendo locks)
+  - Uma função capaz de fazer diversas operações sobre file descriptors
+    - Uma delas é utilizar "Advisory record locking"
 - [fcntl "Open file description locks (non-POSIX)"](https://man7.org/linux/man-pages/man2/fcntl.2.html)
   - **f**ile **c**o**nt**ro**l**
   - Linux specific
-    - Existem propostas para se adicionado ao padrões POSIX
-  - Uma função capaz de fazer diversas operações sobre file descriptors (uma delas sendo este outro tipo de locks)
+    - Existem propostas para ser adicionado ao padrões POSIX
+  - Uma função capaz de fazer diversas operações sobre file descriptors
+    - Uma delas é utilizar "Open file description locks (non-POSIX)"
 
-```C title="flock"
+Se quiser saber mais sobre cada um, é bom ler o post no blog: https://gavv.net/articles/file-locks/  
+Incrivel como um blog de 8 anos atrás me ajudou mais do que pesquisas no Google.  
+
+### flock
+
+```C
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -239,7 +252,9 @@ int main() {
 }
 ```
 
-```C title="lockf"
+### lockf
+
+```C
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -289,7 +304,9 @@ int main() {
 }
 ```
 
-```C title="fcntl - Advisory record locking"
+### fcntl - "Advisory record locking"
+
+```C
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
