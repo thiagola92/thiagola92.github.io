@@ -96,6 +96,7 @@ FILE* file = fopen("example.txt", "w+");
 while(count < 10000) {
     int i;
     
+    fseek(file, 0, SEEK_SET);
     fscanf(file, "%d", &i);
     fseek(file, 0, SEEK_SET);
     fprintf(file, "%d     ", ++i);
@@ -106,7 +107,7 @@ while(count < 10000) {
 fclose(file);
 ```
 
-O código irá ler o atual número do arquivo, mover o ponteiro para o início do arquivo e sobreescrever o número.  
+O código irá garantir que o cursor está no início do arquivo, ler o atual número do arquivo, mover o cursor para o início do arquivo e sobreescrever o número.  
 
 :::note
 ```C
@@ -131,6 +132,7 @@ void code() {
   while(count < 10000) {
     int i;
     
+    fseek(file, 0, SEEK_SET);
     fscanf(file, "%d", &i);
     fseek(file, 0, SEEK_SET);
     fprintf(file, "%d     ", ++i);
@@ -272,6 +274,7 @@ void code() {
     int i;
 
     lockf(fd, F_LOCK, 0);
+    lseek(fd, 0, SEEK_SET);
     read(fd, buffer, BUFFER_SIZE);
     i = atoi(buffer) + 1;
     sprintf(buffer, "%d     ", i);
@@ -378,3 +381,50 @@ int main() {
 - https://en.wikipedia.org/wiki/File_descriptor
 - https://en.wikipedia.org/wiki/File_locking
 - https://gavv.net/articles/file-locks/
+
+## Extra
+Por diversão, eu experimentei replicar o mesmo problema em outras linguagens.  
+
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+	"os/exec"
+)
+
+func code() {
+	var count int = 0
+	file, _ := os.OpenFile("example.txt", os.O_RDWR, 0666)
+
+	for count < 10000 {
+		var i int
+
+		file.Seek(0, 0)
+		fmt.Fscanf(file, "%d", &i)
+		file.Seek(0, 0)
+		fmt.Fprintf(file, "%d     ", i+1)
+
+		count++
+	}
+
+	file.Close()
+}
+
+func main() {
+	if len(os.Args) >= 2 {
+		code()
+		fmt.Println("Child finished")
+	} else {
+		os.WriteFile("example.txt", []byte{'0'}, 0600)
+
+		command := exec.Command("/usr/bin/go", "run", "main.go", "fork")
+		command.Start()
+		code()
+		command.Wait()
+
+		fmt.Println("Parent finished")
+	}
+}
+```
