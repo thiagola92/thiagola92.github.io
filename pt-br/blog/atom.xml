@@ -69,6 +69,13 @@
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="shells">Shells<a href="https://thiagola92.github.io/pt-br/blog/2024/09/03/terminal-tools#shells" class="hash-link" aria-label="Link direto para Shells" title="Link direto para Shells">​</a></h2>
 <ul>
+<li><a href="https://fishshell.com/" target="_blank" rel="noopener noreferrer">fish</a>
+<ul>
+<li>Substituto para shells (<code>bash</code>)</li>
+<li>O default é muito bom</li>
+<li>Infelizmente envolve outra sintaxe que também não é do meu agrado</li>
+</ul>
+</li>
 <li><a href="https://www.nushell.sh/" target="_blank" rel="noopener noreferrer">nushell</a>
 <ul>
 <li>Substituto para shells (<code>bash</code>, <code>fish</code>)</li>
@@ -82,9 +89,24 @@
 </ul>
 </li>
 </ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="prompt">Prompt<a href="https://thiagola92.github.io/pt-br/blog/2024/09/03/terminal-tools#prompt" class="hash-link" aria-label="Link direto para Prompt" title="Link direto para Prompt">​</a></h2>
+<ul>
+<li><a href="https://starship.rs/" target="_blank" rel="noopener noreferrer">Starship</a>
+<ul>
+<li>Não substitui ninguém</li>
+<li>Utiliza de emojis para transmitir informações rapidamente<!-- -->
+<ul>
+<li>Muito customizável</li>
+</ul>
+</li>
+<li>Quando lidando com Git possue um peso considerativo</li>
+</ul>
+</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="references">References<a href="https://thiagola92.github.io/pt-br/blog/2024/09/03/terminal-tools#references" class="hash-link" aria-label="Link direto para References" title="Link direto para References">​</a></h2>
 <ul>
 <li><a href="https://terminalroot.com/list-of-30-modern-alternatives-to-unix-commands/" target="_blank" rel="noopener noreferrer">https://terminalroot.com/list-of-30-modern-alternatives-to-unix-commands/</a></li>
+<li><a href="https://gabevenberg.com/posts/cli-renaissance/" target="_blank" rel="noopener noreferrer">https://gabevenberg.com/posts/cli-renaissance/</a></li>
 </ul>]]></content>
         <author>
             <name>Thiago Lages de Alencar</name>
