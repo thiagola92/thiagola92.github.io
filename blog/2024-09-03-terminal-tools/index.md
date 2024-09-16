@@ -42,6 +42,10 @@ Está é minha atual lista de ferramentas para terminal.
 
 ## Shells
 
+- [fish](https://fishshell.com/)
+    - Substituto para shells (`bash`)
+    - O default é muito bom
+    - Infelizmente envolve outra sintaxe que também não é do meu agrado
 - [nushell](https://www.nushell.sh/)
     - Substituto para shells (`bash`, `fish`)
     - Relativamente novo para mim, não tenho opnião
@@ -49,5 +53,14 @@ Está é minha atual lista de ferramentas para terminal.
         - Mas a linguagem parece bem boa comparada aos outros shells
     - Remove a necessidade de ter `jq`
 
+## Prompt
+
+- [Starship](https://starship.rs/)
+    - Não substitui ninguém
+    - Utiliza de emojis para transmitir informações rapidamente
+        - Muito customizável
+    - Quando lidando com Git possue um peso considerativo
+
 ## References
-- https://terminalroot.com/list-of-30-modern-alternatives-to-unix-commands/
+- https://terminalroot.com/list-of-30-modern-alternatives-to-unix-commands/  
+- https://gabevenberg.com/posts/cli-renaissance/  
