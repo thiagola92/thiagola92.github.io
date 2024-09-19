@@ -4,62 +4,70 @@ tags: [terminal, tools]
 ---
 
 # Terminal Tools
-:::warning
-Não confie na data deste post!  
-
-Eu devo alterar sempre que fizer alguma atualização pois também devo utiliza-lo como referência (então posso querer manter no topo).  
-:::
-
-Está é minha atual lista de ferramentas para terminal.  
+Está é uma lista com minha opnião sobre diversas ferramentas de terminal.  
+Aqueles marcados com estrela (⭐) são ainda utilizados por mim.  
 
 ## CLI
-
-- [nala](https://gitlab.com/volian/nala)
-    - Substituto para `apt`
-    - Sempre uso pois funciona igualzinho só que trocando `apt` por `nala` e torna **muito** melhor de entender o que está acontecendo
+- [nala](https://gitlab.com/volian/nala) ⭐
+    - **Substitui**: `apt`
+    - **Uso diário**: Alto
+    - **Nota**: Torna muito melhor a visualização e entendimento da instalação de programas
 - [duf](https://github.com/muesli/duf)
-    - Substituto para `df`
-    - Praticamente nunca uso pois acabo olhando em GUIs essas informações, mas se tivesse que usar seria `duf`
+    - **Substitui**: `df`
+    - **Uso diário**: Baixo
+    - **Nota**: Praticamente nunca uso pois acabo olhando em GUIs essas informações
 - [dust](https://github.com/bootandy/dust)
-    - Substituto para `du`
-    - Relativamente novo para mim, não tenho opnião
-- [fastfetch](https://github.com/fastfetch-cli/fastfetch)
-    - Substituto para `neofetch`
-    - Sempre uso `fastfetch` pois faz a mesma tarefa só que melhor (e `neofetch` foi oficialmente descontinuado)
+    - **Substitui**: `du`
+    - **Uso diário**: Baixo
+    - **Nota**: Praticamente nunca uso pois acabo olhando em GUIs essas informações
+- [fastfetch](https://github.com/fastfetch-cli/fastfetch) ⭐
+    - **Substitui**: `neofetch`
+    - **Uso diário**: Baixo
+    - **Nota**: Providência mais informação e o projeto não foi abandonado
+- [jq](https://jqlang.github.io/jq/)
+    - **Substitui**: ---
+    - **Uso diário**: Baixo
+    - **Nota**: Praticamente nunca uso pois trato JSON por código
 
 ## TUI
-
 - [bottom](https://github.com/ClementTsang/bottom)
-    - Substituto para `htop`/`top`
-    - Praticamente nunca uso pois só lembro dele quando quero matar um programa
-        - Mesmo assim prefiro `htop` pois não envolve decorar atalhos já que maioria das coisas estão na tela (um dia quem sabe eu aprendo)
+    - **Substitui**: `htop`, `top`
+    - **Uso diário**: Baixo
+    - **Nota**: Praticamente nunca uso pois é muito chato ter que lembrar de todos os atalhos, acabo voltando para `htop`
 - [superfile](https://superfile.netlify.app/)
-    - File manager no terminal
-    - Nunca uso pois dificilmente tenho necessidade de usar file manager no terminal e mesmo assim envolveria aprender alguns atalhos
-- [micro](https://micro-editor.github.io/)
-    - Substituto para `nano`
-    - Sempre uso pois os atalhos são quase iguais a um editor de texto normal
+    - **Substitui**: ---
+    - **Uso diário**: Baixo
+    - **Nota**: Nunca uso pois dificilmente tenho necessidade de usar file manager no terminal
+- [yazi](https://github.com/sxyazi/yazi)
+    - **Substitui**: ---
+    - **Uso diário**: Baixo
+    - **Nota**: Nunca uso pois dificilmente tenho necessidade de usar file manager no terminal
+- [micro](https://micro-editor.github.io/) ⭐
+    - **Substitui**: `nano`
+    - **Uso diário**: Alto
+    - **Nota**: Muito mais parecido com um editor de texto do dia a dia
 
 ## Shells
-
 - [fish](https://fishshell.com/)
-    - Substituto para shells (`bash`)
-    - O default é muito bom
-    - Infelizmente envolve outra sintaxe que também não é do meu agrado
-- [nushell](https://www.nushell.sh/)
-    - Substituto para shells (`bash`, `fish`)
-    - Relativamente novo para mim, não tenho opnião
-    - Totalmente diferente dos outros shells então copiar comandos da internet provavelmente vão gerar erros
-        - Mas a linguagem parece bem boa comparada aos outros shells
-    - Remove a necessidade de ter `jq`
+    - **Substitui**: `bash`
+    - **Nota 1**: Providência uma ótima experiência logo de cara
+    - **Nota 2**: Sintaxe melhor que `bash` porém ainda não da vontade de aprender
+- [nushell](https://www.nushell.sh/) ⭐
+    - **Substitui**: `bash`, `fish`
+    - **Nota 1**: Providência uma ótima experiência logo de cara
+    - **Nota 2**: Sintaxe muito mais agradável
+    - **Nota 3**: Remove a necessidade de possuir `jq`
+    - **Nota 4**: Remove a necessidade de possuir `curl` pois possui o comando `http`
+
+Em shells "uso diário" é 100% de quando você utilizar o shell, então sempre é alto.  
 
 ## Prompt
+- [Starship](https://starship.rs/) ⭐
+    - **Opnião 1**: Permite grande costumização do prompt com facilidade, tornando o prompt mais agradável
+    - **Opnião 2**: Quando lidando com Git possue um peso considerativo
 
-- [Starship](https://starship.rs/)
-    - Não substitui ninguém
-    - Utiliza de emojis para transmitir informações rapidamente
-        - Muito customizável
-    - Quando lidando com Git possue um peso considerativo
+Em prompts "subsititui" é sempre sobre substituir o padrão.  
+Em prompts "uso diário" é 100% de quando você utilizar o shell, então sempre é alto.  
 
 ## References
 - https://terminalroot.com/list-of-30-modern-alternatives-to-unix-commands/  
