@@ -119,8 +119,8 @@ I don't have any...
 
 I don't know how developers attack this... They invest less in long immersive moments? They do more short content? They always assume that the player is a streamer? I mean, you can't just ignore the fact that a streamer could badmouth your game (this can affect sales, right?).  
 
-::: note
-EDIT: It's always good to see that streamers know that this is something that can happen.  
+:::note
+It's always good to see that streamers know that this is something that can happen.  
 
 https://youtu.be/5LtQAcGxQlM?t=193
 :::

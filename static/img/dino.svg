@@ -7,8 +7,8 @@
    viewBox="0 0 128 128"
    version="1.1"
    id="svg1"
-   inkscape:version="1.3.2 (1:1.3.2+202311252150+091e20ef0f)"
-   sodipodi:docname="logo.svg"
+   inkscape:version="1.3.2 (1:1.3.2+202404261509+091e20ef0f)"
+   sodipodi:docname="dino.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,9 +25,9 @@
      inkscape:document-units="px"
      showgrid="true"
      labelstyle="default"
-     inkscape:zoom="4.1121711"
-     inkscape:cx="112.471"
-     inkscape:cy="73.318934"
+     inkscape:zoom="11.630976"
+     inkscape:cx="34.863797"
+     inkscape:cy="50.038792"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="1920"
@@ -172,6 +172,13 @@
          d="m -70.15015,-5.606726 c 1.823417,0.7686815 3.49089,1.8244501 4.964861,3.0975608 a 14.634159,14.634159 0 0 0 -7.118282,7.5660054 14.634159,14.634159 0 0 0 7.936819,19.1143828 14.634159,14.634159 0 0 0 5.328762,1.071235 c -1.706935,8.642513 -9.290526,15.122382 -18.448599,15.122382 l -44.843951,-1.98e-4 c -10.42277,0 -18.81353,-8.390812 -18.81353,-18.813587 l -4.9e-4,-9.818551 c 0,-5.6518803 2.47982,-10.691842 6.40054,-14.1348248 a 2.611536,2.611536 0 0 0 1.50362,1.68005593 2.611536,2.611536 0 0 0 3.41064,-1.41619203 2.611536,2.611536 0 0 0 -0.76735,-3.0220829 c 2.49502,-1.2181054 5.29277,-1.9204871 8.26614,-1.9204871 l 44.843946,1.981e-4 c 2.605695,0 5.084524,0.5246001 7.336874,1.4741028 z m -53.0583,21.362829 a 2.611536,2.611536 0 0 0 -3.41064,1.416192 2.611536,2.611536 0 0 0 1.41544,3.412446 2.611536,2.611536 0 0 0 3.41139,-1.417997 2.611536,2.611536 0 0 0 -1.41619,-3.410641 z"
          transform="matrix(-0.92421029,-0.38188394,-0.38188394,0.92421029,0,0)" />
     </g>
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke-width:3.05608;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="path3-5-7-5"
+       cx="-43.097076"
+       cy="41.070847"
+       r="9.0708466"
+       transform="scale(-1,1)" />
     <path
        id="path3"
        style="fill:#3ecc5f;fill-opacity:1;stroke-width:11.6183;stroke-linejoin:round;paint-order:stroke fill markers"
