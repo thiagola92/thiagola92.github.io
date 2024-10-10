@@ -36,17 +36,15 @@ Muito do seu estilo vem do fato de ter sido criado utilizando Java e depois adap
 ```javascript title="javascript"
 import { Browser, Builder, By } from "selenium-webdriver";
 
-(async () => {
-    const driver = await new Builder().forBrowser(Browser.CHROME).build()
-    await driver.get('https://www.etiquetaunica.com.br/')
-    await driver.manage().setTimeouts({implicit: 1000});
+const driver = await new Builder().forBrowser(Browser.CHROME).build()
+await driver.get('https://www.etiquetaunica.com.br/')
+await driver.manage().setTimeouts({implicit: 1000});
 
-    let hamburguerButton = await driver.findElement(By.xpath('//*[@id="headerWrapper"]/div[1]/button[1]'))
-    await hamburguerButton.click()
+let hamburguerButton = await driver.findElement(By.xpath('//*[@id="headerWrapper"]/div[1]/button[1]'))
+await hamburguerButton.click()
 
-    let brandButton = await driver.findElement(By.xpath('//*[@id="menu"]/div/div[2]/ul/li[7]/a'))
-    await brandButton.click()
-})()
+let brandButton = await driver.findElement(By.xpath('//*[@id="menu"]/div/div[2]/ul/li[7]/a'))
+await brandButton.click()
 ```
 
 ### Puppeteer
@@ -73,14 +71,12 @@ A linguagem primária de programação dele é JavaScript, porém fornece suport
 ```javascript title="javascript"
 import { chromium, devices } from "playwright";
 
-(async () => {
-    const browser = await chromium.launch({ channel: 'chrome', headless: false })
-    const context = await browser.newContext(devices['Desktop Chrome'])
-    const page = await context.newPage()
-    
-    await page.goto('https://canseivendi.com.br/')
-    await page.getByRole('link', {name: 'Marcas'}).click()
-})()
+const browser = await chromium.launch({ channel: 'chrome', headless: false })
+const context = await browser.newContext(devices['Desktop Chrome'])
+const page = await context.newPage()
+
+await page.goto('https://canseivendi.com.br/')
+await page.getByRole('link', {name: 'Marcas'}).click()
 ```
 
 ## Raw
