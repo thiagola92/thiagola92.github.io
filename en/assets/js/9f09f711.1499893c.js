@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[2280],{34500:a=>{a.exports=JSON.parse('{"label":"playwright","permalink":"/en/blog/tags/playwright","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

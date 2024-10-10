@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[9332],{82990:e=>{e.exports=JSON.parse('{"label":"puppeteer","permalink":"/blog/tags/puppeteer","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

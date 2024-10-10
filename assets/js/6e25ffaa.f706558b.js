@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[7262],{14913:a=>{a.exports=JSON.parse('{"label":"drama","permalink":"/blog/tags/drama","allTagsPath":"/blog/tags","count":1,"unlisted":false}')}}]);

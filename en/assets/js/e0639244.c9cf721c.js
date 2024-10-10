@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[9591],{14207:e=>{e.exports=JSON.parse('{"label":"terminal user interface","permalink":"/en/blog/tags/terminal-user-interface","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

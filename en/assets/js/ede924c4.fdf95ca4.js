@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[5216],{38971:a=>{a.exports=JSON.parse('{"label":"streaming","permalink":"/en/blog/tags/streaming","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

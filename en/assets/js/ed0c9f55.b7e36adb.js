@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[7640],{25248:o=>{o.exports=JSON.parse('{"permalink":"/en/blog/tags/godot","page":1,"postsPerPage":10,"totalPages":2,"totalCount":12,"nextPage":"/en/blog/tags/godot/page/2","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

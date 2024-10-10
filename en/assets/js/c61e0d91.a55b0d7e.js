@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[9011],{47197:a=>{a.exports=JSON.parse('{"label":"rust","permalink":"/en/blog/tags/rust","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

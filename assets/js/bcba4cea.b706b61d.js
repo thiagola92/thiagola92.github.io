@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[7218],{13340:a=>{a.exports=JSON.parse('{"label":"godot","permalink":"/blog/tags/godot","allTagsPath":"/blog/tags","count":12,"unlisted":false}')}}]);

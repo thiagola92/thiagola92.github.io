@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[3284],{27312:a=>{a.exports=JSON.parse('{"label":"command line interface","permalink":"/en/blog/tags/command-line-interface","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

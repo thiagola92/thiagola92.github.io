@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[2854],{28810:a=>{a.exports=JSON.parse('{"label":"forward kinematics","permalink":"/en/blog/tags/forward-kinematics","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

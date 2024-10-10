@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[3410],{95878:a=>{a.exports=JSON.parse('{"label":"programming language","permalink":"/en/blog/tags/programming-language","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

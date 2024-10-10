@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[3242],{12722:t=>{t.exports=JSON.parse('{"label":"authentication","permalink":"/pt-br/blog/tags/authentication","allTagsPath":"/pt-br/blog/tags","count":2,"unlisted":false}')}}]);
