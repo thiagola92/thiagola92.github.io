@@ -63,7 +63,6 @@ const config = {
           editUrl:
           'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
         blogSidebarCount: 'ALL',
-        blogSidebarTitle: 'All posts',
         },
         theme: {
           customCss: './src/css/custom.css',
