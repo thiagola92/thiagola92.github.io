@@ -98,3 +98,5 @@ names = selector.xpath('//div[@class="name"]/a/text()').getall()
 links = selector.xpath('//div[@class="name"]/a/@href').getall()
 prices = selector.xpath('//div[@class="cash"]/text()').getall()
 ```
+
+Note que navegadores fazem muito mais que apenas uma requisição, pois uma página pode envolver fazer diversas requisições (por imagens, videos, códigos javascripts, etc).  
