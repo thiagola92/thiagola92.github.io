@@ -33,7 +33,7 @@ Criado em ~2004 mas que continua a oferecer suporte para todos os navegadores e 
 
 Muito do seu estilo vem do fato de ter sido criado utilizando Java e depois adaptado para outras linguagens.  
 
-```javascript
+```javascript title="javascript"
 import { Browser, Builder, By } from "selenium-webdriver";
 
 (async () => {
@@ -54,7 +54,7 @@ Criado pela Google em ~2017 para fornecer automação ao Google Chrome utilizand
 
 Note que o locator favorito deles envolve utilizar CSS.  
 
-```javascript
+```javascript title="javascript"
 import puppeteer from "puppeteer";
 
 const browser = await puppeteer.launch({headless: false})
@@ -70,7 +70,7 @@ Criado pela Microsoft em ~2020 para fornecer automação em diversos navegador. 
 
 A linguagem primária de programação dele é JavaScript, porém fornece suporte a diversas outras (não necessariamente bem).  
 
-```javascript
+```javascript title="javascript"
 import { chromium, devices } from "playwright";
 
 (async () => {
@@ -86,7 +86,7 @@ import { chromium, devices } from "playwright";
 ## Raw
 Neste caso o mais importante é você possuir uma boa quantidade de bibliotecas que o ajudem a realizar a tarefa, porém o básico é conseguir requisitar a página na internet e parsear o conteúdo HTML.  
 
-```python
+```python title="python"
 import httpx
 from parsel import Selector
 
