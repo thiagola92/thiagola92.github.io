@@ -8,21 +8,31 @@ tags: [godot, drama]
 Pesquisa limitada pelo fato de Twitter ainda estar bloqueado no Brasil.  
 :::
 
+Aproveitando que eu estava olhando o drama em cima de Godot e assistindo Ace Attorney... Resolvi brincar com o site [https://objection.lol](https://objection.lol).  
+
+### Video  
+
+[![](./ace_godot.png)](https://youtu.be/gXn0ktIHXcw)  
+
+## Details
+
 [![](./godot.png)](https://godotengine.org/)  
 
 [![](./open-source.webp)](https://opensource.org/osd)  
 
 ## Twitter
 
-![](./twitter1.webp)  
-
 ![](./twitter2.webp)  
+
+![](./twitter1.webp)  
 
 ![](./twitter-grummz.png)  
 
 ## Discord
 
 ![](./twitter-gamesnosh.png)  
+
+![](./discord-xananax4.png)  
 
 ![](./discord-new-old.png)  
 
@@ -32,8 +42,6 @@ Pesquisa limitada pelo fato de Twitter ainda estar bloqueado no Brasil.
 
 ![](./discord-xananax3.png)  
 
-![](./discord-xananax4.png)  
-
 ## Godot Foundation
 
 ![](./foundation1.webp)  
@@ -42,11 +50,14 @@ Pesquisa limitada pelo fato de Twitter ainda estar bloqueado no Brasil.
 
 ## Website
 
-jun-17
+jun-17  
 ![](./web-archive-jun-17.png)  
 
-jul-08
+jul-08  
 ![](./web-archive-jul-08.png)  
+
+oct-11  
+![](./web-archive-oct-11.png)  
 
 ![](./server-start.png)  
 
@@ -80,15 +91,13 @@ jul-08
 
 ## Twitter++
 
-![](./twitter-grummz.png)  
-
 ![](./twitter-starkium.png)  
 
 ![](./twitter-cos.png)  
 
-![](./twitter-petter.png)  
-
 ![](./twitter-sherief.png)  
+
+![](./twitter-petter.png)  
 
 ![](./twitter-artur.png)  
 
@@ -102,9 +111,19 @@ jul-08
 
 ![](./twitter-cuteandfunny.png)  
 
+![](./twitter-redot2.png)  
+
+![](./twitter-redot3.png)  
+
 ## BlueSky
 
 ![](./bluesky-mittenokitten.png)  
+
+![](./bluesky-yuri.png)  
+
+## Google
+
+![](./google-github.png)  
 
 ## Discord++
 
