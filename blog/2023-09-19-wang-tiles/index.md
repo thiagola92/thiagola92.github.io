@@ -18,9 +18,7 @@ Assuma que teremos um conjunto de tiles onde cada lado está pintado de apenas u
 5. Variação das cores já vistas só que em posições diferentes.
 
 :::note
-
 Por simplicidade mudaremos para duas cores apenas.  
-
 :::
 
 A ideia é reutilizar os mesmos tiles quantas vezes quisermos para botar eles lado a lado e formar um plano, porém com as cores laterais do tiles sempre casando. No exemplo seguinte temos 5 tiles e 2 exemplos de planos formados por eles:  
@@ -42,9 +40,7 @@ Por exemplo, possuindo 2 cores e 4 lados, podemos formar 16 (2<sup>4</sup>) tile
 ![Todas os possíveis tiles com duas cores e quatro lados](./sides.svg)  
 
 :::note
-
 Adicionamos um quadrado cinza no centro de cada tile.
-
 :::
 
 Botamos estes tiles na game engine [Godot](https://godotengine.org/) e nela definimos a relação entre os tiles.  
@@ -98,9 +94,7 @@ Utilizando estes tiles com suas rotações/relexões, podemos criar em segundos 
 ![Tiles do labirinto](./maze.png)  
 
 :::note
-
 Este labirinto está com cara de circuitos da placa mãe. 🤔
-
 :::
 
 ## References

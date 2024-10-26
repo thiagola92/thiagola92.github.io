@@ -58,10 +58,8 @@ Porém iremos mostrar para cada um dos tipos:
 ## Corners and Sides
 
 :::note
-
 Clique nas imagens para abrir em outra janela e depois de bastante zoom.  
 E lembre que para restar o zoom existe o atalho `Ctrl+0`.  
-
 :::
 
 [![Todos possiveis tiles para "corners and sides"](./corners_sides.svg)](./corners_sides.svg)  

@@ -80,7 +80,7 @@ await page.getByRole('link', {name: 'Marcas'}).click()
 ```
 
 ## Raw
-Neste caso o mais importante é você possuir uma boa quantidade de bibliotecas que o ajudem a realizar a tarefa, porém o básico é conseguir requisitar a página na internet e parsear o conteúdo HTML.  
+Neste caso o mais importante é você possuir uma boa quantidade de bibliotecas que o ajudem a realizar a tarefa! O básico é conseguir requisitar a página na internet e parsear o conteúdo HTML.  
 
 ```python title="python"
 import httpx
@@ -99,4 +99,45 @@ links = selector.xpath('//div[@class="name"]/a/@href').getall()
 prices = selector.xpath('//div[@class="cash"]/text()').getall()
 ```
 
-Note que navegadores fazem muito mais que apenas uma requisição, pois uma página pode envolver fazer diversas requisições (por imagens, videos, códigos javascripts, etc).  
+Neste exemplo escolhi utilizar a biblioteca [httpx](https://github.com/encode/httpx) (criada por [Encode](https://www.encode.io/)) e [parsel](https://github.com/scrapy/parsel) (criado por [Scrapy](https://scrapy.org/)), mas fica a sua escolha as bibliotecas para as tarefas.  
+
+:::note
+Navegadores fazem muito mais que apenas uma requisição! Uma página leva uma reação em cadeia de requisições por conteúdos delas.  
+
+Por exemplo, ao receber uma página HTML e o navegador identificar uma imagem nela (`<img src="photo.jpg">`), ele precisa fazer uma requisição dessa imagem ao site.  
+
+Agora imagina que isto acontece para diversos tipos de conteúdos da página:  
+- Imagens: `<img src="myimage.jpg">`
+- Audio: `<audio></audio>`
+- Videos: `<video></video>`
+- CSS: `<link rel="stylesheet" href="mystyle.css">`
+- JavaScript: `<script src="myscripts.js"></script>`
+- Iframe: `<iframe src="url"></iframe>`
+:::
+
+## Cat and Mouse Game
+Ter os dados do seu site scrapeado por bots não é algo bom, pois eles geram grande tráfego e nenhum lucro (não estou falando de [scalping](https://en.wikipedia.org/wiki/Ticket_resale#Automated_scalping_bots)).  
+
+Por isto é normal ver websites tentando identificar bots para bloquea-los e bots fingindo serem usuários normais do dia a dia.  
+
+Acontece que muitas vezes isso envolve simular comportamentos de um usuário e simular um navegador, onde ambos não são tarefas fáceis.  
+
+Aqui uma lista **pequena** de coisas a se pensar:
+- Simular Navegador
+    - Construir Headers
+    - Analisar HTML
+    - Executar JavaScript
+    - Variar fingerprint
+- Simular Usuário
+    - Resolver Captchas
+    - Movimento do mouse
+    - Velocidade digitando
+- Após ser bloqueado
+    - Alterar comportamento/tática
+        - Para não ser bloqueado novamente
+    - Utilizar Proxy
+
+Uma da melhor maneira de saber como atacar é sabendo como os sites se protegem... O que é algo que eu tenho pouco conhecimento então vou terminar aqui 🤣.  
+
+## References
+- https://substack.thewebscraping.club/p/browser-fingerprinting-test-online
