@@ -22,18 +22,18 @@ Por padrão o nosso sistema operacional nos providência o gráfico básico de u
 
 O lado positivo é que isto nos providência o básico de uma janela, como aqueles 3 botões no topo da direita (minimizar, máximizar, fechar, ...).  
 
-Porém note que, dependendo do sistema operacional, mais opções podem estar disponíveis! Se eu clicar com o botão direito na barra do topo, podemos ver mais ações:  
+Porém note que, dependendo do sistema operacional, mais opções podem estar disponíveis! Se eu clicar com o botão direito na title bar do topo, podemos ver mais ações:  
 
 ![Not borderless again](not_borderless_again.png)  
 
-Se ativarmos *Display > Window > Size > Borderless*, o sistema operacional deixará de adicionar a barra no topo:  
+Se ativarmos *Display > Window > Size > Borderless*, o sistema operacional deixará de adicionar a title bar no topo:  
 
 ![Borderless](borderless.png)  
 
-Basicamente ele está assumindo que você mesmo irá desenhar a barra no topo caso queira (normalmente em jogos isto não faz sentido).  
+Basicamente ele está assumindo que você mesmo irá desenhar a title bar no topo caso queira (normalmente em jogos isto não faz sentido).  
 
 :::info
-Borderless ou não, ainda se trata de uma janela no seu sistema operacional então atalhos que iriam minimizar, máximizar ou fechar vão funcionar normalmente.  
+Borderless ou não, ainda se trata de uma janela no seu sistema operacional então alguns atalhos podem continuar funcionando (`Super + Up/Down/Left/Right`, `Alt + Space`).  
 :::
 
 ## 3 - Multiple Windows
@@ -63,7 +63,7 @@ Mas a documentação menciona ela como necessária.
 
 **Como visto na sessão anterior...**  
 
-Ative Display > Window > Size > Borderless para o sistema operacional deixará de adicionar a barra no topo.  
+Ative Display > Window > Size > Borderless para o sistema operacional deixará de adicionar a title bar no topo.  
 
 ![Invisible](invisible.png)  
 
@@ -82,7 +82,7 @@ func _ready() -> void:
 	get_tree().root.mouse_passthrough = true
 ```
 
-**Segundo** podemos notar que ela ainda está processando teclas (pode ser selecionada pelo Alt+Tab, fechada por Alt+F4, maximizada com Super+Up, etc).  
+**Segundo** podemos notar que ela ainda está processando teclas (pode ser selecionada pelo `Alt + Tab`, fechada por `Alt + F4`, maximizada com `Super + Up`, etc).  
 
 Ative *Display > Window > Size > No Focus* para que ela não possa ser focada (até por atalhos).  
 
@@ -111,7 +111,7 @@ Nós poderiamos checar a cada frame se todas as janelas foram fechadas, poderiam
 Agora precisamos entender que cada janela aberta é uma subwindow. Existem dois tipos de subwindows:
 1. Subwindows
 	- Quando sua janela pede ao sistema operacional para criar uma janela filha dela
-	- Sua janela filha vai possuir a barra padrão de janelas
+	- Sua janela filha vai possuir a title bar padrão de janelas
 2. Embed subwindows
 	- Quando sua janela simula outra janela dentro dela mesmo
 	- Isto impossibilita ela de ser mover para fora da janela pai
@@ -128,7 +128,7 @@ Desative *Display > Window > Subwindows > Embed Subwindows* para que as subwindo
 
 ![Subwindows](subwindows.png)  
 
-Mas se quisermos ter uma barra de janela única para as nossas janelas? Podemos fazer o mesmo que fizemos com janela principal, torna-la borderless.  
+Mas se quisermos ter uma title bar de janela única para as nossas janelas? Podemos fazer o mesmo que fizemos com janela principal, torna-la borderless.  
 
 ![subwindows borderless](subwindows_borderless.png)  
 
@@ -136,4 +136,80 @@ Dentro das propriedades da Janela, ative *Flags > Borderless*.
 
 ![subwindows borderless activate](subwindows_borderless2.png)  
 
-Agora nós seriamos responsáveis por criar a barra no topo da janela. Desta maneira poderiamos fazer uma barra única igual ao Google Chrome ou Steam!  
+Agora nós seriamos responsáveis por criar a title bar no topo da janela. Desta maneira poderiamos fazer uma title bar única igual ao Google Chrome ou Steam!  
+
+## 4 - Custom Title Bar
+Ter uma title bar própria é relativamente raro hoje em dia, pois muitas vezes requer reinventar a roda sem trazer benifícios reais.  
+
+Mas isto não quer dizer que nenhuma aplicação faz isto:  
+![Custom Title Bars](custom_title_bars.png)  
+<sub>(Steam, GNOME Files, Google Chrome)</sub>  
+
+Note que as 3 aplicações aproveitaram o espaço para providênciar mais informações e funcionalidades ao usuário. Porém nós vamos focar em pelo menos reproduzir o básico:  
+1. Exibir titulo
+2. Providênciar botões de minimizar, maximizar e fechar
+3. Double click maximizar
+4. Arrastar a title bar deve mover a janela
+5. Redimensionar janela se arrastar as bordas
+6. Botão direito abrir menu de funcionalidades
+7. Snap para um dos cantos do monitor quando arrastado para ele
+
+Depois disso você deve ser capaz de adicionar ou remover mais utilidades conforme a sua vontade.  
+
+:::warning
+Estou supondo que você possui uma boa familiaridade com Godot e não pretendo passar prints de cada etapa.  
+:::
+
+### Exibir Titulo
+Basta utilizar o node Label.  
+
+### Minimize, Maximize, Close Buttons
+Basta utilizar 3 nodes Button.  
+
+```gdscript title="Close"
+func _on_close_pressed() -> void:
+	queue_free()
+```
+
+```gdscript title="Minimize"
+func _on_minimize_pressed() -> void:
+	mode = Window.MODE_MINIMIZED
+```
+
+```gdscript title="Maximize"
+func _on_maximize_pressed() -> void:
+	if mode == Window.MODE_MAXIMIZED:
+		mode = Window.MODE_WINDOWED
+	else:
+		mode = Window.MODE_MAXIMIZED
+```
+
+Importante tratar o signal `close_requested` vindo da janela, pois é por ele que você recebe notificações que o usuário tentou fechar de outras maneiras. Por exemplo:taskbar do windows.  
+
+### Double Click Maximize
+Containers não possui signal para isto diretamente porém podemos utilizar o signal mais geral `gui_input`.  
+
+```gdscript title="Double Click"
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		_on_mouse_button(event)
+```
+
+```gdscript title="Double Click"
+func _on_mouse_button(event: InputEventMouseButton) -> void:
+	if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
+		_on_double_click()
+```
+
+```gdscript title="Double Click"
+func _on_double_click() -> void:
+	match mode:
+		Window.MODE_MAXIMIZED:
+			mode = Window.MODE_WINDOWED
+		_:
+			mode = Window.MODE_MAXIMIZED
+```
+
+Já estamos dividindo em funções menores pois os passos seguintes irão adicionar mais funcionalidades a aquelas que forem mais gerais.  
+
+### Drag Window
