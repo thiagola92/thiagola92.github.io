@@ -79,7 +79,7 @@ Para resolver isto podemos alterar janela raiz (criada quando seu programa inici
 
 ```gdscript
 func _ready() -> void:
-	get_tree().root.mouse_passthrough = true
+	get_window().mouse_passthrough = true
 ```
 
 **Segundo** podemos notar que ela ainda está processando teclas (pode ser selecionada pelo `Alt + Tab`, fechada por `Alt + F4`, maximizada com `Super + Up`, etc).  
