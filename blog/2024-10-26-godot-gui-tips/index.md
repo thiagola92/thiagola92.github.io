@@ -151,65 +151,221 @@ Note que as 3 aplicações aproveitaram o espaço para providênciar mais inform
 3. Double click maximizar
 4. Arrastar a title bar deve mover a janela
 5. Redimensionar janela se arrastar as bordas
-6. Botão direito abrir menu de funcionalidades
-7. Snap para um dos cantos do monitor quando arrastado para ele
+6. Snap para um dos cantos do monitor quando arrastado para ele
 
 Depois disso você deve ser capaz de adicionar ou remover mais utilidades conforme a sua vontade.  
 
 :::warning
-Estou supondo que você possui uma boa familiaridade com Godot e não pretendo passar prints de cada etapa.  
+Estarei partindo do princípio que queremos customizar uma title bar na janela principal, por isto o código utiliza `get_window()`, mas adaptações podem ser necessárias caso esteja tratando subwindows.  
 :::
 
 ### Exibir Titulo
 Basta utilizar o node Label.  
 
 ### Minimize, Maximize, Close Buttons
-Basta utilizar 3 nodes Button.  
+Basta utilizar 3 nodes Button tratando o signal `pressed`:  
 
-```gdscript title="Close"
-func _on_close_pressed() -> void:
-	queue_free()
-```
-
-```gdscript title="Minimize"
+```gdscript
 func _on_minimize_pressed() -> void:
-	mode = Window.MODE_MINIMIZED
-```
+	get_window().mode = Window.MODE_MINIMIZED
 
-```gdscript title="Maximize"
+
 func _on_maximize_pressed() -> void:
-	if mode == Window.MODE_MAXIMIZED:
-		mode = Window.MODE_WINDOWED
+	if get_window().mode == Window.MODE_MAXIMIZED:
+		get_window().mode = Window.MODE_WINDOWED
 	else:
-		mode = Window.MODE_MAXIMIZED
+		get_window().mode = Window.MODE_MAXIMIZED
+
+
+func _on_close_pressed() -> void:
+	get_tree().quit()
 ```
 
-Importante tratar o signal `close_requested` vindo da janela, pois é por ele que você recebe notificações que o usuário tentou fechar de outras maneiras. Por exemplo:taskbar do windows.  
+:::tip subwindows tip
+É importante tratar o signal `close_requested` vindo da janela, pois é por ele que você recebe notificações que o usuário tentou fechar de outras maneiras (taskbar do windows, etc).  
+:::
 
 ### Double Click Maximize
-Containers não possui signal para isto diretamente porém podemos utilizar o signal mais geral `gui_input`.  
+Container não possui signal para isto diretamente porém podemos utilizar o signal mais geral `gui_input`.  
 
-```gdscript title="Double Click"
-func _on_gui_input(event: InputEvent) -> void:
+```gdscript
+func _on_minimize_pressed() -> void:
+	...
+
+
+func _on_maximize_pressed() -> void:
+	...
+
+
+func _on_close_pressed() -> void:
+	...
+
+
+// highlight-start
+func _on_title_bar_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		_on_mouse_button(event)
-```
+		_on_title_bar_mouse_button(event)
 
-```gdscript title="Double Click"
-func _on_mouse_button(event: InputEventMouseButton) -> void:
+
+func _on_title_bar_mouse_button(event: InputEventMouseButton) -> void:
 	if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
-		_on_double_click()
-```
+		_on_title_bar_double_click()
 
-```gdscript title="Double Click"
-func _on_double_click() -> void:
-	match mode:
+
+func _on_title_bar_double_click() -> void:
+	match get_window().mode:
 		Window.MODE_MAXIMIZED:
-			mode = Window.MODE_WINDOWED
+			get_window().mode = Window.MODE_WINDOWED
 		_:
-			mode = Window.MODE_MAXIMIZED
+			get_window().mode = Window.MODE_MAXIMIZED
+// highlight-end
 ```
 
-Já estamos dividindo em funções menores pois os passos seguintes irão adicionar mais funcionalidades a aquelas que forem mais gerais.  
+Já estamos dividindo em funções menores pois os passos seguintes irão adicionar mais funcionalidades nestas funções gerais.  
 
 ### Drag Window
+A princípio, arrastar a janela pode ser resumido em saber duas coisas:  
+- Saber se o click do mouse está sendo pressionado
+- Onde que o click estava quando começou
+
+```gdscript
+// highlight-start
+var _title_bar_dragging: bool = false
+
+var _title_bar_dragging_start: Vector2i
+// highlight-end
+
+
+func _on_minimize_pressed() -> void:
+	...
+
+
+func _on_maximize_pressed() -> void:
+	...
+
+
+func _on_close_pressed() -> void:
+	...
+
+
+func _on_title_bar_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		_on_title_bar_mouse_button(event)
+	// highlight-start
+	elif event is InputEventMouseMotion:
+		_on_title_bar_mouse_motion(event)
+	// highlight-end
+
+
+func _on_title_bar_mouse_button(event: InputEventMouseButton) -> void:
+	if event.button_index == MOUSE_BUTTON_LEFT and event.double_click:
+		_on_title_bar_double_click()
+	// highlight-start
+	elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_title_bar_dragging = true
+		_title_bar_dragging_start = get_global_mouse_position()
+	elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		_title_bar_dragging = false
+	// highlight-end
+
+
+func _on_title_bar_double_click() -> void:
+	...
+
+
+// highlight-start
+func _on_title_bar_mouse_motion(_event: InputEventMouseMotion) -> void:
+	if _title_bar_dragging:
+		_on_title_bar_dragged()
+
+
+func _on_title_bar_dragged() -> void:
+	match get_window().mode:
+		Window.MODE_WINDOWED:
+			get_window().position += get_global_mouse_position() as Vector2i - _title_bar_dragging_start
+// highlight-end
+```
+
+:::tip subwindows tip
+**Primeiro**: Talvez seja bom mover para o centro da tela a janela pois a posição poder não estar correta durante a inicialização (bug?):  
+
+```gdscript
+func _ready() -> void:
+	get_window().move_to_center()
+```
+
+**Segundo**: Talvez seja necessário utilizar `get_local_mouse_position()` em vez de `get_global_mouse_position()` pois deve ser necessário o canvas da própria subwindow.  
+:::
+
+Esse foi apenas o essencial sobre arrastar, agora podemos pensar em implementar detalhes sobre a ação de arrastar janelas.  
+
+Por exemplo: Quando o usuário tentar arrastar uma janela máximizada, ela automaticamente sai do máximizado e se posiciona para que o mouse esteja proporcionalmente na posição correta.   
+
+```gdscript
+var _title_bar_dragging: bool = false
+
+var _title_bar_dragging_start: Vector2i
+
+// highlight-next-line
+var _title_bar_dragging_adjustment: float = 0
+
+
+func _on_minimize_pressed() -> void:
+	...
+
+
+func _on_maximize_pressed() -> void:
+	...
+
+
+func _on_close_pressed() -> void:
+	...
+
+
+func _on_title_bar_gui_input(event: InputEvent) -> void:
+	...
+
+
+func _on_title_bar_mouse_button(event: InputEventMouseButton) -> void:
+	...
+
+
+func _on_title_bar_double_click() -> void:
+	...
+
+
+func _on_title_bar_mouse_motion(event: InputEventMouseMotion) -> void:
+	...
+
+
+func _on_title_bar_dragged() -> void:
+	match get_window().mode:
+		Window.MODE_WINDOWED:
+			get_window().position += get_global_mouse_position() as Vector2i - _title_bar_dragging_start
+// highlight-start
+		Window.MODE_MAXIMIZED:
+			_title_bar_dragging_adjustment = get_global_mouse_position().x / get_window().size.x
+			get_window().mode = Window.MODE_WINDOWED
+
+
+func _on_resized() -> void:
+	if _title_bar_dragging_adjustment != 0:
+		get_window().position += (get_global_mouse_position() as Vector2i)
+		get_window().position.x -= get_window().size.x * _title_bar_dragging_adjustment
+		_title_bar_dragging_start = get_global_mouse_position()
+		_title_bar_dragging_adjustment = 0
+// highlight-end
+```
+
+### Resize Window
+Redimensionar pode ser facilmente implementado se utilizarmos o node `MarginContainer` que nos permite adicionar uma margin às laterais, estas serão nossas bordas que devem reagir ao mouse.  
+
+Nodes do tipo `Control` possuem lógica para lidar com inputs do mouse, eles podem consumir ou passar ao node de cima as input do mouse.  
+
+Isso quer dizer que qualquer input do mouse na nossa janela (que não tiver sido consumida) chegará ao nosso`MarginContainer`. Isto não é o que queremos, para nós só é interessante que chegue inputs interagindo com a borda do nosso container.  
+
+Podemos resolver isto parando o consumo de inputs no container logo abaixo do `MarginContainer`:  
+
+![Margins](margin.png)  
+
+Agora temos certeza que interações vindo do signal `gui_input` são interações diretas com o `MarginContainer`.  
