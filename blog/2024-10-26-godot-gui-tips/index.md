@@ -5,7 +5,6 @@ tags: [godot, gui, tips]
 
 # Godot GUI Tips
 
-
 ## 1 - Performance
 Mude o modo de renderização para *Compatibility*, não é como se você fosse precisar de qualquer renderização além do básico para desenhar uma janela na tela.  
 
