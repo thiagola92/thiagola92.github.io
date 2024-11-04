@@ -151,7 +151,6 @@ Note que as 3 aplicações aproveitaram o espaço para providênciar mais inform
 3. Double click maximizar
 4. Arrastar a title bar deve mover a janela
 5. Redimensionar janela se arrastar as bordas
-6. Snap para um dos cantos do monitor quando arrastado para ele
 
 Depois disso você deve ser capaz de adicionar ou remover mais utilidades conforme a sua vontade.  
 
@@ -386,7 +385,7 @@ enum Margin {
 
 var _margin_dragging: bool = false
 
-var _margin_dragging_end: Vector2i
+var _margin_dragging_edge_start: Vector2i
 
 var _margin_selected: Margin
 // highlight-end
@@ -437,7 +436,7 @@ func _on_mouse_button(event: InputEventMouseButton) -> void:
 	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		_margin_dragging = true
 		_margin_selected = _get_current_margin()
-		_margin_dragging_end = get_window().position + get_window().size
+		_margin_dragging_edge_start = get_window().position + get_window().size
 	elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		_margin_dragging = false
 
@@ -458,28 +457,29 @@ func _on_dragged() -> void:
 	match _margin_selected:
 		Margin.TOP:
 			get_window().position.y += mouse_position.y # TODO: Fixing moving window
-			get_window().size.y = _margin_dragging_end.y - get_window().position.y
+			get_window().size.y = _margin_dragging_edge_start.y - get_window().position.y
 		Margin.RIGHT:
 			get_window().size.x = mouse_position.x
 		Margin.BOTTOM:
 			get_window().size.y = mouse_position.y
 		Margin.LEFT:
 			get_window().position.x += mouse_position.x # TODO: Fixing moving window
-			get_window().size.x = _margin_dragging_end.x - get_window().position.x
+			get_window().size.x = _margin_dragging_edge_start.x - get_window().position.x
 		Margin.TOP_RIGHT:
 			get_window().position.y += mouse_position.y # Top
 			get_window().size = Vector2i(
 				mouse_position.x, # Right
-				_margin_dragging_end.y - get_window().position.y, # Top
+				_margin_dragging_edge_start.y - get_window().position.y, # Top
 			)
 		Margin.TOP_LEFT:
 			get_window().position = Vector2i(
 				get_window().position.x + mouse_position.x, # Left,
 				get_window().position.y + mouse_position.y, # Top
 			)
+
 			get_window().size = Vector2i(
-				_margin_dragging_end.x - get_window().position.x, # Left
-				_margin_dragging_end.y - get_window().position.y, # Top
+				_margin_dragging_edge_start.x - get_window().position.x, # Left
+				_margin_dragging_edge_start.y - get_window().position.y, # Top
 			)
 		Margin.BOTTOM_RIGHT:
 			get_window().size = Vector2i(
@@ -489,7 +489,7 @@ func _on_dragged() -> void:
 		Margin.BOTTOM_LEFT:
 			get_window().position.x += mouse_position.x # Left
 			get_window().size = Vector2i(
-				_margin_dragging_end.x - get_window().position.x, # Left
+				_margin_dragging_edge_start.x - get_window().position.x, # Left
 				mouse_position.y, # Bottom
 			)
 
@@ -553,8 +553,15 @@ func _on_resized() -> void:
 
 Dentro das funções novas, muitas possuem a mesma lógica utilizada para arrastar janela. Porém duas possuem lógica nova: `_get_current_margin()` e `_on_dragged()`  
 
-A primeira é responsável por identificar a borda a qual o mouse se encontra (varias validações para identificar a posição do mouse em relação as bordas).  
+**A primeira** é responsável por identificar a borda a qual o mouse se encontra (varias validações para identificar a posição do mouse em relação as bordas).  
 
-A segunda é a lógica de redimensionar, para resolver ela é recomendado primeiro resolver a lógica para cima, direita, baixo e esquerda (as diagonais são combinações das lógicas das outras).  
+**A segunda** é a lógica de redimensionar, para resolver ela é recomendado primeiro resolver a lógica para cima, direita, baixo e esquerda (as diagonais são combinações das lógicas das outras).  
 
-### Snap Window
+:::note
+Redimensionar uma janela inclui redimensionar os items dentro dela, isso pode ser um tanto quanto custoso de se fazer todas as frames.  
+
+Eu penso em testar redimensionar de tempos em tempos e apenas se tiver algum redimensionamento pendente 🤔.  
+:::
+
+### references
+- https://github.com/thiagola92/learning-godot-window
