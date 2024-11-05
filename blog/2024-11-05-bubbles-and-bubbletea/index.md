@@ -154,19 +154,15 @@ func (m MyStruct) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         switch {
         case key.Matches(msg, keys.Quit):
             return m, tea.Quit
-        }
         case key.Matches(msg, keys.Down):
             // Do something
-        }
         case key.Matches(msg, keys.Up):
             // Do something
-        }
     }
 
     return m, nil
 }
 ```
-
 :::
 
 ## Bubbles
