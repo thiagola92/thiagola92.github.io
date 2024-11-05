@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[5960],{83383:a=>{a.exports=JSON.parse('{"label":"golang","permalink":"/en/blog/tags/golang","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);
