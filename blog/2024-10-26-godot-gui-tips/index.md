@@ -562,5 +562,6 @@ Redimensionar uma janela inclui redimensionar os items dentro dela, isso pode se
 Eu penso em testar redimensionar de tempos em tempos e apenas se tiver algum redimensionamento pendente 🤔.  
 :::
 
-### references
+### References
 - https://github.com/thiagola92/learning-godot-window
+- https://www.youtube.com/watch?v=cJ5Rkk5fnGg
