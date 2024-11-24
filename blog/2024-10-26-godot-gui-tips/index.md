@@ -583,7 +583,7 @@ Isto quer dizer que cada sistema operacional possue seu formato de transferênci
 
 Por outro lado, quando toda a operação de DND é dentro do Godot, não precisamos nos preocupar com formatar da maneira que o sistema operacional deseja e podemos passar os dados em um formato conhecido pelo Godot.  
 
-### Drag from Godot
+### Drag from Godot (Control)
 ![DND Godot](dnd_godot.svg)  
 
 No momento que você começa a arrastar qualquer [Control](https://docs.godotengine.org/en/stable/classes/class_control.html), Godot irá chamar o método [`_get_drag_data()`](https://docs.godotengine.org/en/stable/classes/class_control.html#class-control-private-method-get-drag-data) daquele Control.  
@@ -646,8 +646,40 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	icon = data
+
+```
+### Drag from Godot (Node2D + Control)
+Diferente de Controls, [Node2D](https://docs.godotengine.org/en/stable/classes/class_node2d.html) não implementa DND! Se por algum motivo você precisar dessa funcionalidade em seus Node2D, minha recomendação é utilizar Control escondido no Node2D.  
+
+```
+Node2D
+└── Control
 ```
 
+Se quisermos criar um Control genérico para satisfazer isto para qualquer Node2D, podemos escrever o código dele de maneira a chamar o pai quando DND for necessário:  
+
+```gdscript
+extends Control
+
+
+func _get_drag_data(at_position: Vector2) -> Variant:
+	var parent := get_parent()
+	
+	if parent.has_method("_get_drag_data"):
+		return parent._get_drag_data(at_position)
+		
+	return null
+```
+
+Agora basta o pai implementar `_get_drag_data()` igual aos Controls.  
+
+Podemos resolver o drop da mesma maneira, então não pretendo elaborar.  
+
+:::warning
+Estou me referenciando a funcionalidade idêntica ao DND dos Controls.  
+
+Se sua intenção é fazer algo como "dragging character", isto pode ser feito tranquilamente utilizando a mesma lógica de colisões porém tratando clicks do mouse dentro da área.  
+:::
 
 ### Drag from Operating System
 No momento Godot apenas suporta receber o path para os arquivos.  
