@@ -562,6 +562,98 @@ Redimensionar uma janela inclui redimensionar os items dentro dela, isso pode se
 Eu penso em testar redimensionar de tempos em tempos e apenas se tiver algum redimensionamento pendente 🤔.  
 :::
 
-### References
+## 5 - Drag and Drop (DND)
+Podemos dividir em dois tipos:
+- Drag from Godot
+- Drag from Operating System
+
+Entenda que não é possível simplesmente arrastar um item de uma aplicação para outra e esperar que a receptora entenda aquele tipo de dado.  
+
+Por exemplo, imagine que nós puxemos a aba do terminal do VSCode para o Godot.  
+
+![VSCode terminal](vscode_terminal.png)  
+
+Embora VSCode nos permita arrastar está aba e reposiciona-la dentro do próprio VSCode, o Godot não entende o que é está aba (definitivamente não é um Node ou Control).  
+
+Para resolver este problema, o sistema operacional age como intermediários entre as aplicações, forçando a aplicação a formatar de uma maneira esperada pelo OS antes de transferir entre aplicações
+
+:::note
+Isto quer dizer que cada sistema operacional possue seu formato de transferência (normalmente as bibliotecas abstraem isto).  
+:::
+
+Por outro lado, quando toda a operação de DND é dentro do Godot, não precisamos nos preocupar com formatar da maneira que o sistema operacional deseja e podemos passar os dados em um formato conhecido pelo Godot.  
+
+### Drag from Godot
+![DND Godot](dnd_godot.svg)  
+
+No momento que você começa a arrastar qualquer [Control](https://docs.godotengine.org/en/stable/classes/class_control.html), Godot irá chamar o método [`_get_drag_data()`](https://docs.godotengine.org/en/stable/classes/class_control.html#class-control-private-method-get-drag-data) daquele Control.  
+
+Exemplo:  
+
+```gdscript
+extends TextureRect
+
+
+func _get_drag_data(at_position: Vector2) -> Variant:
+	return texture
+```
+
+- Se o método retornar `null`, Godot entenderá que não existe conteúdo sendo arrastado
+	- Por padrão este método virtual retorna `null`
+- Se o método retornar qualquer outro dado, Godot entenderá que existe conteúdo sendo arrastado
+
+Neste momento Godot lança o sinal [NOTIFICATION_DRAG_BEGIN](https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-constant-notification-drag-begin) para todos os [Nodes](https://docs.godotengine.org/en/stable/classes/class_node.html).  
+
+:::info
+Este tipo de notificação é muito utilizada em GUI's pois nos permite destacar uma área onde o conteúdo pode ser solto.  
+
+Por exemplo, Godot detecta que você está arrastando algo válido para aquele campo e cria uma borda azul para deixar claro que é possível soltar o conteúdo lá.  
+
+![Godot blue border](godot_blue_border.png)  
+:::
+
+Agora que estamos no estado "dragging", sempre que passarmos o mouse em cima de um Control, Godot irá chamar o método [`_can_drop_data()`](https://docs.godotengine.org/en/stable/classes/class_control.html#class-control-private-method-can-drop-data) para saber se é possível soltar conteúdo nele.  
+
+Exemplo:  
+
+```gdscript
+extends Button
+
+
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	return data is Texture
+```
+
+- Se o método retornar `false`, Godot entenderá que não suporta o conteúdo sendo arrastado
+	- Por padrão este método virtual retorna `false`
+- Se o método retornar `true`, Godot entenderá que suporta o conteúdo sendo arrastado
+
+:::info
+É normal ver o mouse mudar de aparência para destacar que o conteúdo pode ser largado naquele local.  
+:::
+
+No momento que soltarmos o conteúdo, Godot irá chamar o método [`_drop_data()`](https://docs.godotengine.org/en/stable/classes/class_control.html#class-control-private-method-drop-data) **apenas** se passou na validação do método `_can_drop_data()`.  
+
+Exemplo:  
+
+```gdscript
+extends Button
+
+
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	return data is Texture
+
+
+func _drop_data(at_position: Vector2, data: Variant) -> void:
+	icon = data
+```
+
+
+### Drag from Operating System
+No momento Godot apenas suporta receber o path para os arquivos.  
+
+## References
 - https://github.com/thiagola92/learning-godot-window
 - https://www.youtube.com/watch?v=cJ5Rkk5fnGg
+- https://learn.microsoft.com/en-us/windows/apps/design/input/drag-and-drop
+- https://www.freedesktop.org/wiki/Specifications/XDND/
