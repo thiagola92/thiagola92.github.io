@@ -583,7 +583,7 @@ Isto quer dizer que cada sistema operacional possue seu formato de transferênci
 
 Por outro lado, quando toda a operação de DND é dentro do Godot, não precisamos nos preocupar com formatar da maneira que o sistema operacional deseja e podemos passar os dados em um formato conhecido pelo Godot.  
 
-### Drag from Godot (Control)
+### Drag from Godot
 ![DND Godot](dnd_godot.svg)  
 
 No momento que você começa a arrastar qualquer [Control](https://docs.godotengine.org/en/stable/classes/class_control.html), Godot irá chamar o método [`_get_drag_data()`](https://docs.godotengine.org/en/stable/classes/class_control.html#class-control-private-method-get-drag-data) daquele Control.  
@@ -602,7 +602,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	- Por padrão este método virtual retorna `null`
 - Se o método retornar qualquer outro dado, Godot entenderá que existe conteúdo sendo arrastado
 
-Neste momento Godot lança o sinal [NOTIFICATION_DRAG_BEGIN](https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-constant-notification-drag-begin) para todos os [Nodes](https://docs.godotengine.org/en/stable/classes/class_node.html).  
+Neste momento Godot lança a notificação [NOTIFICATION_DRAG_BEGIN](https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-constant-notification-drag-begin) para todos os [Nodes](https://docs.godotengine.org/en/stable/classes/class_node.html).  
 
 :::info
 Este tipo de notificação é muito utilizada em GUI's pois nos permite destacar uma área onde o conteúdo pode ser solto.  
@@ -646,43 +646,60 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
 	icon = data
-
-```
-### Drag from Godot (Node2D + Control)
-Diferente de Controls, [Node2D](https://docs.godotengine.org/en/stable/classes/class_node2d.html) não implementa DND! Se por algum motivo você precisar dessa funcionalidade em seus Node2D, minha recomendação é utilizar Control escondido no Node2D.  
-
-```
-Node2D
-└── Control
 ```
 
-Se quisermos criar um Control genérico para satisfazer isto para qualquer Node2D, podemos escrever o código dele de maneira a chamar o pai quando DND for necessário:  
+Após soltar o click, independente se tiver sido de algo válido, Godot irá emitir a notificação [NOTIFICATION_DRAG_END](https://docs.godotengine.org/en/stable/classes/class_node.html#class-node-constant-notification-drag-end) para todos os Nodes.  
 
-```gdscript
-extends Control
+:::info
+É possível conseguir informações ao vivo do estado do dragging na [Viewport](https://docs.godotengine.org/en/stable/classes/class_viewport.html).  
 
-
-func _get_drag_data(at_position: Vector2) -> Variant:
-	var parent := get_parent()
-	
-	if parent.has_method("_get_drag_data"):
-		return parent._get_drag_data(at_position)
-		
-	return null
-```
-
-Agora basta o pai implementar `_get_drag_data()` igual aos Controls.  
-
-Podemos resolver o drop da mesma maneira, então não pretendo elaborar.  
-
-:::warning
-Estou me referenciando a funcionalidade idêntica ao DND dos Controls.  
-
-Se sua intenção é fazer algo como "dragging character", isto pode ser feito tranquilamente utilizando a mesma lógica de colisões porém tratando clicks do mouse dentro da área.  
+- [`gui_get_drag_data()`](https://docs.godotengine.org/en/stable/classes/class_viewport.html#class-viewport-method-gui-get-drag-data)
+	- O dado sendo arrastado
+- [`gui_is_drag_successful()`](https://docs.godotengine.org/en/stable/classes/class_viewport.html#class-viewport-method-gui-is-drag-successful)
+	- O resultado do último drag
+- [`gui_is_dragging()`](https://docs.godotengine.org/en/stable/classes/class_viewport.html#class-viewport-method-gui-is-dragging)
+	- O estado atual do drag
 :::
 
-### Drag from Operating System
-No momento Godot apenas suporta receber o path para os arquivos.  
+### Drag from OS
+No momento Godot apenas suporta **drop** do **file manager**, ao fazer isto sua janela irá receber os para os arquivos passados.  
+
+:::info
+Esta ação ocorre entre sistema operacional e as janelas da nossa aplicação, mas é importante entender que está janela **não** pode ser [embedded](https://docs.godotengine.org/en/stable/classes/class_viewport.html#class-viewport-property-gui-embed-subwindows).  
+
+Isso é necessário pois "embed window" é apenas uma simulação de janela dentro da nossa aplicação, logo não é vista como janela pelo OS.  
+:::
+
+O node [Window](https://docs.godotengine.org/en/stable/classes/class_window.html) possui o sinal [files_dropped](https://docs.godotengine.org/en/stable/classes/class_window.html#class-window-signal-files-dropped) para avisar quando um ou mais arquivos são largados na janela.  
+
+Sabendo isto podemos conectar uma função a este sinal da janela principal:  
+
+```gdscript
+func _ready() -> void:
+	get_window().files_dropped.connect(_on_files_dropped)
+
+
+func _on_files_dropped(files: PackedStringArray) -> void:
+	pass
+```
+
+:::note
+Se estivessemos falando de uma subwindow, poderiamos utilizar a própria interface do Godot para conectar.  
+:::
+
+Um detalhe a se notar é que neste caso não recebemos a posição onde os arquivos foram largados, então precisariamos calcular manualmente se está dentro da área esperada.  
+
+```gdscript
+func _ready() -> void:
+	get_window().files_dropped.connect(_on_files_dropped)
+
+
+func _on_files_dropped(files: PackedStringArray) -> void:
+	if Rect2(global_position, size).has_point(get_global_mouse_position()):
+		pass
+```
+
+Este código pode ser adicionado a qualquer Control para que ele trate drops nele.  
 
 ## References
 - https://github.com/thiagola92/learning-godot-window
