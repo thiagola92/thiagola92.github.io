@@ -662,6 +662,8 @@ Após soltar o click, independente se tiver sido de algo válido, Godot irá emi
 :::
 
 ### Drag from OS
+![DND OS](dnd_os.svg)  
+
 No momento Godot apenas suporta **drop** do **file manager**, ao fazer isto sua janela irá receber os para os arquivos passados.  
 
 :::info
