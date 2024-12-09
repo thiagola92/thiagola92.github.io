@@ -99,5 +99,7 @@ Este labirinto está com cara de circuitos da placa mãe. 🤔
 
 ## References
 
-- [cr31 website](http://www.cr31.co.uk/stagecast/wang/intro.html)  
-- [Wikipedia](https://en.wikipedia.org/wiki/Wang_tile)  
+- http://www.cr31.co.uk/stagecast/wang/intro.html
+    - Site is down 😭
+- https://en.wikipedia.org/wiki/Wang_tile
+- https://www.youtube.com/watch?v=tQSL2scuqeU
