@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[3695],{97296:a=>{a.exports=JSON.parse('{"label":"ipc","permalink":"/en/blog/tags/ipc","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);

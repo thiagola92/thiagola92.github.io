@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[1645],{473:a=>{a.exports=JSON.parse('{"label":"interprocess communication","permalink":"/en/blog/tags/interprocess-communication","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);
