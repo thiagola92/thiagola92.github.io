@@ -518,6 +518,8 @@ func _on_dragged(event: InputEventMouseMotion) -> void:
 
 func _on_hover(event: InputEventMouseMotion) -> void:
 	match _get_current_margin(event.position):
+		Margin.NONE:
+			mouse_default_cursor_shape = Control.CURSOR_ARROW
 		Margin.TOP:
 			mouse_default_cursor_shape = Control.CURSOR_VSIZE
 		Margin.RIGHT:
