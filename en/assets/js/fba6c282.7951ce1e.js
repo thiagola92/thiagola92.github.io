@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[4364],{99501:e=>{e.exports=JSON.parse('{"permalink":"/en/blog","page":1,"postsPerPage":10,"totalPages":4,"totalCount":34,"nextPage":"/en/blog/page/2","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

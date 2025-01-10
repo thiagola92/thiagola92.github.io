@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[9405],{1893:e=>{e.exports=JSON.parse('{"label":"referecing couting","permalink":"/en/blog/tags/referecing-couting","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);
