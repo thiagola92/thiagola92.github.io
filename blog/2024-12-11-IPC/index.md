@@ -22,10 +22,10 @@ Inclusive, é como eu implementei [Mondot](https://github.com/thiagola92/Mondot)
 Exemplo:
 - Processo 1
   - Constantemente verifica se o arquivo possui conteúdo
-  - Quando notar que possui, exibe o conteúdo na tela e esvazia o arquivo
+  - Se notar que possui, exibe o conteúdo na tela e esvazia o arquivo
 - Processo 2
   - Constantemente verifica se o arquivo está vazio
-  - Quando notar que está vazio, escreve conteúdo no arquivo
+  - Se notar que está vazio, escreve conteúdo no arquivo
 
 ```C
 #include <stdio.h>
@@ -104,9 +104,26 @@ A realidade é que nós devemos ler ou escrever no arquivo na frequência que ac
 ### File Locking
 *Escrever os dados em um arquivo e esperar que outro processo leia o arquivo **porém respeitando as travas**.*  
 
-Um grande problema da maneira anterior é dois processos interagirem exatamente no mesmo momento com o arquivo.  
+Um grande problema da maneira anterior é dois processos interagirem exatamente no mesmo momento com o arquivo. Imagine que um processo comece a ler enquanto um outro não terminou de escrever, isso fará com que ele leia conteúdo incompleto.  
 
-Imagine que um processo comece a ler enquanto um outro não terminou de escrever, isso fará com que ele leia conteúdo incompleto (parte do conteúdo). Se não tivermos botado garantias para error no nosso código, grandes problemas podem acontecer durante a execução.  
+A maneira de travar arquivos varia em cada sistema operacional. Por exemplo, no Linux temos:  
+- `flock`
+- `lockf`
+- `fcntl`
+
+Utilizaremos `lockf` para aprimorar o exemplo utilizado para arquivos:  
+- Processo 1
+  - Constantemente:
+    - Espera obter a trava para o arquivo
+    - Verifica se o arquivo possui conteúdo
+    - Libera a trava do arquivo
+  - Se notar que possui, exibe o conteúdo na tela e esvazia o arquivo
+- Processo 2
+  - Constantemente:
+    - Espera obter a trava para o arquivo
+    - Verifica se o arquivo possui conteúdo
+    - Libera a trava do arquivo
+  - Se notar que está vazio, escreve conteúdo no arquivo
 
 ### Signal
 

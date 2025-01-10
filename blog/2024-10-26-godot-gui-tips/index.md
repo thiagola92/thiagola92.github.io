@@ -360,11 +360,15 @@ Redimensionar pode ser facilmente implementado se utilizarmos o node `MarginCont
 
 Nodes do tipo `Control` possuem lógica para lidar com inputs do mouse, eles podem consumir ou passar ao node de cima as input do mouse.  
 
-Isso quer dizer que qualquer input do mouse na nossa janela (que não tiver sido consumida) chegará ao nosso`MarginContainer`. Isto não é o que queremos, para nós só é interessante que chegue inputs interagindo com a borda do nosso container.  
+Isso quer dizer que qualquer input do mouse na nossa janela (que não tiver sido consumida) chegará ao nosso `MarginContainer`. Isto não é o que queremos, para nós só é interessante que chegue inputs interagindo com a borda do nosso container.  
 
 Podemos resolver isto parando o consumo de inputs no container logo abaixo do `MarginContainer`:  
 
 ![Margin](margin.png)  
+
+:::note
+Existem `Control`s que por padrão param o consumo do mouse neles, por exemplo: `Panel`.  
+:::
 
 Agora temos certeza que interações vindo do signal `gui_input` são interações diretas com o `MarginContainer`.  
 
@@ -386,6 +390,8 @@ var _margin_dragging: bool = false
 
 var _margin_dragging_edge_start: Vector2i
 
+var _margin_dragging_origin_limit: Vector2i
+
 var _margin_selected: Margin
 // highlight-end
 
@@ -396,7 +402,7 @@ var _title_bar_dragging_start: Vector2i
 var _title_bar_dragging_adjustment: float = 0
 
 // highlight-start
-func _get_current_margin() -> Margin:
+func _get_current_margin(mouse_position: Vector2) -> Margin:
 	var margin: Margin = Margin.NONE
 	
 	if get_global_mouse_position().x < get_theme_constant("margin_left"):
@@ -434,46 +440,63 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_mouse_button(event: InputEventMouseButton) -> void:
 	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		_margin_dragging = true
-		_margin_selected = _get_current_margin()
+		_margin_selected = _get_current_margin(event.position)
 		_margin_dragging_edge_start = get_window().position + get_window().size
+		_margin_dragging_origin_limit = _margin_dragging_edge_start - get_window().min_size
 	elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		_margin_dragging = false
 
 
-func _on_mouse_motion(_event: InputEventMouseMotion) -> void:
+func _on_mouse_motion(event: InputEventMouseMotion) -> void:
 	if _margin_dragging:
-		_on_dragged()
+		_on_dragged(event)
 	else:
-		_on_hover()
+		_on_hover(event)
 
 
-func _on_dragged() -> void:
+func _on_dragged(event: InputEventMouseMotion) -> void:
 	if get_window().mode != Window.MODE_WINDOWED:
 		return
 	
-	var mouse_position: Vector2i = get_global_mouse_position()
-	
 	match _margin_selected:
 		Margin.TOP:
-			get_window().position.y += mouse_position.y # TODO: Fixing moving window
+			get_window().position.y = min(
+				get_window().position.y + event.position.y,
+				_margin_dragging_origin_limit.y
+			)
+			
 			get_window().size.y = _margin_dragging_edge_start.y - get_window().position.y
 		Margin.RIGHT:
-			get_window().size.x = mouse_position.x
+			get_window().size.x = event.position.x
 		Margin.BOTTOM:
-			get_window().size.y = mouse_position.y
+			get_window().size.y = event.position.y
 		Margin.LEFT:
-			get_window().position.x += mouse_position.x # TODO: Fixing moving window
+			get_window().position.x = min(
+				get_window().position.x + event.position.x,
+				_margin_dragging_origin_limit.x
+			)
+			
 			get_window().size.x = _margin_dragging_edge_start.x - get_window().position.x
 		Margin.TOP_RIGHT:
-			get_window().position.y += mouse_position.y # Top
+			get_window().position.y = min(
+				get_window().position.y + event.position.y,
+				_margin_dragging_origin_limit.y
+			) # Top
+			
 			get_window().size = Vector2i(
-				mouse_position.x, # Right
+				event.position.x, # Right
 				_margin_dragging_edge_start.y - get_window().position.y, # Top
 			)
 		Margin.TOP_LEFT:
 			get_window().position = Vector2i(
-				get_window().position.x + mouse_position.x, # Left,
-				get_window().position.y + mouse_position.y, # Top
+				min(
+					get_window().position.x + event.position.x,
+					_margin_dragging_origin_limit.x
+				), # Left,
+				min(
+					get_window().position.y + event.position.y,
+					_margin_dragging_origin_limit.y
+				), # Top
 			)
 
 			get_window().size = Vector2i(
@@ -482,19 +505,19 @@ func _on_dragged() -> void:
 			)
 		Margin.BOTTOM_RIGHT:
 			get_window().size = Vector2i(
-				mouse_position.x, # Right
-				mouse_position.y, # Bottom
+				event.position.x, # Right
+				event.position.y, # Bottom
 			)
 		Margin.BOTTOM_LEFT:
-			get_window().position.x += mouse_position.x # Left
+			get_window().position.x += event.position.x # Left
 			get_window().size = Vector2i(
 				_margin_dragging_edge_start.x - get_window().position.x, # Left
-				mouse_position.y, # Bottom
+				event.position.y, # Bottom
 			)
 
 
-func _on_hover() -> void:
-	match _get_current_margin():
+func _on_hover(event: InputEventMouseMotion) -> void:
+	match _get_current_margin(event.position):
 		Margin.TOP:
 			mouse_default_cursor_shape = Control.CURSOR_VSIZE
 		Margin.RIGHT:
@@ -556,10 +579,12 @@ Dentro das funções novas, muitas possuem a mesma lógica utilizada para arrast
 
 **A segunda** é a lógica de redimensionar, para resolver ela é recomendado primeiro resolver a lógica para cima, direita, baixo e esquerda (as diagonais são combinações das lógicas das outras).  
 
-:::note
-Redimensionar uma janela inclui redimensionar os items dentro dela, isso pode ser um tanto quanto custoso de se fazer todas as frames.  
+:::info
+> Por que redimensionar não é suave igual a outras aplicações?  
 
-Eu penso em testar redimensionar de tempos em tempos e apenas se tiver algum redimensionamento pendente 🤔.  
+Isto ocorre quando a **movimentação** e o **redimensionamento** não ocorrem na mesma frame.  
+
+Por enquanto não é possível de se fazer isto pelo Godot.  
 :::
 
 ## 5 - Drag and Drop (DND)
