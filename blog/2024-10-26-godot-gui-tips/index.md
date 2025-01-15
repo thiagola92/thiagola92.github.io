@@ -355,7 +355,11 @@ func _on_resized() -> void:
 // highlight-end
 ```
 
-### Resize Window
+:::note
+Lembre de se conectar ao sinal `_on_resized`.
+:::
+
+### Resize Window (old)
 Redimensionar pode ser facilmente implementado se utilizarmos o node `MarginContainer` que nos permite adicionar bordas às laterais, estas serão nossas bordas que devem reagir ao mouse.  
 
 Nodes do tipo `Control` possuem lógica para lidar com inputs do mouse, eles podem consumir ou passar ao node de cima as input do mouse.  
@@ -584,10 +588,17 @@ Dentro das funções novas, muitas possuem a mesma lógica utilizada para arrast
 :::info
 > Por que redimensionar não é suave igual a outras aplicações?  
 
-Isto ocorre quando a **movimentação** e o **redimensionamento** não ocorrem na mesma frame.  
+Isto ocorre pois nem sempre a **movimentação** e o **redimensionamento** não ocorrem na mesma frame.  
 
-Por enquanto não é possível de se fazer isto pelo Godot.  
+Por enquanto não é possível de se resolver isto pelo Godot.  
 :::
+
+### Resize Window (new)
+A maneira anterior adiciona um grande problema: Utilizar `MarginContainer` adiciona margins vazias a sua janela e tornava impossível delas encostarem nas bordas do monitor.  
+
+Está outra maneira envolve estruturar uma cena com todas as bordas necessárias.  
+
+![Margin Scene](./margin_scene.png)  
 
 ## 5 - Drag and Drop (DND)
 Podemos dividir em dois tipos:
