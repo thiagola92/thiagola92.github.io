@@ -600,6 +600,245 @@ Está outra maneira envolve estruturar uma cena com todas as bordas necessárias
 
 ![Margin Scene](./margin_scene.png)  
 
+```gdscript
+// highlight-start
+enum Margin {
+	TOP,
+	RIGHT,
+	BOTTOM,
+	LEFT,
+	TOP_RIGHT,
+	TOP_LEFT,
+	BOTTOM_RIGHT,
+	BOTTOM_LEFT,
+}
+
+@export var margin_top: int = 0:
+	set(m):
+		margin_top = m
+		
+		if not get_node_or_null("%Top"):
+			return
+		
+		%TopLeft.custom_minimum_size.y = m
+		%Top.custom_minimum_size.y = m
+		%TopRight.custom_minimum_size.y = m
+
+@export var margin_right: int = 0:
+	set(m):
+		margin_right = m
+		
+		if not get_node_or_null("%Right"):
+			return
+		
+		%TopRight.custom_minimum_size.x = m
+		%Right.custom_minimum_size.x = m
+		%BottomRight.custom_minimum_size.x = m
+
+@export var margin_bottom: int = 0:
+	set(m):
+		margin_bottom = m
+		
+		if not get_node_or_null("%Bottom"):
+			return
+		
+		%BottomLeft.custom_minimum_size.y = m
+		%Bottom.custom_minimum_size.y = m
+		%BottomRight.custom_minimum_size.y = m
+
+@export var margin_left: int = 0:
+	set(m):
+		margin_left = m
+		
+		if not get_node_or_null("%Left"):
+			return
+		
+		%TopLeft.custom_minimum_size.x = m
+		%Left.custom_minimum_size.x = m
+		%BottomLeft.custom_minimum_size.x = m
+
+var _margin_dragging: bool = false
+
+var _margin_dragging_edge_start: Vector2i
+
+var _margin_dragging_origin_limit: Vector2i
+
+var _margin_hovered: Margin
+// highlight-end
+
+var _title_bar_dragging: bool = false
+
+var _title_bar_dragging_start: Vector2i
+
+var _title_bar_dragging_adjustment: float = 0
+
+// highlight-start
+func _process(_delta: float) -> void:
+	if _margin_dragging:
+		_on_dragged()
+
+
+func _on_dragged() -> void:
+	if get_window().mode != Window.MODE_WINDOWED:
+		return
+	
+	var mouse_position: Vector2i = get_global_mouse_position() as Vector2i
+	
+	match _margin_hovered:
+		Margin.TOP:
+			get_window().position.y = min(
+				get_window().position.y + mouse_position.y,
+				_margin_dragging_origin_limit.y
+			)
+			
+			get_window().size.y = _margin_dragging_edge_start.y - get_window().position.y
+		Margin.RIGHT:
+			get_window().size.x = mouse_position.x
+		Margin.BOTTOM:
+			get_window().size.y = mouse_position.y
+		Margin.LEFT:
+			get_window().position.x = min(
+				get_window().position.x + mouse_position.x,
+				_margin_dragging_origin_limit.x
+			)
+			
+			get_window().size.x = _margin_dragging_edge_start.x - get_window().position.x
+		Margin.TOP_RIGHT:
+			get_window().position.y = min(
+				get_window().position.y + mouse_position.y,
+				_margin_dragging_origin_limit.y
+			) # Top
+			
+			get_window().size = Vector2i(
+				mouse_position.x, # Right
+				_margin_dragging_edge_start.y - get_window().position.y, # Top
+			)
+		Margin.TOP_LEFT:
+			get_window().position = Vector2i(
+				min(
+					get_window().position.x + mouse_position.x,
+					_margin_dragging_origin_limit.x
+				), # Left,
+				min(
+					get_window().position.y + mouse_position.y,
+					_margin_dragging_origin_limit.y
+				), # Top
+			)
+
+			get_window().size = Vector2i(
+				_margin_dragging_edge_start.x - get_window().position.x, # Left
+				_margin_dragging_edge_start.y - get_window().position.y, # Top
+			)
+		Margin.BOTTOM_RIGHT:
+			get_window().size = Vector2i(
+				mouse_position.x, # Right
+				mouse_position.y, # Bottom
+			)
+		Margin.BOTTOM_LEFT:
+			get_window().position.x += mouse_position.x # Left
+			get_window().size = Vector2i(
+				_margin_dragging_edge_start.x - get_window().position.x, # Left
+				mouse_position.y, # Bottom
+			)
+
+
+func _on_top_left_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.TOP_LEFT
+	_on_margin_gui_input(event)
+
+
+func _on_top_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.TOP
+	_on_margin_gui_input(event)
+
+
+func _on_top_right_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.TOP_RIGHT
+	_on_margin_gui_input(event)
+
+
+func _on_left_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.LEFT
+	_on_margin_gui_input(event)
+
+
+func _on_right_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.RIGHT
+	_on_margin_gui_input(event)
+
+
+func _on_bottom_left_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.BOTTOM_LEFT
+	_on_margin_gui_input(event)
+
+
+func _on_bottom_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.BOTTOM
+	_on_margin_gui_input(event)
+
+
+func _on_bottom_right_gui_input(event: InputEvent) -> void:
+	_margin_hovered = Margin.BOTTOM_RIGHT
+	_on_margin_gui_input(event)
+
+
+func _on_margin_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		_on_margin_mouse_button(event)
+
+
+func _on_margin_mouse_button(event: InputEventMouseButton) -> void:
+	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_margin_dragging = true
+		_margin_dragging_edge_start = get_window().position + get_window().size
+		_margin_dragging_origin_limit = _margin_dragging_edge_start - get_window().min_size
+	elif event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		_margin_dragging = false
+// highlight-end
+
+
+func _on_minimize_pressed() -> void:
+	...
+
+
+func _on_maximize_pressed() -> void:
+	...
+
+
+func _on_close_pressed() -> void:
+	...
+
+
+func _on_title_bar_gui_input(event: InputEvent) -> void:
+	...
+
+
+func _on_title_bar_mouse_button(event: InputEventMouseButton) -> void:
+	...
+
+
+func _on_title_bar_double_click() -> void:
+	...
+
+
+func _on_title_bar_mouse_motion(_event: InputEventMouseMotion) -> void:
+	...
+
+
+func _on_title_bar_dragged() -> void:
+	...
+
+
+func _on_resized() -> void:
+	...
+```
+
+:::warning
+Eu não passei a limpo o código acima, usei como base o de outro projeto que eu possuia.  
+
+Isto quer dizer que posso ter esquecido de alterar algum nome de função e variável corretamente ou seguindo o mesmo padrão visto anteriormente.  
+:::
+
 ## 5 - Drag and Drop (DND)
 Podemos dividir em dois tipos:
 - Drag from Godot
