@@ -980,6 +980,19 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 
 Este código pode ser adicionado a qualquer Control para que ele trate drops nele.  
 
+## 6 - Debug
+É possível literalmente visualizar o quanto a sua aplicação se redesenha na tela.  
+
+![Debug canvas options](./debug_canvas.png)  
+
+Isto pode ser útil para te alertar se algum control seu está se redesenhando demais.  
+
+:::warning
+Atualmente isto apenas funciona quando utilizando o modo de renderização "Mobile" e este modo afeta o desempenho do Godot.  
+
+Minha recomendação seria apenas utilizar durante as etapas de testes.  
+:::
+
 ## References
 - https://github.com/thiagola92/learning-godot-window
 - https://www.youtube.com/watch?v=cJ5Rkk5fnGg
