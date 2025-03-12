@@ -64,7 +64,9 @@ Por que não fazer com que todas as chamadas da funções utilizem o mesmo espa�
 Imagine que seu código possue uma função recursiva, agora você corre o risco das chamadas a ela mesma alterarem uma variável que era essencial dela.  
 
 ## Stack Allocation
-Se refere a alocação feita no início do programa para dados temporários ou curto tempo de vida. Este espaço reservado é chamado de **Stack**.  
+Se refere a alocar espaço na **Stack**.  
+
+No início do programa, um espaço na memória é reservado para dados temporários ou curto tempo de vida, este espaço reservado é chamado de Stack. Utilizar mais espaço do que o reservado irá causar **Stack Overflow**.  
 
 Isto é necessário pois nosso código pode se ramificar de diversas maneiras, tornando impossível descobrir toda a memória que será utilizada durante a etapa de compilação.  
 
@@ -90,16 +92,16 @@ int run(int a, int b) {
 }
 ```
 
-Quando uma função é chamada, o programa insere na stack variáveis daquela função.  
+Quando uma função é chamada, o programa insere na Stack variáveis daquela função.  
 
 No caso da `func1()`: `a`, `b`.  
 No caso da `func2()`: `a`, `b`, `x`, `y`.  
 
-Ao sair da função, o programa remove esse valor da stack.  
+Ao sair da função, o programa remove esses valores da Stack.  
 
-É importante notar que como o espaço da stack já foi alocada no início do programa, inserir e remover da stack são operações rápidas.  
+É importante notar que como o espaço da Stack já foi alocada no início do programa, inserir e remover da Stack são operações rápidas.  
 
-Quando CPUs precisam de dados da memória RAM, elas pegam um bloco de dados de cada vez. O ideal é que nessa pegada já tivesse tudo que a CPU precisaria, para ajudar nisto stacks seguem o modelo (LIFO, *last-in, first-out*).  
+Quando CPUs precisam de dados da memória RAM, elas pegam um bloco de dados de cada vez. O ideal é que nessa pegada já tivesse tudo que a CPU precisaria, para ajudar nisto Stacks seguem o modelo (LIFO, *last-in, first-out*).  
 
 Pegando a `func2()` como exemplo:  
 
@@ -112,23 +114,68 @@ Pegando a `func2()` como exemplo:
 
 Podemos notar que inserimos na stack na ordem em que encontramos as variáveis, justamente para quando a CPU pegar um bloco de memória a chance de pegar tudo aumentar.  
 
-Por outro lado note que essa arquitetura impede que nossas variáveis possam crescer de tamanho (`b` não poderia crescer de tamanho pois o espaço seguinte já está reservado por `x`).  
+Por outro lado, note que essa arquitetura impede que nossas variáveis possam crescer de tamanho (`b` não poderia crescer de tamanho pois o espaço seguinte já está reservado por `x`), por isto os valores inseridos na Stack precisam ter tamanho **fixo**.  
 
 ## Explicit Memory Management
-Se refere a alocação feita durante a execução do programa para dados de tamanhos variados. Este espaço reservado é chamado de **Heap**.  
+Se refere a alocar espaço na **Heap**.  
+
+Existem casos onde precisamos que a memória possa crescer ou diminuir tamanho, justamente pois não temos como saber o quanta memória será necessária (e armazenar toda a memória RAM para si mesmo seria rude).  
+
+É importante notar que o sistema operacional é responsável por gerenciar a memória, então precisamos pedir a ele por espaço de memória RAM para utilizar.  
+
+Por exemplo, note como utilizamos a função `malloc` para pedir ao sistema operacional por espaço para 3 inteiros:  
 
 ```C
-int run(int n) {
-    int *v = (int*)malloc(sizeof(int) * n);
+int run() {
+    int *v = (int*)malloc(sizeof(int) * 3);
     v[0] = 10;
     v[1] = 100;
     v[2] = 1000;
-    v[3] = 10000;
     free(v);
 
     return 0;
 }
 ```
+
+Fazer uma requisição por N espaços de memória ao sistema operacional, nos garante N espaço de memória, ou seja, podemos receber mais espaço de memória que o necessário (estou ignorando o caso onde a memória RAM está cheia).  
+
+Este comportamento tem como objeto minimizar a quantidade de requisições feitas ao sistema operacional por memória, pois estas requisições custam bastante tempo.  
+
+Vamos pegar outro exemplo:  
+
+```C
+int run() {
+    int *v = (int*)malloc(sizeof(int) * 3);
+    v[0] = 10;
+    v[1] = 100;
+    v[2] = 1000;
+    v[3] = 10000; // New line.
+    free(v);
+
+    return 0;
+}
+```
+
+Existe a chance deste código dar erro e a chance de não dar, tudo depende de quanta memória RAM o sistema operacional nos deu. Se ele tiver nos dado exatamente 3, um erro de **Core Dumped** vai aparecer pois o sistema operacional não nos permite acessar memória RAM que ele não nos entregou.  
+
+Por outro lado, grande chance de não dar erro pois sistema operacional costumam enviar bem mais que o necessário. O seguinte código tem bem mais chance de dar erro:  
+
+```C
+
+int run() {
+    int *v = (int*)malloc(sizeof(int) * 3);
+    v[0] = 10;
+    v[1] = 100;
+    v[2] = 1000;
+    v[3] = 10000;
+    v[100000] = 100000; // New line.
+    free(v);
+
+    return 0;
+}
+```
+
+Importante notar que `v` contém o endereço da memória RAM requisitada ao sistema operacional (o endereço na Heap), porém o valor de `v`, o endereço` é armazenado na Stack pois é uma espaço de memória fixo (um endereço tem um tamanho fixo de memória).  
 
 ## Garbage Collection
 
@@ -142,3 +189,4 @@ int run(int n) {
 - https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)
 - https://en.wikipedia.org/wiki/Reference_counting
 - https://www.youtube.com/watch?v=N3o5yHYLviQ
+- https://www.youtube.com/watch?v=ioJkA7Mw2-U
