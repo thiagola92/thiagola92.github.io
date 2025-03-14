@@ -59,9 +59,13 @@ Text segments são armazenados uma vez e apenas utilizados para leitura durante 
 
 **Código de funções** são somente leitura pois estamos falando da base para se criar funções conforme o necessário. O que eu quero dizer com isto? Toda vez que executarmos uma função, utilizaremos o código da função como base para alocar memória para aquela execução da função!  
 
-Por que não fazer com que todas as chamadas da funções utilizem o mesmo espaço? Cada chamada pode ter comportamento diferente por causa de parâmetros ou fatores externos. Isto quer dizer arriscariamos colisão entre as execuções, o que poderia trazer resultados diferentes.  
+:::info
+> Por que não fazer com que todas as chamadas da funções utilizem o mesmo espaço?  
+
+Cada chamada pode ter comportamento diferente por causa de parâmetros ou fatores externos. Isto quer dizer arriscariamos colisão entre as execuções, o que poderia trazer resultados diferentes.  
 
 Imagine que seu código possue uma função recursiva, agora você corre o risco das chamadas a ela mesma alterarem uma variável que era essencial dela.  
+:::
 
 ## Stack Allocation
 Se refere a alocar espaço na **Stack**.  
@@ -123,7 +127,7 @@ Existem casos onde precisamos que a memória possa crescer ou diminuir tamanho, 
 
 É importante notar que o sistema operacional é responsável por gerenciar a memória, então precisamos pedir a ele por espaço de memória RAM para utilizar.  
 
-Por exemplo, note como utilizamos a função `malloc` para pedir ao sistema operacional por espaço para 3 inteiros:  
+Por exemplo, note como utilizamos a função `malloc()` para pedir ao sistema operacional por espaço para 3 inteiros:  
 
 ```C
 int run() {
@@ -156,12 +160,11 @@ int run() {
 }
 ```
 
-Existe a chance deste código dar erro e a chance de não dar, tudo depende de quanta memória RAM o sistema operacional nos deu. Se ele tiver nos dado exatamente 3, um erro de **Core Dumped** vai aparecer pois o sistema operacional não nos permite acessar memória RAM que ele não nos entregou.  
+Existe a chance deste código dar erro e a chance de não dar, tudo depende de quanta memória RAM o sistema operacional nos deu. Se ele tiver nos dado exatamente 3, um erro de **Segmentation fault** vai aparecer pois o sistema operacional não nos permite acessar memória RAM que ele não nos entregou.  
 
 Por outro lado, grande chance de não dar erro pois sistema operacional costumam enviar bem mais que o necessário. O seguinte código tem bem mais chance de dar erro:  
 
 ```C
-
 int run() {
     int *v = (int*)malloc(sizeof(int) * 3);
     v[0] = 10;
@@ -177,11 +180,108 @@ int run() {
 
 Importante notar que `v` contém o endereço da memória RAM requisitada ao sistema operacional (o endereço na Heap), porém o valor de `v`, o endereço` é armazenado na Stack pois é uma espaço de memória fixo (um endereço tem um tamanho fixo de memória).  
 
+O grande problema que aparece com o uso da Heap é garantir que o seu programa libere a memória obtida, pois é bem comum de usuários da linguagem esquecerem de devolver a memória (`free()`).  
+
+Para evitar este tipo de problema, algumas técnicas para gerênciar memória foram criados:  
+
+- Garbage Collection
+- Reference Counting
+- Ownership Model
+
 ## Garbage Collection
+É uma técnica onde toda a responsabilidade de alocar e liberar memória (`malloc()` e `free()`) é passada ao **Garbage Collector**, onde ele deve conseguir detectar que a memória não está mais sendo usada e libera-la.  
+
+:::info
+A requisição de memória (`malloc()`) sempre é feita pelo usuário, mesmo em linguagens que possuem Garbage Collector embutido.  
+
+Pode não ser tão claro notar estes pedidos de alocação:  
+
+- Python
+    - `example = []`
+- GDScript
+    - `var example = []`
+- Java
+    - `Obj example = new ArrayList<Obj>();`
+:::
+
+É possível implementar um Garbage Collector em linguagens que não possuem um embutido, porém por não ser embutido, bibliotecas de terceiros podem acabar por não utiliza-lo e vazamento de memória pode acontecer de qualquer maneira.  
+
+:::note
+Por exemplo, para a linguagem de programação C podemos encontrar este pequeno projeto:  
+https://github.com/orangeduck/tgc  
+:::
+
+A grande desvantagem desta técnica é que pausas no seu programa precisam ser feitas para que o Garbage Collector tenha tempo de análisar memórias que não estão mais em uso.  
 
 ## Reference Counting
+Nesta técnica, toda alocação de memória inclue um contador para sabermos quantas vezes aquele espaço alocado está sendo referenciado. Quando o contador chega a zero, uma chamada para liberar a memória é feita (`free()`).  
+
+A quantidade de referências aumenta a qualquer momento que alguém aponta para aquele espaço de memória. Por exemplo:  
+
+```GDScript
+func _ready() -> void:
+	var x = RefCounted.new()
+	var y = x
+	var z = [x]
+	print(x.get_reference_count()) # Three
+	y = null
+	z = []
+	print(x.get_reference_count()) # One
+```
+
+Cada vez que alguém referência o espaço de memória alocado por pedido da segunda linha, o contador cresce.  
+
+```GDScript
+func _ready() -> void:
+	var x = RefCounted.new()
+	var y = x
+	var z = [x]
+	print(x.get_reference_count()) # Three
+	y = null
+	z = []
+	print(x.get_reference_count()) # One
+```
+
+Cada vez que alguém para de referênciar aquele espaço de memória, o contador desce.  
+
+```GDScript
+func _ready() -> void:
+	var x = RefCounted.new()
+	var y = x
+	var z = [x]
+	print(x.get_reference_count()) # Three
+	y = x
+	x = null
+	print(y.get_reference_count()) # One
+	y = x
+	x = null
+	print(y.get_reference_count()) # One
+```
+
+É importante notar que o contador não existe com a variável inicial, no caso `x`, então a qualquer momento podemos fazer com que a variável inicial deixe de referênciar e continuaremos sem problemas de usar aquela memória!  
+
+O lado negativo é que a cada referência a está variável, precisamos aumentar/diminuir o contador. O que pode ser custoso quando tem que se fazer isso para **toda** memória da Heap.  
+
+:::warn
+A técnica mais simples de reference counting também não é bom em lidar com **reference cycles**. Quando referências apontam entre sim, o que faz com que os contadores nunca cheguem a zero.  
+:::
 
 ## Ownership Model
+Diferente das maneiras anteriores onde o programador não precisa pensar sobre a liberação de memória, neste caso temos que seguir regras que no final ajudam o compilador a determinar quando que a memória deve ser liberada.  
+
+Como isto é feito durante a etapa de compilação, a execução do seu software não sofre perda de desempenho e qualquer erro relacionado ao assunto é pego durante a compilação.  
+
+A documentação da linguagem Rust deixa claro as regras:
+
+- Cada valor possue um dono
+- Valores apenas podem possuir um dono
+- Quando o dono sai do escopo, o valor é liberado
+
+:::info
+A primeira regra parece ser apenas uma introdução de que existe o conceito de dono.  
+A segunda é para deixar claro que um valor não pode ter múltiplos donos.  
+A terceira nos deixa claro quando o compilador irá adicionar a liberação de memória.  
+:::
 
 ## References
 - https://en.wikipedia.org/wiki/Memory_management
@@ -190,3 +290,4 @@ Importante notar que `v` contém o endereço da memória RAM requisitada ao sist
 - https://en.wikipedia.org/wiki/Reference_counting
 - https://www.youtube.com/watch?v=N3o5yHYLviQ
 - https://www.youtube.com/watch?v=ioJkA7Mw2-U
+- https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html

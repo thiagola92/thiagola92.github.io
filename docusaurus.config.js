@@ -4,7 +4,7 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 // Math markdown
 import remarkMath from 'remark-math';
@@ -49,7 +49,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-          'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
+            'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
           routeBasePath: '/',
 
           // Math markdown
@@ -61,8 +61,8 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-          'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
-        blogSidebarCount: 'ALL',
+            'https://github.com/thiagola92/thiagola92.github.io/tree/master/',
+          blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -99,9 +99,9 @@ const config = {
             position: 'left',
             label: 'About',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://thiagola92.github.io/curriculum.html',
+            href: 'https://thiagola92.github.io/curriculum',
             label: 'Curriculum',
             position: 'left',
           },
@@ -123,11 +123,11 @@ const config = {
       },
     }),
 
-    // Mermaid markdown
-    markdown: {
-      mermaid: true,
-    },
-    themes: ['@docusaurus/theme-mermaid'],
+  // Mermaid markdown
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 };
 
 export default config;
