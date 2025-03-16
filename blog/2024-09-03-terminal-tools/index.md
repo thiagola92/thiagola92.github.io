@@ -58,6 +58,7 @@ Aqueles marcados com estrela (⭐) são ainda utilizados por mim.
     - **Nota 2**: Sintaxe muito mais agradável
     - **Nota 3**: Remove a necessidade de possuir `jq`
     - **Nota 4**: Remove a necessidade de possuir `curl` pois possui o comando `http`
+    - **Nota 5**: Remove a necessidade de possuir `df`/`duf` pois possui o comando `sys disks`
 
 Em shells "uso diário" é 100% de quando você utilizar o shell, então sempre é alto.  
 
