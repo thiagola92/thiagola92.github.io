@@ -220,7 +220,7 @@ int main(void) {
 ```
 
 ### Signal
-*Enviar um signal simples para outro processo/thread*  
+*Enviar um signal ao processo/thread para uma função tratar*  
 
 Diferente de outros IPC, signal não é focado em comunicação no nível de aplicação, então não é muito utilizado para enviar dados, normalmente apenas para notificar outro processo da ocorrência de algo.  
 
@@ -397,6 +397,204 @@ int main(int argc, char **args) {
 ```
 
 ### Pipe
+*Ler e escrever no pipe de outro processo filho/pai*  
+
+:::warning
+Para entender bem pipe, recomendo entender bem file descriptor (o que eu não entendia muito bem).  
+
+Recomendação: https://www.youtube.com/watch?v=rW_NV6rf0rM
+:::
+
+O conceito de pipes é bem simples, você escreve em um lado do pipe e para alguém ler do outro lado dele.  
+
+Podemos criar um pipe com o comando `pipe()`:  
+
+```C
+#include <stdio.h>
+#include <unistd.h>
+
+int main(void) {
+  int file_descriptors[2];
+
+  pipe(file_descriptors);
+
+  printf("Pipe input: %d\n", file_descriptors[0]);
+  printf("Pipe output: %d\n", file_descriptors[1]);
+
+  return 0;
+}
+```
+
+O comando `pipe()` inseri dois file descriptors, um para a entrada do pipe e outro para a saída do pipe, no nosso array. O comando também retorna -1 em caso de erro, mas eu irei ignorar tratamentos de erros nesses exemplos.  
+
+:::info
+O que é um file descriptor? É um número inteiro utilizado pelo seu processo para pedir ao sistema operacional por acesso a um arquivo. É preciso entender que quando você escreve/lê de um arquivo, você na verdade está pedindo para o sistema operacional fazer isto para você.  
+
+O sistema operacional possue uma tabela com todos os files descriptors de cada processo (e outras informações relacionadas ao arquivo).  
+
+| processo id | file descriptor | file position | ... |
+| ---         | ---             | ---           | --- |
+| 1034        | 3               | 0             | ... |
+| 567         | 7               | 10            | ... |
+| 3945        | 4               | 4959          | ... |
+| 12034       | 3               | 283           | ... |
+
+Então toda vez que você deseja abrir um arquivo, o sistema operacional te entrega um file descriptor. Este file descriptor é como se fosse um ticket que permite você pedir ao sistema operacional por interações com aquele arquivo ("Oi sistema operacional, eu gostaria de escrever no arquivo relacionado a este ticket").  
+:::
+
+Começamos com o mínimo de IPC quando utilizando `pipe()` com `fork()`:  
+
+```C
+#include <stdio.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main(void) {
+  char message[3];
+  int file_descriptors[2];
+
+  pipe(file_descriptors);
+
+  if (fork()) {
+    // Parent
+    wait(NULL);
+    read(file_descriptors[0], message, 3);
+    printf("Message: %s\n", message);
+  } else {
+    // Child
+    write(file_descriptors[1], "hi", 3);
+  }
+
+  return 0;
+}
+```
+
+Cada processo possui seus próprios file descriptors, que por sua vez levam a um arquivo/pipe/etc. Porém quando fazemos um `fork()`, nossas entradas na tabela de file descriptors também é clonada.  
+
+Por exemplo, vamos supor que o ID do processo pai é 1034 e o filho nasceu com o ID 1035. Quando o filho nasce, ele herda todos os files descriptors:  
+
+| processo id | file descriptor | file position | ... | leva ao pipe |
+| ---         | ---             | ---           | --- | ---          |
+| 1034        | 3               | 0             | ... | 1000         |
+| 1035        | 3               | 0             | ... | 1000         |
+
+Ou seja, o file descriptor com número 3 do pai e do filho irão levar ao mesmo arquivo/pipe/etc.  
+
+Isto não quer dizer que todos os file descriptors futuros seram compartilhados! Por exemplo:  
+
+```C
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main(void) {
+  int file_descriptors[2];
+  int more_file_descriptors[2];
+
+  pipe(file_descriptors);
+
+  if (fork()) {
+    // Parent
+    pipe(more_file_descriptors);
+    wait(NULL);
+  } else {
+    // Child
+    pipe(more_file_descriptors);
+  }
+
+  return 0;
+}
+```
+
+Ao chamar `pipe()` dentro do pai ou do filho, você está pedindo para o sistema operacional criar um pipe para aquele processo. O pai e filho receberam pipes distintos embora possuam o mesmo file descriptor (justamente pois file descriptors são identificadores únicos do processo).  
+
+| processo id | file descriptor | file position | ... | leva ao pipe |
+| ---         | ---             | ---           | --- | ---          |
+| 1034        | 3               | 0             | ... | 1000         |
+| 1034        | 4               | 0             | ... | 2000         |
+| 1034        | 5               | 0             | ... | 2000         |
+| 1035        | 3               | 0             | ... | 1000         |
+| 1035        | 4               | 0             | ... | 3000         |
+| 1035        | 5               | 0             | ... | 3000         |
+
+### Named Pipe (FIFO)
+*Ler e escrever no pipe de outro processo*  
+
+A diferença deste pipe para o anterior é que qualquer processo pode se ligar a ele, seja para escrever ou ler, pois ele é praticamente um arquivo no sistema.
+
+O comando utilizado para criar o este pipe é `mkfifo()` e da mesma maneira que arquivos tem permissões... Você deve passar as permissões do arquivo como parâmetro, no nosso caso irei passar `0666` (rw-rw-rw).  
+
+Lembrando que um pipe só é um pipe se tiver pelo menos um lado de entrada e outro de saída, ou seja, funções de escrita/leitura do pipe irão ficar travadas até que o outro lado do pipe exista.  
+
+Enquanto não tiver ninguém lendo do pipe, o comando `write()` irá ficar em loop esperando alguém para ler.  
+Enquanto não tiver ninguém escrevendo no pipe, o comando `read()` irá ficar em loop esperando alguém começar a escrever.  
+
+- Processo 1
+  - Tenta criar o named pipe com devidas permissões
+  - Abre o named pipe para escrita
+  - Escreve no arquivo a mensagem
+- Processo 2
+  - Tenta criar o named pipe com devidas permissões
+  - Abre o named pipe para leitura
+  - Le do arquivo a mensagem
+
+```C
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+int main(void) {
+  mkfifo("pipefile", 0666);
+
+  int file_descriptor = open("pipefile", O_WRONLY);
+  write(file_descriptor, "hi", 3);
+  printf("Message sent\n");
+  
+  return 0;
+}
+```
+
+```C
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+int main(void) {
+  char message[3];
+
+  mkfifo("pipefile", 0666);
+
+  int file_descriptor = open("pipefile", O_RDONLY);
+  read(file_descriptor, &message, 3);
+  printf("Message: %s\n", message);
+  
+  return 0;
+}
+```
+
+É possível ter mais que um processo lendo do mesmo pipe mas é incerto de quem receberá o conteúdo ou se dois processos irão receber o mesmo conteúdo.  
+
+Também é possível não ficar em loop esperando alguém começar a ler/escrever do outro lado do pipe, basta fazer um *or* quando abrindo o pipe (`O_WRONLY | O_NDELAY` ou `O_RDONLY | O_NDELAY`).  
+
+:::info
+Originalmente chamado de FIFO pelo comportamento clássico ["first in, first out"](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)), porém atualmente é mais conhecido pelo nome *named pipe* que deixa implicito que se comporta basicamente igual a um pipe.  
+
+Originalmente criado utilizando a função `mknod()` e passando como argumento `S_IFIFO` para especificar o tipo de arquivo. Justamente por está função suportar diversos tipos:  
+
+| #define  | value   | file type        |
+| -------- | ------- | ---------------- |
+| S_IFSOCK | 0140000 | socket           |
+| S_IFLNK  | 0120000 | symbolic link    |
+| S_IFREG  | 0100000 | regular file     |
+| S_IFBLK  | 0060000 | block device     |
+| S_IFDIR  | 0040000 | directory        |
+| S_IFCHR  | 0020000 | character device |
+| S_IFIFO  | 0010000 | FIFO             |
+:::
+
 
 ### Message Queue
 
@@ -420,3 +618,8 @@ int main(int argc, char **args) {
 - https://man7.org/linux/man-pages/man2/sigaction.2.html
 - https://man7.org/linux/man-pages/man3/sigqueue.3.html
 - https://en.wikipedia.org/wiki/Signal_(IPC)
+- https://en.wikipedia.org/wiki/Pipeline_(Unix)
+- https://en.wikipedia.org/wiki/File_descriptor
+- https://man7.org/linux/man-pages/man3/mkfifo.3.html
+- https://man7.org/linux/man-pages/man2/mknod.2.html
+- https://man7.org/linux/man-pages/man7/inode.7.html
