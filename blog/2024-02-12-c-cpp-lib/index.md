@@ -101,8 +101,8 @@ Agora podemos adicionar `#include <header.h>` sem o compilador reclamar que `hea
 Se tentarmos chamar uma função que está no `header.h` ainda teremos erro pois não temos a função, apenas a assinatura dela. Nós precisamos do código da função, que pode estar em um `.so` ou `.a`.  
 
 :::warning
-- Saiba se sua biblioteca é C++ ou C para saber se deve usar `gcc` ou `g++`.
-- Se ambos tipos de bibliotecas existirem o linker talvez priorize o `.so`.  
+- Saiba se sua biblioteca é C++ ou C para saber se deve usar `gcc` ou `g++`.  
+- Se ambos tipos de bibliotecas existirem o linker vai priorizar procurar o `.so`.  
 :::
 
 ---
@@ -136,7 +136,17 @@ gcc src/main.c -o main -Iinclude -Llib -lname
 
 :::note
 `-lname` vai buscar pela biblioteca `libname.a`, este é um atalho para referênciar bibliotecas.  
-`-l:libname.so` pode ser usado em casos que o nome da biblioteca não segue estes padrões.  
+`-l:libname.a` pode ser usado em casos que o nome da biblioteca não segue estes padrões ou precise forçar o uso da static.  
+:::
+
+:::info
+Muitos pacotes de bibliotecas em Linux providenciam o `.a` quando baixamos a versão `-dev` delas. Por exemplo:  
+
+```
+sudo apt install libxcb-xinput-dev
+```
+
+No meu caso, agora posso encontrar o `libxcb-xinput.a` em `/usr/lib/x86_64-linux-gnu/`.  
 :::
 
 ---
@@ -185,6 +195,15 @@ gcc src/main.c -o main -Iinclude -Llib -lname -Wl,-Rlib
 
 Nosso executável agora vai sempre tentar buscar a biblioteca na pasta `lib` que estiver no mesmo diretório que ele.  
 
+:::warning
+Bibliotecas compartilhadas podem depender de outras bibliotecas compartilhadas. Nestes casos o linker irá utilizar a mesma lógica vista acima para buscar as dependências.  
+
+Caso precise saber das dependências da sua biblioteca, pode utilizar:  
+```
+ldd libname.so
+```
+:::
+
 ## References
 - https://en.wikipedia.org/wiki/GNU_Compiler_Collection#Design  
 - https://en.wikipedia.org/wiki/Preprocessor  
@@ -192,6 +211,7 @@ Nosso executável agora vai sempre tentar buscar a biblioteca na pasta `lib` que
 - https://stackoverflow.com/questions/25160245/clang-linking-with-a-so-file  
 - https://stackoverflow.com/questions/31176747/how-to-use-a-library-with-headers-and-so-files  
 - https://stackoverflow.com/questions/480764/linux-error-while-loading-shared-libraries-cannot-open-shared-object-file-no-s  
+- https://stackoverflow.com/questions/6578484/telling-gcc-directly-to-link-a-library-statically
 - https://www.youtube.com/watch?v=or1dAmUO8k0  
 - https://www.youtube.com/watch?v=pLy69V2F_8M  
 - https://www.youtube.com/watch?v=Wt4dxDNmDA8  
