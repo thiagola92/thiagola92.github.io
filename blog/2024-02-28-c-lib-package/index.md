@@ -3,7 +3,7 @@ authors: thiagola92
 tags: [c, libs, lib, package, packages]
 ---
 
-# C lib package
+# C/C++ Lib packages
 Não bastava meu sofrimento com [utilização de bibliotecas](../2024-02-12-c-cpp-lib/index.md), agora tive mais dor de cabeça por elas virem do package manager (`apt`).  
 
 Meu sofrimento foi enquanto tentava usar a biblioteca [GTK](https://www.gtk.org/) em C.  
