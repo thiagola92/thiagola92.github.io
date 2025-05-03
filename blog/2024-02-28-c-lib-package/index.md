@@ -72,7 +72,7 @@ E aspas também podem ser usadas para buscar em diretórios padrões...
 Mas se você faz isso, você é um criminoso.
 :::
 
-Qual o diretório padrão para bibliotecas? `/usr/include`  
+Qual o diretório padrão para os headers? `/usr/include`  
 
 Lembra quando vimos a lista dos arquivos que o pacote trouxe? Muitos headers foram justamente para o diretório padrão.  
 ```bash
