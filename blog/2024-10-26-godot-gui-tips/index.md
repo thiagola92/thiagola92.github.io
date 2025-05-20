@@ -860,7 +860,7 @@ Isto quer dizer que cada sistema operacional possue seu formato de transferênci
 
 Por outro lado, quando toda a operação de DND é dentro do Godot, não precisamos nos preocupar com formatar da maneira que o sistema operacional deseja e podemos passar os dados em um formato conhecido pelo Godot.  
 
-### Drag from Godot
+### DND: Godot -> Godot
 ![DND Godot](dnd_godot.svg)  
 
 No momento que você começa a arrastar qualquer [Control](https://docs.godotengine.org/en/stable/classes/class_control.html), Godot irá chamar o método [`_get_drag_data()`](https://docs.godotengine.org/en/stable/classes/class_control.html#class-control-private-method-get-drag-data) daquele Control.  
@@ -938,7 +938,7 @@ Após soltar o click, independente se tiver sido de algo válido, Godot irá emi
 	- O estado atual do drag
 :::
 
-### Drag from OS
+### DND: OS -> Godot
 ![DND OS](dnd_os.svg)  
 
 No momento Godot apenas suporta **drop** do **file manager**, ao fazer isto sua janela irá receber os para os arquivos passados.  
@@ -979,6 +979,56 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 ```
 
 Este código pode ser adicionado a qualquer Control para que ele trate drops nele.  
+
+### DND: OS -> Godot Web
+
+Existem dois comportamentos dos navegadores que tornam esse processo um pouco diferente do acima:  
+- A posição global do mouse **não** é atualizada enquanto o usuário estiver arrastando arquivo(s)
+- O navegador cria cópias temporárias dos arquivos arrastados e ele podem ser **deletados** na frame seguinte
+
+Uma maneira de resolver o primeiro problema é esperar atualização de movimento do mouse antes de tratar qualquer lógica do drop.  
+
+```gdscript
+func _ready() -> void:
+	get_tree().root.window_input.connect(_on_window_input)
+	get_window().files_dropped.connect(_on_files_dropped)
+
+
+func _on_window_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		mouse_moved.emit()
+
+
+func _on_files_dropped(files: PackedStringArray) -> void:
+	await mouse_moved
+
+	if Rect2(global_position, size).has_point(get_global_mouse_position()):
+		pass
+```
+
+Porém ao fazer isto existe **grande** chance do segundo problema atacar (deletar os arquivos temporários). Uma possível solução é ler os arquivos antes do `await`:  
+
+```gdscript
+func _ready() -> void:
+	get_tree().root.window_input.connect(_on_window_input)
+	get_window().files_dropped.connect(_on_files_dropped)
+
+
+func _on_window_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		mouse_moved.emit()
+
+
+func _on_files_dropped(files: PackedStringArray) -> void:
+	var filebytes := FileAccess.get_file_as_bytes(files[0])
+
+	await mouse_moved
+
+	if Rect2(global_position, size).has_point(get_global_mouse_position()):
+		pass
+```
+
+Neste exemplo, estou apenas pegando os bytes do primeiro arquivo e armazenando numa variável mas você deve adaptar para o seu caso de uso.  
 
 ## 6 - Debug
 É possível literalmente visualizar o quanto a sua aplicação se redesenha na tela.  
