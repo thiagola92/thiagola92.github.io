@@ -595,8 +595,84 @@ Originalmente criado utilizando a função `mknod()` e passando como argumento `
 | S_IFIFO  | 0010000 | FIFO             |
 :::
 
-
 ### Message Queue
+*Armazenar dados na fila para outro processo retirar*
+
+A maior diferença deste método para os anteriores é o foco em transferência de dados estruturados em vez de inteiro/string, o que torna muito importante que o receptor conheça o formato exato dos dados. O formato dos dados é bem simples:  
+
+```c
+struct message {
+  long message_type;
+  struct m {
+    // Add as many fields you want here.
+  } message;
+}
+```
+
+O primeiro campo da estrutura deve ser um `long` e é informação que a fila irá interpretar.  
+O segundo campo da estrutura pode ser qualquer tipo, pois no momento de inserção na fila você irá informar o tamanho dos dados seguintes ao `long`.  
+
+Isto quer dizer que nós poderiamos estruturar de infinitas maneiras nossa mensagem:  
+
+```c
+struct message {
+  long message_type;
+  char data[10];    // 10 bytes
+}
+```
+
+```c
+struct message {
+  long message_type;
+  int data;         // 4 bytes
+}
+```
+
+```c
+struct message {
+  long message_type;
+  struct d {
+    char name[10];  // 10 bytes
+    int age;        // 4 bytes
+  } data;           // total: 14 bytes
+}
+```
+
+Lembrando que podemos calcular o tamanho de qualquer dado/tipo com `sizeof`:  
+
+```c
+char data[10];
+
+sizeof(data);       // Option 1
+sizeof(char) * 10;  // Option 2
+```
+
+```c
+int data;
+
+sizeof(data);       // Option 1
+sizeof(int);        // Option 2
+```
+
+```c
+struct d {
+  char name[10];
+  int age;
+} data;
+
+sizeof(data);        // Option 1
+sizeof(struct d);    // Option 2
+```
+
+Se qualquer processo pode se conectar a uma fila, então é preciso evitar que processos esbarrem em filas de outros processos. Imagina se meu processo insere algum dado no formato X e outro processo insere na minha fila algum dado no formato Y... Quem ler dessa fila tera sérios erros.  
+
+Para evitar isto, uma fila é identificada por uma chave (do tipo `long`) que é gerada apartir de duas informações:
+- `pathname` que é um caminho para um arquivo que identifica essa aplicação
+  - Normalmente o caminho esperado da aplicação: `/home/thiagola92/.local/bin/application`
+- `proj_id` que é um inteiro (onde os 8 menores bits são utilizados)
+  - Normalmente pessoas botam uma letra qualquer: `'A'` ou `'b'`
+
+As chances de duas aplicações formarem a mesma chave, ao usarem parâmetro, diferentes é bem baixo.  
 
 ### Shared Memory
 
