@@ -1114,7 +1114,6 @@ Se você está desenvolvendo um addon/gdextension para Godot, a recomendação �
 :::
 
 ## References
-- https://github.com/thiagola92/learning-godot-window
 - https://www.youtube.com/watch?v=cJ5Rkk5fnGg
 - https://learn.microsoft.com/en-us/windows/apps/design/input/drag-and-drop
 - https://www.freedesktop.org/wiki/Specifications/XDND/
