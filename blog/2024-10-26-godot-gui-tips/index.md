@@ -1043,6 +1043,56 @@ Atualmente isto apenas funciona quando utilizando o modo de renderização "Mobi
 Minha recomendação seria apenas utilizar durante as etapas de testes.  
 :::
 
+## 7 - Undo & Redo
+Godot fornece uma classe para lidar com desfazer & refazer ações: [`UndoRedo`](https://docs.godotengine.org/en/stable/classes/class_undoredo.html).  
+
+Esta classe funciona registrando ações, que representam aquilo que pode ser desfeito ou refeito.  
+
+![UndoRedo actions timeline](undo_redo_actions.svg)  
+
+É importante entender que ações são aglomerados de operações que serão executadas quando `undo()`/`redo()` for chamado.  
+
+```gdscript
+var undo_redo = UndoRedo.new()
+
+func do_something():
+	undo_redo.create_action("Action name")
+
+	# DO
+	undo_redo.add_do_method(_method_a)
+	undo_redo.add_do_method(_method_b)
+	undo_redo.add_do_method(_method_c)
+	undo_redo.add_do_property(_object_a, "propery_name", "yes")
+	undo_redo.add_do_property(_object_b, "propery_name", 100)
+
+	# UNDO
+	undo_redo.add_undo_method(_method_d)
+	undo_redo.add_undo_method(_method_e)
+	undo_redo.add_undo_method(_method_f)
+	undo_redo.add_undo_property(_object_a, "propery_name", "no")
+	undo_redo.add_undo_property(_object_b, "propery_name", 0)
+
+	undo_redo.commit_action()
+```
+
+Estás operações podem ser chamadas de métodos ou definições de propriedades, mas resta a você definir as operações que desfazem/refazem aquela ação.  
+
+Quando uma nova ação é adicionada, todas ações que estavam na frente são deletadas.  
+
+![UndoRedo new action timeline](undo_redo_new_action.svg)  
+
+Existem casos que a ação envolve liberar (`queue_free()`) um `Node`. Isto criaria um grande problema, pois desfazer está operação seria recriar um node idêntico ao deletado. Imagina o trabalho que daria "settar" todas as propriedades que aquele node tinha... Não quero nem começar a pensar.  
+
+Acontece que `UndoRedo` já providência uma solução simples para isto: 
+- [`add_do_reference()`](https://docs.godotengine.org/en/stable/classes/class_undoredo.html#class-undoredo-method-add-do-reference)
+- [`add_undo_reference()`](https://docs.godotengine.org/en/stable/classes/class_undoredo.html#class-undoredo-method-add-undo-reference)  
+
+Em vez de liberar o objeto, você entrega ele ao `UndoRedo` que ficará encarregado de libera-lo dependendo se ele ainda será necessário ou não para o `UndoRedo`.  
+
+:::note
+Se você está desenvolvendo um addon/gdextension para Godot, a recomendação é utilizar o [EditorUndoRedoManager](https://docs.godotengine.org/en/stable/classes/class_editorundoredomanager.html) (UndoRedo interno do Godot).  
+:::
+
 ## References
 - https://github.com/thiagola92/learning-godot-window
 - https://www.youtube.com/watch?v=cJ5Rkk5fnGg
