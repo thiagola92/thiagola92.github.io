@@ -1089,7 +1089,27 @@ Acontece que `UndoRedo` já providência uma solução simples para isto:
 
 Em vez de liberar o objeto, você entrega ele ao `UndoRedo` que ficará encarregado de libera-lo dependendo se ele ainda será necessário ou não para o `UndoRedo`.  
 
-:::note
+Vamos supor que as ações seis e sete do exemplo anterior tivessemos chamado `add_do_reference()` (normalmente utilizado quando sua ação cria nodes).  
+
+![UndoRedo add do reference](undo_redo_add_ref.svg)  
+
+No momento que a ação oito do exemplo anterior tivesse aparecido, os nodes teriam sido liberados pois não existiria mais caminho para eles.  
+
+![UndoRedo new action timeline when there is nodes added as reference](undo_redo_new_action2.svg)  
+
+Enquanto isso, `add_undo_reference()` é utilizado para o oposto (normalmente utilizado quando sua ação deleta nodes).  
+
+![UndoRedo add undo reference](undo_redo_add_ref2.svg)  
+
+Os nodes teriam liberados da memória, mas estão sendo mantidos nas ações para caso o usuário faça `undo()`.  
+
+Nesse caso a única hora em que eles vão ser liberados da memória, é quando o histórico de undo for deletado.  
+
+> E se eu voltar para a ação 4 e criar uma nova ação?  
+
+Se você voltou até a ação 4, então você desfez a deleção deles e está segurando eles em algum lugar... A ação não precisa mais segurar a referência mas não existe motivo para ela liberar a memória dela.  
+
+:::note  
 Se você está desenvolvendo um addon/gdextension para Godot, a recomendação é utilizar o [EditorUndoRedoManager](https://docs.godotengine.org/en/stable/classes/class_editorundoredomanager.html) (UndoRedo interno do Godot).  
 :::
 
