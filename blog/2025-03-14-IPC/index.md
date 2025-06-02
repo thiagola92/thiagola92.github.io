@@ -609,8 +609,25 @@ struct message {
 }
 ```
 
-O primeiro campo da estrutura deve ser um `long` e é informação que a fila irá interpretar.  
-O segundo campo da estrutura pode ser qualquer tipo, pois no momento de inserção na fila você irá informar o tamanho dos dados seguintes ao `long`.  
+O **primeiro campo** da estrutura deve ser um `long` positivo e serve para o receptor conseguir filtrar pelas mensagens que deseja receber.  
+
+O receptor passa para a fila um valor e com isto a fila sabe qual mensagem pegar para ele:  
+
+| Valor  |                                                                                          | `if`                     |
+| ------ | ---------------------------------------------------------------------------------------- | ------------------------ |
+| 0      | Receptor quer a próxima mensagem da fila, não importa qual seja o tipo                   | `true`                   |
+| > 0    | Receptor quer a próxima mensagem da fila com aquele tipo                                 | `message_type == X`      |
+| < 0    | Receptor quer a próxima mensagem da fila com tipo menor ou igual ao absoluto deste valor | `message_type <= abs(X)` |
+
+:::danger
+Eu repito, o primeiro campo **deve** ser um número POSITIVO.  
+
+Mesmo que o receptor vá utilizar 0, por querer qualquer mensagem, você como emissor deve botar um número positivo.  
+
+A fila não permite que você bote mensagens com o primeiro campo zero...  
+:::
+
+O **segundo campo** da estrutura pode ser qualquer tipo, pois no momento de inserção na fila você irá informar o tamanho dos dados seguintes ao `long`.  
 
 Isto quer dizer que nós poderiamos estruturar de infinitas maneiras nossa mensagem:  
 
@@ -638,7 +655,7 @@ struct message {
 }
 ```
 
-Lembrando que podemos calcular o tamanho de qualquer dado/tipo com `sizeof`:  
+Pois podemos calcular o tamanho de qualquer dado/tipo com `sizeof`:  
 
 ```c
 char data[10];
@@ -669,10 +686,89 @@ Se qualquer processo pode se conectar a uma fila, então é preciso evitar que p
 Para evitar isto, uma fila é identificada por uma chave (do tipo `long`) que é gerada apartir de duas informações:
 - `pathname` que é um caminho para um arquivo que identifica essa aplicação
   - Normalmente o caminho esperado da aplicação: `/home/thiagola92/.local/bin/application`
+  - O arquivo precisa existir, caso contrário irá falhar
 - `proj_id` que é um inteiro (onde os 8 menores bits são utilizados)
   - Normalmente pessoas botam uma letra qualquer: `'A'` ou `'b'`
 
-As chances de duas aplicações formarem a mesma chave, ao usarem parâmetro, diferentes é bem baixo.  
+As chances de duas aplicações formarem a mesma chave é bem baixo.  
+
+Vamos aos códigos
+
+- Processo 1
+  - Cria a message queue
+  - Escreve mensagem na fila
+- Processo 2
+  - Acessa a message queue
+  - Le mensagem da fila
+  - Destroi a fila
+
+```C
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/types.h>
+
+struct message_data {
+  int a;
+  char b[256];
+  float c;
+};
+
+struct message {
+  long type;
+  struct message_data data;
+};
+
+int main(void) {
+  size_t data_size = sizeof(struct message_data);
+  struct message message = {
+      1,
+      {10, "example", 5.5},
+  };
+
+  key_t key = ftok("./send_msg.c", 'A');
+  int message_queue_id = msgget(key, 0666 | IPC_CREAT);
+  msgsnd(message_queue_id, &message, data_size, 0);
+
+  return 0;
+}
+```
+
+```C
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/types.h>
+
+struct message_data {
+  int a;
+  char b[256];
+  float c;
+};
+
+struct message {
+  long type;
+  struct message_data data;
+};
+
+int main(void) {
+  int data_size = sizeof(struct message_data);
+  struct message msg;
+
+  key_t key = ftok("./send_msg.c", 'A');
+  int msg_queue_id = msgget(key, 0666);
+  msgrcv(msg_queue_id, &msg, data_size, 0, 0);
+
+  printf("  a: %d\n  b: %s\n  c: %f", msg.data.a, msg.data.b, msg.data.c);
+
+  // Destroy message queue.
+  msgctl(msg_queue_id, IPC_RMID, NULL);
+
+  return 0;
+}
+```
+
+É importante destroir a fila quando não for mais utiliza-la, pois ela não é destruida quando o seu processo encerra.  
 
 ### Shared Memory
 
