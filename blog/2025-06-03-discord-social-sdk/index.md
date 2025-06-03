@@ -4,38 +4,79 @@ tags: [discord, sdk]
 ---
 
 # Discord Social SDK
-Discord possui uma nomeclatura realmente confusa, pois o nome de features utilizadas pelo usuário podem não corresponder ao nome da feature na SDK **ou** features não possuem nome específico e o termo mais abrangente delas pode causa confusão com outras features.  
+Internamente Discord possui uma nomeclatura realmente confusa.  
+
+O nome de uma feature qualquer do Discord, pode não ser o mesmo dentro da SDK **ou**, até mesmo, não possuir um nome certo. Por exemplo, activities...  
 
 ## Activity
-*É um termo genérico para qualquer atividade que o usuário esteja fazendo e que seja compartilhada com o Discord.*  
+![Site do Discord explicando o que é activity](activity.png)  
+<small>(https://discord.com/developers/docs/activities/overview)</small>
 
-Isto quer dizer que pode ser qualquer jogo ou software rodando fora do Discord (League of legends, Spotify, etc) quanto aquelas atividades em grupo que é possível fazer dentro do Discord com os amigos.  
+Na imagem podemos ver que a definição dada é:  
 
-No Discord, existe um botão no Discord o qual mostra a mensagem "Start an Activity" quando você para o mouse em cima. Por está feature não ter um nome mais específico, pode ser um tanto confuso referênciar saber quando está se referenciado a apenas ela ([olhe como Discord se referência a elas](https://discord.com/developers/docs/activities/overview)).  
+> Activities are multiplayer games and social experiences that can be launched in Discord
 
-## Guild
-*É um termo dentro da SDK para se referência a servers*  
+Activites eram essas atividades em grupo que nós poderiamos iniciar ao pressionar o botão "Start an Activity" durante uma chamada de voz:  
 
-Server é um termo muito específico dentro de computação, então utilizar um termo de jogos foi uma boa ideia da SDK. Porém, o fato de não decidirem utilizar o memso termo fora da SDK causa uma grande complicação.  
+![Botão "start an activity"](activity2.png)  
+
+E é justamente isto que **eu**, como usuário do Discord, esperava que activity fosse ser para sempre. 
+
+---
+
+Recentemente descobri que Discord decidiu generalizar o termo para:  
+
+***Qualquer atividade que o usuário esteja fazendo e que tenha sido compartilhada com o Discord.***  
+
+É por isto que podemos encontrar várias seções de atividades dentro do Discord:  
+https://support.discord.com/hc/en-us/articles/7931156448919-Activity-Status-Recent-Activity  
+
+A nova SDK utiliza está definição nova, enquanto documentações antigas do Discord ainda podem não ter sido atualizadas.  
+
+## Guild (aka Server)
+> Guilds in Discord represent an isolated collection of users and channels, and are often referred to as "servers" in the UI.  
+
+Meu palpite é que "server" seja um termo muito específico dentro de computação, então utilizar um termo de jogos internamente ajuda bastante. Maaaas não é um termo que qualquer pessoa do dia a dia iria entender e por isto decidiram utilizar "server" na UI.  
+
+Para mim deveriam ter ficado com Guild por organização, mesmo que pessoas normais fossem achar nerd ou estranho.  
+
+---
+
+Vale mencionar que recentemente tentaram utilizar o termo Guild para outra feature deles (que foi cancelada):  
+
+![FAQ do Discord explicando Guild](guild.png)  
+<small>(https://support.discord.com/hc/en-us/articles/23187611406999-Guilds-FAQ)</small>  
 
 ## Channel
-*Err... Pode ser muita coisa*  
-
 Normalmente se imaginaria canais de texto e canais de voz, mas acontece que quase tudo é um channel:  
-https://discord.com/developers/docs/resources/channel#channel-object-channel-types  
 
-Channel pode ser visto como um objeto dentro do Discord (canal de voz, canal de texto, categoria, mensagens de grupo, threads, ...). O que só aumenta a confusão de como obter a informação/ação que você procura dentro da SDK.  
+- Canal de texto de um server
+- Canal de voz de um server
+- Categorizador dos servers
+    - Sabe aquilo para você botar diversos canais de voz/texto em categorias?
+- Threads
+- Mensagem privada entre usuários
+- Mensagem em um grupo
+- ...
+
+<small>(https://discord.com/developers/docs/resources/channel#channel-object-channel-types)</small>   
 
 ## Lobby
-*É um grupo de usuários*  
+É um grupo de usuários... Fim.  
 
-É importante entender que isto existe sem a necessidade de activity/guild/channel... Basicamente é uma maneira de agrupar diversos usuários juntos para depois linkarmos o lobby com algo específico do Discord (canais de texto, ...).  
+Um lobby existe sem a necessidade dos usuários estarem fazendo nada nele (activity/guild/channel/...). É o local onde multiplos usuários decidiram se agrupar junto e ainda não foi decidido o que vão fazer.  
 
-## Call
+Meio difícil de imaginar isto na interface do Discord né?  
 
 # References
-- [Activity](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Activity.html)
-- [Guild](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1GuildMinimal.html)
-- [Channel](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1ChannelHandle.html)
-- [Lobby](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1LobbyHandle.html)
-- [Call](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Call.html)
+- [Activity](https://discord.com/developers/docs/activities/overview)
+- [Activity blog](https://discord.com:2053/blog/server-activities-games-voice-watch-together)
+- [Activity video 1](https://www.youtube.com/watch?v=POMIDMK6WfM)
+- [Activity video 2](https://www.youtube.com/watch?v=8jD0dkCgF7k)
+- [Activity status](https://support.discord.com/hc/en-us/articles/7931156448919-Activity-Status-Recent-Activity)
+- [SDK Activity](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Activity.html)
+- [Guild](https://discord.com/developers/docs/resources/guild)
+- [SDK Guild](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1GuildMinimal.html)
+- [SDK Channel](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1ChannelHandle.html)
+- [SDK Lobby](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1LobbyHandle.html)
+- [SDK Call](https://discord.com/developers/docs/social-sdk/classdiscordpp_1_1Call.html)
