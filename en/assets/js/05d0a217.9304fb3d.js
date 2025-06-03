@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkthiagola_92_github_io=self.webpackChunkthiagola_92_github_io||[]).push([[6196],{34736:a=>{a.exports=JSON.parse('{"label":"discord","permalink":"/en/blog/tags/discord","allTagsPath":"/en/blog/tags","count":1,"unlisted":false}')}}]);
