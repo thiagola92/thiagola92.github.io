@@ -286,9 +286,12 @@
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="shared-memory">Shared Memory<a href="https://thiagola92.github.io/blog/2025/03/14/IPC#shared-memory" class="hash-link" aria-label="Link direto para Shared Memory" title="Link direto para Shared Memory">​</a></h3>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="socket">Socket<a href="https://thiagola92.github.io/blog/2025/03/14/IPC#socket" class="hash-link" aria-label="Link direto para Socket" title="Link direto para Socket">​</a></h3>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="high-level">High Level<a href="https://thiagola92.github.io/blog/2025/03/14/IPC#high-level" class="hash-link" aria-label="Link direto para High Level" title="Link direto para High Level">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="remote-procedure-call">Remote Procedure Call<a href="https://thiagola92.github.io/blog/2025/03/14/IPC#remote-procedure-call" class="hash-link" aria-label="Link direto para Remote Procedure Call" title="Link direto para Remote Procedure Call">​</a></h3>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="http-api">HTTP API<a href="https://thiagola92.github.io/blog/2025/03/14/IPC#http-api" class="hash-link" aria-label="Link direto para HTTP API" title="Link direto para HTTP API">​</a></h3>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="websocket">WebSocket<a href="https://thiagola92.github.io/blog/2025/03/14/IPC#websocket" class="hash-link" aria-label="Link direto para WebSocket" title="Link direto para WebSocket">​</a></h3>
+<p>Por questão de preguiça, não vou escrever sobre outras maneiras como:</p>
+<ul>
+<li>Remote Procedure Call</li>
+<li>HTTP API</li>
+<li>WebSocket</li>
+</ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="references">References<a href="https://thiagola92.github.io/blog/2025/03/14/IPC#references" class="hash-link" aria-label="Link direto para References" title="Link direto para References">​</a></h2>
 <ul>
 <li><a href="https://beej.us/guide/bgipc/" target="_blank" rel="noopener noreferrer">https://beej.us/guide/bgipc/</a></li>
