@@ -5,9 +5,8 @@ sidebar_position: 1
 
 # About
 
-Me chamo **Thiago Lages de Alencar** e sou um **desenvolvedor de software** fanático por descobrir novas ferrametas. Também tenho um grande carinho por projetos open source que dão total liberdade de ver a lógica por trás da magia.  
+Me chamo **Thiago Lages de Alencar** e sou um **desenvolvedor de software** apaixonado por descobrir novas ferramentas. Tenho um grande apreço por projetos open source, que oferecem total liberdade para explorar a lógica por trás da "magia".  
 
-Formado em ciência da computação na [PUC-Rio](https://www.puc-rio.br/index.html).  
-Atualmente eu moro no [Rio de Janeiro](https://en.wikipedia.org/wiki/Rio_de_Janeiro).  
+Sou formado em Ciência da Computação pela [PUC-Rio](https://www.puc-rio.br/index.html) e atualmente moro no [Rio de Janeiro](https://en.wikipedia.org/wiki/Rio_de_Janeiro).  
 
 Contate-me por thiagola92@gmail.com  

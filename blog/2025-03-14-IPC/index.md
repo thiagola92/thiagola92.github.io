@@ -775,12 +775,11 @@ int main(void) {
 ### Socket
 
 ## High Level
+Por questão de preguiça, não vou escrever sobre outras maneiras como:  
 
-### Remote Procedure Call
-
-### HTTP API
-
-### WebSocket
+- Remote Procedure Call
+- HTTP API
+- WebSocket
 
 ## References
 - https://beej.us/guide/bgipc/
