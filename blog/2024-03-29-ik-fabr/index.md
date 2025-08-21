@@ -82,6 +82,10 @@ O ponto vermelho irá representar onde globalmente o início do osso atual está
 
 Estou pausando aqui para lembrar que movimentar e rotacionar um osso afeta todos os filhos, por isto os ossos filhos são movimentados e rotacionados de forma a ficarem "piores" (mais longe do alvo).  
 
+:::danger
+Anos depois... Eu percebi que ajustar a posição e rotação do filho depois de fazer essa operação é uma boa pois conserta diversos problemas. Não irei atualizar este blog pois isto envolveria atualizar imagens e reler o post (esse é meu nível de preguiça aqui).  
+:::
+
 ![TODO](./forward6.svg)  
 
 O osso seguinte irá utilizar o osso anterior como referência, seguimos essa tática para cada um dos ossos.  
