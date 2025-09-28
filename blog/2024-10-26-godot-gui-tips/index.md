@@ -839,6 +839,25 @@ Eu não passei a limpo o código acima, usei como base o de outro projeto que eu
 Isto quer dizer que posso ter esquecido de alterar algum nome de função e variável corretamente ou seguindo o mesmo padrão visto anteriormente.  
 :::
 
+### Icon
+Imagem não é minha área e existe tanta configuração para isto que eu fico perdido. O que eu faço é utilizar um SVG pois ele se adapta a qualuer tamanho.  
+
+Dito isto, para mim ainda foi necessário configurar como Godot importaria meu icone. A parte que eu não esperava era ter que reduzir a escala para conseguir algo mais liso.  
+
+![Icon settings](./icon_scale.png)  
+
+Originalmente eu estava usando a escala 1.0  
+
+![Icon before](./icon_before.png)  
+
+Quando alterei para 0.2 obtive uma icone mais liso  
+
+![Icon before](./icon_after.png)  
+
+:::note
+Não é todo sistema operacional que utiliza icones na title bar.
+:::
+
 ## 5 - Drag and Drop (DND)
 Podemos dividir em dois tipos:
 - Drag from Godot
