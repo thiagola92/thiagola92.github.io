@@ -21,11 +21,11 @@ dedicado ao Desenvolvimento de Softwares para o dia a dia.
 **Link**: https://www.linkedin.com/company/nodistecnologia/  
 
 **Conquistas**:  
-• Responsável pelos scrapers, ou seja, obter dados dos marketplaces, trata-los e inseri-los em nossos Bancos de Dados  
+• Desenvolvimento de scrapers para obter dados dos marketplaces, tratar-los e inseri-los nos Bancos de Dados   
 • Migração de dados entre bancos (PostgreSQL, MongoDB, Elasticsearch)  
 • Automatização de tarefas com Ansible e Docker  
 
-Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuito em aprimorar nossa inteligência por trás de sugestão de produtos.
+Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuito de aprimorar nossa inteligência por trás de sugestão de produtos.
 
 ---
 
@@ -77,7 +77,7 @@ Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuit
 **Data**: 08/2019  
 **Emissor**: PUC-Rio  
 
-# Skills
+# Competências
 
 ### Linguagens
 
@@ -110,21 +110,25 @@ Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuit
 # Projetos Pessoais
 
 **Projeto**: Mondot  
+**Data**: 2021 e 2023  
 
-Minha própria interface gráfica para se comunciar com MongoDB. Onde as queries eram escritas em Python em vez de JavaScript.  
+Minha própria interface gráfica para se comunicar com MongoDB. Onde as queries eram escritas em Python em vez de JavaScript.  
 Foi o primeiro projeto em que utilizei Godot para montar minha própria GUI.  
 
 **Projeto**: BoneIK  
+**Data**: 2024  
 
 Extensão para processar Inverse Kinematic em jogos 2D no Godot.  
 Desde lógica para dois ossos como também lógica para corrente de ossos.   
 
 **Projeto**: Cotuber  
+**Data**: 2025  
 
 PNGTuber que permite juntar diversos usuários em uma mesma apresentação.  
 O desafio deste projeto foi aprender a utilizar Win32 e X11 para criar atalhos globais.  
 
 **Projeto**: Discord GDScript  
+**Data**: 2025  
 
 Extensão que permite utilizar a SDK do Discord pelo GDScript do Godot.  
 É interessante que todo o código C++ da extensão é gerado a partir da leitura dos arquivos headers da SDK.  
