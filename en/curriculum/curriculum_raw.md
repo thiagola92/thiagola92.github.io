@@ -17,8 +17,8 @@ dedicado ao Desenvolvimento de Softwares para o dia a dia.
 **Cargo**: Engenheiro de Web Scraping Líder  
 **Data de Início**: 09/2019  
 **Data de Término**: 01/2023  
-**Empresa**: Nodis  
-**Link**: https://www.linkedin.com/company/nodistecnologia/  
+**Empresa**: Nodis/Linx  
+**Link**: https://www.linx.com.br/  
 
 **Conquistas**:  
 • Desenvolvimento de scrapers para obter dados dos marketplaces, tratar-los e inseri-los nos Bancos de Dados   
@@ -71,7 +71,7 @@ Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuit
 
 **Conquista**: Destaque de Catálogo  
 **Data**: 01/2023  
-**Emissor**: Nodis  
+**Emissor**: Linx  
 
 **Conquista**: Primeiro Lugar em Inovação no HackEng  
 **Data**: 08/2019  
