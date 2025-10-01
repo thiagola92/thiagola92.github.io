@@ -8,6 +8,10 @@
 **Cidade**: Rio de Janeiro  
 **Estado**: RJ  
 
+**Resumo**:  
+Após 3 anos como Engenheiro de Web Scraping Líder, tenho explorado outras áreas da computação. Atualmente, tenho me
+dedicado ao Desenvolvimento de Softwares para o dia a dia.  
+
 # Experiência Profissional
 
 **Cargo**: Engenheiro de Web Scraping Líder  
