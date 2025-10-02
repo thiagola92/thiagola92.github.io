@@ -8,9 +8,7 @@
 **Cidade**: Rio de Janeiro  
 **Estado**: RJ  
 
-**Resumo**:  
-Após 3 anos como Engenheiro de Web Scraping Líder, tenho explorado outras áreas da computação. Atualmente, tenho me
-dedicado ao Desenvolvimento de Softwares para o dia a dia.  
+**Resumo**: Profissional com 3 anos de experiência como Engenheiro de Web Scraping Líder, atuando no desenvolvimento de soluções para coleta e tratamento de grandes volumes de dados. Atualmente focado em projetos de desenvolvimento de software aplicados ao dia a dia, explorando diferentes áreas da computação.  
 
 # Experiência Profissional
 
@@ -21,11 +19,10 @@ dedicado ao Desenvolvimento de Softwares para o dia a dia.
 **Link**: https://www.linx.com.br/  
 
 **Conquistas**:  
-• Desenvolvimento de scrapers para obter dados dos marketplaces, tratar-los e inseri-los nos Bancos de Dados   
-• Migração de dados entre bancos (PostgreSQL, MongoDB, Elasticsearch)  
-• Automatização de tarefas com Ansible e Docker  
-
-Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuito de aprimorar nossa inteligência por trás de sugestão de produtos.
+• Desenvolvimento de scrapers para marketplaces, realizando coleta, tratamento e integração de dados em bancos de dados  
+• Migração e gerenciamento de dados em PostgreSQL, MongoDB e Elasticsearch  
+• Automação de processos com Ansible e Docker  
+• Coleta de mais de 60 milhões de produtos de diversos marketplaces, contribuindo para a inteligência de recomendação de produtos  
 
 ---
 
@@ -36,9 +33,9 @@ Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuit
 **Link**: https://www.puc-rio.br/index.html  
 
 **Conquistas**:  
-• Responsável pelo funcionamento das máquinas utilizadas pelos alunos e professores  
-• Formatação e restauração das máquinas  
-• Scripts para instalação de softwares em Windows e Linux  
+• Suporte e manutenção de estações de trabalho utilizadas por alunos e professores  
+• Formatação e restauração de máquinas  
+• Criação de scripts para automatização de instalação de softwares em Windows e Linux  
 
 # Formação Acadêmica
 
@@ -111,24 +108,16 @@ Coletamos dados de 60 milhões de produtos, de diversos marketplaces, com intuit
 
 **Projeto**: Mondot  
 **Data**: 2021 e 2023  
-
-Minha própria interface gráfica para se comunicar com MongoDB. Onde as queries eram escritas em Python em vez de JavaScript.  
-Foi o primeiro projeto em que utilizei Godot para montar minha própria GUI.  
+Interface gráfica própria para interação com MongoDB, utilizando queries em Python e GUI desenvolvida com Godot.  
 
 **Projeto**: BoneIK  
 **Data**: 2024  
-
-Extensão para processar Inverse Kinematic em jogos 2D no Godot.  
-Desde lógica para dois ossos como também lógica para corrente de ossos.   
+Extensão para jogos 2D no Godot que providência Inverse Kinematics para ossos individuais e cadeias de ossos.  
 
 **Projeto**: Cotuber  
 **Data**: 2025  
-
-PNGTuber que permite juntar diversos usuários em uma mesma apresentação.  
-O desafio deste projeto foi aprender a utilizar Win32 e X11 para criar atalhos globais.  
+PNGTuber que integra múltiplos usuários em uma apresentação.  
 
 **Projeto**: Discord GDScript  
 **Data**: 2025  
-
-Extensão que permite utilizar a SDK do Discord pelo GDScript do Godot.  
-É interessante que todo o código C++ da extensão é gerado a partir da leitura dos arquivos headers da SDK.  
+Extensão que integra a SDK do Discord ao Godot via GDScript.  
