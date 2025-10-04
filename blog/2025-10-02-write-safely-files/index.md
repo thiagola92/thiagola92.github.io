@@ -254,6 +254,61 @@ process_1
 O próximo problema que temos é... Onde armazenar esse journal? Outro processos vão precisar ver ele para saber se precisam terminar alguma operação passada.  
 
 ### Solution 2+
+Podemos armazenar o journal de cada processo em um arquivo dentro de um diretório qualquer (iremos chamar o diretório de `.journals`).  
+
+```
+.journals
+├── <pid_0001>.journal
+├── <pid_0002>.journal
+└── <pid_0003>.journal
+```
+
+Utilizamos o [PID](https://en.wikipedia.org/wiki/Process_identifier) de cada processo como nome dos arquivos (pois eles são únicos).  
+
+Agora precisamos garantir o tratamento de qualquer journal incompleto, para isto vamos definir regras que todo processo deve executar antes de começar sua própria tarefa:  
+
+- Verifica se `<pid>.journal`
+    - Se existir, nós sabemos que foi um processo antigo que não finalizou então começamos o tratamento
+- Verifica se outro jornal incompleto existe
+    - Se existir, nós iniciamos o tratamento daquele journal
+
+Como sabemos que PIDs são únicos é fácil saber que um journal com o nosso PID é um journal incompleto. Mas como sabemos se outros journals são incompletos ou possuem alguém processando?  
+
+### Solution 2++
+Podemos utilizar locks para informar a outro processos que este journal está em tratamento.  
+
+```
+.journals
+├── <pid_0001>.journal (write lock)
+├── <pid_0002>.journal (write lock)
+└── <pid_0003>.journal (no lock)
+```
+
+Se o processo encontrar um journal sem lock, nós teremos certeza que ninguém está tratando ele no momento e devemos pegar o lock para nós e terminar o journal.  
+
+## Solution 3
+Para garantir que não exista deadlock, precisamos garantir que um processo pegue suas locks antes de outro processo tentar pegar as deles.  
+
+Para isto criaremos um arquivo que chamaremos de `.global.lock`, o qual todos os processos devem tentar pegar a lock antes de iniciar as tarefas.  
+
+- Se nosso processo não conseguir a lock do `.global.lock`
+    - Existe um processo pegando locks, devemos aguardar
+- Caso contrário
+    - Nós podemos pegar as locks que são necessárias para nossa tarefa
+
+É importante que essa lock seja liberada após aquele processo pegar as locks que precisa (ou falhar em pegar), caso contrário diversos processos podem acabar esperando pela liberação da `.global.lock`.  
+
+## Conclusion
+Eu não comecei a escrever nada de código ainda mas posso garantir uma coisa... Vai ser lento.  
+
+- Read & Write de arquivos o tempo todo
+- Lock & Unlock de arquivos o tempo todo
+
+Tudo é receita para ser bem lento, não é atoa que SQLite faz tudo em um arquivo e trabalha maior parte na memória RAM.  
+
+Dito isto, isto vai ser um projeto interessante para mim.  
+
+![Rosto feliz](./happy.svg)  
 
 ## References
 - https://en.wikipedia.org/wiki/Deadlock_(computer_science)
