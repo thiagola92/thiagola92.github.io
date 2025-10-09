@@ -58,7 +58,6 @@
 <li>Copie o conteúdo do arquivo original para o temporário (<code>xxxx.temp</code>)</li>
 <li>Escreva sempre no arquivo temporário</li>
 <li>Substitua o arquivo original pelo temporário</li>
-<li>Delete o arquivo temporário</li>
 </ul>
 <p>Se considerarmos que temos locks:</p>
 <ul>
@@ -67,7 +66,6 @@
 <li>Copie o conteúdo do arquivo original para o temporário (<code>xxxx.temp</code>)</li>
 <li>Escreva sempre no arquivo temporário</li>
 <li>Substitua o arquivo original pelo temporário</li>
-<li>Delete o arquivo temporário</li>
 <li><strong>Solte a lock do arquivo original</strong></li>
 </ul>
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>Ambas operações <code>mv</code> e <code>rename</code> são atómicas quando se trata do mesmo volume (HD/SSD) pois é só um redirecionamento do ponteiro. Se estivermos falando dessas operações entre volumes diferentes, seria preciso que um volume copiasse para o outro volume antes e isso <strong>não</strong> é atómico.</p></div></div>
@@ -83,7 +81,6 @@
 <li>Copie o conteúdo do arquivo original para o temporário (<code>xxxx.temp</code>)</li>
 <li>Escreva sempre no arquivo temporário</li>
 <li>Substitua o arquivo original pelo temporário</li>
-<li>Delete o arquivo temporário</li>
 <li><strong>Solte a lock do arquivo de acesso</strong></li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="solution-1-2">Solution 1++<a href="https://thiagola92.github.io/blog/2025/10/04/write-safely-files#solution-1-2" class="hash-link" aria-label="Link direto para Solution 1++" title="Link direto para Solution 1++">​</a></h3>
@@ -98,7 +95,6 @@
 <li><strong><code>fsync</code> no arquivo temporário</strong></li>
 <li>Substitua o arquivo original pelo temporário</li>
 <li><strong><code>fsync</code> no diretório do arquivo original</strong></li>
-<li>Delete o arquivo temporário</li>
 <li>Solte a lock do arquivo de acesso</li>
 </ul>
 <p><em>O primeiro <code>fsync</code> garante que o arquivo temporário esteja storage antes de substituir o original.</em></p>

@@ -10,7 +10,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css" integrity="sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM" crossorigin="anonymous"><link rel="stylesheet" href="/assets/css/styles.4ed44873.css">
-<script src="/assets/js/runtime~main.19b1a751.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.68c6529d.js" defer="defer"></script>
 <script src="/assets/js/main.1ae74e03.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -58,7 +58,6 @@
 <li>Copie o conteúdo do arquivo original para o temporário (<code>xxxx.temp</code>)</li>
 <li>Escreva sempre no arquivo temporário</li>
 <li>Substitua o arquivo original pelo temporário</li>
-<li>Delete o arquivo temporário</li>
 </ul>
 <p>Se considerarmos que temos locks:</p>
 <ul>
@@ -67,7 +66,6 @@
 <li>Copie o conteúdo do arquivo original para o temporário (<code>xxxx.temp</code>)</li>
 <li>Escreva sempre no arquivo temporário</li>
 <li>Substitua o arquivo original pelo temporário</li>
-<li>Delete o arquivo temporário</li>
 <li><strong>Solte a lock do arquivo original</strong></li>
 </ul>
 <div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>Ambas operações <code>mv</code> e <code>rename</code> são atómicas quando se trata do mesmo volume (HD/SSD) pois é só um redirecionamento do ponteiro. Se estivermos falando dessas operações entre volumes diferentes, seria preciso que um volume copiasse para o outro volume antes e isso <strong>não</strong> é atómico.</p></div></div>
@@ -83,7 +81,6 @@
 <li>Copie o conteúdo do arquivo original para o temporário (<code>xxxx.temp</code>)</li>
 <li>Escreva sempre no arquivo temporário</li>
 <li>Substitua o arquivo original pelo temporário</li>
-<li>Delete o arquivo temporário</li>
 <li><strong>Solte a lock do arquivo de acesso</strong></li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="solution-1-2">Solution 1++<a href="#solution-1-2" class="hash-link" aria-label="Link direto para Solution 1++" title="Link direto para Solution 1++">​</a></h3>
@@ -98,7 +95,6 @@
 <li><strong><code>fsync</code> no arquivo temporário</strong></li>
 <li>Substitua o arquivo original pelo temporário</li>
 <li><strong><code>fsync</code> no diretório do arquivo original</strong></li>
-<li>Delete o arquivo temporário</li>
 <li>Solte a lock do arquivo de acesso</li>
 </ul>
 <p><em>O primeiro <code>fsync</code> garante que o arquivo temporário esteja storage antes de substituir o original.</em></p>
@@ -135,7 +131,7 @@
 <div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">process_1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── journal</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_a.temp (DELETE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_b.temp (DELETE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └── file_c.temp (DELETE)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>Encontrar um arquivo no estado DELETE indica que ele precisa ser removido pois já foi utilizado como deveria.</p>
 <p>É importante notar que todos os arquivos devem caminhar em conjunto pelas etapas. Por exemplo:</p>
-<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">process_1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── journal</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_a.temp (REPLACE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_b.temp (WRITE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └── file_c.temp (WRITE)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">process_1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── journal</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_a.temp (REPLACE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_b.temp (WRITE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └ ── file_c.temp (WRITE)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>O arquivo <code>file_a.temp</code> <strong>não</strong> pode ir para o estado DELETE até que todos os outros arquivos estejam no mesmo estado que ele (REPLACE).</p>
 <p>A ausência dessa regra pode criar cenários impossíveis de se recuperar <strong>após uma falha no sistema</strong>. Por exemplo:</p>
 <div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">process_1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── journal</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_a.temp (DELETE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    ├── file_b.temp (WRITE)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └── file_c.temp (WRITE)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copiar código para a área de transferência" title="Copiar" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
