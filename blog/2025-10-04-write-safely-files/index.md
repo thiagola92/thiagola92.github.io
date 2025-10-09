@@ -113,7 +113,6 @@ Basicamente a lógica é:
 - Copie o conteúdo do arquivo original para o temporário (`xxxx.temp`)
 - Escreva sempre no arquivo temporário
 - Substitua o arquivo original pelo temporário
-- Delete o arquivo temporário
 
 Se considerarmos que temos locks:  
 
@@ -122,7 +121,6 @@ Se considerarmos que temos locks:
 - Copie o conteúdo do arquivo original para o temporário (`xxxx.temp`)
 - Escreva sempre no arquivo temporário
 - Substitua o arquivo original pelo temporário
-- Delete o arquivo temporário
 - **Solte a lock do arquivo original**
 
 :::warning
@@ -150,7 +148,6 @@ Agora nos criamos a regra interna que apenas aqueles com a lock do arquivo de ac
 - Copie o conteúdo do arquivo original para o temporário (`xxxx.temp`)
 - Escreva sempre no arquivo temporário
 - Substitua o arquivo original pelo temporário
-- Delete o arquivo temporário
 - **Solte a lock do arquivo de acesso**
 
 ### Solution 1++
@@ -167,7 +164,6 @@ Por isto que precisamos utilizar comandos como `fsync` que forção o flush dos 
 - **`fsync` no arquivo temporário**
 - Substitua o arquivo original pelo temporário
 - **`fsync` no diretório do arquivo original**
-- Delete o arquivo temporário
 - Solte a lock do arquivo de acesso
 
 *O primeiro `fsync` garante que o arquivo temporário esteja storage antes de substituir o original.*  
