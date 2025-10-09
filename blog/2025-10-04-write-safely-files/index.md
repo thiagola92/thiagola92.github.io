@@ -171,7 +171,7 @@ Por isto que precisamos utilizar comandos como `fsync` que forção o flush dos 
 :::danger
 Imagina se a gente usasse `rename`, sem ele ter sido armazenado no storage!  
 
-Quando você substitui o arquivo, você apenas está substituindo ponteiros, então é bom você ter certeza que para onde ele existe no storage (caso contrário você está apontando para lixo).
+Você apenas está substituindo os ponteiros quando faz um `rename`, então é bom você ter certeza que o ponteiro seja para um espaço do drive com conteúdo (caso contrário você está apontando para lixo).  
 :::
 
 *O segundo `fsync` atualiza o metadata do diretório (os arquivos que ele possue).*  
@@ -297,8 +297,9 @@ Para isto criaremos um arquivo que chamaremos de `.global.lock`, o qual todos os
 ## Conclusion
 Eu não comecei a escrever nada de código ainda mas posso garantir uma coisa... Vai ser lento.  
 
-- Read & Write de arquivos o tempo todo
-- Lock & Unlock de arquivos o tempo todo
+- Clonar o arquivo original
+- Read & Write no journal o tempo todo
+- Lock & Unlock arquivos o tempo todo
 
 Tudo é receita para ser bem lento, não é atoa que SQLite faz tudo em um arquivo e trabalha maior parte na memória RAM.  
 
@@ -319,3 +320,4 @@ Dito isto, isto vai ser um projeto interessante para mim.
 - https://www.sqlite.org/tempfiles.html
 - https://www.sqlite.org/lockingv3.html
 - https://www.sqlite.org/wal.html
+- https://www.slideshare.net/slideshow/eat-my-data/9002060
