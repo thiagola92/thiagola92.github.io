@@ -97,7 +97,7 @@
 <li>Solte a lock do arquivo de acesso</li>
 </ul>
 <p><em>O primeiro <code>fsync</code> garante que o arquivo temporário esteja storage antes de substituir o original.</em></p>
-<div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>danger</div><div class="admonitionContent_BuS1"><p>Imagina se a gente usasse <code>rename</code>, sem ele ter sido armazenado no storage!</p><p>Quando você substitui o arquivo, você apenas está substituindo ponteiros, então é bom você ter certeza que para onde ele existe no storage (caso contrário você está apontando para lixo).</p></div></div>
+<div class="theme-admonition theme-admonition-danger admonition_xJq3 alert alert--danger"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></span>danger</div><div class="admonitionContent_BuS1"><p>Imagina se a gente usasse <code>rename</code>, sem ele ter sido armazenado no storage!</p><p>Você apenas está substituindo os ponteiros quando faz um <code>rename</code>, então é bom você ter certeza que o ponteiro seja para um espaço do drive com conteúdo (caso contrário você está apontando para lixo).</p></div></div>
 <p><em>O segundo <code>fsync</code> atualiza o metadata do diretório (os arquivos que ele possue).</em></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="solution-2">Solution 2<a href="https://thiagola92.github.io/blog/2025/10/04/write-safely-files#solution-2" class="hash-link" aria-label="Link direto para Solution 2" title="Link direto para Solution 2">​</a></h2>
 <p>Para garantir a atomicidade dessa alteração em conjunto, podemos criar um journal que irá armazenar todos os arquivos que precisam ser substituidos e seus estados.</p>
@@ -180,8 +180,9 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="https://thiagola92.github.io/blog/2025/10/04/write-safely-files#conclusion" class="hash-link" aria-label="Link direto para Conclusion" title="Link direto para Conclusion">​</a></h2>
 <p>Eu não comecei a escrever nada de código ainda mas posso garantir uma coisa... Vai ser lento.</p>
 <ul>
-<li>Read &amp; Write de arquivos o tempo todo</li>
-<li>Lock &amp; Unlock de arquivos o tempo todo</li>
+<li>Clonar o arquivo original</li>
+<li>Read &amp; Write no journal o tempo todo</li>
+<li>Lock &amp; Unlock arquivos o tempo todo</li>
 </ul>
 <p>Tudo é receita para ser bem lento, não é atoa que SQLite faz tudo em um arquivo e trabalha maior parte na memória RAM.</p>
 <p>Dito isto, isto vai ser um projeto interessante para mim.</p>
@@ -200,6 +201,7 @@
 <li><a href="https://www.sqlite.org/tempfiles.html" target="_blank" rel="noopener noreferrer">https://www.sqlite.org/tempfiles.html</a></li>
 <li><a href="https://www.sqlite.org/lockingv3.html" target="_blank" rel="noopener noreferrer">https://www.sqlite.org/lockingv3.html</a></li>
 <li><a href="https://www.sqlite.org/wal.html" target="_blank" rel="noopener noreferrer">https://www.sqlite.org/wal.html</a></li>
+<li><a href="https://www.slideshare.net/slideshow/eat-my-data/9002060" target="_blank" rel="noopener noreferrer">https://www.slideshare.net/slideshow/eat-my-data/9002060</a></li>
 </ul>]]></content>
         <author>
             <name>Thiago Lages de Alencar</name>
