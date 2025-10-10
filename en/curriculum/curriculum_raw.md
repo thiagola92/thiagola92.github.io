@@ -22,7 +22,6 @@
 • Desenvolvimento de scrapers para marketplaces, realizando coleta, tratamento e integração de dados em bancos de dados  
 • Migração e gerenciamento de dados em PostgreSQL, MongoDB e Elasticsearch  
 • Automação de processos com Ansible e Docker  
-• Coleta de mais de 60 milhões de produtos de diversos marketplaces, contribuindo para a inteligência de recomendação de produtos  
 
 ---
 
