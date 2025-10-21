@@ -222,7 +222,7 @@ process_1
 
 Encontrar um arquivo no estado DELETE indica que ele precisa ser removido pois já foi utilizado como deveria.  
 
-É importante notar que todos os arquivos devem caminhar em conjunto pelas etapas. Por exemplo:  
+É importante notar que todos os arquivos devem caminhar em conjunto pelos estados. Por exemplo:  
 
 ```
 process_1
@@ -247,6 +247,33 @@ process_1
 - Não temos como reverter a alteração no `file_a.temp` pois já substituimos o arquivo
 - Não podemos completar de escrever o conteúdo de `file_b.temp` e `file_c.temp` pois não sabemos o que estava sendo escrito
 
+Escrever no journal toda vez que um arquivo mudar de estado seria custoso demais e não mudaria nossa decisão final sobre os arquivos:  
+
+```
+// Precisariamos descartar os arquivos.
+process_1
+└── journal
+    ├── file_a.temp (WRITE)
+    ├── file_b.temp (WRITE)
+    └── file_c.temp (WRITE)
+
+// Precisariamos descartar os arquivos.
+process_1
+└── journal
+    ├── file_a.temp (REPLACE)
+    ├── file_b.temp (WRITE)
+    └── file_c.temp (WRITE)
+
+// Precisariamos descartar os arquivos.
+process_1
+└── journal
+    ├── file_a.temp (REPLACE)
+    ├── file_b.temp (REPLACE)
+    └── file_c.temp (WRITE)
+```
+
+Então apenas vamos escrever quando todos estiverem no mesmo estado, pois só nesse caso a decisão de tratamento mudaria.  
+
 O próximo problema que temos é... Onde armazenar esse journal? Outro processos vão precisar ver ele para saber se precisam terminar alguma operação passada.  
 
 ### Solution 2+
@@ -261,17 +288,15 @@ Podemos armazenar o journal de cada processo em um arquivo dentro de um diretór
 
 Utilizamos o [PID](https://en.wikipedia.org/wiki/Process_identifier) de cada processo como nome dos arquivos (pois eles são únicos).  
 
-Agora precisamos garantir o tratamento de qualquer journal incompleto, para isto vamos definir regras que todo processo deve executar antes de começar sua própria tarefa:  
+Agora precisamos garantir o tratamento de qualquer journal incompleto, para isto vamos definir a simples regra que a primeira coisa a se fazer no programa é:  
 
-- Verifica se `<pid>.journal`
-    - Se existir, nós sabemos que foi um processo antigo que não finalizou então começamos o tratamento
 - Verifica se outro jornal incompleto existe
     - Se existir, nós iniciamos o tratamento daquele journal
 
-Como sabemos que PIDs são únicos é fácil saber que um journal com o nosso PID é um journal incompleto. Mas como sabemos se outros journals são incompletos ou possuem alguém processando?  
+Mas como sabemos se um journal está incompleto? Como sabemos se já existe alguém fazendo o tratamento dele?  
 
 ### Solution 2++
-Podemos utilizar locks para informar a outro processos que este journal está em tratamento.  
+Podemos utilizar locks para informar a outros processos que aquele journal está em tratamento.  
 
 ```
 .journals
