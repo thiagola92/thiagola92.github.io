@@ -4,22 +4,28 @@ tags: [ipc, interprocess communication, inter-process communication]
 ---
 
 # IPC
-*(Interprocess Communication)*  
 
-Existem diversas maneiras de fazer dois processos distintos se comunicarem e isto torna bem difícil de escolher qual deles utilizar sem antes conhecermos o mínimo delas.  
+_(Interprocess Communication)_
+
+Existem diversas maneiras de fazer dois processos distintos se comunicarem e
+isto torna bem difícil de escolher qual deles utilizar sem antes conhecermos o
+mínimo delas.
 
 ## Low Level
 
 ### File
-*Escrever os dados em um arquivo e esperar que outro processo leia o arquivo.*  
 
-Pode ser estranho por ser muito simples mas acontece que passar dados entre processos não precisa ser complicado.  
+_Escrever os dados em um arquivo e esperar que outro processo leia o arquivo._
 
-:::note
-Inclusive, é como eu implementei [Mondot](https://github.com/thiagola92/Mondot) (GUI para MongoDB).  
+Pode ser estranho por ser muito simples mas acontece que passar dados entre
+processos não precisa ser complicado.
+
+:::note Inclusive, é como eu implementei
+[Mondot](https://github.com/thiagola92/Mondot) (GUI para MongoDB).\
 :::
 
 Exemplo:
+
 - Processo 1
   - Constantemente verifica se o arquivo possui conteúdo
   - Se notar que possui, exibe o conteúdo na tela e esvazia o arquivo
@@ -97,27 +103,38 @@ int main(void) {
 }
 ```
 
-Note que neste exemplo eu leio e escrevo no arquivo constantemente, porém isto é apenas um exemplo!  
+Note que neste exemplo eu leio e escrevo no arquivo constantemente, porém isto é
+apenas um exemplo!
 
-A realidade é que nós devemos ler ou escrever no arquivo na frequência que acharmos necessário para nosso programa. Só quero que você entenda que este método IPC é sobre processos usarem arquivos para interagir uns com os outros.  
+A realidade é que nós devemos ler ou escrever no arquivo na frequência que
+acharmos necessário para nosso programa. Só quero que você entenda que este
+método IPC é sobre processos usarem arquivos para interagir uns com os outros.
 
 ### File Locking
-*Escrever os dados em um arquivo e esperar que outro processo leia o arquivo **porém respeitando as travas**.*  
 
-Um grande problema da maneira anterior é dois processos interagirem exatamente no mesmo momento com o arquivo. Imagine que um processo comece a ler enquanto um outro não terminou de escrever, isso fará com que ele leia conteúdo incompleto.  
+_Escrever os dados em um arquivo e esperar que outro processo leia o arquivo
+**porém respeitando as travas**._
 
-A maneira de travar arquivos varia em cada sistema operacional. Por exemplo, no Linux temos:  
+Um grande problema da maneira anterior é dois processos interagirem exatamente
+no mesmo momento com o arquivo. Imagine que um processo comece a ler enquanto um
+outro não terminou de escrever, isso fará com que ele leia conteúdo incompleto.
+
+A maneira de travar arquivos varia em cada sistema operacional. Por exemplo, no
+Linux temos:
+
 - `flock`
 - `lockf`
 - `fcntl`
 
-Utilizaremos `lockf` para aprimorar o exemplo utilizado para arquivos:  
+Utilizaremos `lockf` para aprimorar o exemplo utilizado para arquivos:
+
 - Processo 1
   - Constantemente:
     - Espera obter a trava para o arquivo
     - Verifica se o arquivo possui conteúdo
     - Libera a trava do arquivo **se ele não tiver**
-  - Se notar que possui, exibe o conteúdo na tela, esvazia o arquivo e **libera a trava**
+  - Se notar que possui, exibe o conteúdo na tela, esvazia o arquivo e **libera
+    a trava**
 - Processo 2
   - Constantemente:
     - Espera obter a trava para o arquivo
@@ -220,11 +237,15 @@ int main(void) {
 ```
 
 ### Signal
-*Enviar um signal ao processo/thread para uma função tratar*  
 
-Diferente de outros IPC, signal não é focado em comunicação no nível de aplicação, então não é muito utilizado para enviar dados, normalmente apenas para notificar outro processo da ocorrência de algo.  
+_Enviar um signal ao processo/thread para uma função tratar_
 
-A melhor maneira de ter uma idéia da utilidade dos signals é vendo o `signal.h` do sistema operacional. No caso do Linux:  
+Diferente de outros IPC, signal não é focado em comunicação no nível de
+aplicação, então não é muito utilizado para enviar dados, normalmente apenas
+para notificar outro processo da ocorrência de algo.
+
+A melhor maneira de ter uma idéia da utilidade dos signals é vendo o `signal.h`
+do sistema operacional. No caso do Linux:
 
 ```C title="bits/signum-generic.h"
 /* We define here all the signal names listed in POSIX (1003.1-2008);
@@ -302,31 +323,38 @@ A melhor maneira de ter uma idéia da utilidade dos signals é vendo o `signal.h
 #define SIGWINCH	28	/* Window size change (4.3 BSD, Sun).  */
 ```
 
-Por padrão alguns signals já possuem comportamentos pré-definidos. Por exemplo: `SIGINT`.  
+Por padrão alguns signals já possuem comportamentos pré-definidos. Por exemplo:
+`SIGINT`.
 
-:::info
-Quando executando um programa pelo terminal, se você apertar `Ctrl+C` o signal enviado para o processo é o `SIGINT`.  
+:::info Quando executando um programa pelo terminal, se você apertar `Ctrl+C` o
+signal enviado para o processo é o `SIGINT`.\
 :::
 
-Fica a sua escolha se você deseja sobreescrever o comportamento de um signal (caso ele tenha um comportamento padrão).  
+Fica a sua escolha se você deseja sobreescrever o comportamento de um signal
+(caso ele tenha um comportamento padrão).
 
-:::warning
-Existem dois signals que não podem ter o comportamento sobreescrito: `SIGKILL` e `SIGSTOP`.   
+:::warning Existem dois signals que não podem ter o comportamento sobreescrito:
+`SIGKILL` e `SIGSTOP`.\
 :::
 
-Quando um Signal é recebido pelo seu processo, o kernel pausa o fluxo normal do seu programa para executar a função que você definiu para aquele signal. Caso você não tenha definido alguma função, o comportamento padrão é executado (o qual pode ser ignorar o signal).  
+Quando um Signal é recebido pelo seu processo, o kernel pausa o fluxo normal do
+seu programa para executar a função que você definiu para aquele signal. Caso
+você não tenha definido alguma função, o comportamento padrão é executado (o
+qual pode ser ignorar o signal).
 
-Signals permitem que você envie um inteiro ou ponteiro junto deles.  
+Signals permitem que você envie um inteiro ou ponteiro junto deles.
 
-No caso de comunicação entre processos, apenas o inteiro costuma ser útil pois não podemos acessar o espaço de memória de outro processo.  
+No caso de comunicação entre processos, apenas o inteiro costuma ser útil pois
+não podemos acessar o espaço de memória de outro processo.
 
-:::note
-Porém se estivermos utilizando para comunicação entre threads, enviar o endereço de um dado específico é bem útil.  
+:::note Porém se estivermos utilizando para comunicação entre threads, enviar o
+endereço de um dado específico é bem útil.\
 :::
 
-Existem dois signals reservados para o uso da aplicação/usuário: `SIGUSR1` e `SIGUSR2`. Podemos utiliza-los para a comunicação de nossos processo.
+Existem dois signals reservados para o uso da aplicação/usuário: `SIGUSR1` e
+`SIGUSR2`. Podemos utiliza-los para a comunicação de nossos processo.
 
-Por exemplo, enviar um número entre processos:  
+Por exemplo, enviar um número entre processos:
 
 - Processo 1
   - Exibe o PID no terminal
@@ -397,17 +425,18 @@ int main(int argc, char **args) {
 ```
 
 ### Pipe
-*Ler e escrever no pipe de outro processo filho/pai*  
 
-:::warning
-Para entender bem pipe, recomendo entender bem file descriptor (o que eu não entendia muito bem).  
+_Ler e escrever no pipe de outro processo filho/pai_
 
-Recomendação: https://www.youtube.com/watch?v=rW_NV6rf0rM
-:::
+:::warning Para entender bem pipe, recomendo entender bem file descriptor (o que
+eu não entendia muito bem).
 
-O conceito de pipes é bem simples, você escreve em um lado do pipe e para alguém ler do outro lado dele.  
+Recomendação: https://www.youtube.com/watch?v=rW_NV6rf0rM :::
 
-Podemos criar um pipe com o comando `pipe()`:  
+O conceito de pipes é bem simples, você escreve em um lado do pipe e para alguém
+ler do outro lado dele.
+
+Podemos criar um pipe com o comando `pipe()`:
 
 ```C
 #include <stdio.h>
@@ -425,24 +454,33 @@ int main(void) {
 }
 ```
 
-O comando `pipe()` inseri dois file descriptors, um para a entrada do pipe e outro para a saída do pipe, no nosso array. O comando também retorna -1 em caso de erro, mas eu irei ignorar tratamentos de erros nesses exemplos.  
+O comando `pipe()` inseri dois file descriptors, um para a entrada do pipe e
+outro para a saída do pipe, no nosso array. O comando também retorna -1 em caso
+de erro, mas eu irei ignorar tratamentos de erros nesses exemplos.
 
-:::info
-O que é um file descriptor? É um número inteiro utilizado pelo seu processo para pedir ao sistema operacional por acesso a um arquivo. É preciso entender que quando você escreve/lê de um arquivo, você na verdade está pedindo para o sistema operacional fazer isto para você.  
+:::info O que é um file descriptor? É um número inteiro utilizado pelo seu
+processo para pedir ao sistema operacional por acesso a um arquivo. É preciso
+entender que quando você escreve/lê de um arquivo, você na verdade está pedindo
+para o sistema operacional fazer isto para você.
 
-O sistema operacional possue uma tabela com todos os files descriptors de cada processo (e outras informações relacionadas ao arquivo).  
+O sistema operacional possue uma tabela com todos os files descriptors de cada
+processo (e outras informações relacionadas ao arquivo).
 
 | processo id | file descriptor | file position | ... |
-| ---         | ---             | ---           | --- |
+| ----------- | --------------- | ------------- | --- |
 | 1034        | 3               | 0             | ... |
 | 567         | 7               | 10            | ... |
 | 3945        | 4               | 4959          | ... |
 | 12034       | 3               | 283           | ... |
 
-Então toda vez que você deseja abrir um arquivo, o sistema operacional te entrega um file descriptor. Este file descriptor é como se fosse um ticket que permite você pedir ao sistema operacional por interações com aquele arquivo ("Oi sistema operacional, eu gostaria de escrever no arquivo relacionado a este ticket").  
+Então toda vez que você deseja abrir um arquivo, o sistema operacional te
+entrega um file descriptor. Este file descriptor é como se fosse um ticket que
+permite você pedir ao sistema operacional por interações com aquele arquivo ("Oi
+sistema operacional, eu gostaria de escrever no arquivo relacionado a este
+ticket").\
 :::
 
-Começamos com o mínimo de IPC quando utilizando `pipe()` com `fork()`:  
+Começamos com o mínimo de IPC quando utilizando `pipe()` com `fork()`:
 
 ```C
 #include <stdio.h>
@@ -469,18 +507,23 @@ int main(void) {
 }
 ```
 
-Cada processo possui seus próprios file descriptors, que por sua vez levam a um arquivo/pipe/etc. Porém quando fazemos um `fork()`, nossas entradas na tabela de file descriptors também é clonada.  
+Cada processo possui seus próprios file descriptors, que por sua vez levam a um
+arquivo/pipe/etc. Porém quando fazemos um `fork()`, nossas entradas na tabela de
+file descriptors também é clonada.
 
-Por exemplo, vamos supor que o ID do processo pai é 1034 e o filho nasceu com o ID 1035. Quando o filho nasce, ele herda todos os files descriptors:  
+Por exemplo, vamos supor que o ID do processo pai é 1034 e o filho nasceu com o
+ID 1035. Quando o filho nasce, ele herda todos os files descriptors:
 
 | processo id | file descriptor | file position | ... | leva ao pipe |
-| ---         | ---             | ---           | --- | ---          |
+| ----------- | --------------- | ------------- | --- | ------------ |
 | 1034        | 3               | 0             | ... | 1000         |
 | 1035        | 3               | 0             | ... | 1000         |
 
-Ou seja, o file descriptor com número 3 do pai e do filho irão levar ao mesmo arquivo/pipe/etc.  
+Ou seja, o file descriptor com número 3 do pai e do filho irão levar ao mesmo
+arquivo/pipe/etc.
 
-Isto não quer dizer que todos os file descriptors futuros seram compartilhados! Por exemplo:  
+Isto não quer dizer que todos os file descriptors futuros seram compartilhados!
+Por exemplo:
 
 ```C
 #include <sys/wait.h>
@@ -505,10 +548,13 @@ int main(void) {
 }
 ```
 
-Ao chamar `pipe()` dentro do pai ou do filho, você está pedindo para o sistema operacional criar um pipe para aquele processo. O pai e filho receberam pipes distintos embora possuam o mesmo file descriptor (justamente pois file descriptors são identificadores únicos do processo).  
+Ao chamar `pipe()` dentro do pai ou do filho, você está pedindo para o sistema
+operacional criar um pipe para aquele processo. O pai e filho receberam pipes
+distintos embora possuam o mesmo file descriptor (justamente pois file
+descriptors são identificadores únicos do processo).
 
 | processo id | file descriptor | file position | ... | leva ao pipe |
-| ---         | ---             | ---           | --- | ---          |
+| ----------- | --------------- | ------------- | --- | ------------ |
 | 1034        | 3               | 0             | ... | 1000         |
 | 1034        | 4               | 0             | ... | 2000         |
 | 1034        | 5               | 0             | ... | 2000         |
@@ -517,16 +563,24 @@ Ao chamar `pipe()` dentro do pai ou do filho, você está pedindo para o sistema
 | 1035        | 5               | 0             | ... | 3000         |
 
 ### Named Pipe (FIFO)
-*Ler e escrever no pipe de outro processo*  
 
-A diferença deste pipe para o anterior é que qualquer processo pode se ligar a ele, seja para escrever ou ler, pois ele é praticamente um arquivo no sistema.
+_Ler e escrever no pipe de outro processo_
 
-O comando utilizado para criar o este pipe é `mkfifo()` e da mesma maneira que arquivos tem permissões... Você deve passar as permissões do arquivo como parâmetro, no nosso caso irei passar `0666` (rw-rw-rw).  
+A diferença deste pipe para o anterior é que qualquer processo pode se ligar a
+ele, seja para escrever ou ler, pois ele é praticamente um arquivo no sistema.
 
-Lembrando que um pipe só é um pipe se tiver pelo menos um lado de entrada e outro de saída, ou seja, funções de escrita/leitura do pipe irão ficar travadas até que o outro lado do pipe exista.  
+O comando utilizado para criar o este pipe é `mkfifo()` e da mesma maneira que
+arquivos tem permissões... Você deve passar as permissões do arquivo como
+parâmetro, no nosso caso irei passar `0666` (rw-rw-rw).
 
-Enquanto não tiver ninguém lendo do pipe, o comando `write()` irá ficar em loop esperando alguém para ler.  
-Enquanto não tiver ninguém escrevendo no pipe, o comando `read()` irá ficar em loop esperando alguém começar a escrever.  
+Lembrando que um pipe só é um pipe se tiver pelo menos um lado de entrada e
+outro de saída, ou seja, funções de escrita/leitura do pipe irão ficar travadas
+até que o outro lado do pipe exista.
+
+Enquanto não tiver ninguém lendo do pipe, o comando `write()` irá ficar em loop
+esperando alguém para ler.\
+Enquanto não tiver ninguém escrevendo no pipe, o comando `read()` irá ficar em
+loop esperando alguém começar a escrever.
 
 - Processo 1
   - Tenta criar o named pipe com devidas permissões
@@ -575,14 +629,21 @@ int main(void) {
 }
 ```
 
-É possível ter mais que um processo lendo do mesmo pipe mas é incerto de quem receberá o conteúdo ou se dois processos irão receber o mesmo conteúdo.  
+É possível ter mais que um processo lendo do mesmo pipe mas é incerto de quem
+receberá o conteúdo ou se dois processos irão receber o mesmo conteúdo.
 
-Também é possível não ficar em loop esperando alguém começar a ler/escrever do outro lado do pipe, basta fazer um *or* quando abrindo o pipe (`O_WRONLY | O_NDELAY` ou `O_RDONLY | O_NDELAY`).  
+Também é possível não ficar em loop esperando alguém começar a ler/escrever do
+outro lado do pipe, basta fazer um _or_ quando abrindo o pipe
+(`O_WRONLY | O_NDELAY` ou `O_RDONLY | O_NDELAY`).
 
-:::info
-Originalmente chamado de FIFO pelo comportamento clássico ["first in, first out"](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)), porém atualmente é mais conhecido pelo nome *named pipe* que deixa implicito que se comporta basicamente igual a um pipe.  
+:::info Originalmente chamado de FIFO pelo comportamento clássico
+["first in, first out"](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)),
+porém atualmente é mais conhecido pelo nome _named pipe_ que deixa implicito que
+se comporta basicamente igual a um pipe.
 
-Originalmente criado utilizando a função `mknod()` e passando como argumento `S_IFIFO` para especificar o tipo de arquivo. Justamente por está função suportar diversos tipos:  
+Originalmente criado utilizando a função `mknod()` e passando como argumento
+`S_IFIFO` para especificar o tipo de arquivo. Justamente por está função
+suportar diversos tipos:
 
 | #define  | value   | file type        |
 | -------- | ------- | ---------------- |
@@ -593,12 +654,15 @@ Originalmente criado utilizando a função `mknod()` e passando como argumento `
 | S_IFDIR  | 0040000 | directory        |
 | S_IFCHR  | 0020000 | character device |
 | S_IFIFO  | 0010000 | FIFO             |
-:::
+| :::      |         |                  |
 
 ### Message Queue
-*Armazenar dados na fila para outro processo retirar*
 
-A maior diferença deste método para os anteriores é o foco em transferência de dados estruturados em vez de inteiro/string, o que torna muito importante que o receptor conheça o formato exato dos dados. O formato dos dados é bem simples:  
+_Armazenar dados na fila para outro processo retirar_
+
+A maior diferença deste método para os anteriores é o foco em transferência de
+dados estruturados em vez de inteiro/string, o que torna muito importante que o
+receptor conheça o formato exato dos dados. O formato dos dados é bem simples:
 
 ```c
 struct message {
@@ -609,27 +673,31 @@ struct message {
 }
 ```
 
-O **primeiro campo** da estrutura deve ser um `long` positivo e serve para o receptor conseguir filtrar pelas mensagens que deseja receber.  
+O **primeiro campo** da estrutura deve ser um `long` positivo e serve para o
+receptor conseguir filtrar pelas mensagens que deseja receber.
 
-O receptor passa para a fila um valor e com isto a fila sabe qual mensagem pegar para ele:  
+O receptor passa para a fila um valor e com isto a fila sabe qual mensagem pegar
+para ele:
 
-| Valor  |                                                                                          | `if`                     |
-| ------ | ---------------------------------------------------------------------------------------- | ------------------------ |
-| 0      | Receptor quer a próxima mensagem da fila, não importa qual seja o tipo                   | `true`                   |
-| > 0    | Receptor quer a próxima mensagem da fila com aquele tipo                                 | `message_type == X`      |
-| < 0    | Receptor quer a próxima mensagem da fila com tipo menor ou igual ao absoluto deste valor | `message_type <= abs(X)` |
+| Valor |                                                                                          | `if`                     |
+| ----- | ---------------------------------------------------------------------------------------- | ------------------------ |
+| 0     | Receptor quer a próxima mensagem da fila, não importa qual seja o tipo                   | `true`                   |
+| > 0   | Receptor quer a próxima mensagem da fila com aquele tipo                                 | `message_type == X`      |
+| < 0   | Receptor quer a próxima mensagem da fila com tipo menor ou igual ao absoluto deste valor | `message_type <= abs(X)` |
 
-:::danger
-Eu repito, o primeiro campo **deve** ser um número POSITIVO.  
+:::danger Eu repito, o primeiro campo **deve** ser um número POSITIVO.
 
-Mesmo que o receptor vá utilizar 0, por querer qualquer mensagem, você como emissor deve botar um número positivo.  
+Mesmo que o receptor vá utilizar 0, por querer qualquer mensagem, você como
+emissor deve botar um número positivo.
 
-A fila não permite que você bote mensagens com o primeiro campo zero...  
+A fila não permite que você bote mensagens com o primeiro campo zero...\
 :::
 
-O **segundo campo** da estrutura pode ser qualquer tipo, pois no momento de inserção na fila você irá informar o tamanho dos dados seguintes ao `long`.  
+O **segundo campo** da estrutura pode ser qualquer tipo, pois no momento de
+inserção na fila você irá informar o tamanho dos dados seguintes ao `long`.
 
-Isto quer dizer que nós poderiamos estruturar de infinitas maneiras nossa mensagem:  
+Isto quer dizer que nós poderiamos estruturar de infinitas maneiras nossa
+mensagem:
 
 ```c
 struct message {
@@ -655,7 +723,7 @@ struct message {
 }
 ```
 
-Pois podemos calcular o tamanho de qualquer dado/tipo com `sizeof`:  
+Pois podemos calcular o tamanho de qualquer dado/tipo com `sizeof`:
 
 ```c
 char data[10];
@@ -681,16 +749,22 @@ sizeof(data);        // Option 1
 sizeof(struct d);    // Option 2
 ```
 
-Se qualquer processo pode se conectar a uma fila, então é preciso evitar que processos esbarrem em filas de outros processos. Imagina se meu processo insere algum dado no formato X e outro processo insere na minha fila algum dado no formato Y... Quem ler dessa fila tera sérios erros.  
+Se qualquer processo pode se conectar a uma fila, então é preciso evitar que
+processos esbarrem em filas de outros processos. Imagina se meu processo insere
+algum dado no formato X e outro processo insere na minha fila algum dado no
+formato Y... Quem ler dessa fila tera sérios erros.
 
-Para evitar isto, uma fila é identificada por uma chave (do tipo `long`) que é gerada apartir de duas informações:
+Para evitar isto, uma fila é identificada por uma chave (do tipo `long`) que é
+gerada apartir de duas informações:
+
 - `pathname` que é um caminho para um arquivo que identifica essa aplicação
-  - Normalmente o caminho esperado da aplicação: `/home/thiagola92/.local/bin/application`
+  - Normalmente o caminho esperado da aplicação:
+    `/home/thiagola92/.local/bin/application`
   - O arquivo precisa existir, caso contrário irá falhar
 - `proj_id` que é um inteiro (onde os 8 menores bits são utilizados)
   - Normalmente pessoas botam uma letra qualquer: `'A'` ou `'b'`
 
-As chances de duas aplicações formarem a mesma chave é bem baixo.  
+As chances de duas aplicações formarem a mesma chave é bem baixo.
 
 Vamos aos códigos
 
@@ -768,20 +842,23 @@ int main(void) {
 }
 ```
 
-É importante destroir a fila quando não for mais utiliza-la, pois ela não é destruida quando o seu processo encerra.  
+É importante destruir a fila quando não for mais utiliza-la, pois ela não é
+destruida quando o seu processo encerra.
 
 ### Shared Memory
 
 ### Socket
 
 ## High Level
-Por questão de preguiça, não vou escrever sobre outras maneiras como:  
 
-- Remote Procedure Call
-- HTTP API
+Por questão de preguiça, não vou escrever sobre outras maneiras como:
+
+- HTTP
+- RPC
 - WebSocket
 
 ## References
+
 - https://beej.us/guide/bgipc/
 - https://en.wikipedia.org/wiki/Inter-process_communication
 - https://www.youtube.com/watch?v=Y2mDwW2pMv4
