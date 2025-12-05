@@ -124,3 +124,15 @@ It's always good to see that streamers know that this is something that can happ
 
 https://youtu.be/5LtQAcGxQlM?t=193
 :::
+
+## TODO
+
+- Insym miss the tape (didn't notice that beds are clickable?)
+    - https://youtu.be/MWYhCkMFv6w?t=1450
+    - https://youtu.be/MWYhCkMFv6w?t=1567
+        - Chat sending message to him
+        - Them he says "Am I blind?"
+    - https://youtu.be/MWYhCkMFv6w?t=1855
+        - "You need to put images here, because my stupid brain don't understand"
+- Reaction videos pause, gamers normally don't pause
+    - But even reaction videos lose immersion on it
