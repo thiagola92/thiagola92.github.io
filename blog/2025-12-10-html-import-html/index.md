@@ -35,14 +35,12 @@ importante.
 Vamos analisar 3 tipos de reutilização que HTML fornece:
 
 - [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
+  - Ajuda a reutilização de elemento
 - [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/template),
   [`<slot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/slot)
-  - Ajudam a reutilização de elementos
-- [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe),
-  [`<object>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/object),
-  [`<embed>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/embed),
-  [`<fencedframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fencedframe)
-  - Ajudam a reutilização de documentos
+  - Ajuda a reutilização de grupo de elementos
+- [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe)
+  - Ajuda a reutilização de documento
 
 ## Custom Elements
 
@@ -75,9 +73,7 @@ Com isto criamos um elemento novo: `<blog-post>`, que por sua vez já possui doi
 <blog-post/>
 ```
 
-## Reutilização de elementos
-
-### `<template>`
+## `<template>`, `<slot>`
 
 `<template>` é utilizado para agrupar um conjunto de elementos que você deseja
 reutilizar mais tarde.
@@ -151,8 +147,6 @@ comportar como esperado por quem está importando.
 
 :::
 
-### `<slot>`
-
 `<slot>` é usado para reservar um espaço para um elemento que mais tarde será
 decidido.
 
@@ -195,25 +189,55 @@ Para substituir os slots pelo elemento desejado é bem simples:
 </blog-post>
 ```
 
-## Reutilização de documentos
+## `<iframe>`
 
-### `<iframe>`
+`<iframe>` é o elemento mais famoso quando se fala de exibir conteúdo de outra página HTML na sua página.  
 
-### `<object>`
+```html
+<body>
+    <iframe src="page.html"></iframe>
+</body>
+```
 
-### `<embed>`
+:::info
+Porém não é o único!
 
-### `<fencedframe>`
+Acontece que HTML possui diversos elementos que são capazes de fazer a mesma tarefa que outros elementos, o que torna difícil identificar quando usar o elemento certo.  
+
+Por exemplo, note como `<object>` e `<embed>` são extremamente genéricos:
+- `<img>`, `<object>`, `<embed>`: Conseguem exibir images
+- `<video>`, `<object>`, `<embed>`: Conseguem exibir video
+- `<iframe>`, `<object>`, `<embed>`: Conseguem exibir conteúdo de outra página
+
+```html
+<body>
+    <img src="image.png" />
+    <object data="image.png"></object>
+    <embed src="image.png">
+
+    <video src="video.mp4" controls></video>
+    <object data="video.mp4"></object>
+    <embed src="video.mp4">
+
+    <iframe src="page.html"></iframe>
+    <object data="page.html"></object>
+    <embed src="page.html">
+</body>
+```
+:::
+
 
 ## References
 
 - https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements
 - https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM
 - https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots
-- https://developer.mozilla.org/en-US/docs/Glossary/Browsing_context
+- https://developer.mozilla.org/en-US/docs/Web/API/Fenced_frame_API/Communication_with_embedded_frames
+- https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/General_embedding_technologies
 - https://developer.mozilla.org/en-US/docs/Web/API/Document
-- https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy#file_origins
+- https://developer.mozilla.org/en-US/docs/Glossary/Browsing_context
 - https://developer.mozilla.org/en-US/docs/Glossary/Replaced_elements
+- https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy#file_origins
 
 ## backup
 
