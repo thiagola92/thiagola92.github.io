@@ -44,7 +44,40 @@ Vamos analisar 3 tipos de reutilização que HTML fornece:
   [`<fencedframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/fencedframe)
   - Ajudam a reutilização de documentos
 
-## `<template>`, `<slot>`
+## Custom Elements
+
+Se refere a habilidade de criar sua própria tag HTML, isto abre muita brecha para reutilização de código. 
+
+```javascript
+customElements.define(
+    "blog-post",
+    class extends HTMLElement {
+        constructor() {
+            super();
+
+            const h1 = document.createElement("h1");
+            const p = document.createElement("p");
+            const shadowRoot = this.attachShadow({ mode: "open" });
+
+            h1.innerText = "A header for our post"
+            p.innerText = "The post text"
+
+            shadowRoot.appendChild(h1);
+            shadowRoot.appendChild(p);
+        }
+    },
+);
+```
+
+Com isto criamos um elemento novo: `<blog-post>`, que por sua vez já possui dois elementos dentro dele (`<h1>`, `<p>`).  
+
+```html
+<blog-post/>
+```
+
+## Reutilização de elementos
+
+### `<template>`
 
 `<template>` é utilizado para agrupar um conjunto de elementos que você deseja
 reutilizar mais tarde.
@@ -118,6 +151,8 @@ comportar como esperado por quem está importando.
 
 :::
 
+### `<slot>`
+
 `<slot>` é usado para reservar um espaço para um elemento que mais tarde será
 decidido.
 
@@ -130,6 +165,45 @@ decidido.
 
 Em outras palavras, no lugar do primeiro slot poderiamos inserir o elemento que
 quisessemos (`<h1>`/`<h2>`/`<h3>`/...) e o mesmo para o segundo slot.
+
+Eu não consegui utiliza-lo sem ser criando um custom element, então espero que você tenha lido a seção sobre custom elements.
+
+```javascript
+customElements.define(
+  "blog-post",
+  class extends HTMLElement {
+    constructor() {
+      super();
+
+      let template = document.getElementById("blog-post");
+      const shadowRoot = this.attachShadow({ mode: "open" });
+
+      shadowRoot.appendChild(document.importNode(template.content, true));
+    }
+  },
+);
+```
+
+Poderiamos ter criado todo os nodes internos deste elemento pelo javascript, mas ao invés disso nós apenas copiamos os elementos do nosso template (isto já diminui muito a quantidade de javascript que é preciso escrever).
+
+Para substituir os slots pelo elemento desejado é bem simples:  
+
+```html
+<blog-post>
+    <h1 slot="post-header">A header for our post</h1>
+    <p slot="post-text">The post text</p>
+</blog-post>
+```
+
+## Reutilização de documentos
+
+### `<iframe>`
+
+### `<object>`
+
+### `<embed>`
+
+### `<fencedframe>`
 
 ## References
 
