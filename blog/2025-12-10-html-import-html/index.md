@@ -42,7 +42,7 @@ Vamos analisar 3 tipos de reutilização que HTML fornece:
 - Reutilização de documento
     - [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe)
 
-## Reutilização de elemento
+## Reusing element
 
 **Custom elements** se refere a habilidade de criar sua própria tag HTML, isto abre muita brecha para reutilização de código. 
 
@@ -73,7 +73,7 @@ Com isto criamos um elemento novo: `<blog-post>`, que por sua vez já possui doi
 <blog-post/>
 ```
 
-## Reutilização de grupo de elementos
+## Reusing a groupe of elements
 
 `<template>` é utilizado para agrupar um conjunto de elementos que você deseja
 reutilizar mais tarde.
@@ -191,7 +191,7 @@ Para substituir os slots pelo elemento desejado é bem simples (note o header de
 </blog-post>
 ```
 
-## Reutilização de documento
+## Reusing documents
 
 `<iframe>` é o elemento mais famoso quando se fala de exibir conteúdo de outra página HTML na sua página.  
 
@@ -245,7 +245,13 @@ const iframeDocument = iframes[0].contentDocument; // document or null.
 ```
 :::
 
-Embora seja fácil de levantar um server hoje em dia (por exemplo, `python3 -m http.server`), isto tira uma das maiores elegâncias de HTML. A simplicidade de executar uma página básica de HTML.  
+Isso pode ser fácilmente contornado levantando um server. Por exemplo, executando `python3 -m http.server` no diretório do arquivo.  
+
+## Conclusion
+
+É um tanto quanto triste ver como JavaScript é obrigatório em todos estes casos que tentamos reutilizar HTML. Principalmente para `<iframe>` que precisaria de um server.  
+
+A elegância de HTML se encontra na simplicidade da linguagem para representar um site, o que torna bem complicado quando a reutilização é limitada.  
 
 <details>
     <summary>Curiosidade: HTML possui diversos elementos que são capazes de fazer a mesma tarefa que outros elementos.</summary>
