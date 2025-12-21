@@ -34,17 +34,17 @@ importante.
 
 Vamos analisar 3 tipos de reutilização que HTML fornece:
 
-- [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
-  - Ajuda a reutilização de elemento
-- [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/template),
-  [`<slot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/slot)
-  - Ajuda a reutilização de grupo de elementos
-- [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe)
-  - Ajuda a reutilização de documento
+- Reutilização de elemento
+    - [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
+- Reutilização de grupo de elementos
+    - [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/template),
+    [`<slot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/slot)
+- Reutilização de documento
+    - [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe)
 
-## Custom Elements
+## Reutilização de elemento
 
-Se refere a habilidade de criar sua própria tag HTML, isto abre muita brecha para reutilização de código. 
+**Custom elements** se refere a habilidade de criar sua própria tag HTML, isto abre muita brecha para reutilização de código. 
 
 ```javascript
 customElements.define(
@@ -73,7 +73,7 @@ Com isto criamos um elemento novo: `<blog-post>`, que por sua vez já possui doi
 <blog-post/>
 ```
 
-## `<template>`, `<slot>`
+## Reutilização de grupo de elementos
 
 `<template>` é utilizado para agrupar um conjunto de elementos que você deseja
 reutilizar mais tarde.
@@ -95,14 +95,8 @@ conforme o necessário (não para ter alguma visualização no momento).
         const template = document.getElementById("blog-post");
         const divPosts = document.getElementById("posts");
 
-        const clone0 = document.importNode(template.content, true);
-        divPosts.appendChild(clone0);
-
-        const clone1 = document.importNode(template.content, true);
-        divPosts.appendChild(clone1);
-
-        const clone2 = document.importNode(template.content, true);
-        divPosts.appendChild(clone2);
+        const clone = document.importNode(template.content, true);
+        divPosts.appendChild(clone);
     });
 </script>
 
@@ -114,16 +108,15 @@ conforme o necessário (não para ter alguma visualização no momento).
 <div id="posts"></div>
 ```
 
-:::danger
-
-Ambos `importNode()` e `cloneNode()` clonam o node/fragmento:
+<details>
+    <summary>É possível usar ambos `importNode()` e `cloneNode()` para clonar node/fragmento</summary>
 
 ```javascript
-// Alternative 1
+// Using importNode()
 const clone1 = document.importNode(template.content, true);
 divPosts.appendChild(clone1);
 
-// Alternative 2
+// Using cloneNode()
 const clone2 = template.content.cloneNode(true);
 divPosts.appendChild(clone2);
 ```
@@ -144,8 +137,7 @@ tiver definido no document do template.
 
 O recomendado é utilizar `importNode()` pois os elementos custom vão se
 comportar como esperado por quem está importando.
-
-:::
+</details>
 
 `<slot>` é usado para reservar um espaço para um elemento que mais tarde será
 decidido.
@@ -180,29 +172,83 @@ customElements.define(
 
 Poderiamos ter criado todo os nodes internos deste elemento pelo javascript, mas ao invés disso nós apenas copiamos os elementos do nosso template (isto já diminui muito a quantidade de javascript que é preciso escrever).
 
-Para substituir os slots pelo elemento desejado é bem simples:  
+Para substituir os slots pelo elemento desejado é bem simples (note o header de cada um):  
 
 ```html
 <blog-post>
     <h1 slot="post-header">A header for our post</h1>
     <p slot="post-text">The post text</p>
 </blog-post>
+
+<blog-post>
+    <h2 slot="post-header">A header for our post</h2>
+    <p slot="post-text">The post text</p>
+</blog-post>
+
+<blog-post>
+    <h3 slot="post-header">A header for our post</h3>
+    <p slot="post-text">The post text</p>
+</blog-post>
 ```
 
-## `<iframe>`
+## Reutilização de documento
 
 `<iframe>` é o elemento mais famoso quando se fala de exibir conteúdo de outra página HTML na sua página.  
 
-```html
+```html title="index.html"
 <body>
-    <iframe src="page.html"></iframe>
+    <iframe src="blog-post.html"></iframe>
 </body>
 ```
 
-:::info
-Porém não é o único!
+```html title="blog-post.html"
+<h1>A header for our post</h1>
+<p>The post text</p>
+```
 
-Acontece que HTML possui diversos elementos que são capazes de fazer a mesma tarefa que outros elementos, o que torna difícil identificar quando usar o elemento certo.  
+A primeira vista nós podemos até pensar que ele é a melhor opção para reutilização de código HTML, porém a utilidade dele é exibir conteúdo de outras páginas.  
+
+**A grande diferença é segurança!** Quando falamos de exibir conteúdo de outras páginas, precisamos garantir que elas não vão conseguir acessar nada que não deveriam da sua página (por exmeplo, suas credenciais).  
+
+A melhor maneira de fazer isso é tratando elas como outras páginas, isto faz elas passarem por todas as burocracias esperadas de comunicação entre páginas. Algumas delas sendo:  
+
+- Funções costumam atuar apenas dentro do próprio documento.
+    - `getElementById()`
+    - `getElementsByClassName()`
+    - `getElementsByTagName()`
+    - ...
+- Só é possível acessar o documento de páginas com a mesma `origin`.
+    - Abrir um arquivo HTML localmente não conta como mesma `origin`.
+
+O primeiro caso não é um grande problema, você apenas teria que pegar o documento da `<iframe>` e fazer a busca dentro dele.  
+
+```javascript
+const iframes = document.getElementsByTagName("iframe");
+const iframeWindow = iframes[0].contentWindow;
+const iframeDocument = iframeWindow.document;
+const h1 = iframeDocument.getElementsByTagName("h1")[0]
+```
+
+O segundo caso torna impossível de testar sem antes levantar um server.  
+
+```javascript
+const iframes = document.getElementsByTagName("iframe");
+const iframeWindow = iframes[0].contentWindow;
+const iframeDocument = iframeWindow.document; // Error because has origin null.
+```
+
+:::tip
+`contentDocument` é um atalho para `contentWindow.document`
+```javascript
+const iframes = document.getElementsByTagName("iframe");
+const iframeDocument = iframes[0].contentDocument; // document or null.
+```
+:::
+
+Embora seja fácil de levantar um server hoje em dia (por exemplo, `python3 -m http.server`), isto tira uma das maiores elegâncias de HTML. A simplicidade de executar uma página básica de HTML.  
+
+<details>
+    <summary>Curiosidade: HTML possui diversos elementos que são capazes de fazer a mesma tarefa que outros elementos.</summary>
 
 Por exemplo, note como `<object>` e `<embed>` são extremamente genéricos:
 - `<img>`, `<object>`, `<embed>`: Conseguem exibir images
@@ -224,8 +270,7 @@ Por exemplo, note como `<object>` e `<embed>` são extremamente genéricos:
     <embed src="page.html">
 </body>
 ```
-:::
-
+</details>
 
 ## References
 
@@ -238,135 +283,3 @@ Por exemplo, note como `<object>` e `<embed>` são extremamente genéricos:
 - https://developer.mozilla.org/en-US/docs/Glossary/Browsing_context
 - https://developer.mozilla.org/en-US/docs/Glossary/Replaced_elements
 - https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy#file_origins
-
-## backup
-
-Um detalhe que me incomoda profundamente em HTML é a ausência de um **"import"**
-decente.
-
-Alguma maneira que me deixe separar o desenvolvimento da minha página em
-diversos arquivos HTML. O motivo principal é organização, um motivo secundário
-seria reutilização.
-
-Não é que não exista nenhuma maneira de importar, mas elas não são construidas
-da maneira que você esperaria dentro dos navegadores.
-
-## [`<iframe>`](https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element), [`<object>`](https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element), [`<embed>`](https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element)
-
-Vamos pegar o seguinte código como exemplo:
-
-```html
-<body>
-    <iframe src="file.html"></iframe>
-</body>
-```
-
-E considerar o arquivo `file.html` com o conteúdo:
-
-```html
-<div>
-    <button>Hello world</button>
-</div>
-```
-
-Para qual das alternativas seguintes o seu navegador vai transforma-lo?
-
-<table>
-    <tr>
-        <td>1</td>
-        <td>
-            ```html
-            <body>
-                <div>
-                    <button>Hello world</button>
-                </div>
-            </body>
-            ```
-        </td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>
-            ```html
-            <body>
-                <iframe src="file.html">
-                    <div>
-                        <button>Hello world</button>
-                    </div>
-                </iframe>
-            </body>
-            ```
-        </td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>
-            ```html
-            <body>
-                <iframe src="file.html">
-                    #document (file:///home/user/dir/file.html)
-                    <html>
-                        <head></head>
-                        <body>
-                            <div>
-                                <button>Hello world</button>
-                            </div>
-                        </body>
-                    </html>
-                </iframe>
-            </body>
-            ```
-        </td>
-    </tr>
-
-</table>
-
-E a resposta correta é..... A terceira opção!
-
-:::info
-
-Antes que você comece a considerar os outros 2 elementos, sinto informar que
-estes 3 elementos produzem o mesmo resultados quando trazendo conteúdo HTML de
-outra página:
-
-```html
-<iframe src="file.html"></iframe>
-<object data="file.html"></object>
-<embed src="file.html"></embed>
-```
-
-:::
-
-Em outras palavras, o navegador transforma em um
-[navigable](https://html.spec.whatwg.org/multipage/document-sequences.html#navigable)
-e é tratado como um documento dentro do seu documento original.
-
-> Mas qual o lado negativo disso?\
-> No final das contas você está obtendo o HTML que queria na sua página.
-
-O problema é que isto complica um pouco mais a interação com os elementos. Por
-exemplo, não podemos obter o botão com:
-
-```javascript
-const buttons = document.getElementsByTagName("button");
-```
-
-Pois ele só existe dentro do documento da iframe, ou seja, nosso código se
-tornaria
-
-```javascript
-const iframes = document.getElementsByTagName("iframe");
-const buttons = iframes[0].contentDocument.getElementsByTagName("button");
-```
-
-> Mas qual o problema disso?!\
-> Eu consigo entender claramente o código e não é um grande problema.
-
-O problema é que navegadores apenas permitem que você acesse o documento se ele
-for da mesma origem (`Same-Origin`)?.
-
-Então precisamos rodar um server, por exemplo:
-
-```bash
-python3 -m http.server
-```
