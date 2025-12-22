@@ -245,13 +245,25 @@ const iframeDocument = iframes[0].contentDocument; // document or null.
 ```
 :::
 
-Isso pode ser fácilmente contornado levantando um server. Por exemplo, executando `python3 -m http.server` no diretório do arquivo.  
+Isso pode ser fácilmente contornado levantando um server. Por exemplo, executando o seguinte comando no diretório do arquivo:  
+
+```bash
+python3 -m http.server
+```
 
 ## Conclusion
 
 É um tanto quanto triste ver como JavaScript é obrigatório em todos estes casos que tentamos reutilizar HTML. Principalmente para `<iframe>` que precisaria de um server.  
 
-A elegância de HTML se encontra na simplicidade da linguagem para representar um site, o que torna bem complicado quando a reutilização é limitada.  
+A elegância de HTML se encontra na simplicidade da linguagem para representar um site, o que torna bem complicado quando a reutilização de código é limitada.  
+
+Enfim... Se meu objetivo fosse resolver com JavaScript após levantar um server, para mim seria apenas utilizar um `fetch()`.  
+
+```javascript
+const blogPost = document.getElementById("blog-post");
+const response = await fetch("blog-post.html")
+blogPost.innerHTML = await response.text()
+```
 
 <details>
     <summary>Curiosidade: HTML possui diversos elementos que são capazes de fazer a mesma tarefa que outros elementos.</summary>
