@@ -21,10 +21,8 @@ Pode ser estranho por ser muito simples mas acontece que passar dados entre
 processos não precisa ser complicado.
 
 :::note
-
 Inclusive, é como eu implementei [Mondot](https://github.com/thiagola92/Mondot)
 (GUI para MongoDB).\
-
 :::
 
 Exemplo:
@@ -330,20 +328,16 @@ Por padrão alguns signals já possuem comportamentos pré-definidos. Por exempl
 `SIGINT`.
 
 :::info
-
 Quando executando um programa pelo terminal, se você apertar `Ctrl+C` o signal
 enviado para o processo é o `SIGINT`.\
-
 :::
 
 Fica a sua escolha se você deseja sobreescrever o comportamento de um signal
 (caso ele tenha um comportamento padrão).
 
 :::warning
-
 Existem dois signals que não podem ter o comportamento sobreescrito: `SIGKILL` e
 `SIGSTOP`.\
-
 :::
 
 Quando um Signal é recebido pelo seu processo, o kernel pausa o fluxo normal do
@@ -357,10 +351,8 @@ No caso de comunicação entre processos, apenas o inteiro costuma ser útil poi
 não podemos acessar o espaço de memória de outro processo.
 
 :::note
-
 Porém se estivermos utilizando para comunicação entre threads, enviar o endereço
 de um dado específico é bem útil.\
-
 :::
 
 Existem dois signals reservados para o uso da aplicação/usuário: `SIGUSR1` e
@@ -441,12 +433,10 @@ int main(int argc, char **args) {
 _Ler e escrever no pipe de outro processo filho/pai_
 
 :::warning
-
 Para entender bem pipe, recomendo entender bem file descriptor (o que eu não
 entendia muito bem).
 
 Recomendação: https://www.youtube.com/watch?v=rW_NV6rf0rM
-
 :::
 
 O conceito de pipes é bem simples, você escreve em um lado do pipe e para alguém
@@ -475,7 +465,6 @@ outro para a saída do pipe, no nosso array. O comando também retorna -1 em cas
 de erro, mas eu irei ignorar tratamentos de erros nesses exemplos.
 
 :::info
-
 O que é um file descriptor? É um número inteiro utilizado pelo seu processo para
 pedir ao sistema operacional por acesso a um arquivo. É preciso entender que
 quando você escreve/lê de um arquivo, você na verdade está pedindo para o
@@ -496,7 +485,6 @@ entrega um file descriptor. Este file descriptor é como se fosse um ticket que
 permite você pedir ao sistema operacional por interações com aquele arquivo ("Oi
 sistema operacional, eu gostaria de escrever no arquivo relacionado a este
 ticket").\
-
 :::
 
 Começamos com o mínimo de IPC quando utilizando `pipe()` com `fork()`:
@@ -656,7 +644,6 @@ outro lado do pipe, basta fazer um _or_ quando abrindo o pipe
 (`O_WRONLY | O_NDELAY` ou `O_RDONLY | O_NDELAY`).
 
 :::info
-
 Originalmente chamado de FIFO pelo comportamento clássico
 ["first in, first out"](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)),
 porém atualmente é mais conhecido pelo nome _named pipe_ que deixa implicito que
@@ -675,7 +662,6 @@ suportar diversos tipos:
 | S_IFDIR  | 0040000 | directory        |
 | S_IFCHR  | 0020000 | character device |
 | S_IFIFO  | 0010000 | FIFO             |
-
 :::
 
 ### Message Queue
@@ -708,14 +694,12 @@ para ele:
 | < 0   | Receptor quer a próxima mensagem da fila com tipo menor ou igual ao absoluto deste valor | `message_type <= abs(X)` |
 
 :::danger
-
 Eu repito, o primeiro campo **deve** ser um número POSITIVO.
 
 Mesmo que o receptor vá utilizar 0, por querer qualquer mensagem, você como
 emissor deve botar um número positivo.
 
 A fila não permite que você bote mensagens com o primeiro campo zero...\
-
 :::
 
 O **segundo campo** da estrutura pode ser qualquer tipo, pois no momento de

@@ -16,10 +16,8 @@ Alocação de memória se trata de pedir ao sistema operacional por espaço de
 memória RAM para utilizarmos durante a execução do nosso programa.
 
 :::note
-
 Não confundir com dispositivos de armazenamentos como HDD e SSD, onde nossa
 interação com eles customa ser por escrita e leitura de arquivos.\
-
 :::
 
 ## Static Allocation
@@ -88,7 +86,6 @@ executarmos uma função, utilizaremos o código da função como base para aloc
 memória para aquela execução da função!
 
 :::info
-
 > Por que não fazer com que todas as chamadas da funções utilizem o mesmo
 > espaço?
 
@@ -98,7 +95,6 @@ poderia trazer resultados diferentes.
 
 Imagine que seu código possue uma função recursiva, agora você corre o risco das
 chamadas a ela mesma alterarem uma variável que era essencial dela.\
-
 :::
 
 ## Stack Allocation
@@ -263,7 +259,6 @@ criados:
 conseguir detectar que a memória não está mais sendo usada e libera-la.
 
 :::info
-
 A requisição de memória (`malloc()`) sempre é feita pelo usuário, mesmo em
 linguagens que possuem Garbage Collector embutido.
 
@@ -275,7 +270,6 @@ Pode não ser tão claro notar estes pedidos de alocação:
   - `var example = []`
 - Java
   - `Obj example = new ArrayList<Obj>();`
-
 :::
 
 É possível implementar um Garbage Collector em linguagens que não possuem um
@@ -283,11 +277,9 @@ embutido, porém por não ser embutido, bibliotecas de terceiros podem acabar po
 não utiliza-lo e vazamento de memória pode acontecer de qualquer maneira.
 
 :::note
-
 Por exemplo, para a linguagem de programação C podemos encontrar este pequeno
 projeto:\
 https://github.com/orangeduck/tgc\
-
 :::
 
 A grande desvantagem desta técnica é que pausas no seu programa precisam ser
@@ -354,11 +346,9 @@ aumentar/diminuir o contador. O que pode ser custoso quando tem que se fazer
 isso para **toda** memória da Heap.
 
 :::warn
-
 A técnica mais simples de reference counting também não é bom em lidar com
 **reference cycles**. Quando referências apontam entre sim, o que faz com que os
 contadores nunca cheguem a zero.\
-
 :::
 
 ## Ownership Model
@@ -378,13 +368,11 @@ A documentação da linguagem Rust deixa claro as regras:
 - Quando o dono sai do escopo, o valor é liberado
 
 :::info
-
 A primeira regra parece ser apenas uma introdução de que existe o conceito de
 dono.\
 A segunda é para deixar claro que um valor não pode ter múltiplos donos.\
 A terceira nos deixa claro quando o compilador irá adicionar a liberação de
 memória.\
-
 :::
 
 ## References

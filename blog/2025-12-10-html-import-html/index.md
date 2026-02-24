@@ -6,14 +6,12 @@ tags: [web, html, javascript, css]
 # HTML importing HTML
 
 :::note
-
 Eu **não** tenho anos de experiência em HTML, CSS e JavaScript, então não
 considere este post uma boa fonte de informação. Usei muito quando criança mas
 não tenho feito nada além do mínimo necessário para o dia-a-dia.
 
 Engraçado que enquanto eu ia escrevendo esse post, descobri que sou mais velho
 que HTML 🥲.
-
 :::
 
 Reutilização de código é algo normal para um programador, tanto que todas as
