@@ -59,8 +59,8 @@ Então vamos representar uma divisão entre os bytes.
 Se pegarmos um inteiro (unsigned) como 5351, vamos precisar de 2 bytes para armazena-lo (pois seu binário é `00010100 11100111`).  
 Existe duas maneiras famosas de se armazenar eles.  
 
-**Little-endian**: Byte menos significativo primeiro ("little end first").  
-**Big-endian**: Byte mais significativo primeiro ("big end first").  
+**Little-endian**: Byte menos significativo primeiro (eu chamaria de "little-first").  
+**Big-endian**: Byte mais significativo primeiro (eu chamaria de "big-first").  
 
 ```
 | Endereço da memória | Little-endian | Big-endian |
