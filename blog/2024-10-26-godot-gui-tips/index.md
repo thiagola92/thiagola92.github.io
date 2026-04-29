@@ -585,14 +585,6 @@ Dentro das funções novas, muitas possuem a mesma lógica utilizada para arrast
 
 **A segunda** é a lógica de redimensionar, para resolver ela é recomendado primeiro resolver a lógica para cima, direita, baixo e esquerda (as diagonais são combinações das lógicas das outras).  
 
-:::info
-> Por que redimensionar não é suave igual a outras aplicações?  
-
-Isto ocorre pois nem sempre a **movimentação** e o **redimensionamento** não ocorrem na mesma frame.  
-
-Por enquanto não é possível de se resolver isto pelo Godot.  
-:::
-
 ### Resize Window (new)
 A maneira anterior adiciona um grande problema: Utilizar `MarginContainer` adiciona margins vazias a sua janela e tornava impossível delas encostarem nas bordas do monitor.  
 
@@ -1130,6 +1122,15 @@ Se você voltou até a ação 4, então você desfez a deleção deles e está s
 
 :::note  
 Se você está desenvolvendo um addon/gdextension para Godot, a recomendação é utilizar o [EditorUndoRedoManager](https://docs.godotengine.org/en/stable/classes/class_editorundoredomanager.html) (UndoRedo interno do Godot).  
+:::
+
+8 - Turn off V-Sync
+Por padrão Godot possui V-Sync on e isto pode ser a causa do redimensionamento das janelas (dentro da seção 4) não ser suave igual a outras aplicações.  
+
+Desative em *Display > Window > V-Sync > V-Sync Mode* e teste redimensionar a janela.  
+
+:::info
+Caso continue não suave, eu só posso assumir que o problema é a **movimentação** e o **redimensionamento** não ocorreremm na mesma frame. Se for este o caso, não a muito que a gente possa fazer.  
 :::
 
 ## References
