@@ -1124,7 +1124,7 @@ Se você voltou até a ação 4, então você desfez a deleção deles e está s
 Se você está desenvolvendo um addon/gdextension para Godot, a recomendação é utilizar o [EditorUndoRedoManager](https://docs.godotengine.org/en/stable/classes/class_editorundoredomanager.html) (UndoRedo interno do Godot).  
 :::
 
-8 - Turn off V-Sync
+## 8 - Turn off V-Sync
 Por padrão Godot possui V-Sync on e isto pode ser a causa do redimensionamento das janelas (dentro da seção 4) não ser suave igual a outras aplicações.  
 
 Desative em *Display > Window > V-Sync > V-Sync Mode* e teste redimensionar a janela.  
