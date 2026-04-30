@@ -221,7 +221,7 @@ func _on_title_bar_double_click() -> void:
 
 Já estamos dividindo em funções menores pois os passos seguintes irão adicionar mais funcionalidades nestas funções gerais.  
 
-### Drag Window
+### Drag Window (v1)
 A princípio, arrastar a janela pode ser resumido em saber duas coisas:  
 - Saber se o click do mouse está sendo pressionado
 - Onde que o click estava quando começou
@@ -359,7 +359,19 @@ func _on_resized() -> void:
 Lembre de se conectar ao sinal `_on_resized`.
 :::
 
-### Resize Window (old)
+### Drag Window (v2)
+Recentemente Godot apresentou [`start_drag()`](https://github.com/godotengine/godot/pull/101221) que traz toda a funcionalidade esperada de quando você arrasta uma janela (incluindo para os cantos!).  
+
+Basta chamar este método quando o drag começar, exemplo:  
+```gdscript
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		get_window().start_drag()
+```
+
+Não precisa se preocupar em escrever a lógica de soltar a janela, tudo está incluso no comportamento padrão do sistema operacional.  
+
+### Resize Window (v1)
 Redimensionar pode ser facilmente implementado se utilizarmos o node `MarginContainer` que nos permite adicionar bordas às laterais, estas serão nossas bordas que devem reagir ao mouse.  
 
 Nodes do tipo `Control` possuem lógica para lidar com inputs do mouse, eles podem consumir ou passar ao node de cima as input do mouse.  
@@ -585,7 +597,7 @@ Dentro das funções novas, muitas possuem a mesma lógica utilizada para arrast
 
 **A segunda** é a lógica de redimensionar, para resolver ela é recomendado primeiro resolver a lógica para cima, direita, baixo e esquerda (as diagonais são combinações das lógicas das outras).  
 
-### Resize Window (new)
+### Resize Window (v2)
 A maneira anterior adiciona um grande problema: Utilizar `MarginContainer` adiciona margins vazias a sua janela e tornava impossível delas encostarem nas bordas do monitor.  
 
 Está outra maneira envolve estruturar uma cena com todas as bordas necessárias.  
