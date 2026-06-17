@@ -12,6 +12,9 @@ links:
   - text: Blog
     href: 'https://thiagola92.github.io/blog/'
     type: ''
+  - text: Projects
+    href: 'https://thiagola92.github.io/projects/'
+    type: ''
   - text: Github
     href: 'https://github.com/thiagola92'
     type: github
