@@ -1,0 +1,22 @@
+layout: layouts/base.vto
+header:
+  title: thiagola92
+  description: 🍫🍫🍫
+  avatar: /avatar.png
+metas:
+  title: =header.title
+  description: =header.description
+  image: =header.avatar
+  generator: true
+links:
+  - text: Blog
+    href: 'https://thiagola92.github.io/blog/'
+    type: ''
+  - text: Github
+    href: 'https://github.com/thiagola92'
+    type: github
+  - text: Linkedin
+    href: 'https://www.linkedin.com/in/thiagola92/'
+    type: linkedin
+footer: "Powered by [Lume](https://lume.land) & [SimpleMe](https://github.com/lumeland/theme-simple-me) theme"
+extra_head: ''
