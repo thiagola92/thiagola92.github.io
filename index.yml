@@ -15,20 +15,5 @@ links:
   - text: Projects
     href: 'https://thiagola92.github.io/projects/'
     type: ''
-  - text: Bluesky
-    href: 'https://bsky.app/profile/thiagola92.bsky.social'
-    type: bluesky
-  - text: Github
-    href: 'https://github.com/thiagola92'
-    type: github
-  - text: Itch.io
-    href: 'https://thiagola92.itch.io/'
-    type: itchdotio
-  - text: Linkedin
-    href: 'https://www.linkedin.com/in/thiagola92/'
-    type: linkedin
-  - text: Youtube
-    href: 'https://www.youtube.com/thiagola92'
-    type: youtube
 footer: "Powered by [Lume](https://lume.land) & [SimpleMe](https://github.com/lumeland/theme-simple-me) theme"
 extra_head: ''
